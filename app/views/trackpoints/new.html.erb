@@ -1,0 +1,18 @@
+<h1>New trackpoint</h1>
+
+<% form_for([@activity, @trackpoint]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :heart_rate %><br />
+    <%= f.text_field :heart_rate %>
+  </p>
+  <p>
+    <%= f.label :latitude %><br />
+    <%= f.text_area :latitude %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+

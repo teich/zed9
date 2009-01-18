@@ -1,0 +1,34 @@
+<h1>Activities#show</h1>
+
+<p>
+    NAME: <%=h @activity.name %>
+    TYPE: <%=h @activity.type %><BR><BR> 
+ <b>Start time:</b>
+  <%=h @activity.start_time %>
+</p>
+
+<p>
+  <b>Average heart rate:</b>
+  <%=h @activity.average_hr %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%=h @activity.end_time %>
+</p>
+
+<img src="<%= @hr_chart_url %>">
+<h2>Trackpoints</h2>
+<p>
+<% @activity.trackpoints.each do |a| %>
+        
+          <b>HR:</b>
+          <%=h a.heart_rate %>
+
+          <b>Lat:</b>
+          <%=h a.latitude %><BR>
+        
+<% end %>
+</p>
+<%= link_to 'Edit', edit_activity_path(@activity) %> |
+<%= link_to 'Back', activities_path %>

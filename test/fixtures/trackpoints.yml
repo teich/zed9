@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  latitude: 1.5
+  longitutde: 1.5
+  heart_rate: 1
+  activity: 
+
+two:
+  latitude: 1.5
+  longitutde: 1.5
+  heart_rate: 1
+  activity: 
