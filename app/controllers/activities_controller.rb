@@ -1,3 +1,4 @@
+require 'hpricot'
 class ActivitiesController < ApplicationController
   before_filter :find_activity, :only => [:show, :edit, :update, :destroy]
   # GET /activities
@@ -93,4 +94,32 @@ class ActivitiesController < ApplicationController
   def find_activity
     @activity = Activity.find(params[:id])
   end
+  
+  def upload 
+    uploaded_file = params[:xml_file] 
+    data = uploaded_file.read if uploaded_file.respond_to? :read 
+    @points = 0
+    if request.post? and data  
+      @points = parse_xml( data ) 
+    else 
+      redirect_to :action => 'index' 
+    end
+  end 
+
+  def parse_xml ( xml_data )
+    doc = Hpricot::XML( xml_data ) 
+    temp = []
+    hr = 0
+    (doc/:Trackpoint).each do |t| 
+      time = (t/:Time).innerHTML
+      hr = (t/:HeartRateBpm/:Value).innerHTML
+      lat = (t/:Position/:LatitudeDegrees).innerHTML
+      long = (t/:Position/:LongitudeDegrees).innerHTML
+      dist = (t/:DistanceMeters).innerHTML
+      alt = (t/:AltitudeMeters).innerHTML
+      temp << { "hr" => hr, "time" => time, "lat" => lat, "long" => long, "dist" => dist, "alt" => alt }
+    end
+    return temp
+  end
+  
 end
