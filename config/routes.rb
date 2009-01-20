@@ -36,6 +36,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :activities, :has_many => [:trackpoints]
   
   map.root :controller => "activities"
+
+  map.load_chart '/load_chart', :controller => 'activities', :action => 'load_chart'
+
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.

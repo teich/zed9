@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090117000702) do
+ActiveRecord::Schema.define(:version => 20090118203522) do
 
   create_table "activities", :force => true do |t|
     t.datetime "start_time"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20090117000702) do
 
   create_table "trackpoints", :force => true do |t|
     t.float    "latitude"
-    t.float    "longitutde"
+    t.float    "longitude"
     t.integer  "heart_rate"
     t.integer  "activity_id"
     t.datetime "created_at"

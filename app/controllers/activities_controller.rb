@@ -1,5 +1,10 @@
 require 'hpricot'
+require 'scruffy'
+
 class ActivitiesController < ApplicationController
+#  include Ziya
+helper Ziya::Helper 
+  
   before_filter :find_activity, :only => [:show, :edit, :update, :destroy]
   # GET /activities
   # GET /activities.xml
@@ -17,15 +22,15 @@ class ActivitiesController < ApplicationController
   def show
 
     # Create a graph URL of HR:
-    heart_rate_chart = GoogleChart.new
-    heart_rate_chart.type = :line 
-    heart_rate_chart.height = 75
-    heart_rate_chart.width = 150
-    heart_rate_chart.data = []
-    @activity.trackpoints.each do |a|
-      heart_rate_chart.data.push(a.heart_rate)
-    end
-    @hr_chart_url = heart_rate_chart.to_url
+#    heart_rate_chart = GoogleChart.new
+#    heart_rate_chart.type = :line 
+#    heart_rate_chart.height = 75
+#    heart_rate_chart.width = 150
+#    heart_rate_chart.data = []
+#    @activity.trackpoints.each do |a|
+#      heart_rate_chart.data.push(a.heart_rate)
+#    end
+#    @hr_chart_url = heart_rate_chart.to_url
     
     respond_to do |format|
       format.html # show.html.erb
@@ -100,26 +105,74 @@ class ActivitiesController < ApplicationController
     data = uploaded_file.read if uploaded_file.respond_to? :read 
     @points = 0
     if request.post? and data  
-      @points = parse_xml( data ) 
+      @activity = Activity.new
+      @activity.update_attributes( {"name" => "TEST TEST"})
+
+      @points = parse_garmin_xml( data ) 
+      @points.each do |p|
+        tp = @activity.trackpoints.build(p)
+        tp.save
+      end
     else 
       redirect_to :action => 'index' 
     end
+    
+    
+#    return render :text => "DEBUG #{@activity}"
   end 
 
-  def parse_xml ( xml_data )
+  def parse_garmin_xml ( xml_data )
     doc = Hpricot::XML( xml_data ) 
-    temp = []
+    datapoint = []
     hr = 0
     (doc/:Trackpoint).each do |t| 
-      time = (t/:Time).innerHTML
       hr = (t/:HeartRateBpm/:Value).innerHTML
       lat = (t/:Position/:LatitudeDegrees).innerHTML
       long = (t/:Position/:LongitudeDegrees).innerHTML
-      dist = (t/:DistanceMeters).innerHTML
-      alt = (t/:AltitudeMeters).innerHTML
-      temp << { "hr" => hr, "time" => time, "lat" => lat, "long" => long, "dist" => dist, "alt" => alt }
+
+# Need to add migration to support these.      
+#      time = (t/:Time).innerHTML
+#      dist = (t/:DistanceMeters).innerHTML
+#      alt = (t/:AltitudeMeters).innerHTML
+      datapoint << { "heart_rate" => hr, "latitude" => lat, "longitude" => long }
     end
-    return temp
+    return datapoint
   end
   
+  def load_chart
+    @activity = Activity.find(params[:id])
+     
+    hr_series = []
+    time_series = []
+    c = 1
+    @activity.trackpoints.each do |a|
+      next if a.heart_rate == nil
+      hr_series << a.heart_rate
+      time_series << c
+      c += 1 
+    end
+
+    chart = Ziya::Charts::Line.new LICENSE, 'sparse_line'
+    chart.add( :theme, "fitness" )
+    chart.add :axis_category_text, time_series 
+    chart.add :series, "HR", hr_series
+
+    respond_to do |fmt|
+      fmt.xml { render :xml => chart.to_xml }
+    end
+  end
+  
+  def scruffy_image
+    @activity = Activity.find(params[:id])
+    hr_series = []
+    @activity.trackpoints.each do |a|
+      next if a.heart_rate == nil
+      hr_series << a.heart_rate 
+    end
+
+    graph = Scruffy::Graph.new
+    graph.add(:line, 'Heart Rate', hr_series)
+    send_data(graph.render(:width => 480, :as => 'PNG'), :type => 'image/png', :disposition=> 'inline')  
+  end
+
 end

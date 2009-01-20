@@ -17,18 +17,13 @@
   <%=h @activity.end_time %>
 </p>
 
-<img src="<%= @hr_chart_url %>">
-<h2>Trackpoints</h2>
-<p>
-<% @activity.trackpoints.each do |a| %>
-        
-          <b>HR:</b>
-          <%=h a.heart_rate %>
+<%= image_tag url_for(:action => 'scruffy_image') + '/' + @activity.id.to_s %>
 
-          <b>Lat:</b>
-          <%=h a.latitude %><BR>
-        
+<% if false then %>
+<%= image_tag scruffy_image %>
 <% end %>
-</p>
+  
+<p>
 <%= link_to 'Edit', edit_activity_path(@activity) %> |
 <%= link_to 'Back', activities_path %>
+</p>
