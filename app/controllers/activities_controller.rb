@@ -11,6 +11,7 @@ helper Ziya::Helper
   def index
     @activities = Activity.find(:all)
     
+    @user = User.find([session[:user_id]])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @activities }
@@ -31,6 +32,7 @@ helper Ziya::Helper
 #      heart_rate_chart.data.push(a.heart_rate)
 #    end
 #    @hr_chart_url = heart_rate_chart.to_url
+  
     
     respond_to do |format|
       format.html # show.html.erb
