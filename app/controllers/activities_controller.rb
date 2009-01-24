@@ -166,15 +166,17 @@ helper Ziya::Helper
   
   def scruffy_image
     @activity = Activity.find(params[:id])
-    hr_series = []
-    @activity.trackpoints.each do |a|
-      next if a.heart_rate == nil
-      hr_series << a.heart_rate 
-    end
 
-    graph = Scruffy::Graph.new
-    graph.add(:line, 'Heart Rate', hr_series)
-    send_data(graph.render(:width => 480, :as => 'PNG'), :type => 'image/png', :disposition=> 'inline')  
+    # Slick one-line ruby hash->array thing
+    hr_series = @activity.trackpoints.map {|a|a.heart_rate}
+ 
+    # create a less dense array
+    res = [] 
+    (0...hr_series.length).step(10) {|x| res << hr_series[x]}
+ 
+    graph = Scruffy::Graph.new(:theme => Scruffy::Themes::Mephisto.new)
+    graph.add(:line, 'Heart Rate', res)
+    send_data(graph.render(:width => 640, :as => 'PNG'), :type => 'image/png', :disposition=> 'inline')  
   end
 
 end
