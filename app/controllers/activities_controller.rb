@@ -1,9 +1,13 @@
 require 'hpricot'
 require 'scruffy'
 
-class ActivitiesController < ApplicationController
-#  include Ziya
-helper Ziya::Helper 
+class ActivitiesController < ApplicationController  
+ 
+  # REQUIRE LOGIN
+  # before_filter :login_required
+ 
+  #  include Ziya
+  helper Ziya::Helper 
   
   before_filter :find_activity, :only => [:show, :edit, :update, :destroy]
   # GET /activities
@@ -11,7 +15,6 @@ helper Ziya::Helper
   def index
     @activities = Activity.find(:all)
     
-    @user = User.find([session[:user_id]])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @activities }
