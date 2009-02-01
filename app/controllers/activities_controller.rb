@@ -4,12 +4,12 @@ require 'scruffy'
 class ActivitiesController < ApplicationController  
  
   # REQUIRE LOGIN
-  # before_filter :login_required
+  before_filter :login_required
  
   #  include Ziya
   helper Ziya::Helper 
   
-  before_filter :find_activity, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_activity, :only => [:show, :edit, :update, :destroy, :scruffy_image]
   # GET /activities
   # GET /activities.xml
   def index
@@ -108,7 +108,7 @@ class ActivitiesController < ApplicationController
   def upload 
     uploaded_file = params[:xml_file] 
     data = uploaded_file.read if uploaded_file.respond_to? :read 
-    @points = 0
+#    @points = 0
     if request.post? and data  
       @activity = Activity.new
       @activity.update_attributes( {"name" => "TEST TEST"})
@@ -168,8 +168,6 @@ class ActivitiesController < ApplicationController
   end
   
   def scruffy_image
-    @activity = Activity.find(params[:id])
-
     # Slick one-line ruby hash->array thing
     hr_series = @activity.trackpoints.map {|a|a.heart_rate}
  
