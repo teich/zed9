@@ -13,7 +13,7 @@ class ActivitiesController < ApplicationController
   # GET /activities
   # GET /activities.xml
   def index
-    @activities = Activity.find(:all)
+    @activities = current_user.activities.find(:all)
     
     respond_to do |format|
       format.html # index.html.erb
@@ -102,7 +102,7 @@ class ActivitiesController < ApplicationController
   end
 
   def find_activity
-    @activity = Activity.find(params[:id])
+    @activity = current_user.activities.find(params[:id])
   end
   
   def upload 
@@ -110,13 +110,13 @@ class ActivitiesController < ApplicationController
     data = uploaded_file.read if uploaded_file.respond_to? :read 
 #    @points = 0
     if request.post? and data  
-      @activity = Activity.new
+      @activity = current_user.activities.build
       @activity.update_attributes( {"name" => "TEST TEST"})
 
       @points = parse_garmin_xml( data ) 
       @points.each do |p|
-        tp = @activity.trackpoints.build(p)
-        tp.save
+        tp = @activity.trackpoints.build(p).save
+#        tp.save
       end
     else 
       redirect_to :action => 'index' 
