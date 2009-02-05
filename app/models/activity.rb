@@ -1,6 +1,5 @@
 class Activity < ActiveRecord::Base
-  belongs_to :project
-  
+  belongs_to :users
   has_many :trackpoints
   
   validates_presence_of :name

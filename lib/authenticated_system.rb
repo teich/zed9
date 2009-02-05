@@ -32,7 +32,7 @@ module AuthenticatedSystem
     #  end
     #
     def authorized?(action = action_name, resource = nil)
-      logged_in?
+      logged_in? && current_user.enabled?
     end
 
     # Filter method to enforce a login requirement.
@@ -53,6 +53,13 @@ module AuthenticatedSystem
       authorized? || access_denied
     end
 
+		# Prevents logged in users from accessing actions reserved for
+		# non-authenticated users such as the login or signup forms
+		# Make sure to redirect to a path they can access to avoid an infinite loop
+		def login_prohibited
+			!logged_in? || (redirect_to root_path)
+		end
+
     # Redirect as appropriate when an access request fails.
     #
     # The default action is to redirect to the login screen.
@@ -65,12 +72,13 @@ module AuthenticatedSystem
       respond_to do |format|
         format.html do
           store_location
+					flash[:error] = "You must be logged in to access this feature."
           redirect_to new_session_path
         end
         # format.any doesn't work in rails version < http://dev.rubyonrails.org/changeset/8987
-        # Add any other API formats here.  (Some browsers, notably IE6, send Accept: */* and trigger 
-        # the 'format.any' block incorrectly. See http://bit.ly/ie6_borken or http://bit.ly/ie6_borken2
-        # for a workaround.)
+				# Add any other API formats here. (Some browsers, notably IE6, send Accept: */* and trigger
+				# the 'format.any' block incorrectly. See http://bit.ly/ie6_borken or http://bit.ly/ie6_borken2
+				# for a workaround.)
         format.any(:json, :xml) do
           request_http_basic_authentication 'Web Password'
         end
@@ -82,6 +90,7 @@ module AuthenticatedSystem
     # We can return to this location by calling #redirect_back_or_default.
     def store_location
       session[:return_to] = request.request_uri
+			session[:refered_from] = request.env["HTTP_REFERER"]
     end
 
     # Redirect to the URI stored by the most recent store_location call or
@@ -90,7 +99,7 @@ module AuthenticatedSystem
     # for any controller you want to be bounce-backable.
     def redirect_back_or_default(default)
       redirect_to(session[:return_to] || default)
-      session[:return_to] = nil
+			session[:return_to] = nil
     end
 
     # Inclusion hook to make #current_user and #logged_in?
@@ -105,7 +114,7 @@ module AuthenticatedSystem
 
     # Called from #current_user.  First attempt to login by the user id stored in the session.
     def login_from_session
-      self.current_user = User.find_by_id(session[:user_id]) if session[:user_id]
+      self.current_user = User.find_by_id(session[:user_id], :include => :roles) if session[:user_id]
     end
 
     # Called from #current_user.  Now, attempt to login by basic authentication information.
@@ -122,7 +131,7 @@ module AuthenticatedSystem
     # Called from #current_user.  Finaly, attempt to login by an expiring token in the cookie.
     # for the paranoid: we _should_ be storing user_token = hash(cookie_token, request IP)
     def login_from_cookie
-      user = cookies[:auth_token] && User.find_by_remember_token(cookies[:auth_token])
+      user = cookies[:auth_token] && User.find_by_remember_token(cookies[:auth_token], :include => :roles)
       if user && user.remember_token?
         self.current_user = user
         handle_remember_cookie! false # freshen cookie token (keeping date)
@@ -135,7 +144,7 @@ module AuthenticatedSystem
     # However, **all session state variables should be unset here**.
     def logout_keeping_session!
       # Kill server-side auth cookie
-      @current_user.forget_me if @current_user.is_a? User
+      @current_user.forget_me if @current_user.is_a?(User)
       @current_user = false     # not logged in, and don't do it for me
       kill_remember_cookie!     # Kill client-side auth cookie
       session[:user_id] = nil   # keeps the session but kill our variable

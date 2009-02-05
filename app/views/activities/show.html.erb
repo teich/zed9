@@ -17,7 +17,7 @@
   <%=h @activity.end_time %>
 </p>
 
-<%= image_tag url_for(:action => 'scruffy_image') + '/' + @activity.id.to_s %>
+<%= image_tag scruffy_path(@activity) %>
 
 <% if false then %>
 <%= image_tag scruffy_image %>
