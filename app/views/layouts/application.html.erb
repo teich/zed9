@@ -12,15 +12,23 @@
 <p style="color: green"><%= flash[:notice] %></p>
 <div class="container">
 	<div id="header">
-		<ul>
-			<li>
-		   <% if logged_in? %>
-		      <%= link_to "Log Out", logout_path %>
-		   <% else %>
-		      <%= link_to "Log In", login_path %>
-		   <% end %>
-			</li>
-		</ul>
+		<div id="logo">
+			<h1>Zed9</h1>
+		</div>
+		<div id="userbar">
+			<%= render :partial => "shared/user_bar" %>
+		</div>
+		<div id="navigation_container">
+			<% ubermenu :id => 'main_navigation' do |m| %>
+			  <% m.action 'Homepage', root_path %>
+				<% if_logged_in? do %>
+			  	<% m.action 'Members', members_path %>
+				<% end %>
+		    <% if_admin? do %>
+			  	<% m.action 'Admin', admin_controls_path %>
+				<% end %>
+			<% end %>
+		</div>
 	</div>
 </div>
 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090129061109) do
+ActiveRecord::Schema.define(:version => 20090205035815) do
 
   create_table "activities", :force => true do |t|
     t.datetime "start_time"
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(:version => 20090129061109) do
     t.string   "type"
     t.integer  "user_id"
   end
+
+  create_table "roles", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
+  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -56,6 +68,11 @@ ActiveRecord::Schema.define(:version => 20090129061109) do
     t.datetime "activated_at"
     t.string   "state",                                    :default => "passive"
     t.datetime "deleted_at"
+    t.string   "user_type"
+    t.string   "identity_url"
+    t.integer  "invitation_id"
+    t.integer  "invitation_limit"
+    t.boolean  "enabled",                                  :default => true
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

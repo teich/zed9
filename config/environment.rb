@@ -10,6 +10,10 @@ RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+#Load application and environment specific constants
+raw_config = File.read(RAILS_ROOT + "/config/config.yml")
+APP_CONFIG = YAML.load(raw_config)[RAILS_ENV]
+
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -27,6 +31,9 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
+
+  # Load AASM
+  config.gem 'rubyist-aasm', :lib => 'aasm', :source => 'http://gems.github.com'
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
@@ -73,8 +80,5 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
   config.active_record.observers = :user_observer
-  
-  # Load AASM
-  config.gem 'rubyist-aasm', :lib => 'aasm', :source => 'http://gems.github.com'
-  
+
 end
