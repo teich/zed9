@@ -2,9 +2,9 @@ class CreateTrackpoints < ActiveRecord::Migration
   def self.up
     create_table :trackpoints do |t|
       t.float :latitude
-      t.float :longitutde
+      t.float :longitude
       t.integer :heart_rate
-      t.references :activity
+      t.references :workout
 
       t.timestamps
     end

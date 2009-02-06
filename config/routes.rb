@@ -1,7 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-
-	map.resources :activities, :has_many => [:trackpoints] 
-	map.scruffy '/scruffy/:id', :controller => "activities", :action => "scruffy_image"  
   
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
@@ -40,8 +37,10 @@ ActionController::Routing::Routes.draw do |map|
 	map.resource  :session
 	map.resource  :openid_session
 	map.resources :members
-	 
-  map.load_chart '/load_chart', :controller => 'activities', :action => 'load_chart'
+	map.resources :workouts, :has_many => [:trackpoints] 
+	
+	map.scruffy '/scruffy/:id', :controller => "workouts", :action => "scruffy_image"  	 
+  map.load_chart '/load_chart', :controller => 'workouts', :action => 'load_chart'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -84,8 +83,7 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   #map.connect ':controller/:action/:id'
   #map.connect ':controller/:action/:id.:format'
+
 	map.connect '*path' , :controller => 'four_oh_fours'
 	
-	map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
 end

@@ -1,3 +1,3 @@
 class Trackpoint < ActiveRecord::Base
-  belongs_to :activity
+  belongs_to :workout
 end

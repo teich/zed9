@@ -1,4 +1,4 @@
-class Activity < ActiveRecord::Base
+class Workout < ActiveRecord::Base
   belongs_to :users
   has_many :trackpoints
   

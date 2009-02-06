@@ -1,13 +1,9 @@
-<% form_for(@activity, :html => { :multipart => true }) do |f| %>
+<% form_for(@workout, :html => { :multipart => true }) do |f| %>
   <%= f.error_messages %>
 
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :type %><br />
-    <%= f.text_field :type %>
   </p>
 	<p> 
 		<%= f.label "Upload your device file:" %>

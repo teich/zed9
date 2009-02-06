@@ -1,7 +1,7 @@
 require 'hpricot'
 require 'scruffy'
 
-class ActivitiesController < ApplicationController  
+class WorkoutsController < ApplicationController  
  
   # REQUIRE LOGIN
   before_filter :login_required
@@ -9,43 +9,39 @@ class ActivitiesController < ApplicationController
   #  include Ziya
   #helper Ziya::Helper 
   
-  before_filter :find_activity, :only => [:show, :edit, :update, :destroy, :scruffy_image]
-  # GET /activities
-  # GET /activities.xml
+  before_filter :find_workout, :only => [:show, :edit, :update, :destroy, :scruffy_image]
+
   def index
-    @activities = current_user.activities.find(:all)
+    @workouts = current_user.workouts.find(:all)
     
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @activities }
+      format.xml  { render :xml => @workout }
     end
   end
 
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @activity }
+      format.xml  { render :xml => @workout }
     end
   end
 
   def new
-    @activity = current_user.activities.build
+    @workout = current_user.workouts.build
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @activity }
+      format.xml  { render :xml => @workout }
     end
   end
 
-  # GET /activities/1/edit
   def edit
   end
 
-  # POST /activities
-  # POST /activities.xml
   def create
-    @activity = current_user.activities.build
-    @activity.update_attributes(params[:activity])
+    @workout = current_user.workouts.build
+    #@activity.update_attributes(params[:activity])
 
     # Need to parse the XML seperatly here.  
     # TODO: Generize this to support any file.
@@ -54,50 +50,48 @@ class ActivitiesController < ApplicationController
     if request.post? and data  
       @points = parse_garmin_xml( data ) 
       @points.each do |p|
-        @activity.trackpoints.build(p)
+        @workout.trackpoints.build(p)
       end
     end
 
     respond_to do |format|
-      if @activity.save
-        flash[:notice] = 'Activity was successfully created.'
-        format.html { redirect_to(@activity) }
-        format.xml  { render :xml => @activity, :status => :created, :location => @activity }
+      if @workout.save
+        flash[:notice] = 'Workout was successfully created.'
+        format.html { redirect_to(@workout) }
+        format.xml  { render :xml => @workout, :status => :created, :location => @workout }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @activity.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @workout.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # PUT /activities/1
-  # PUT /activities/1.xml
+
   def update
     respond_to do |format|
-      if @activity.update_attributes(params[:activity])
-        flash[:notice] = 'Activity was successfully updated.'
-        format.html { redirect_to(@activity) }
+      if @workout.update_attributes(params[:workout])
+        flash[:notice] = 'Workout was successfully updated.'
+        format.html { redirect_to(@workout) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @activity.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @workout.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /activities/1
-  # DELETE /activities/1.xml
+
   def destroy
-    @activity.destroy
+    @workout.destroy
 
     respond_to do |format|
-      format.html { redirect_to(activities_url) }
+      format.html { redirect_to(workouts_url) }
       format.xml  { head :ok }
     end
   end
 
-  def find_activity
-    @activity = current_user.activities.find(params[:id])
+  def find_workout
+    @workout = current_user.workouts.find(params[:id])
   end
 
   def parse_garmin_xml ( xml_data )
@@ -119,12 +113,12 @@ class ActivitiesController < ApplicationController
   end
   
   def load_chart
-    @activity = Activity.find(params[:id])
+    @workout = Workout.find(params[:id])
      
     hr_series = []
     time_series = []
     c = 1
-    @activity.trackpoints.each do |a|
+    @workout.trackpoints.each do |a|
       next if a.heart_rate == nil
       hr_series << a.heart_rate
       time_series << c
@@ -148,7 +142,7 @@ class ActivitiesController < ApplicationController
   end
   
   def scruffy_image
-    hr_series = @activity.trackpoints.map {|a|a.heart_rate}
+    hr_series = @workout.trackpoints.map {|a|a.heart_rate}
  
     res = smooth_data(hr_series, 15)
      
@@ -156,5 +150,8 @@ class ActivitiesController < ApplicationController
     graph.add(:line, 'Heart Rate', res)
     send_data(graph.render(:width => 400, :as => 'PNG'), :type => 'image/png', :disposition=> 'inline')  
   end
-
+  
+  def is_garmin?
+    params[:device] == "garmin"
+  end
 end

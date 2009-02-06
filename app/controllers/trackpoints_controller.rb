@@ -1,39 +1,39 @@
 class TrackpointsController < ApplicationController
   def index
-    @activity = Activity.find(params[:activity_id])
-    @trackpoints = @activity.trackpoints
+    @workout = Workout.find(params[:workout_id])
+    @trackpoints = @workout.trackpoints
   end
 
   def show
-    @activity = Activity.find(params[:activity_id])
+    @workout = Workout.find(params[:workout_id])
     @trackpoint = Trackpoint.find(params[:id])
   end
 
   def new
-    @activity = Activity.find(params[:activity_id])
-    @trackpoint = @activity.trackpoints.build
+    @workout = Workout.find(params[:workout_id])
+    @trackpoint = @workout.trackpoints.build
   end
 
   def edit
-    @activity = Activity.find(params[:activity_id])
+    @workout = Workout.find(params[:workout_id])
     @trackpoint = Trackpoint.find(params[:id])
   end
 
   def create
-    @activity = Activity.find(params[:activity_id])
-    @trackpoint = @activity.trackpoints.build(params[:trackpoint])
+    @workout = Workout.find(params[:workout_id])
+    @trackpoint = @workout.trackpoints.build(params[:trackpoint])
     if @trackpoint.save
-      redirect_to activity_trackpoint_path(@activity, @trackpoint)
+      redirect_to workout_trackpoint_path(@workout, @trackpoint)
     else
       render :action => "new"
     end
   end
   
   def update
-    @activity = Activity.find(params[:activity_id])
+    @workout = Workout.find(params[:workout_id])
     @trackpoint = Trackpoint.find(params[:id])
-    if @trackpoint.update_attributes(params[:activity])
-      redirect_to activity_trackpoint_path(@activity, @trackpoint)
+    if @trackpoint.update_attributes(params[:workout])
+      redirect_to workout_trackpoint_path(@workout, @trackpoint)
     else
       render :action => "edit"
     end

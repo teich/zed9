@@ -9,19 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090129061109) do
-
-  create_table "activities", :force => true do |t|
-    t.datetime "start_time"
-    t.float    "distance"
-    t.integer  "average_hr"
-    t.datetime "end_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-    t.string   "type"
-    t.integer  "user_id"
-  end
+ActiveRecord::Schema.define(:version => 20090117000702) do
 
   create_table "four_oh_fours", :force => true do |t|
     t.string   "url"
@@ -31,8 +19,8 @@ ActiveRecord::Schema.define(:version => 20090129061109) do
     t.datetime "updated_at"
   end
 
-  add_index "four_oh_fours", ["url", "referer"], :name => "index_four_oh_fours_on_url_and_referer", :unique => true
   add_index "four_oh_fours", ["url"], :name => "index_four_oh_fours_on_url"
+  add_index "four_oh_fours", ["url", "referer"], :name => "index_four_oh_fours_on_url_and_referer", :unique => true
 
   create_table "invitations", :force => true do |t|
     t.integer  "sender_id"
@@ -97,7 +85,7 @@ ActiveRecord::Schema.define(:version => 20090129061109) do
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "heart_rate"
-    t.integer  "activity_id"
+    t.integer  "workout_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -135,5 +123,16 @@ ActiveRecord::Schema.define(:version => 20090129061109) do
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+
+  create_table "workouts", :force => true do |t|
+    t.datetime "start_time"
+    t.float    "distance"
+    t.integer  "average_hr"
+    t.integer  "duration"
+    t.string   "name",       :default => "Unnamed"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

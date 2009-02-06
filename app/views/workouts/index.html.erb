@@ -1,0 +1,32 @@
+<h1>Listing workouts</h1>
+
+Hello <%=h current_user.email %>
+<div class="data">
+<table>
+  <tr>
+    <th>Name</th>
+    <th>type</th>
+    <th>Start time</th>
+    <th>Avg. HR</th>
+    <th>End time</th>
+  </tr>
+
+<% for workout in @workouts %>
+  <tr>
+    <td><%=h workout.name %></td>
+    <td><%=h workout.workout_type %></td>
+
+    <td><%=h workout.start_time %></td>
+    <td><%=h workout.average_hr %></td>
+    <td><%=h workout.end_time %></td>
+    <td><%= link_to 'Show', workout %></td>
+    <td><%= link_to 'Edit', edit_workout_path(workout) %></td>
+    <td><%= link_to 'Destroy', workout, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+<br />
+
+<%= link_to 'New workout', new_workout_path %>
+

@@ -5,11 +5,11 @@
 	<tr>
 		<td><%=h trackpoint.heart_rate %></td>
 		<td><%=h trackpoint.latitude %></td>
-		<td><%= link_to 'Show', activity_trackpoint_path(@activity, trackpoint) %></td>
-		<td><%= link_to 'Edit', edit_activity_trackpoint_path(@activity, trackpoint) %></td>
+		<td><%= link_to 'Show', workout_trackpoint_path(@workout, trackpoint) %></td>
+		<td><%= link_to 'Edit', edit_workout_trackpoint_path(@workout, trackpoint) %></td>
 	</tr>
 <% end %>
 </table>	
 
-<%= link_to 'New trackpoint', new_activity_trackpoint_path(@activity) %>
-<%= link_to 'Back to Activity', @activity %>
+<%= link_to 'New trackpoint', new_workout_trackpoint_path(@workout) %>
+<%= link_to 'Back to Workout', @workout %>

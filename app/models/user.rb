@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
 	include Authentication::UserAbstraction
 
-  has_many :activities
+  has_many :workouts
   
 	set_inheritance_column :user_type
 	validates_presence_of  :user_type
