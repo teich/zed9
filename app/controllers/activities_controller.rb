@@ -141,14 +141,17 @@ class ActivitiesController < ApplicationController
     end
   end
   
+  def smooth_data(series, factor)
+    res = []
+    (0...series.length).step(factor) {|x| res << series[x]}
+    res
+  end
+  
   def scruffy_image
-    # Slick one-line ruby hash->array thing
     hr_series = @activity.trackpoints.map {|a|a.heart_rate}
  
-    # create a less dense array
-    res = [] 
-    (0...hr_series.length).step(10) {|x| res << hr_series[x]}
- 
+    res = smooth_data(hr_series, 15)
+     
     graph = Scruffy::Graph.new(:theme => Scruffy::Themes::Mephisto.new)
     graph.add(:line, 'Heart Rate', res)
     send_data(graph.render(:width => 400, :as => 'PNG'), :type => 'image/png', :disposition=> 'inline')  
