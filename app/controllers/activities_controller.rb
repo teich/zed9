@@ -7,7 +7,7 @@ class ActivitiesController < ApplicationController
   before_filter :login_required
  
   #  include Ziya
-  helper Ziya::Helper 
+  #helper Ziya::Helper 
   
   before_filter :find_activity, :only => [:show, :edit, :update, :destroy, :scruffy_image]
   # GET /activities
@@ -21,32 +21,15 @@ class ActivitiesController < ApplicationController
     end
   end
 
-  # GET /activities/1
-  # GET /activities/1.xml
   def show
-
-    # Create a graph URL of HR:
-#    heart_rate_chart = GoogleChart.new
-#    heart_rate_chart.type = :line 
-#    heart_rate_chart.height = 75
-#    heart_rate_chart.width = 150
-#    heart_rate_chart.data = []
-#    @activity.trackpoints.each do |a|
-#      heart_rate_chart.data.push(a.heart_rate)
-#    end
-#    @hr_chart_url = heart_rate_chart.to_url
-  
-    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @activity }
     end
   end
 
-  # GET /activities/new
-  # GET /activities/new.xml
   def new
-    @activity = Activity.new
+    @activity = current_user.activities.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -61,7 +44,19 @@ class ActivitiesController < ApplicationController
   # POST /activities
   # POST /activities.xml
   def create
-    @activity = Activity.new(params[:activity])
+    @activity = current_user.activities.build
+    @activity.update_attributes(params[:activity])
+
+    # Need to parse the XML seperatly here.  
+    # TODO: Generize this to support any file.
+    uploaded_file = params[:device_file] 
+    data = uploaded_file.read if uploaded_file.respond_to? :read 
+    if request.post? and data  
+      @points = parse_garmin_xml( data ) 
+      @points.each do |p|
+        @activity.trackpoints.build(p)
+      end
+    end
 
     respond_to do |format|
       if @activity.save
@@ -104,27 +99,6 @@ class ActivitiesController < ApplicationController
   def find_activity
     @activity = current_user.activities.find(params[:id])
   end
-  
-  def upload 
-    uploaded_file = params[:xml_file] 
-    data = uploaded_file.read if uploaded_file.respond_to? :read 
-#    @points = 0
-    if request.post? and data  
-      @activity = current_user.activities.build
-      @activity.update_attributes( {"name" => "TEST TEST"})
-
-      @points = parse_garmin_xml( data ) 
-      @points.each do |p|
-        tp = @activity.trackpoints.build(p).save
-#        tp.save
-      end
-    else 
-      redirect_to :action => 'index' 
-    end
-    
-    
-#    return render :text => "DEBUG #{@activity}"
-  end 
 
   def parse_garmin_xml ( xml_data )
     doc = Hpricot::XML( xml_data ) 
@@ -135,7 +109,7 @@ class ActivitiesController < ApplicationController
       lat = (t/:Position/:LatitudeDegrees).innerHTML
       long = (t/:Position/:LongitudeDegrees).innerHTML
 
-# Need to add migration to support these.      
+# TODO: Need to add migration to support these.      
 #      time = (t/:Time).innerHTML
 #      dist = (t/:DistanceMeters).innerHTML
 #      alt = (t/:AltitudeMeters).innerHTML
@@ -167,17 +141,20 @@ class ActivitiesController < ApplicationController
     end
   end
   
+  def smooth_data(series, factor)
+    res = []
+    (0...series.length).step(factor) {|x| res << series[x]}
+    res
+  end
+  
   def scruffy_image
-    # Slick one-line ruby hash->array thing
     hr_series = @activity.trackpoints.map {|a|a.heart_rate}
  
-    # create a less dense array
-    res = [] 
-    (0...hr_series.length).step(10) {|x| res << hr_series[x]}
- 
+    res = smooth_data(hr_series, 15)
+     
     graph = Scruffy::Graph.new(:theme => Scruffy::Themes::Mephisto.new)
     graph.add(:line, 'Heart Rate', res)
-    send_data(graph.render(:width => 640, :as => 'PNG'), :type => 'image/png', :disposition=> 'inline')  
+    send_data(graph.render(:width => 400, :as => 'PNG'), :type => 'image/png', :disposition=> 'inline')  
   end
 
 end

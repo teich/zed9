@@ -1,45 +1,62 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"    
+ "http://www.w3.org/TR/html4/strict.dtd"> 
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Activities: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'common' %>
+  <title><%= APP_CONFIG['settings']['name'] %>: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'reset' %>
+  <%= stylesheet_link_tag 'fonts' %>
+  <%= stylesheet_link_tag 'grids' %>
+  <%= stylesheet_link_tag 'base' %>
+  <%= stylesheet_link_tag 'main' %>
+
+	<%= javascript_include_tag 'jquery-1.3.1', 'ui/ui.core', 'ui/ui.datepicker' %>
+	<%= javascript_include_tag 'application' %>
+	
 </head>
 <body>
+	<div id="main" class="yui-d2f"><!-- start YUI layout -->
 
-<p style="color: green"><%= flash[:notice] %></p>
-<div class="container">
-	<div id="header">
-		<div id="logo">
-			<h1>Zed9</h1>
-		</div>
-		<div id="userbar">
-			<%= render :partial => "shared/user_bar" %>
-		</div>
-		<div id="navigation_container">
-			<% ubermenu :id => 'main_navigation' do |m| %>
-			  <% m.action 'Homepage', root_path %>
-				<% if_logged_in? do %>
-			  	<% m.action 'Members', members_path %>
+		<div id="hd"><!-- header -->
+    	<div class="yui-gd"> <!-- the "special grid" --> 
+    		<div class="yui-u first">
+					<h1>Your Application</h1>
+					<p>awesome tagline for your application</p>
+				</div> 
+    		<div class="yui-u">
+					<%= render :partial => "shared/user_bar" %>
+				</div> 
+    	</div> 
+			<div id="navigation_container">
+				<% ubermenu :id => 'main_navigation' do |m| %>
+				  <% m.action 'Homepage', root_path %>
+					<% if_logged_in? do %>
+				  	<% m.action 'Members', members_path %>
+					<% end %>
+			    <% if_admin? do %>
+				  	<% m.action 'Admin', admin_controls_path %>
+					<% end %>
 				<% end %>
-		    <% if_admin? do %>
-			  	<% m.action 'Admin', admin_controls_path %>
-				<% end %>
-			<% end %>
+			</div>
 		</div>
-	</div>
-</div>
 
-<div class="container">
-	<div class="main">
-		<%= yield  %>
-	</div>
-</div>
+		<div id="bd"><!-- body -->
+			<%= render :partial => "layouts/#{controller.nested_layout}" %>
+		</div>  
 
-	<div class="footer">
-		This is the footer
-	</div>
+		<div id="ft"><!-- footer -->
+			<p>Copyright 2008 Your Company</p>
+		</div>  	
+  
+	</div><!-- end YUI layout -->
+  
+	<!-- debug -->
+	<% if Rails.env.development? %>
+	  <div id="footnotes_holder">
+	  </div>
+	  <%= render :partial => 'shared/debug' %>
+	<% end %>
+
 </body>
 </html>

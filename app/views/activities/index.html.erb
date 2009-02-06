@@ -30,10 +30,3 @@ Hello <%=h current_user.email %>
 
 <%= link_to 'New activity', new_activity_path %>
 
-<% form_tag( {:action => 'upload'}, {:multipart => true} ) do -%> 
-<p> 
-<label for="file">File:</label><%= 
-file_field_tag "xml_file" %><br/> 
-<%= submit_tag "Submit" %> 
-</p> 
-<% end -%> 
