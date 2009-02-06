@@ -5,23 +5,17 @@ Hello <%=h current_user.email %>
 <table>
   <tr>
     <th>Name</th>
-    <th>type</th>
     <th>Start time</th>
     <th>Avg. HR</th>
-    <th>End time</th>
   </tr>
 
 <% for workout in @workouts %>
   <tr>
-    <td><%=h workout.name %></td>
-    <td><%=h workout.workout_type %></td>
-
+    <td><%=link_to workout.name, workout %></td>
     <td><%=h workout.start_time %></td>
     <td><%=h workout.average_hr %></td>
-    <td><%=h workout.end_time %></td>
-    <td><%= link_to 'Show', workout %></td>
-    <td><%= link_to 'Edit', edit_workout_path(workout) %></td>
-    <td><%= link_to 'Destroy', workout, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Edit', edit_workout_path(workout) %> | 
+    <%= link_to 'Delete', workout, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
