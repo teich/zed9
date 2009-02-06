@@ -47,6 +47,17 @@ class ActivitiesController < ApplicationController
     @activity = current_user.activities.build
     @activity.update_attributes(params[:activity])
 
+    # Need to parse the XML seperatly here.  
+    # TODO: Generize this to support any file.
+    uploaded_file = params[:device_file] 
+    data = uploaded_file.read if uploaded_file.respond_to? :read 
+    if request.post? and data  
+      @points = parse_garmin_xml( data ) 
+      @points.each do |p|
+        @activity.trackpoints.build(p)
+      end
+    end
+
     respond_to do |format|
       if @activity.save
         flash[:notice] = 'Activity was successfully created.'
@@ -88,25 +99,6 @@ class ActivitiesController < ApplicationController
   def find_activity
     @activity = current_user.activities.find(params[:id])
   end
-  
-  def upload 
-    uploaded_file = params[:xml_file] 
-    data = uploaded_file.read if uploaded_file.respond_to? :read 
-    if request.post? and data  
-      @activity = current_user.activities.build
-      @activity.update_attributes( {"name" => "TEST TEST"})
-
-      @points = parse_garmin_xml( data ) 
-      @points.each do |p|
-        @activity.trackpoints.build(p).save
-      end
-    else 
-      redirect_to :action => 'index' 
-    end
-    
-    
-#    return render :text => "DEBUG #{@activity}"
-  end 
 
   def parse_garmin_xml ( xml_data )
     doc = Hpricot::XML( xml_data ) 
@@ -117,7 +109,7 @@ class ActivitiesController < ApplicationController
       lat = (t/:Position/:LatitudeDegrees).innerHTML
       long = (t/:Position/:LongitudeDegrees).innerHTML
 
-# Need to add migration to support these.      
+# TODO: Need to add migration to support these.      
 #      time = (t/:Time).innerHTML
 #      dist = (t/:DistanceMeters).innerHTML
 #      alt = (t/:AltitudeMeters).innerHTML
