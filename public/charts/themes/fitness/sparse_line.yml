@@ -1,8 +1,0 @@
-<%= chart :line %>
-  <%= component :chart_pref %>
-    point_size: 0
-
-    <%=component :axis_category %>
-      skip:   100
-
-

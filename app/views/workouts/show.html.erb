@@ -1,24 +1,24 @@
 <h1>Workouts#show</h1>
-
+ 
 <p>
     NAME: <%=h @workout.name %><BR><BR>
  <b>Start time:</b><BR><BR>
   <%=h @workout.start_time %>
 </p>
-
+ 
 <p>
   <b>Average heart rate:</b>
   <%=h @workout.average_hr %>
 </p>
-
+ 
+<% if false then %> 
 
 <%= image_tag scruffy_path(@workout) %>
-
-<% if false then %>
+ 
 <%= image_tag scruffy_image %>
 <% end %>
   
 <p>
-<%= link_to 'Edit', edit_workout_path(@workout) %> |
-<%= link_to 'Back', workouts_path %>
+<%= link_to 'Edit', edit_user_workout_path(current_user, @workout) %> |
+<%= link_to 'Back', user_workouts_path %>
 </p>

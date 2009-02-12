@@ -1,8 +1,25 @@
-admin:
-  id: 1
-  login: admin
-  email: admin@example.com
-  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  # activation_code: adminscode # only if you're activating new signups
-  created_at: <%= 1.days.ago.to_s :db %>
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  login: MyString
+  crypted_password: MyString
+  password_salt: MyString
+  persistence_token: MyString
+  login_count: 1
+  last_request_at: 2009-02-11 19:09:28
+  last_login_at: 2009-02-11 19:09:28
+  current_login_at: 2009-02-11 19:09:28
+  last_login_ip: MyString
+  current_login_ip: MyString
+
+two:
+  login: MyString
+  crypted_password: MyString
+  password_salt: MyString
+  persistence_token: MyString
+  login_count: 1
+  last_request_at: 2009-02-11 19:09:28
+  last_login_at: 2009-02-11 19:09:28
+  current_login_at: 2009-02-11 19:09:28
+  last_login_ip: MyString
+  current_login_ip: MyString

@@ -1,13 +1,12 @@
-
-<% if is_garmin? %>
-	<%= render :partial => "garmin" %>
+<% if params[:device] == "garmin" %>
+  <%= render :partial => "garmin" %>
 <% else %>
 <ul>
-	<li>Nike +</li>
-	<li><%= link_to 'Garmin', url_for(:action => 'new', :device => 'garmin') %></li>
-	<li>Polar</li>
-	<li>Generic GPS</li>
+  <li>Nike +</li>
+  <li><%= link_to 'Garmin', url_for(:action => 'new', :device => 'garmin') %></li>
+  <li>Polar</li>
+  <li>Generic GPS</li>
 </ul>
 <% end -%>
-
-<%= link_to 'Back', workouts_path %>
+ 
+<%= link_to 'Back', user_workouts_path %>

@@ -1,6 +1,6 @@
 <h1>Listing workouts</h1>
-
-Hello <%=h current_user.email %>
+ 
+Hello 
 <div class="data">
 <table>
   <tr>
@@ -8,19 +8,18 @@ Hello <%=h current_user.email %>
     <th>Start time</th>
     <th>Avg. HR</th>
   </tr>
-
+ 
 <% for workout in @workouts %>
   <tr>
-    <td><%=link_to workout.name, workout %></td>
+    <td><%=link_to workout.name, [current_user, workout] %></td>
     <td><%=h workout.start_time %></td>
     <td><%=h workout.average_hr %></td>
-    <td><%= link_to 'Edit', edit_workout_path(workout) %> | 
-    <%= link_to 'Delete', workout, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Edit', edit_user_workout_path(current_user, workout) %> | 
+    <%= link_to 'Delete', [current_user, workout], :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 </div>
 <br />
-
-<%= link_to 'New workout', new_workout_path %>
-
+ 
+<%= link_to 'New workout', new_user_workout_path(current_user) %>
