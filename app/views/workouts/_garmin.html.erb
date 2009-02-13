@@ -2,6 +2,10 @@ Please select your file
 <% form_for @workout, :url => user_workouts_path, :action => 'upload', :html => { :multipart => true } do |f| %>
   <%= f.error_messages %>
  
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
   <p> 
     <%= f.label "Upload your device file:" %>
     <%= file_field_tag "device_file" %> 

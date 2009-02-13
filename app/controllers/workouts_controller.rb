@@ -20,7 +20,7 @@ class WorkoutsController < ApplicationController
   end
 
   def create
-    @workout = current_user.workouts.build
+    @workout = current_user.workouts.build(params[:workout])
 
     # Need to parse the XML seperatly here.  
     # TODO: Generize this to support any file.
