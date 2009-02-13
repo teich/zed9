@@ -11,9 +11,10 @@
   <%=h @workout.average_hr %>
 </p>
  
-<% if false then %> 
 
-<%= image_tag scruffy_path(@workout) %>
+<%= image_tag user_workout_chart_path(current_user, @workout) %>
+
+<% if false then %> 
  
 <%= image_tag scruffy_image %>
 <% end %>

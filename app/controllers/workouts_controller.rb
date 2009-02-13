@@ -1,5 +1,4 @@
 require 'hpricot'
-#require 'scruffy'
 
 class WorkoutsController < ApplicationController
   before_filter :require_user
@@ -117,13 +116,7 @@ class WorkoutsController < ApplicationController
       params[:device] == "garmin"
     end
 
-    private
 
-      def smooth_data(series, factor)
-        res = []
-        (0...series.length).step(factor) {|x| res << series[x]}
-        res
-      end
     
     
 end
