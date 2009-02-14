@@ -1,0 +1,8 @@
+<%= chart :mixed %>
+ 
+  <%=comp :chart_pref %>
+    point_shape:        none
+    line_thickness:     3
+ 
+  <%=comp :series_color %>
+    colors: DAFFE3,F7FFDA,FFDADA,2A31C2
