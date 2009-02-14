@@ -29,7 +29,7 @@ set :use_sudo, false
 #	Passenger
 #############################################################
 
-namespace :passenger do
+namespace :deploy do
   desc "Restart Application"
   task :restart do
     run "touch #{current_path}/tmp/restart.txt"
