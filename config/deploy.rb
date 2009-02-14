@@ -20,7 +20,20 @@ set :deploy_to, applicationdir
 set :deploy_via, :export
 
 # additional settings
-default_run_options[:pty] = true  # Forgo errors when deploying from windows
+default_run_options[:pty] = true 
 #ssh_options[:keys] = %w(/Path/To/id_rsa)            # If you are using ssh_keys
 set :chmod755, "app config db lib public vendor script script/* public/disp*"
 set :use_sudo, false
+
+#############################################################
+#	Passenger
+#############################################################
+
+namespace :passenger do
+  desc "Restart Application"
+  task :restart do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
+end
+
+after :deploy, "passenger:restart"
