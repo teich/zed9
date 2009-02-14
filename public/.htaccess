@@ -1,4 +1,6 @@
 RewriteEngine On
+RewriteRule ^(.*)$ dispatch.fcgi [QSA,L]
+
 RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
 RewriteCond %{SCRIPT_FILENAME} !maintenance.html
 RewriteRule ^.*$ /system/maintenance.html [L]
