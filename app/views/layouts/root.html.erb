@@ -16,7 +16,6 @@
 
 		<% form_for @user_session, :url => user_session_path do |f| %>
 	  <%= link_to "Register", new_account_path %> or login:
-	  	  <%= f.error_messages %>
 		  <span class="login_text">Username:</span> <%= f.text_field :login %>
 		  <span class="login_text">Password:</span> <%= f.password_field :password %>
 		  <%= f.submit "Login" %>

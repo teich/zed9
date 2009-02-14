@@ -1,6 +1,8 @@
-RewriteEngine On
-RewriteRule ^(.*)$ dispatch.fcgi [QSA,L]
+AddHandler fastcgi-script fcg fcgi fpl
 
+RewriteEngine On
 RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
 RewriteCond %{SCRIPT_FILENAME} !maintenance.html
 RewriteRule ^.*$ /system/maintenance.html [L]
+
+RewriteRule ^(.*)$ dispatch.fcgi [QSA,L]
