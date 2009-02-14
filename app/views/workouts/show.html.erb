@@ -18,13 +18,10 @@
 	<% end %>
  </p>
 
-<%= image_tag user_workout_chart_path(current_user, @workout) %>
+<p>
+	<%= ziya_chart user_workout_chart_path(current_user, @workout), :size => "400x300" -%>
+</p>
 
-<% if false then %> 
- 
-<%= image_tag scruffy_image %>
-<% end %>
-  
 <p>
 <%= link_to 'Edit', edit_user_workout_path(current_user, @workout) %> |
 <%= link_to 'Back', user_workouts_path %>
