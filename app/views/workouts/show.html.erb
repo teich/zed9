@@ -10,7 +10,13 @@
   <b>Average heart rate:</b>
   <%=h @workout.average_hr %>
 </p>
- 
+
+<p>
+	<b>Tags:</b>
+	<% for tag in @workout.tag_list %>
+	<%= link_to tag, user_workouts_path + '?tag=' + tag %>
+	<% end %>
+ </p>
 
 <%= image_tag user_workout_chart_path(current_user, @workout) %>
 

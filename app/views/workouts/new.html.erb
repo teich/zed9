@@ -1,5 +1,22 @@
 <% if params[:device] == "garmin" %>
-  <%= render :partial => "garmin" %>
+<% form_for [current_user, @workout], :url => user_workouts_path, :action => 'upload', :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+	<%= f.label :tag_list %><br />
+	<%= f.text_field :tag_list %>
+  <p> 
+    <%= f.label "Upload your device file:" %>
+    <%= file_field_tag "device_file" %> 
+  </p> 
+  <p>
+    <%= f.submit "Save" %>
+  </p>
+<% end %>
 <% else %>
 <ul>
   <li>Nike +</li>

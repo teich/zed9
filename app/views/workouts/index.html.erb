@@ -7,6 +7,7 @@ Hello
     <th>Name</th>
     <th>Start time</th>
     <th>Avg. HR</th>
+	<th>Tag</th>
   </tr>
  
 <% for workout in @workouts %>
@@ -14,6 +15,10 @@ Hello
     <td><%=link_to workout.name, [current_user, workout] %></td>
     <td><%=h workout.start_time %></td>
     <td><%=h workout.average_hr %></td>
+	<td>
+	<% for tag in workout.tag_list %>
+	<%= link_to tag, user_workouts_path + '?tag=' + tag %>
+	<% end %></td>
     <td><%= link_to 'Edit', edit_user_workout_path(current_user, workout) %> | 
     <%= link_to 'Delete', [current_user, workout], :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
@@ -21,5 +26,7 @@ Hello
 </table>
 </div>
 <br />
- 
+<% if (params[:tag])%>
+<%= link_to 'Clear Tags', user_workouts_path %> 
+<% end %>
 <%= link_to 'New workout', new_user_workout_path(current_user) %>

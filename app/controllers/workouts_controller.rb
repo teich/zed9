@@ -6,7 +6,11 @@ class WorkoutsController < ApplicationController
   before_filter :find_workout, :only => [:show, :edit, :update, :destroy]
   
   def index
-    @workouts = current_user.workouts.find(:all)
+    if params[:tag]
+      @workouts = current_user.workouts.tagged_with(params[:tag], :on => :tags)
+    else
+      @workouts = current_user.workouts.find(:all)
+    end
   end
 
   def show
@@ -77,39 +81,6 @@ class WorkoutsController < ApplicationController
         datapoint << { "heart_rate" => hr, "latitude" => lat, "longitude" => long }
       end
       return datapoint
-    end
-
-    def load_chart
-      @workout = Workout.find(params[:id])
-
-      hr_series = []
-      time_series = []
-      c = 1
-      @workout.trackpoints.each do |a|
-        next if a.heart_rate == nil
-        hr_series << a.heart_rate
-        time_series << c
-        c += 1 
-      end
-
-      chart = Ziya::Charts::Line.new LICENSE, 'sparse_line'
-      chart.add( :theme, "fitness" )
-      chart.add :axis_category_text, time_series 
-      chart.add :series, "HR", hr_series
-
-      respond_to do |fmt|
-        fmt.xml { render :xml => chart.to_xml }
-      end
-    end
-
-    def scruffy_image
-      hr_series = @workout.trackpoints.map {|a|a.heart_rate}
-
-      res = smooth_data(hr_series, 15)
-
-      graph = Scruffy::Graph.new(:theme => Scruffy::Themes::Mephisto.new)
-      graph.add(:line, 'Heart Rate', res)
-      send_data(graph.render(:width => 400, :as => 'PNG'), :type => 'image/png', :disposition=> 'inline')  
     end
 
     def is_garmin?
