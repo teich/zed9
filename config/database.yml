@@ -16,7 +16,11 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: mysql
+  encoding: utf8
+  database: zed9_production
+  username: zed9
+  password: fjdkslzz
+  host:     mysql.zednine.com
   pool: 5
   timeout: 5000

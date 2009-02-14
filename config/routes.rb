@@ -45,7 +45,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   map.resource  :user_session
-  map.root      :controller => "user_sessions", :action => "new"
+  map.root      :controller => "root", :action => "index"
 
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
