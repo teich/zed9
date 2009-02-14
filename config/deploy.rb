@@ -27,13 +27,10 @@ set :use_sudo, false
 
 #############################################################
 #	Passenger
-#############################################################
-
+# Need to overload the deploy functions so they don't try using the CGI scripts 
 namespace :deploy do
   desc "Restart Application"
-  task :restart do
+  task :restart, :roles => :app do
     run "touch #{current_path}/tmp/restart.txt"
   end
 end
-
-after :deploy, "passenger:restart"
