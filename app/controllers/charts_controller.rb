@@ -19,7 +19,7 @@ class ChartsController < ApplicationController
     
     @workout = current_user.workouts.find(params[:workout_id])
     hr_series = @workout.trackpoints.map {|a|a.heart_rate}
-    graph_data = smooth_data(hr_series, 40)
+    graph_data = smooth_data(hr_series, 10)
     
     hr1 = []
     hr2 = []

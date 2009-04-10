@@ -29,13 +29,20 @@ class WorkoutsController < ApplicationController
     # Need to parse the XML seperatly here.  
     # TODO: Generize this to support any file.
     uploaded_file = params[:device_file] 
-    if request.post? and uploaded_file.respond_to? :read  
+    if request.post? and uploaded_file.respond_to? :read
+      
+      # Version I'm running here seems to pass as string is <10K, or file if over.
+      if (uploaded_file.is_a?(String))
+        uploaded_data = uploaded_file
+      else
+        uploaded_data = uploaded_file.read
+      end
       if (params[:device] == "polar")
         logger.debug "POLAR DEVICE"
-        @points = parse_polar( uploaded_file )
+        @points = parse_polar( uploaded_data )
       elsif (params[:device] == "garmin")
         logger.debug "GARMIN DEVICE"
-        @points = parse_garmin_xml( uploaded_file ) 
+        @points = parse_garmin_xml( uploaded_data ) 
       end
       @points.each do |p|
         @workout.trackpoints.build(p)
@@ -64,15 +71,14 @@ class WorkoutsController < ApplicationController
 
     def destroy
       @workout.destroy
-      redirect_to(workouts_url)
+      redirect_to( user_workouts_url)
     end
 
     def find_workout
       @workout = current_user.workouts.find(params[:id])
     end
 
-    def parse_garmin_xml ( garmin_file )
-      xml_data = garmin_file.read
+    def parse_garmin_xml ( xml_data )
       doc = Hpricot::XML( xml_data ) 
       datapoint = []
       hr = 0
@@ -90,16 +96,11 @@ class WorkoutsController < ApplicationController
       return datapoint
     end
 
-    def parse_polar ( hrm_file )
-      logger.debug "IN THE PARSE_POLAR FUNCTION!!!"
+    def parse_polar ( hrm_data )
       datapoint = []
       hr_data = 0
-      if (hrm_file.is_a?(String))
-        hrm_string = hrm_file
-      else
-        hrm_string = hrm_file.read
-      end
-      hrm_array = hrm_string.split("\n")
+      
+      hrm_array = hrm_data.split("\n")
       hrm_array.each do |line|
         datapoint << { "heart_rate" => line.chomp } if (hr_data == 1)
         if (line =~ /\[HRData\]/)
@@ -112,8 +113,4 @@ class WorkoutsController < ApplicationController
     def is_garmin?
       params[:device] == "garmin"
     end
-
-
-    
-    
 end
