@@ -29,18 +29,24 @@ class WorkoutsController < ApplicationController
     # Need to parse the XML seperatly here.  
     # TODO: Generize this to support any file.
     uploaded_file = params[:device_file] 
-    data = uploaded_file.read if uploaded_file.respond_to? :read 
-    if request.post? and data  
-      @points = parse_garmin_xml( data ) 
+    if request.post? and uploaded_file.respond_to? :read  
+      if (params[:device] == "polar")
+        logger.debug "POLAR DEVICE"
+        @points = parse_polar( uploaded_file )
+      elsif (params[:device] == "garmin")
+        logger.debug "GARMIN DEVICE"
+        @points = parse_garmin_xml( uploaded_file ) 
+      end
       @points.each do |p|
         @workout.trackpoints.build(p)
       end
     end
-
+    
     if @workout.save
       flash[:notice] = 'Workout was successfully created.'
       redirect_to [current_user, @workout]
     else
+      flash[:notice] = "can't save workout for some lame reason."
       render :action => "new"
     end
   end
@@ -65,7 +71,8 @@ class WorkoutsController < ApplicationController
       @workout = current_user.workouts.find(params[:id])
     end
 
-    def parse_garmin_xml ( xml_data )
+    def parse_garmin_xml ( garmin_file )
+      xml_data = garmin_file.read
       doc = Hpricot::XML( xml_data ) 
       datapoint = []
       hr = 0
@@ -83,6 +90,25 @@ class WorkoutsController < ApplicationController
       return datapoint
     end
 
+    def parse_polar ( hrm_file )
+      logger.debug "IN THE PARSE_POLAR FUNCTION!!!"
+      datapoint = []
+      hr_data = 0
+      if (hrm_file.is_a?(String))
+        hrm_string = hrm_file
+      else
+        hrm_string = hrm_file.read
+      end
+      hrm_array = hrm_string.split("\n")
+      hrm_array.each do |line|
+        datapoint << { "heart_rate" => line.chomp } if (hr_data == 1)
+        if (line =~ /\[HRData\]/)
+          hr_data = 1
+        end
+      end
+      return datapoint
+    end
+    
     def is_garmin?
       params[:device] == "garmin"
     end
