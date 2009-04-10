@@ -9,7 +9,7 @@ class WorkoutsController < ApplicationController
     if params[:tag]
       @workouts = current_user.workouts.tagged_with(params[:tag], :on => :tags)
     else
-      @workouts = current_user.workouts.find(:all)
+      @workouts = current_user.workouts.find(:all, :order => "start_time DESC")
     end
   end
 
@@ -26,7 +26,6 @@ class WorkoutsController < ApplicationController
   def create
     @workout = current_user.workouts.build(params[:workout])
 
-    # Need to parse the XML seperatly here.  
     # TODO: Generize this to support any file.
     uploaded_file = params[:device_file] 
     if request.post? and uploaded_file.respond_to? :read
@@ -37,13 +36,16 @@ class WorkoutsController < ApplicationController
       else
         uploaded_data = uploaded_file.read
       end
+      
       if (params[:device] == "polar")
-        logger.debug "POLAR DEVICE"
-        @points = parse_polar( uploaded_data )
+        @parsed_data = parse_polar( uploaded_data )
       elsif (params[:device] == "garmin")
-        logger.debug "GARMIN DEVICE"
-        @points = parse_garmin_xml( uploaded_data ) 
+        @parsed_data = parse_garmin_xml( uploaded_data ) 
       end
+
+      @workout.update_attributes(:start_time => @parsed_data["start_time"])
+
+      @points = @parsed_data["datapoints"]
       @points.each do |p|
         @workout.trackpoints.build(p)
       end
@@ -80,8 +82,9 @@ class WorkoutsController < ApplicationController
 
     def parse_garmin_xml ( xml_data )
       doc = Hpricot::XML( xml_data ) 
-      datapoint = []
+      datapoints = []
       hr = 0
+      start_time = (doc/:Id).innerHTML
       (doc/:Trackpoint).each do |t| 
         hr = (t/:HeartRateBpm/:Value).innerHTML
         lat = (t/:Position/:LatitudeDegrees).innerHTML
@@ -91,23 +94,38 @@ class WorkoutsController < ApplicationController
   #      time = (t/:Time).innerHTML
   #      dist = (t/:DistanceMeters).innerHTML
   #      alt = (t/:AltitudeMeters).innerHTML
-        datapoint << { "heart_rate" => hr, "latitude" => lat, "longitude" => long }
+        datapoints << { "heart_rate" => hr, "latitude" => lat, "longitude" => long }
       end
-      return datapoint
+      parsed_data = { "start_time" => start_time, "datapoints" => datapoints }
     end
 
     def parse_polar ( hrm_data )
-      datapoint = []
+      datapoints = []
       hr_data = 0
+      date = ''
+      start = ''
+      parsed_data = {}
       
       hrm_array = hrm_data.split("\n")
       hrm_array.each do |line|
-        datapoint << { "heart_rate" => line.chomp } if (hr_data == 1)
+        line.chomp!
+        datapoints << { "heart_rate" => line } if (hr_data == 1)
+
+        if (line =~ /Date=(.*$)/)
+          date = $1
+        end
+        if (line =~ /StartTime=(\d+):(\d+):(\d+)\..*$/)
+          start = $1 + $2 + $3
+        end
+        if (line =~ /Monitor=(\d+$)/)
+          parsed_data["device"] = $1
+        end
         if (line =~ /\[HRData\]/)
           hr_data = 1
         end
       end
-      return datapoint
+      start_time = date + start
+      parsed_data = { "start_time" => start_time, "datapoints" => datapoints }
     end
     
     def is_garmin?
