@@ -26,27 +26,19 @@ class WorkoutsController < ApplicationController
   def create
     @workout = current_user.workouts.build(params[:workout])
 
-    # TODO: Generize this to support any file.
     uploaded_file = params[:device_file] 
     if request.post? and uploaded_file.respond_to? :read
       
       # Version I'm running here seems to pass as string is <10K, or file if over.
-      if (uploaded_file.is_a?(String))
-        uploaded_data = uploaded_file
-      else
-        uploaded_data = uploaded_file.read
-      end
+      uploaded_data = ensure_string(uploaded_file)
       
-      if (params[:device] == "polar")
-        @parsed_data = parse_polar( uploaded_data )
-      elsif (params[:device] == "garmin")
-        @parsed_data = parse_garmin_xml( uploaded_data ) 
-      end
+      parsed_data = parse_polar( uploaded_data ) if is_polar?(params[:device])
+      parsed_data = parse_garmin_xml( uploaded_data ) if is_garmin?(params[:device])
 
-      @workout.update_attributes(:start_time => @parsed_data["start_time"])
+      @workout.update_attributes(:start_time => parsed_data["start_time"])
 
-      @points = @parsed_data["datapoints"]
-      @points.each do |p|
+      points = parsed_data["datapoints"]
+      points.each do |p|
         @workout.trackpoints.build(p)
       end
     end
@@ -73,12 +65,15 @@ class WorkoutsController < ApplicationController
 
     def destroy
       @workout.destroy
-      redirect_to( user_workouts_url)
+      redirect_to(user_workouts_url)
     end
+
+    
+    private
 
     def find_workout
       @workout = current_user.workouts.find(params[:id])
-    end
+    end    
 
     def parse_garmin_xml ( xml_data )
       doc = Hpricot::XML( xml_data ) 
@@ -128,7 +123,15 @@ class WorkoutsController < ApplicationController
       parsed_data = { "start_time" => start_time, "datapoints" => datapoints }
     end
     
-    def is_garmin?
-      params[:device] == "garmin"
+    def is_garmin?(device)
+      device == "garmin"
+    end
+    
+    def is_polar?(device)
+      device == "polar"
+    end
+    
+    def ensure_string(uploaded_file)
+      (uploaded_file.is_a?(String)) ? uploaded_file : uploaded_file.read
     end
 end
