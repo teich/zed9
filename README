@@ -1,1 +1,3 @@
 Hosted on Zed9
+
+Run "rake db:seed" to populate with the first user
