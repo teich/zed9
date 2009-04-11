@@ -14,14 +14,14 @@
  
 <% for workout in @workouts %>
   <tr>
-    <td><%=link_to workout.name, [current_user, workout] %></td>
+    <td><%=link_to workout.name, workout %></td>
     <td><%=h workout.start_time %></td>
 	<td>
 	<% for tag in workout.tag_list %>
-	<%= link_to tag, user_workouts_path + '?tag=' + tag %>
+	<%= link_to tag, workouts_path + '?tag=' + tag %>
 	<% end %></td>
-    <td><%= link_to 'Edit', edit_user_workout_path(current_user, workout) %> | 
-    <%= link_to 'Delete', [current_user, workout], :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Edit', edit_workout_path(workout) %> | 
+    <%= link_to 'Delete', workout, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </tbody>
@@ -29,9 +29,9 @@
 </div>
 <br />
 <% if (params[:tag])%>
-<%= link_to 'Clear Tags', user_workouts_path %> 
+<%= link_to 'Clear Tags', workouts_path %> 
 <% end %>
-<%= link_to 'New workout', new_user_workout_path(current_user) %>
+<%= link_to 'New workout', new_workout_path %>
 
 <script type="text/javascript">
 	$('.workout_listing').flexigrid();

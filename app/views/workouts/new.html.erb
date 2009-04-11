@@ -1,5 +1,5 @@
 <% if params[:device] %>
-<% form_for [current_user, @workout], :url => user_workouts_path, :action => 'upload', :html => { :multipart => true } do |f| %>
+<% form_for @workout, :url => workouts_path, :action => 'upload', :html => { :multipart => true } do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -27,4 +27,4 @@
 </ul>
 <% end -%>
  
-<%= link_to 'Back', user_workouts_path %>
+<%= link_to 'Back', workouts_path %>

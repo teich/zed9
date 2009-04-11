@@ -11,15 +11,15 @@
 <p>
 	<b>Tags:</b>
 	<% for tag in @workout.tag_list %>
-	<%= link_to tag, user_workouts_path + '?tag=' + tag %>
+	<%= link_to tag, workouts_path + '?tag=' + tag %>
 	<% end %>
  </p>
 
 <p>
-	<%= ziya_chart user_workout_chart_path(current_user, @workout), :size => "400x300" -%>
+	<%= ziya_chart workout_chart_path(@workout), :size => "400x300" -%>
 </p>
 
 <p>
-<%= link_to 'Edit', edit_user_workout_path(current_user, @workout) %> |
-<%= link_to 'Back', user_workouts_path %>
+<%= link_to 'Edit', edit_workout_path(@workout) %> |
+<%= link_to 'Back', workouts_path %>
 </p>

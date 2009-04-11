@@ -1,6 +1,6 @@
 <h1>Workouts#edit</h1>
 
-<% form_for [current_user, @workout], :url => user_workout_path, :action => 'upload', :html => { :multipart => true } do |f| %>
+<% form_for @workout, :url => workout_path, :action => 'upload', :html => { :multipart => true } do |f| %>
 <%= f.error_messages %>
 
 <p>
@@ -19,5 +19,5 @@
 </p> 
 <% end %>
 
-<%= link_to 'Show', [current_user, @workout] %> |
-<%= link_to 'Back', user_workouts_path %>
+<%= link_to 'Show', @workout %> |
+<%= link_to 'Back', workouts_path %>

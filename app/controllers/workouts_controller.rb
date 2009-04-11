@@ -65,7 +65,7 @@ class WorkoutsController < ApplicationController
 
     def destroy
       @workout.destroy
-      redirect_to(user_workouts_url)
+      redirect_to(workouts_url)
     end
 
     

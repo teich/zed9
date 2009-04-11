@@ -3,12 +3,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :invitations
 
   map.resource  :account, :controller => "users"
-  map.resources :users do |user|
-    user.resources :workouts do |workout|
+  map.resources :workouts do |workout|
       workout.resources :trackpoints
       workout.resource  :chart, :only => [:show]
-    end
   end
+  
 
   map.signup '/signup/:invitation_token', :controller => 'users', :action => 'new'
    
