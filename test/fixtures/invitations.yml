@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  senderid: 1
+  recipient_email: MyString
+  token: MyString
+  sent_at: 2009-04-10 17:38:22
+
+two:
+  senderid: 1
+  recipient_email: MyString
+  token: MyString
+  sent_at: 2009-04-10 17:38:22

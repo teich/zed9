@@ -1,0 +1,15 @@
+Data Importers
+simply transforming into canonical format stored in DB.  
+Take data stream as input, provide accessor functions in normalized manner
+
+	
+base object should have some basic accessors:
+	trackpoints - I think I can use the 
+
+constructor reads from file and creates data structure
+	
+
+Questions:
+ * how does inheritance in ruby work?
+ * is it worth having a datapoint be an object itself?  array of objects seems heavyweight
+	

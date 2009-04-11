@@ -1,3 +1,11 @@
 <h1>Zed9 is like Mint.com for Fitness</h1>
 
-<p>Please create an account or login to get started!</a>
+<p>We are in pre-alpha early-ness.  If you are interested in finding out more, please provide your email address below</a>
+	
+	<% form_for Invitation.new do |f| %>
+		<p>
+			<%= f.label :recipient_email, "Your Email:" %>
+			<%= f.text_field :recipient_email %>
+			<%= f.submit "Submit" %>
+		</p>
+	<% end %>

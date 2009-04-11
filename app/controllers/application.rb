@@ -10,6 +10,12 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
   private
+  # Returns true or false if the user is logged in.
+  # Preloads @current_user with the user model if they're logged in.
+  def logged_in?
+    !!current_user
+  end
+  
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
       @current_user_session = UserSession.find

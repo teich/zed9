@@ -1,20 +1,21 @@
 <h1>Listing workouts</h1>
  
-Hello 
 <div class="data">
-<table>
+<table class="workout_listing">
+	<thead>
   <tr>
-    <th>Name</th>
-    <th>Start time</th>
-    <th>Avg. HR</th>
-	<th>Tag</th>
+	<th width="170">Name</th>
+	<th width="170">Start time</th>
+	<th width="170">Tag</th>
+	<th width="170">Edit</th>
   </tr>
+</thead>
+<tbody>
  
 <% for workout in @workouts %>
   <tr>
     <td><%=link_to workout.name, [current_user, workout] %></td>
     <td><%=h workout.start_time %></td>
-    <td><%=h workout.average_hr %></td>
 	<td>
 	<% for tag in workout.tag_list %>
 	<%= link_to tag, user_workouts_path + '?tag=' + tag %>
@@ -23,6 +24,7 @@ Hello
     <%= link_to 'Delete', [current_user, workout], :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
+</tbody>
 </table>
 </div>
 <br />
@@ -30,3 +32,7 @@ Hello
 <%= link_to 'Clear Tags', user_workouts_path %> 
 <% end %>
 <%= link_to 'New workout', new_user_workout_path(current_user) %>
+
+<script type="text/javascript">
+	$('.workout_listing').flexigrid();
+</script>
