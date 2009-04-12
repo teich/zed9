@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 Oren:
-  login: teich
+  login: admin
   crypted_password: b43090b408808382ebea4b0718ddc5dbf6497c6a27a9d09c85341db13f7e8ae6d2a586e71940f77bc4447964c978526894bfebf334f10cdc3ea84b2ae22f6ee9
   password_salt: 2468ec79a8142c43dfee48b9950bc0748326eb72d692d273f77b5d6ded4f84746fc7b44e776bbc6837b4119ae5ac7c04bfb46c97d79399625699456446225df4
   persistence_token: a1d0339c5d0f78887da29e8a8c351872ea9f497c02f0564ff05628a33ada8fa8b7bd27666891044f5fe164129fd535313596af64518047357a6ad75fed77c542
-  email: oren@teich.net
+  email: admin@teich.net
   invitation_limit: 100
   single_access_token: kK4gzaxtui8gv5AztSSi
   perishable_token: uvfhXzXAr8MmbigwKAuf

@@ -49,19 +49,7 @@ class ChartsController < ApplicationController
     def smooth_data(series, factor)
       res = []
       series.in_groups_of(factor) do |snipit|
-        sum = 0
-        datapoints = 0
-
-        # Yes, this is calculating the average of an array.  For shame
-        snipit.length.times do |i|
-          next if snipit[i].nil?
-          sum += snipit[i]
-          datapoints += 1
-        end
-        avg = sum.to_f / datapoints
-        
-        res << avg
-#        res << snipit.average
+        res << average_array(snipit.compact)
       end
       res
     end

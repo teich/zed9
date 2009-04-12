@@ -14,8 +14,10 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    comps = Workout.tagged_with(@workout.tags, :on => :tags )
-    @avg_duration = Integer comps.average(:duration)
+    # Find comperables based on exact macthing all tags.
+    comps = Workout.tagged_with(@workout.tag_list, :on => :tags, :match_all => true)
+    duration = pick_array_field(comps, :duration)
+    @avg_duration = average_array(duration)
   end
 
   def new
@@ -58,7 +60,7 @@ class WorkoutsController < ApplicationController
     def update
       if @workout.update_attributes(params[:workout])
         flash[:notice] = 'Workout was successfully updated.'
-        redirect_to([current_user, @workout])
+        redirect_to @workout
       else
         render :action => "edit"
       end

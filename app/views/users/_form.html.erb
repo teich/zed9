@@ -5,6 +5,15 @@
 <%= form.label :email %><br />
 <%= form.text_field :email %><br />
 <br />
+<%= form.label :height %><br />
+<%= form.text_field :height %><br />
+<br />
+<%= form.label :birthdate %><br />
+<%= form.text_field :birthdate %><br />
+<br />
+<%= form.label :sex %><br />
+<%= form.radio_button :sex, "female" %>Female <%= form.radio_button :sex, "male" %>male<br />
+<br />
 <%= form.label :password, form.object.new_record? ? nil : "Change password" %><br />
 <%= form.password_field :password %><br />
 <br />

@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   
   validates_presence_of :invitation_id, :message => 'is required'
   validates_uniqueness_of :invitation_id
+
+  validates_inclusion_of :sex, :in => %w( male female ), :on => :create, :message => "must be male/female"
   
   has_many :workouts
   has_many :hr_zones
@@ -12,7 +14,7 @@ class User < ActiveRecord::Base
   
   before_create :set_invitation_limit
   
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :birthdate, :sex, :height
     
   def invitation_token
     invitation.token if invitation
@@ -20,6 +22,10 @@ class User < ActiveRecord::Base
   
   def invitation_token=(token)
     self.invitation = Invitation.find_by_token(token)
+  end
+  
+  def age
+    (Date.today - birthdate).to_i / 365
   end
   
   private
