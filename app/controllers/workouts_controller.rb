@@ -7,7 +7,7 @@ class WorkoutsController < ApplicationController
   
   def index
     if params[:tag]
-      @workouts = current_user.workouts.tagged_with(params[:tag], :on => :tags)
+      @workouts = current_user.workouts.find_tagged_with(params[:tag])
     else
       @workouts = current_user.workouts.find(:all, :order => "start_time DESC")
     end
@@ -15,7 +15,7 @@ class WorkoutsController < ApplicationController
 
   def show
     # Find comperables based on exact macthing all tags.
-    comps = Workout.tagged_with(@workout.tag_list, :on => :tags, :match_all => true)
+    comps = Workout.find_tagged_with(@workout.tag_list, :match_all => true)
     duration = pick_array_field(comps, :duration)
     @avg_duration = average_array(duration)
   end
