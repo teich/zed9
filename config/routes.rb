@@ -8,7 +8,6 @@ ActionController::Routing::Routes.draw do |map|
       workout.resource  :chart, :only => [:show]
   end
   
-
   map.signup '/signup/:invitation_token', :controller => 'users', :action => 'new'
    
   map.resource  :user_session

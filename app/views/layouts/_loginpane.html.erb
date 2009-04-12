@@ -14,7 +14,8 @@
 	  </div>
 	<% else %>
 	  <div id="logged_in">
-		<%= link_to "My Account", account_path %> |
+		<%= link_to "My workouts", workouts_path %> |
+		<%= link_to current_user.login, account_path %> |
 		<% if current_user.invitation_limit > 0 %>
 			<%= link_to "Invite", new_invitation_path %> (<%= current_user.invitation_limit %> remaining) |
 		<% end %>

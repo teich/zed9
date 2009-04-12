@@ -1,13 +1,15 @@
 <h1><%=h @workout.name %></h1>
 <p>
  <b>Start time:</b><BR><BR>
-  <%=h @workout.start_time %>
+  <%= @workout.start_time %>
 </p>
 <p>
   <b>Average heart rate:</b>
-  <%=h @workout.average_hr %>
+  <%= @workout.average_hr %>
 </p>
-
+<p>
+	<b>Duration:</b>
+	<%= @workout.duration.round(1) %> seconds.  The average workout was <%= @avg_duration %> seconds
 <p>
 	<b>Tags:</b>
 	<% for tag in @workout.tag_list %>
@@ -16,7 +18,7 @@
  </p>
 
 <p>
-	<%= ziya_chart workout_chart_path(@workout), :size => "400x300" -%>
+	<%= ziya_chart workout_chart_path(@workout), :size => "600x300" -%>
 </p>
 
 <p>

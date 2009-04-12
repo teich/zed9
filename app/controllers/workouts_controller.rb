@@ -14,6 +14,8 @@ class WorkoutsController < ApplicationController
   end
 
   def show
+    comps = Workout.tagged_with(@workout.tags, :on => :tags )
+    @avg_duration = Integer comps.average(:duration)
   end
 
   def new
@@ -35,7 +37,7 @@ class WorkoutsController < ApplicationController
       parsed_data = parse_polar( uploaded_data ) if is_polar?(params[:device])
       parsed_data = parse_garmin_xml( uploaded_data ) if is_garmin?(params[:device])
 
-      @workout.update_attributes(:start_time => parsed_data["start_time"])
+      @workout.update_attributes(:start_time => parsed_data["start_time"], :duration => parsed_data["duration"] )
 
       points = parsed_data["datapoints"]
       points.each do |p|
@@ -45,7 +47,7 @@ class WorkoutsController < ApplicationController
     
     if @workout.save
       flash[:notice] = 'Workout was successfully created.'
-      redirect_to [current_user, @workout]
+      redirect_to @workout
     else
       flash[:notice] = "can't save workout for some lame reason."
       render :action => "new"
@@ -80,6 +82,7 @@ class WorkoutsController < ApplicationController
       datapoints = []
       hr = 0
       start_time = (doc/:Id).innerHTML
+      duration = (doc/:TotalTimeSeconds).innerHTML
       (doc/:Trackpoint).each do |t| 
         hr = (t/:HeartRateBpm/:Value).innerHTML
         lat = (t/:Position/:LatitudeDegrees).innerHTML
@@ -91,7 +94,7 @@ class WorkoutsController < ApplicationController
   #      alt = (t/:AltitudeMeters).innerHTML
         datapoints << { "heart_rate" => hr, "latitude" => lat, "longitude" => long }
       end
-      parsed_data = { "start_time" => start_time, "datapoints" => datapoints }
+      parsed_data = { "start_time" => start_time, "datapoints" => datapoints, "duration" => duration }
     end
 
     def parse_polar ( hrm_data )
@@ -100,6 +103,7 @@ class WorkoutsController < ApplicationController
       date = ''
       start = ''
       parsed_data = {}
+      duration = 0
       
       hrm_array = hrm_data.split("\n")
       hrm_array.each do |line|
@@ -118,9 +122,14 @@ class WorkoutsController < ApplicationController
         if (line =~ /\[HRData\]/)
           hr_data = 1
         end
+        if (line =~/Length=(\d+):(\d+):(.*$)/)
+          duration = Float($1) * 3600
+          duration += Float($2) * 60
+          duration += Float($3)
+        end
       end
       start_time = date + start
-      parsed_data = { "start_time" => start_time, "datapoints" => datapoints }
+      parsed_data = { "start_time" => start_time, "datapoints" => datapoints, "duration" => duration }
     end
     
     def is_garmin?(device)
