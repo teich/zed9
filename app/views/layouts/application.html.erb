@@ -10,8 +10,20 @@
 </head>
 <body>
 
-	<%= render :partial => "layouts/loginpane" %>
+	<div id="header">
 	
+		<div id="logo">
+			ZED9
+		</div>
+		
+	<%= render :partial => "layouts/loginpane" %>
+</div>
+
+	<div id="nav">
+		<a href="">Dashboard</a>  |
+		<%= link_to "Activities", workouts_path %> | 
+		<a href="/account.html">Profile</a>
+	</div>
 	<div id="main">
 		<div id="flash">
 			<%= flash[:notice] %>

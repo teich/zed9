@@ -3,23 +3,17 @@
 	  <div id="not_logged_in"> 
 		  <div id="login">
 
-		<% form_for @user_session, :url => user_session_path do |f| %>
-	login:
-		  <span class="login_text">Username:</span> <%= f.text_field :login %>
-		  <span class="login_text">Password:</span> <%= f.password_field :password %>
-		  <%= f.submit "Login" %>
+		<%= link_to "Log in", user_session_path, :method => :new  %>
 
-		<% end %>
 		</div>
 	  </div>
 	<% else %>
 	  <div id="logged_in">
-		<%= link_to "My workouts", workouts_path %> |
-		<%= link_to current_user.login, account_path %> |
+		Welcome, <%= link_to current_user.login, account_path %>   &nbsp;|&nbsp;
 		<% if current_user.invitation_limit > 0 %>
-			<%= link_to "Invite", new_invitation_path %> (<%= current_user.invitation_limit %> remaining) |
+			<%= link_to "Invite Friends", new_invitation_path %> (<%= current_user.invitation_limit %> remaining)   &nbsp;|&nbsp;
 		<% end %>
-		<%= link_to "Logout", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %>
+		<%= link_to "Log out", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %>
 	  </div>
 	<% end %>
 </div>
