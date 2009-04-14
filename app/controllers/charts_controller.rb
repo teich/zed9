@@ -18,7 +18,7 @@ class ChartsController < ApplicationController
     chart.add :chart_types, %w[area area area line]
     
     @workout = current_user.workouts.find(params[:workout_id])
-    hr_series = @workout.trackpoints.map {|a|a.heart_rate}
+    hr_series = @workout.get_hr
     graph_data = smooth_data(hr_series, 10)
     
     hr1 = []

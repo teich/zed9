@@ -17,8 +17,8 @@ class WorkoutsController < ApplicationController
     # Find comperables based on exact macthing all tags.
     comps = Workout.find_tagged_with(@workout.tag_list, :match_all => true)
     duration = pick_array_field(comps, :duration)
-    #@avg_duration = average_array(duration)
-    @avg_duration = 1000
+    @avg_duration = average_array(duration)
+    #@avg_duration = 1000
   end
 
   def new
@@ -73,7 +73,6 @@ class WorkoutsController < ApplicationController
       redirect_to(workouts_url)
     end
 
-    
     private
 
     def find_workout

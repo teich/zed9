@@ -8,4 +8,8 @@ class Workout < ActiveRecord::Base
   validates_presence_of :user_id
   
   acts_as_taggable_on   :tags
+  
+  def get_hr
+    trackpoints.map {|a|a.heart_rate}
+  end
 end
