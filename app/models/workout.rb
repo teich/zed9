@@ -27,7 +27,7 @@ class Workout < ActiveRecord::Base
     # Find comperables based on exact macthing all tags.
     comps = Workout.find_tagged_with(tag_list, :match_all => true)
     duration = pick_array_field(comps, :duration)
-    duration.compact.average_array
+    duration.compact.average_array.round(1)
   end
 
     def parse_garmin_xml ( xml_data )
