@@ -49,7 +49,7 @@ class ChartsController < ApplicationController
     def smooth_data(series, factor)
       res = []
       series.in_groups_of(factor) do |snipit|
-        res << average_array(snipit.compact)
+        res << snipit.compact.average_array
       end
       res
     end

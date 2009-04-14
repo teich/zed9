@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   #helper :all # include all helpers, all the time
   helper Ziya::Helper
   
+  include ArrayMath
 
   filter_parameter_logging :password, :password_confirmation
   helper_method :current_user_session, :current_user
@@ -12,19 +13,6 @@ class ApplicationController < ActionController::Base
   before_filter :create_user_session
   
   private
-  
-  # Take's an array of objects, and averages one field.
-  def pick_array_field(data, field)
-    data.map { |x| x[field] }
-  end
-  
-  def average_array(data)
-    array_sum(data) / data.size
-  end
-  
-  def array_sum(data)
-    data.inject(0){ |sum,item| sum + item }
-  end
   
   # Returns true or false if the user is logged in.
   # Preloads @current_user with the user model if they're logged in.
