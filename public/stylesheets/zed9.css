@@ -146,7 +146,7 @@ p.activity_notes {
 a.globe {
 	margin-left: -2px;
 	display: inline; 
-	background: url(../globe.png) no-repeat;		
+	background: url(/images/globe.png) no-repeat;		
 	width: 18px;
 	height: 18px;
 	text-decoration: none;
@@ -161,7 +161,7 @@ a.add-plus {
 
 a.delete-x {
 	padding: 0px 7px;
-	background: url(../delete-x.png) no-repeat scroll 4px 5px;
+	background: url(/images/delete-x.png) no-repeat scroll 4px 5px;
 }
 
 .displace {
