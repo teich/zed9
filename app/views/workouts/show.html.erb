@@ -8,6 +8,9 @@
   <%= @workout.calc_avg_hr %>  The average was <%= @workout.comps_average_hr %>
 </p>
 <p>
+	<b>Activity Type:</b>
+	<%= @workout.activity.name if @workout.activity %>
+<p>
 	<b>Duration:</b>
 	<%= @workout.duration.round(1) %> seconds.  The average workout was <%= @workout.comps_average_duration %> seconds
 <p>

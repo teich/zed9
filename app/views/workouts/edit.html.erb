@@ -11,6 +11,10 @@
 	<%= f.label :tag_list %><br />
 	<%= f.text_field :tag_list %>
 <p> 
+	<p>
+		<%= f.label :activity %><br />
+		<%= f.select "activity_id", Activity.find(:all).collect { |p| [p.name, p.id] } %>
+	</p>
   <%= f.label "Upload your device file:" %>
   <%= file_field_tag "device_file" %> 
 </p> 

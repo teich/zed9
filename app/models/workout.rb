@@ -1,6 +1,7 @@
 class Workout < ActiveRecord::Base
   belongs_to  :users
   has_many    :trackpoints
+  belongs_to  :activity
   
   validates_presence_of :name
   validates_length_of   :name,     :maximum => 100

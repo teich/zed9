@@ -9,7 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090412004247) do
+ActiveRecord::Schema.define(:version => 20090414044209) do
+
+  create_table "activities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "hr_zones", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -83,10 +89,11 @@ ActiveRecord::Schema.define(:version => 20090412004247) do
     t.float    "distance"
     t.integer  "average_hr"
     t.float    "duration"
-    t.string   "name",       :default => "Unnamed"
+    t.string   "name",        :default => "Unnamed"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "activity_id", :default => 0
   end
 
 end
