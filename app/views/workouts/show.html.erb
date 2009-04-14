@@ -5,11 +5,11 @@
 </p>
 <p>
   <b>Average heart rate:</b>
-  <%= @workout.calc_avg_hr %>  The average was <%= @avg_hr %>
+  <%= @workout.calc_avg_hr %>  The average was <%= @workout.comps_average_hr %>
 </p>
 <p>
 	<b>Duration:</b>
-	<%= @workout.duration.round(1) %> seconds.  The average workout was <%= @avg_duration %> seconds
+	<%= @workout.duration.round(1) %> seconds.  The average workout was <%= @workout.comps_average_duration %> seconds
 <p>
 	<b>Tags:</b>
 	<% for tag in @workout.tag_list %>

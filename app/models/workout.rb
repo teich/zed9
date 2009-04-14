@@ -17,6 +17,19 @@ class Workout < ActiveRecord::Base
     get_hr.compact.average_array
   end
   
+  def comps_average_hr
+    comps = Workout.find_tagged_with(tag_list, :match_all => true)
+    hrs = comps.map { |comp| comp.calc_avg_hr }
+    hrs.compact.average_array
+  end
+  
+  def comps_average_duration
+    # Find comperables based on exact macthing all tags.
+    comps = Workout.find_tagged_with(tag_list, :match_all => true)
+    duration = pick_array_field(comps, :duration)
+    duration.compact.average_array
+  end
+
     def parse_garmin_xml ( xml_data )
       doc = Hpricot::XML( xml_data ) 
       datapoints = []
@@ -28,10 +41,6 @@ class Workout < ActiveRecord::Base
         lat = (t/:Position/:LatitudeDegrees).innerHTML
         long = (t/:Position/:LongitudeDegrees).innerHTML
 
-  # TODO: Need to add migration to support these.      
-  #      time = (t/:Time).innerHTML
-  #      dist = (t/:DistanceMeters).innerHTML
-  #      alt = (t/:AltitudeMeters).innerHTML
         datapoints << { "heart_rate" => hr, "latitude" => lat, "longitude" => long }
       end
       parsed_data = { "start_time" => start_time, "datapoints" => datapoints, "duration" => duration }
@@ -71,5 +80,9 @@ class Workout < ActiveRecord::Base
       start_time = date + start
       parsed_data = { "start_time" => start_time, "datapoints" => datapoints, "duration" => duration }
     end
-
+    
+    # Take's an array of objects, and averages one field.
+    def pick_array_field(data, field)
+      data.map { |x| x[field] }
+    end
 end

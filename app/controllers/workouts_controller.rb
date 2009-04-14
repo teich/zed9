@@ -14,13 +14,6 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    # Find comperables based on exact macthing all tags.
-    comps = Workout.find_tagged_with(@workout.tag_list, :match_all => true)
-    duration = pick_array_field(comps, :duration)
-    @avg_duration = average_array(duration)
-    
-    hrs = comps.map { |comp| comp.calc_avg_hr }
-    @avg_hr = average_array(hrs)
   end
 
   def new
@@ -58,50 +51,36 @@ class WorkoutsController < ApplicationController
   end
 
 
-    def update
-      if @workout.update_attributes(params[:workout])
-        flash[:notice] = 'Workout was successfully updated.'
-        redirect_to @workout
-      else
-        render :action => "edit"
-      end
+  def update
+    if @workout.update_attributes(params[:workout])
+      flash[:notice] = 'Workout was successfully updated.'
+      redirect_to @workout
+    else
+      render :action => "edit"
     end
+  end
 
 
-    def destroy
-      @workout.destroy
-      redirect_to(workouts_url)
-    end
+  def destroy
+    @workout.destroy
+    redirect_to(workouts_url)
+  end
 
-    private
+  private
 
-    # Take's an array of objects, and averages one field.
-    def pick_array_field(data, field)
-      data.map { |x| x[field] }
-    end
+  def find_workout
+    @workout = current_user.workouts.find(params[:id])
+  end    
+
+  def is_garmin?(device)
+    device == "garmin"
+  end
     
-    def average_array(data)
-      data.array_sum / data.size
-    end
-
-    def array_sum(data)
-      data.inject(0){ |sum,item| sum + item }
-    end
+  def is_polar?(device)
+    device == "polar"
+  end
     
-    def find_workout
-      @workout = current_user.workouts.find(params[:id])
-    end    
-
-
-    def is_garmin?(device)
-      device == "garmin"
-    end
-    
-    def is_polar?(device)
-      device == "polar"
-    end
-    
-    def ensure_string(uploaded_file)
-      (uploaded_file.is_a?(String)) ? uploaded_file : uploaded_file.read
-    end
+  def ensure_string(uploaded_file)
+    (uploaded_file.is_a?(String)) ? uploaded_file : uploaded_file.read
+  end
 end
