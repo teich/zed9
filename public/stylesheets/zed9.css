@@ -143,6 +143,11 @@ p.activity_notes {
 	margin-bottom: 15px;
 }
 
+#flash {
+	font-size: 2em;
+	color: green;
+}
+
 a.globe {
 	margin-left: -2px;
 	display: inline; 

@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   map.signup '/signup/:invitation_token', :controller => 'users', :action => 'new'
+  map.login '/login', :controller => 'user_sessions', :action => 'new' 
    
   map.resource  :user_session
   map.root      :controller => "root", :action => "index"
