@@ -1,8 +1,14 @@
 body {
-	background-color: #DBF0FF;
-	font-family: Calibri, Arial, sans-serif;
-	padding: 0px 10px 0px 10px;
-	font-weight: normal;
+	background-color: white;
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,arial,sans-serif;
+	color: #545454;
+	padding: 24px 72px 24px 72px;
+	font-weight: 300;
+	letter-spacing: .5px;
+}
+
+{
+	border: 1px solid green;
 }
 
 img {
@@ -11,36 +17,34 @@ img {
 
 a {
 	text-decoration: none;
-	color:#2A42FF;
+	color:#25a1d6;
 }
 
 #header {
-	height: 35px;
-	padding-bottom: 8px;
+	height: 36px;
+	padding-bottom: 36px;
 	vertical-align: bottom;
 }
 
 #logo {
-	font-size: 24pt;
-	font-weight: bold;
-	color: #2A42FF;
+	font-size: 36px;
+	font-weight: 200;
+	letter-spacing: 8px;
 	float: left;
 	vertical-align: bottom;
 }
 
 #loginpane {
 	font-size: 10pt;
-	color: #666666;
 	float: right;
-	padding-top: 18px;
-	padding-right: 4px;
+	padding-top: 24px;
+	color: #9f9f9f;
 }
 
 #loginpane input {
 	background-image:url(/images/splash_inputs.png);
 	background-repeat:no-repeat;
 	border:light none;
-	color: #666666;
 	height:16px;
 }
 
@@ -48,114 +52,154 @@ a {
 	padding-left: 12px;
 }
 
-#logged_in {
+#logged_in li{
+	display:block;
+	font-size:12px;
+	padding:4px 12px 4px 12px;
+	float: left;
+	border-right:1px dotted #d9d9d9;
+	position: relative;
+	bottom: 18px;
+}
+
+#logged_in .last {
+	padding-right:0px;
+	border:none;
 }
 
 #nav {
-	background-color: white;
-	border: 1px solid #CCCCCC;
-	font-size: 14pt;
-	color: #666666;
-	padding: 5px;
-	margin-bottom: 8px;
+	text-align: center;
+	margin-bottom:12px;
+	padding:12px;
 }
 
-#nav a {
-	font-weight: bold;
+#nav li {
+	display:block;
+	padding:6px 12px 4px 12px;
+	float: left;
+	position: relative;
+	left: -50px;
+	top: -24px;
+	border-right:1px dotted #d9d9d9;
 }
 
+#nav .first {
+	padding-left:0px;
+	border-left:none;
+}
+
+#nav .last {
+	padding-right:0px;
+	border:none;
+}
 
 h1 {
-	font-weight: normal;
-	font-size: 22pt;
+	font-weight: 500;
+	font-size: 36px;
 	display: inline;
 }
 
 h2 {
-	color: green;
-	font-size: 18pt;
-	font-weight: normal;
-	text-align: center;
+	font-size: 24px;
+	font-weight: 500;
 }
 
 h3 {
-	color: #666666;
-	font-size: 13pt;
-	font-weight: normal;
-	margin: 0px;
-	display: inline;
+	color: #9f9f9f;
+	font-size: 16px;
+	line-height: 16px;
+	font-weight: 400;
+	display: inline-block;
+	margin: 0px 0px 12px 0px;
 }
 
 #main {
-	background-color: white;
-	border: 1px solid #CCCCCC;
-	padding: 10px;
-	vertical-align: top;
-	margin-bottom: 8px;
-	font-size:12pt;
-	line-height: 1.2;
+	clear: both;
+	margin: 48px 0px 48px 0px;
+	font-size:14px;
 }
 
-#activity {
-	margin-right: 175px;
-	float: left;
+#content_header {
+	vertical-align: bottom;
+	margin-bottom: 18px;
+}
+
+#name {
+	position: relative;
+	bottom: 18px;
 }
 
 .activity_icon {
-	vertical-align: top;
-	padding-right: 8px;
+	padding-right: 11px;
 	float: left;
 }
 
 .action_icon {
 	display: inline;
-	vertical-align: top;
-	border: 0px;
+	position: relative;
+	padding-left: 4px;
+	bottom: 14px;
+}
+
+.alert {
+	color: #3dc10b;
+	text-align: center;	
+}
+
+#activity {
+	float: left;
+}
+
+.content {
+	margin-top: 24px;
 }
 
 p.activity_notes {
-	font-size: 10pt;
+	display: inline;
+	font-size: 14px;
+	line-height: 18px;
 	color: #828282;
-	margin-top: 0px;
+	font-style: italic;
 }
 
-.data {
+.activity_comparison {
+	margin-top: 48px;
 	overflow: auto;
 }
 
-.data th {
-	color: #666666;
-	font-weight: normal;
-	font-size: 12pt;
-	border-right: 1px dashed #CCCCCC;
-	padding: 5px;
+th {
+	color: #9f9f9f;
+	font-weight: 400;
+	font-size: 14px;
+	padding: 8px 24px 8px 24px;
+	border-right:1px dotted #d9d9d9;
 }
 
+th.left_column {
+	border-left: 1px dotted #d9d9d9;
+}
+	
 #right_rail {
 	width: 150px;
-	font-size: 11pt;
+	font-size: 14px;
+	line-height: 18px;
 	vertical-align: top;
 	float: right;
-	color: #666666;
+	margin-left: 48px;
 }
 
 #group_list, #tag_list {
-	margin-bottom: 15px;
-}
-
-#flash {
-	font-size: 2em;
-	color: green;
+	margin-bottom: 36px;
 }
 
 a.globe {
+	position: relative;
 	margin-left: -2px;
 	display: inline; 
 	background: url(/images/globe.png) no-repeat;		
 	width: 18px;
 	height: 18px;
-	text-decoration: none;
-	}
+}
 
 a.globe:hover {
 	background-position: -18px 0px;

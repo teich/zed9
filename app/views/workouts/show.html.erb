@@ -1,44 +1,77 @@
-<h1><%=h @workout.name %></h1>
-<div id="activity">
-<p>
- <b>Start time:</b><BR><BR>
-  <%= @workout.start_time %>
-</p>
-<p>
-  <b>Average heart rate:</b>
-  <%= @workout.calc_avg_hr %>  The average was <%= @workout.comps_average_hr %>
-</p>
-<p>
-	<b>Activity Type:</b>
-	<%= @workout.activity.name if @workout.activity %>
-<p>
-	<b>Duration:</b>
-	<%= @workout.duration.round(1) %> seconds.  The average workout was <%= @workout.comps_average_duration %> seconds
+<div id="content_header">
 
+	<img class="activity_icon" src="/images/running.jpg">
 
-<p>
-	<%= ziya_chart workout_chart_path(@workout), :size => "600x300" -%>
-</p>
+	<span id="name">	
+		<img src="/images/spacer.png" width="1" height="78">
+		<h1><%=h @workout.name %></h1>
+		<%= link_to image_tag("pencil.jpg", :class => "action_icon"), edit_workout_path(@workout) %>
+
+	</span>
+
 </div>
-<div id="right_rail"> 
-	<div id="tags">
 
-<p>
-	<b>Tags:</b>
-	<div id="tags_list">
-	<% for tag in @workout.tag_list %>
-	<a class="globe" href="#"><span class="displace">Global</span><img src="./spacer.png" width="18px" height="18px"></a> 
-	<%= link_to tag, workouts_path + '?tag=' + tag %>
-	<a class="delete-x" href=""></a><br \>
-	<% end %>
+<div id="content" class="content">
+
+	<div id="activity">
+		<p class="activity_notes">Notes on the workout</p>
+		<div id="activity_summary">
+			<table class="activity_comparison">
+				<thead>
+					<tr>
+						<th class="left_column">&nbsp;</th>
+						<th><%=h @workout.name %></th>
+						<th>My 	<%= @workout.activity.name.pluralize if @workout.activity %></th>
+						<th>My [Demo]</th>
+						<th>All Zed9</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Average Heart Rate</td>
+						<td><%=h @workout.calc_avg_hr %></td>
+						<td><%=h @workout.comps_average_hr %></td>
+					</tr>
+					<tr>
+						<td>Duration</td>
+						<td><%=h @workout.duration.round(1) %></td>
+						<td><%=h @workout.comps_average_duration %></td>
+					</tr>
+				</tbody>
+			</table>
+
+
+			<p>
+				<b>Start Time</b>
+				<%=h @workout.start_time %>
+			</p>
+
+			<p>
+				<b>Activity Type:</b>
+				<%= @workout.activity.name if @workout.activity %>
+				<p>
+					<%= ziya_chart workout_chart_path(@workout), :size => "600x300" -%>
+				</p>
+			</div>
+		</div>
+		<div id="right_rail"> 
+			<div id="tags">
+				<h3>Tags</h3> <a class="add-plus" href="">+</a>
+				<div id="tags_list">
+					<% for tag in @workout.tag_list %>
+					<a class="globe" href="#"><span class="displace">Global</span><img src="/images/spacer.png" width="18px" height="18px"></a> 
+					<%= link_to tag, workouts_path + '?tag=' + tag %>
+					<a class="delete-x" href=""></a><br \>
+					<% end %>
+				</div>
+			</div>
+		</div>
 	</div>
- </p>
+	<div class="clear">
+		<br>
+	</div>
+	<p>
+		<%= link_to 'Edit', edit_workout_path(@workout) %> |
+		<%= link_to 'Back', workouts_path %>
+	</p>
 </div>
-</div>
-<div class="clear">
-	<br>
-</div>
-<p>
-<%= link_to 'Edit', edit_workout_path(@workout) %> |
-<%= link_to 'Back', workouts_path %>
-</p>

@@ -20,10 +20,13 @@
 </div>
 
 	<div id="nav">
-		<a href="">Dashboard</a>  |
-		<%= link_to "Activities", workouts_path %> | 
-		<a href="/account.html">Profile</a>
+		<ul>
+			<li class="first"><a href="">Dashboard</a></li>
+			<li><%= link_to "Activities", workouts_path %></li>
+			<li class="last"><a href="/account.html">Profile</a></li>
+		</ul>
 	</div>
+
 	<div id="main">
 		<div id="flash">
 			<%= flash[:notice] %>

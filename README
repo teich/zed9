@@ -1,3 +1,25 @@
 Hosted on Zed9
 
 Run "rake db:seed" to populate with the first user
+
+Initial Setup:
+Get GIT access
+ 	ssh-keygen
+ 	setup public key for z9git@zednine.com
+
+	git clone ssh://z9git@zed9.org/~/git/zed9.git
+
+Get Rails setup on your Mac
+	sudo gem update --system
+	sudo gem install -v=2.2.2 rails
+	
+Add github as a gem source:
+	sudo gem sources -a http://gems.github.com
+	
+Install necessary gems:
+	sudo gem install derailed-ziya
+	sudo rake gems:install
+	
+Setup the DB:
+	rake db:migrate
+	rake db:seed
