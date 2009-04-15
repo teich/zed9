@@ -1,38 +1,37 @@
 <h1>Listing workouts</h1>
- 
+
 <div class="data">
-<table class="workout_listing">
-	<thead>
-  <tr>
-	<th width="170">Name</th>
-	<th width="170">Start time</th>
-	<th width="170">Tag</th>
-	<th width="170">Edit</th>
-  </tr>
-</thead>
-<tbody>
- 
-<% for workout in @workouts %>
-  <tr>
-    <td><%=link_to workout.name, workout %></td>
-    <td><%=h workout.start_time %></td>
-	<td>
-	<% for tag in workout.tag_list %>
-	<%= link_to tag, workouts_path + '?tag=' + tag %>
-	<% end %></td>
-    <td><%= link_to 'Edit', edit_workout_path(workout) %> | 
-    <%= link_to 'Delete', workout, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</tbody>
-</table>
+	<table class="workout_listing">
+		<thead>
+			<tr>
+				<th width="170">Name</th>
+				<th width="170">Start time</th>
+				<th width="170">Tag</th>
+				<th width="170">Edit</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<% for workout in @workouts %>
+			<tr>
+				<td><%=link_to workout.name, workout %></td>
+				<td><%=h workout.start_time %></td>
+				<td><% for tag in workout.tag_list %>
+					<%= link_to tag, workouts_path + '?tag=' + tag %>
+					<% end %></td>
+				<td><%= link_to 'Edit', edit_workout_path(workout) %> | 
+					<%= link_to 'Delete', workout, :confirm => 'Are you sure?', :method => :delete %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
 </div>
 <br />
 <% if (params[:tag])%>
-<%= link_to 'Clear Tags', workouts_path %> 
+	<%= link_to 'Clear Tags', workouts_path %> 
 <% end %>
 <%= link_to 'New workout', new_workout_path %>
 
 <script type="text/javascript">
-	$('.workout_listing').flexigrid();
+$('.workout_listing').flexigrid();
 </script>
