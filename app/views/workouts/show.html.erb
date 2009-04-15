@@ -13,16 +13,16 @@
 
 <div id="content" class="content">
 
-	<div id="activity">
-		<p class="activity_notes">Notes on the workout</p>
-		<div id="activity_summary">
-			<table class="activity_comparison">
+	<div id="workout">
+		<p class="workout_notes">Notes on the workout</p>
+		<div id="workout_summary">
+			<table class="workout_comparison">
 				<thead>
 					<tr>
 						<th class="left_column">&nbsp;</th>
 						<th><%=h @workout.name %></th>
-						<th>My 	<%= @workout.activity.name.pluralize if @workout.activity %></th>
-						<th>My [Demo]</th>
+						<th>My 	<%= @workout.activity.name if @workout.activity %></th>
+						<th>My Demo</th>
 						<th>All Zed9</th>
 					</tr>
 				</thead>

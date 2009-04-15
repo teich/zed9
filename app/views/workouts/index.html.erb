@@ -1,4 +1,4 @@
-<h1>Listing workouts</h1>
+<h1>Workouts <%= link_to '+', new_workout_path %></h1>
 
 <div class="data">
 	<table class="workout_listing">
@@ -30,7 +30,6 @@
 <% if (params[:tag])%>
 	<%= link_to 'Clear Tags', workouts_path %> 
 <% end %>
-<%= link_to 'New workout', new_workout_path %>
 
 <script type="text/javascript">
 $('.workout_listing').flexigrid();

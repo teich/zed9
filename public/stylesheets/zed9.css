@@ -146,7 +146,7 @@ h3 {
 	text-align: center;	
 }
 
-#activity {
+#workout {
 	float: left;
 }
 
@@ -154,7 +154,7 @@ h3 {
 	margin-top: 24px;
 }
 
-p.activity_notes {
+p.workout_notes {
 	display: inline;
 	font-size: 14px;
 	line-height: 18px;
@@ -162,7 +162,7 @@ p.activity_notes {
 	font-style: italic;
 }
 
-.activity_comparison {
+.workout_comparison {
 	margin-top: 48px;
 	overflow: auto;
 }
