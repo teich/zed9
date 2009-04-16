@@ -1,0 +1,4 @@
+ * In views, displaying objects that may be nil.  Check, or something better?
+ * Testing with authentication.  Easy way to bypass?
+ * How to test invitation feature
+ * Architecture for polar/garmin/etc importing.  Presumably should actually use model, create new ones?
