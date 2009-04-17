@@ -60,7 +60,7 @@
 				<div id="tags_list">
 					<% for tag in @workout.tag_list %>
 					<a class="globe" href="#"><span class="displace">Global</span><img src="/images/spacer.png" width="18px" height="18px"></a> 
-					<%= link_to tag, workouts_path + '?tag=' + tag %>
+					<%= link_to tag, workouts_path(:tag => tag) %>
 					<a class="delete-x" href=""></a><br \>
 					<% end %>
 				</div>
