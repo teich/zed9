@@ -42,8 +42,8 @@ class WorkoutsController < ApplicationController
       # Version I'm running here seems to pass as string is <10K, or file if over.
       uploaded_data = ensure_string(uploaded_file)
       
-      parsed_data = @workout.parse_polar( uploaded_data ) if is_polar?(params[:device])
-      parsed_data = @workout.parse_garmin_xml( uploaded_data ) if is_garmin?(params[:device])
+      parsed_data = @workout.parse_polar( uploaded_data ) if is_polar?(params[:device_type])
+      parsed_data = @workout.parse_garmin_xml( uploaded_data ) if is_garmin?(params[:device_type])
 
       @workout.update_attributes(:start_time => parsed_data["start_time"], :duration => parsed_data["duration"] )
 
