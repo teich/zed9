@@ -2,3 +2,5 @@
  * Testing with authentication.  Easy way to bypass?
  * How to test invitation feature
  * Architecture for polar/garmin/etc importing.  Presumably should actually use model, create new ones?
+ * What the heck is that symbol on the GIT commit page?
+ * Best solution for graphing.  Especially interactive graphs, flash, etc.  
