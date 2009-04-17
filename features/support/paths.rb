@@ -17,7 +17,7 @@ module NavigationHelpers
     when /the homepage/
       root_path
       
-    when /the workout/
+    when /the list of workouts/
       workouts_path
     
     # Add more page name => path mappings here

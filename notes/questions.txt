@@ -4,3 +4,4 @@
  * Architecture for polar/garmin/etc importing.  Presumably should actually use model, create new ones?
  * What the heck is that symbol on the GIT commit page?
  * Best solution for graphing.  Especially interactive graphs, flash, etc.  
+ * How do I do inplace editing.  i.e. add or remove tags on a workout.  eye to ajax.
