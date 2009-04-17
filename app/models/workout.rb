@@ -18,17 +18,24 @@ class Workout < ActiveRecord::Base
     get_hr.compact.average_array
   end
   
+  # TODO: The return nil check thing - seems lame
   def comps_average_hr
     comps = Workout.find_tagged_with(tag_list, :match_all => true)
-    hrs = comps.map { |comp| comp.calc_avg_hr }
-    hrs.compact.average_array
+    if comps.size > 0
+      hrs = comps.map { |comp| comp.calc_avg_hr }
+      return hrs.compact.average_array
+    end
+    return "N/A"
   end
   
   def comps_average_duration
     # Find comperables based on exact macthing all tags.
     comps = Workout.find_tagged_with(tag_list, :match_all => true)
-    duration = pick_array_field(comps, :duration)
-    duration.compact.average_array.round(1)
+    if comps.size > 0
+      duration = pick_array_field(comps, :duration)
+      duration.compact.average_array.round(1)
+    end
+    return "N/A"
   end
 
     def parse_garmin_xml ( xml_data )

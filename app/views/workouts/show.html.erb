@@ -58,12 +58,18 @@
 			<div id="tags">
 				<h3>Tags</h3> <a class="add-plus" href="">+</a>
 				<div id="tags_list">
-					<% for tag in @workout.tag_list %>
+					<% @workout.tags.each do |tag| %>
 					<a class="globe" href="#"><span class="displace">Global</span><img src="/images/spacer.png" width="18px" height="18px"></a> 
-					<%= link_to tag, workouts_path(:tag => tag) %>
-					<a class="delete-x" href=""></a><br \>
+					<%= link_to tag.name, workouts_path(:tag => tag.name) %>
+					<%= link_to "", workout_tagging_path(@workout,tag), :method => :delete, :class => "delete-x"  %><br \>
 					<% end %>
 				</div>
+				<% form_for @tagging, :url => workout_taggings_path(@workout) do |f| %>
+					<%= f.label "Add Tag" %>
+					<input type="text" name="name" id="new_tag_name" autocomplete="off"/>
+					<%= f.submit "Create" %>
+				<% end %>
+					
 			</div>
 		</div>
 	</div>

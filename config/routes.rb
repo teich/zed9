@@ -4,8 +4,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource  :account, :controller => "users"
   map.resources :workouts do |workout|
-      workout.resources :trackpoints
+      #workout.resources :trackpoints
       workout.resource  :chart, :only => [:show]
+      workout.resources :taggings, :only => [:destroy, :create]
   end
   
   map.signup '/signup/:invitation_token', :controller => 'users', :action => 'new'
