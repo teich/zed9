@@ -19,6 +19,10 @@ class WorkoutsController < ApplicationController
   end
 
   def show
+    # TODO - ruby way of array asignment
+    foo = @workout.find_comps(current_user)
+    @my_comps = foo[0]
+    @all_comps = foo[1]
     @tagging = Tagging.new
     respond_to do |format|
       format.html

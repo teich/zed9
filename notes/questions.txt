@@ -3,6 +3,8 @@
  * How to test invitation feature
  * Architecture for polar/garmin/etc importing.  Presumably should actually use model, create new ones?
  * Best solution for graphing.  Especially interactive graphs, flash, etc.  
+ * grouping, or really dynamic finds.  i.e. same activity, age +/- 10 years
+ * Comparison method must be better way
 
 Possibly figured out already
  * How do I do inplace editing.  i.e. add or remove tags on a workout.  eye to ajax.

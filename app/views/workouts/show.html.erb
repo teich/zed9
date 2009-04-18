@@ -21,7 +21,7 @@
 					<tr>
 						<th class="left_column">&nbsp;</th>
 						<th><%=h @workout.name %></th>
-						<th>My 	<%= @workout.activity.name.pluralize if @workout.activity %></th>
+						<th>My 	<%= @workout.activity.name if @workout.activity %></th>
 						<th>My [Demo]</th>
 						<th>All Zed9</th>
 					</tr>
@@ -30,12 +30,16 @@
 					<tr>
 						<td>Average Heart Rate</td>
 						<td><%=h @workout.calc_avg_hr %></td>
-						<td><%=h @workout.comps_average_hr %></td>
+						<td><%=h @workout.comps_average_hr(@my_comps) %></td>
+						<td>&nbsp;</td>
+						<td><%=h @workout.comps_average_hr(@all_comps) %></td>
 					</tr>
 					<tr>
 						<td>Duration</td>
 						<td><%=h @workout.duration.round(1) %></td>
-						<td><%=h @workout.comps_average_duration %></td>
+						<td><%=h @workout.comps_average_duration(@my_comps) %></td>
+						<td>&nbsp;</td>
+						<td><%=h @workout.comps_average_duration(@all_comps) %></td>
 					</tr>
 				</tbody>
 			</table>
