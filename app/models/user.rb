@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
   acts_as_authentic
   
   # TODO: for testing, I'm removing this till I figure out how to bypass
-  #validates_presence_of :invitation_id, :message => 'is required'
-  #validates_uniqueness_of :invitation_id
+  validates_presence_of :invitation_id, :message => 'is required'
+  validates_uniqueness_of :invitation_id
 
   validates_inclusion_of :sex, :in => %w( male female ), :on => :create, :message => "must be male/female"
 
