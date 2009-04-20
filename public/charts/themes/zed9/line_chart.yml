@@ -1,0 +1,134 @@
+<%=chart :line %>
+
+  <%=comp :axis_category %>
+    shadow:  medium
+    size:        16
+    alpha:       85
+    skip:        300
+
+  <%=comp :axis_ticks %>
+    value_ticks:       false
+    minor_color:      222222
+    minor_count:           10
+    major_thickness:       2
+    position:         inside
+    category_ticks:     true
+    minor_thickness:       1
+
+  <%=comp :axis_value %>
+    shadow:    medium
+    steps:          4
+    size:          10
+    alpha:         65
+    min:           40
+    max:          200
+    color:     0a0a0a
+    show_min:   false
+
+    
+  <%=comp :tooltip %>
+    background_color:  8888FF
+    shadow:            medium
+    alpha:                 90
+    background_alpha:      90
+    color:             FFFFFF    
+    
+  <%=comp :chart_grid_h %>
+    alpha:      10
+    thickness:   1
+
+  <%=comp :chart_guide %>
+    alpha:             25
+    thickness:          1
+    text_h_alpha:       0
+    text_v_alpha:       0
+    horizontal:      true
+    vertical:        true
+    type:          dashed
+
+  # this is the Tooltip.  FAVORITE thing.
+  <%=comp :chart_label %>
+    background_color:  aaff00
+    size:                  12
+    alpha:                 80
+    color:             ffaabb
+    position:          cursor
+
+  <%=comp :chart_pref %>
+    fill_shape:       false
+    point_shape:       none
+    line_thickness:       2
+
+  <%=comp :chart_rect %>
+    shadow:            high
+    x:                   50
+    positive_alpha:      65
+    y:                  100
+    height:             150
+    
+    positive_color:  ffffee
+    negative_color:  ff8888
+    bevel:           bevel1
+    negative_alpha:      65
+
+  <%=comp :chart_type %>
+
+
+  <%=comp :filter %>
+    filters:
+      - <%= filter_type :shadow %>
+          blurY:       5
+          angle:      45
+          alpha:      20
+          id:        low
+          distance:    2
+          blurX:       5
+      - <%= filter_type :shadow %>
+          blurY:          7
+          angle:         45
+          alpha:         40
+          id:        medium
+          distance:       2
+          blurX:          7
+      - <%= filter_type :shadow %>
+          blurY:       10
+          angle:       45
+          alpha:       25
+          id:        high
+          distance:     5
+          blurX:       10
+      - <%= filter_type :bevel %>
+          blurY:               15
+          angle:               45
+          highlightAlpha:      25
+          type:             outer
+          id:              bevel1
+          highlightColor:  ff00ff
+          shadowAlpha:         50
+          blurX:               15
+          distance:             5
+
+  <%=comp :legend %>
+    shadow:                 low
+    size:                    13
+    alpha:                   75
+    line_alpha:               0
+    x:                       50
+    bullet:                line
+    fill_alpha:              10
+    delay:                    0
+    y:                       75
+    margin:                   5
+    line_color:          000000
+    height:                   5
+    color:               aabbcc
+    fill_color:          000000
+    duration:               0.5
+    line_thickness:           0
+    transition:        dissolve
+    #width:                  320
+    layout:          horizontal
+
+  <%=comp :series_color %>
+    colors: 2A31C2
+

@@ -32,7 +32,7 @@
 						<td><%=h @workout.calc_avg_hr %></td>
 						<td><%=h @workout.comps_average_hr(@my_comps) %></td>
 						<td>&nbsp;</td>
-						<td><%=h @workout.comps_average_hr(@all_comps) %></td>
+						<td><% if false %> <%=h @workout.comps_average_hr(@all_comps) %> <% end %></td>
 					</tr>
 					<tr>
 						<td>Duration</td>

@@ -9,9 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090417201539) do
+ActiveRecord::Schema.define(:version => 20090420212345) do
 
   create_table "activities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -52,12 +58,15 @@ ActiveRecord::Schema.define(:version => 20090417201539) do
   end
 
   create_table "trackpoints", :force => true do |t|
-    t.float    "latitude"
-    t.float    "longitude"
+    t.float    "lat"
+    t.float    "lng"
     t.integer  "heart_rate"
     t.integer  "workout_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.time     "time"
+    t.float    "altitude"
+    t.float    "distance"
   end
 
   create_table "users", :force => true do |t|
