@@ -23,7 +23,7 @@ class Workout < ActiveRecord::Base
   end
   
   def get_hr_axis
-    trackpoints.map { |tp| tp.time.strftime("%H:%M") }
+    trackpoints.map { |tp| tp.time.to_s }
   end
   
   def find_all_comps_by_activity(activity_id)

@@ -11,6 +11,11 @@
 <%= form.label :birthdate %><br />
 <%= form.text_field :birthdate %><br />
 <br />
+
+<%= form.label :time_zone %><br />
+<%= form.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %><br />
+<br />
+
 <%= form.label :sex %><br />
 <%= form.radio_button :sex, "female" %>Female <%= form.radio_button :sex, "male" %>male<br />
 <br />
@@ -19,4 +24,5 @@
 <br />
 <%= form.label :password_confirmation %><br />
 <%= form.password_field :password_confirmation %><br />
+
 <br />
