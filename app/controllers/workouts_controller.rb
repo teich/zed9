@@ -46,8 +46,8 @@ class WorkoutsController < ApplicationController
       
       # Version I'm running here seems to pass as string is <10K, or file if over.
       uploaded_data = ensure_string(uploaded_file)
-      importer = GarminImporter.new(uploaded_data) if is_garmin?(params[:device_type])
-      importer = PolarImporter.new(uploaded_data) if is_polar?(params[:device_type])
+      importer = GarminImporter.new(uploaded_data, params[:workout]) if is_garmin?(params[:device_type])
+      importer = PolarImporter.new(uploaded_data, params[:workout], current_user.time_zone) if is_polar?(params[:device_type])
       
       @workout = current_user.workouts.build(importer.get_workout)
       importer.get_trackpoints.each { |tp| @workout.trackpoints.build(tp)}

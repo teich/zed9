@@ -23,7 +23,7 @@ class Workout < ActiveRecord::Base
   end
   
   def get_hr_axis
-    trackpoints.map { |tp| tp.time.to_s }
+    trackpoints.map { |tp| display_seconds(tp.time - start_time) }
   end
   
   def find_all_comps_by_activity(activity_id)
@@ -61,5 +61,9 @@ class Workout < ActiveRecord::Base
   # Take's an array of objects, and averages one field.
   def pick_array_field(data, field)
     data.map { |x| x[field] }
+  end
+  
+  def display_seconds(seconds)
+    Time.at(seconds).utc.strftime("%H:%M:%S")
   end
 end

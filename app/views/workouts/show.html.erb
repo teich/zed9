@@ -36,10 +36,10 @@
 					</tr>
 					<tr>
 						<td>Duration</td>
-						<td><%=h @workout.duration.round(1) %></td>
-						<td><%=h @workout.comps_average_duration(@my_comps) %></td>
+						<td><%=h @workout.display_seconds(@workout.duration) %></td>
+						<td><%=h @workout.display_seconds(@workout.comps_average_duration(@my_comps)) %></td>
 						<td>&nbsp;</td>
-						<td><%=h @workout.comps_average_duration(@all_comps) %></td>
+						<td><%=h @workout.display_seconds(@workout.comps_average_duration(@all_comps)) %></td>
 					</tr>
 				</tbody>
 			</table>

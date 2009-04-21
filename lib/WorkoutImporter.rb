@@ -4,14 +4,16 @@ require 'Time'
 
 class GarminImporter
   
+  ## GARMIN times are all in UTC
   attr_reader :parsed_workout
   
-  def initialize(xml_string)
+  def initialize(xml_string, params = {}, time_zone = "UTC")
     @xml = Hpricot::XML(xml_string)
+    @parsed_workout = params
+    @time_zone = time_zone
   end
 
   def get_workout
-    parsed_workout = Hash.new
     
     time = 0.0
     (@xml/:Lap).each do |lap|
@@ -21,9 +23,9 @@ class GarminImporter
       # TODO- "DistanceMeters" is matching both in the Lap and trackpoint.
     end
     
-    parsed_workout['duration'] = time
-    parsed_workout['start_time'] = (@xml/:Id).innerHTML
-    return parsed_workout
+    @parsed_workout['duration'] = time
+    @parsed_workout['start_time'] = (@xml/:Id).innerHTML
+    return @parsed_workout
   end
   
   def get_trackpoints
@@ -58,13 +60,15 @@ end
 
 class PolarImporter
   
-  def initialize(data)
+  ## Polar times are all local to user.
+  def initialize(data, params = {}, time_zone = "UTC")
     @hrm_data = data
+    @parsed_workout = params
+    @time_zone = time_zone
   end
 
   def get_workout
-    parsed_workout = Hash.new
-    
+  
     date = ''
     start = ''
     duration = 0
@@ -85,11 +89,11 @@ class PolarImporter
       end
     end
     
-    start_time = date + start
+    start_time = date + start + @time_zone
     
-    parsed_workout['duration'] = duration
-    parsed_workout['start_time'] = start_time
-    return parsed_workout
+    @parsed_workout['duration'] = duration
+    @parsed_workout['start_time'] = start_time
+    return @parsed_workout
     
   end
   
@@ -111,7 +115,7 @@ class PolarImporter
       if (hr_data == 1)
         trackpoint = Hash.new
         
-        start_time = Time.parse("#{date} #{time}")
+        start_time = Time.parse("#{date} #{time} #{@time_zone}")
         tp_time = start_time + (interval.seconds * trackpoints.size)
         
         trackpoint["heart_rate"] = line
