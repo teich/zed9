@@ -1,6 +1,6 @@
 #require 'WorkoutImporter'
 require 'hpricot'
-require 'Time'
+#require 'Time'
 
 class GarminImporter
   
