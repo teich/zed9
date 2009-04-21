@@ -1,2 +1,2 @@
-authlogic  
-derailed-ziya  
+authlogic  --source gems.github.com
+derailed-ziya  --source gems.github.com
