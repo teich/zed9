@@ -51,6 +51,8 @@ class WorkoutsController < ApplicationController
       
       @workout = current_user.workouts.build(importer.get_workout)
       importer.get_trackpoints.each { |tp| @workout.trackpoints.build(tp)}
+      
+      @workout.average_hr = @workout.calc_avg_hr if @workout.average_hr.nil?
     end
     
     if @workout.save

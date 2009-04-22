@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
   validates_inclusion_of :sex, :in => %w( male female ), :on => :create, :message => "must be male/female"
 
   belongs_to :invitation  
-  has_many :hr_zones
+  has_many :hr_zones, :dependent => :destroy
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
-  has_many :workouts do
+  has_many :workouts, :dependent => :destroy do
     def by_activity(activity_id)
       find :all, :conditions => ['activity_id == ?', activity_id]
     end

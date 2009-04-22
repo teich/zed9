@@ -1,7 +1,7 @@
 class Workout < ActiveRecord::Base
   belongs_to  :users
   belongs_to  :activity
-  has_many    :trackpoints
+  has_many    :trackpoints, :dependent => :destroy
 
   validates_presence_of :name
   validates_length_of   :name,     :maximum => 100
@@ -44,7 +44,7 @@ class Workout < ActiveRecord::Base
   # TODO: The return nil check thing - seems lame
   def comps_average_hr(comps)
     if comps.size > 0
-      hrs = comps.map { |comp| comp.calc_avg_hr }
+      hrs = comps.map { |comp| comp.average_hr }
       return hrs.compact.average_array
     end
     return "N/A"
