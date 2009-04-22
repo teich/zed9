@@ -5,12 +5,17 @@
 <%= form.label :email %><br />
 <%= form.text_field :email %><br />
 <br />
-<%= form.label :height %><br />
-<%= form.text_field :height %><br />
+<%= form.label :height %> in millimeters.  (Yes, this is lame.  It's high on the todo list)<br />
+<%= form.text_field :height %> <br />
 <br />
 <%= form.label :birthdate %><br />
-<%= form.text_field :birthdate %><br />
+<%= form.date_select :birthdate, :start_year => Time.now.year - 100, :end_year => Time.now.year - 12 %><br />
 <br />
+
+<%= form.label :time_zone %><br />
+<%= form.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %><br />
+<br />
+
 <%= form.label :sex %><br />
 <%= form.radio_button :sex, "female" %>Female <%= form.radio_button :sex, "male" %>male<br />
 <br />
@@ -19,4 +24,5 @@
 <br />
 <%= form.label :password_confirmation %><br />
 <%= form.password_field :password_confirmation %><br />
+
 <br />

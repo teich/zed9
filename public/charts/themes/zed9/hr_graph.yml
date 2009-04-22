@@ -1,8 +1,21 @@
-<%= chart :mixed %>
- 
-  <%=comp :chart_pref %>
-    point_shape:        none
-    line_thickness:     3
- 
-  <%=comp :series_color %>
-    colors: DAFFE3,F7FFDA,FFDADA,2A31C2
+<%=chart :line %>
+
+  <%=comp :chart_type %>
+
+  <%=comp :draw %>
+    components:
+      - <%= drawing :text %>
+          shadow:          high
+          alpha:             10
+          size:              48
+          x:                  8
+          delay:              0
+          y:                  8
+          height:            75
+          h_align:       center
+          duration:         0.5
+          transition:  dissolve
+          width:            400
+          v_align:       bottom
+          text:        'HR Graph'
+

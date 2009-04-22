@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
   before_filter :create_user_session
-  
+  before_filter :set_user_time_zone
+    
   private
   
   # Returns true or false if the user is logged in.
@@ -23,6 +24,10 @@ class ApplicationController < ActionController::Base
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
+  end
+  
+  def set_user_time_zone
+    Time.zone = current_user.time_zone if logged_in?
   end
   
   def current_user

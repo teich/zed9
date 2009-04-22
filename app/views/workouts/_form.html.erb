@@ -1,0 +1,11 @@
+	<%= form.label :name %>
+	<%= form.text_field :name %><br />
+	
+	<%= form.label :tag_list %>
+	<%= form.text_field :tag_list %><br />
+
+	<%= form.label :activity %>
+	<%= form.select "activity_id", Activity.find(:all).collect { |p| [p.name, p.id] } %><br />
+
+ 	<%= form.label "Upload your device file:" %>
+  	<%= file_field_tag "device_file" %> <br />

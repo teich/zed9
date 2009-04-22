@@ -1,10 +1,23 @@
 Feature: Browse workouts
-	In order to look at my workouts
+	In order to track my excercising
 	As a user
-	I want to see overview and details of my uploaded workouts
+	I want see and view workouts that I upload
 	
 	Scenario: View list of workouts
-		Given a registered user "test"
-		When the user "test" logs in
-		And I go to the workout page
-		Then I should see "Listing workouts"
+		Given I am logged in as user "test"
+		And I have a workout titled "Kempo"
+		When I go to the list of workouts
+		Then I should see "Kempo"
+		
+	Scenario: title
+		Given I am logged in as user "test"
+	  	And I have a workout titled "Fun"
+		And I am viewing the workout page for the "Fun" workout
+		When I follow "Edit"
+		And I fill in "Tag list" with "testTag"
+		And I press "Save"
+	  	Then I should see "testTag"
+		And I should have 1 tags
+	
+	
+	

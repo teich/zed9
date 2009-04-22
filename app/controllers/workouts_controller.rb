@@ -1,4 +1,5 @@
 require 'hpricot'
+require 'lib/WorkoutImporter'
 
 class WorkoutsController < ApplicationController
   before_filter :require_user
@@ -11,9 +12,23 @@ class WorkoutsController < ApplicationController
     else
       @workouts = current_user.workouts.find(:all, :order => "start_time DESC")
     end
+    
+    respond_to do |format|
+      format.html
+      format.xml {render :xml => @workouts.to_xml }
+    end
   end
 
   def show
+    # TODO - ruby way of array asignment, and get out of controller
+    foo = @workout.find_comps(current_user)
+    @my_comps = foo[0]
+    @all_comps = foo[1]
+    @tagging = Tagging.new
+    respond_to do |format|
+      format.html
+      format.xml {render :xml => @workout.to_xml }
+    end
   end
 
   def new
@@ -24,21 +39,20 @@ class WorkoutsController < ApplicationController
   end
 
   def create
-    @workout = current_user.workouts.build(params[:workout])
+    #@workout = current_user.workouts.build(params[:workout])
 
     uploaded_file = params[:device_file] 
     if request.post? and uploaded_file.respond_to? :read
       
       # Version I'm running here seems to pass as string is <10K, or file if over.
       uploaded_data = ensure_string(uploaded_file)
+      importer = GarminImporter.new(uploaded_data, params[:workout]) if is_garmin?(params[:device_type])
+      importer = PolarImporter.new(uploaded_data, params[:workout], current_user.time_zone) if is_polar?(params[:device_type])
       
-      parsed_data = @workout.parse_polar( uploaded_data ) if is_polar?(params[:device])
-      parsed_data = @workout.parse_garmin_xml( uploaded_data ) if is_garmin?(params[:device])
-
-      @workout.update_attributes(:start_time => parsed_data["start_time"], :duration => parsed_data["duration"] )
-
-      points = parsed_data["datapoints"]
-      points.each { |p| @workout.trackpoints.build(p) }
+      @workout = current_user.workouts.build(importer.get_workout)
+      importer.get_trackpoints.each { |tp| @workout.trackpoints.build(tp)}
+      
+      @workout.average_hr = @workout.calc_avg_hr if @workout.average_hr.nil?
     end
     
     if @workout.save

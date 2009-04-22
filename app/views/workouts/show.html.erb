@@ -22,20 +22,21 @@
 						<th class="left_column">&nbsp;</th>
 						<th><%=h @workout.name %></th>
 						<th>My 	<%= @workout.activity.name if @workout.activity %></th>
-						<th>My Demo</th>
 						<th>All Zed9</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>Average Heart Rate</td>
-						<td><%=h @workout.calc_avg_hr %></td>
-						<td><%=h @workout.comps_average_hr %></td>
+						<td><%=h @workout.average_hr %></td>
+						<td><%=h @workout.comps_average_hr(@my_comps) %></td>
+						<td><% if false %> <%=h @workout.comps_average_hr(@all_comps) %> <% end %></td>
 					</tr>
 					<tr>
 						<td>Duration</td>
-						<td><%=h @workout.duration.round(1) %></td>
-						<td><%=h @workout.comps_average_duration %></td>
+						<td><%=h @workout.display_seconds(@workout.duration) %></td>
+						<td><%=h @workout.display_seconds(@workout.comps_average_duration(@my_comps)) %></td>
+						<td><%=h @workout.display_seconds(@workout.comps_average_duration(@all_comps)) %></td>
 					</tr>
 				</tbody>
 			</table>
@@ -57,12 +58,18 @@
 			<div id="tags">
 				<h3>Tags</h3> <a class="add-plus" href="">+</a>
 				<div id="tags_list">
-					<% for tag in @workout.tag_list %>
+					<% @workout.tags.each do |tag| %>
 					<a class="globe" href="#"><span class="displace">Global</span><img src="/images/spacer.png" width="18px" height="18px"></a> 
-					<%= link_to tag, workouts_path + '?tag=' + tag %>
-					<a class="delete-x" href=""></a><br \>
+					<%= link_to tag.name, workouts_path(:tag => tag.name) %>
+					<%= link_to "", workout_tagging_path(@workout,tag), :method => :delete, :class => "delete-x"  %><br \>
 					<% end %>
 				</div>
+				<% form_for @tagging, :url => workout_taggings_path(@workout) do |f| %>
+					<%= f.label "Add Tag" %>
+					<input type="text" name="name" id="new_tag_name" autocomplete="off"/>
+					<%= f.submit "Create" %>
+				<% end %>
+					
 			</div>
 		</div>
 	</div>

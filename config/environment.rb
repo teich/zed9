@@ -28,9 +28,8 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
 
-  config.gem "authlogic", :version => '>=2.0.9'
+  config.gem "authlogic"
   config.gem "derailed-ziya", :lib => "ziya"
-#  config.gem "scruffy"
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.

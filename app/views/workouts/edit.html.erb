@@ -1,26 +1,9 @@
 <h1>Workouts#edit</h1>
 
 <% form_for @workout, :url => workout_path, :action => 'upload', :html => { :multipart => true } do |f| %>
-<%= f.error_messages %>
-
-<p>
-  <%= f.label :name %><br />
-  <%= f.text_field :name %>
-</p>
-<p>
-	<%= f.label :tag_list %><br />
-	<%= f.text_field :tag_list %>
-<p> 
-	<p>
-		<%= f.label :activity %><br />
-		<%= f.select "activity_id", Activity.find(:all).collect { |p| [p.name, p.id] } %>
-	</p>
-  <%= f.label "Upload your device file:" %>
-  <%= file_field_tag "device_file" %> 
-</p> 
-<p>
-  <%= f.submit "Save" %>
-</p> 
+	<%= f.error_messages %>
+	<%= render :partial => 'form', :object => f %>
+  	<%= f.submit "Save" %> 
 <% end %>
 
 <%= link_to 'Show', @workout %> |

@@ -1,0 +1,11 @@
+ * In views, displaying objects that may be nil.  Check, or something better?
+ * Best solution for graphing.  Especially interactive graphs, flash, etc.  
+ * grouping, or really dynamic finds.  i.e. same activity, age +/- 10 years
+ * Comparison method must be better way
+ * how can I munge data on submit.  i.e. height is given as 1.5Meters, DB wants 1500
+ * Testing with authlogic.  Easy way to bypass?
+ * How to test invitation feature
+
+Possibly figured out already
+ * How do I do inplace editing.  i.e. add or remove tags on a workout.  eye to ajax.
+ * Architecture for polar/garmin/etc importing.  Presumably should actually use model, create new ones?
