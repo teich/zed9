@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
   has_many :workouts, :dependent => :destroy do
     def by_activity(activity_id)
-      find :all, :conditions => ['activity_id == ?', activity_id]
+      find :all, :conditions => ['activity_id = ?', activity_id]
     end
   end
   
