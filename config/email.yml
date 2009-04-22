@@ -1,12 +1,14 @@
 development:
-  :address: smtp.server.com
+  :address: mail.zednine.com
   :port: 25
+  :domain: => "zednine.com"
   :authentication: plain
-  :user_name: user
-  :password: pass
+  :user_name: outbound@zednine.com
+  :password: NA*AWdCP
 production:
   :address: mail.zednine.com
   :port: 25
+  :domain: => "zednine.com"
   :authentication: plain
   :user_name: outbound@zednine.com
   :password: NA*AWdCP
