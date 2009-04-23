@@ -74,39 +74,43 @@ a {
 	font-size:14px;
 }
 
-.form {
-	margin-left: auto;
-	margin-right: auto;
-	border-collapse:collapse;
-	font-weight: 200;
-	font-size: 18px;
-	line-height: 2.5;
-	font-family: inherit;
-	font-color: inherit;
-	border: none;
-}
-
 #register {
 	width: 100%;
 	text-align: left;
 	float: left;
 }
 
-#registration_form th {
-	text-align:right;
+#registration_form table, tr, th, td {
+	margin-left: auto;
+	margin-right: auto;
+	font-weight: 200;
+	font-size: 18px;
+	line-height: inherit;
+	font-family: inherit;
+	font-color: inherit;
+	border: none;
+	padding: 8px 4px 8px 4px;
 }
 
-#registration_form td, #registration_form th, input {
-	font-weight: inherit;
-	font-size: inherit;
-	line-height: inherit;
-	padding:4px;
-	border: 0px none transparent;
-	margin:0px;
-	vertical-align: inherit;
+#registration_form th {
+	text-align:right;
+	width: 33%;
+}
+
+#registration_form .annotated {
+	padding-bottom: 0px;
+}
+
+#registration_form .field_note {
+	font-size: 12px;
+	padding-top: 0px;
 }
 
 #registration_form input {
+	font-weight: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	vertical-align: inherit;
 	-moz-border-radius-bottomleft:5px;
 	-moz-border-radius-bottomright:5px;
 	-moz-border-radius-topleft:5px;
@@ -118,8 +122,8 @@ a {
 	margin:0px;
 }
 
-#registration_form .field_note {
-	font-size: 12px;
+.submit {
+	background-color: blue;
 }
 
 #nav {
