@@ -6,7 +6,7 @@
 
 <table id="registration_form" class="form">
   <tr>
-    <th><%= f.label :login %></th>
+    <th><%= f.label :login, "User name" %></th>
     <td><%= f.text_field :login %></td>
   </tr>
   <tr>
@@ -14,8 +14,8 @@
     <td><%= f.text_field :email %></td>
   </tr>
   <tr>
-    <th><%= f.label :height %></th>
-    <td><%= f.text_field :height, :size => "4" %> millimeters</td>
+    <th class="annotated"><%= f.label :height %></th>
+    <td class="annotated"><%= f.text_field :height, :size => "4" %> millimeters</td>
   </tr>
   <tr>
 		<th>&nbsp;</th>
@@ -23,7 +23,7 @@
  	</tr>
   <tr>
     <th><%= f.label :birthdate %></th>
-    <td><%= f.date_select :birthdate, :start_year => Time.now.year - 100, :end_year => Time.now.year - 12 %></td>
+    <td><%= f.date_select :birthdate, :start_year => Time.now.year - 12, :end_year => Time.now.year - 100 %></td>
   </tr>
   <tr>
     <th><%= f.label :time_zone %></th>
@@ -43,7 +43,8 @@
   </tr>
   <tr>
     <th><br></th>
-    <td><%= f.submit "Save" %></td>
+<!--    <td><%= f.submit :class => 'submit', %></td> -->
+    <td><%= f.submit "Save" %></td> 
   </tr>
 </table>
 
