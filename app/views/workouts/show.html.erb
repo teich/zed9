@@ -53,6 +53,9 @@
 					<%= ziya_chart workout_chart_path(@workout), :size => "600x300" -%>
 				</p>
 			</div>
+			<% if @workout.gps_data? %>
+	        <%= @map.div(:width => 600, :height => 400) %>
+			<% end %>
 		</div>
 		<div id="right_rail"> 
 			<div id="tags">

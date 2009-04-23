@@ -7,6 +7,10 @@
 	<title><%= controller.controller_name %>: <%= controller.action_name %></title>
 	<%= stylesheet_link_tag 'flexigrid', 'zed9' %>
 	<%= javascript_include_tag 'jquery', 'flexigrid', 'application' %>
+	<% if !@map.nil? %>
+    <%= GMap.header %>
+    <%= @map.to_html %>
+	<% end %>
 </head>
 <body>
 

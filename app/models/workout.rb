@@ -64,4 +64,8 @@ class Workout < ActiveRecord::Base
     data.map { |x| x[field] }
   end
   
+  def gps_data?
+    !trackpoints[0].lat.nil?
+  end
+  
 end
