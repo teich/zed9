@@ -1,28 +1,52 @@
-<%= form.hidden_field :invitation_token %>
-<%= form.label :login %><br />
-<%= form.text_field :login %><br />
-<br />
-<%= form.label :email %><br />
-<%= form.text_field :email %><br />
-<br />
-<%= form.label :height %> in millimeters.  (Yes, this is lame.  It's high on the todo list)<br />
-<%= form.text_field :height %> <br />
-<br />
-<%= form.label :birthdate %><br />
-<%= form.date_select :birthdate, :start_year => Time.now.year - 100, :end_year => Time.now.year - 12 %><br />
-<br />
+<% form_for @user, :url => account_path do |f| %>
+  <%= f.error_messages %>
 
-<%= form.label :time_zone %><br />
-<%= form.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %><br />
-<br />
 
-<%= form.label :sex %><br />
-<%= form.radio_button :sex, "female" %>Female <%= form.radio_button :sex, "male" %>male<br />
-<br />
-<%= form.label :password, form.object.new_record? ? nil : "Change password" %><br />
-<%= form.password_field :password %><br />
-<br />
-<%= form.label :password_confirmation %><br />
-<%= form.password_field :password_confirmation %><br />
+<%= f.hidden_field :invitation_token %>
 
-<br />
+<table id="registration_form" class="form">
+  <tr>
+    <th><%= f.label :login %></th>
+    <td><%= f.text_field :login %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :email %></th>
+    <td><%= f.text_field :email %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :height %></th>
+    <td><%= f.text_field :height, :size => "4" %> millimeters</td>
+  </tr>
+  <tr>
+		<th>&nbsp;</th>
+		<td class="field_note">Yes, this is lame. It's on the todo list. For reference, 5'10" = 1778mm. </td>
+ 	</tr>
+  <tr>
+    <th><%= f.label :birthdate %></th>
+    <td><%= f.date_select :birthdate, :start_year => Time.now.year - 100, :end_year => Time.now.year - 12 %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :time_zone %></th>
+    <td><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :sex, "Gender" %></th>
+    <td><%= f.radio_button :sex, "female" %> female &nbsp;  <%= f.radio_button :sex, "male" %> male</tr>
+  </tr>
+  <tr>
+    <th><%= f.label :password, f.object.new_record? ? nil : "Change password" %></th>
+    <td><%= f.password_field :password %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :password_confirmation, "Confirm password" %></th>
+    <td><%= f.password_field :password_confirmation %></td>
+  </tr>
+  <tr>
+    <th><br></th>
+    <td><%= f.submit "Save" %></td>
+  </tr>
+</table>
+
+<% end %>
+
+<br><br>
