@@ -34,9 +34,9 @@
 					</tr>
 					<tr>
 						<td>Duration</td>
-						<td><%=h @workout.display_seconds(@workout.duration) %></td>
-						<td><%=h @workout.display_seconds(@workout.comps_average_duration(@my_comps)) %></td>
-						<td><%=h @workout.display_seconds(@workout.comps_average_duration(@all_comps)) %></td>
+						<td><%=h number_to_time(@workout.duration) %></td>
+						<td><%=h number_to_time(@workout.comps_average_duration(@my_comps)) %></td>
+						<td><%=h number_to_time(@workout.comps_average_duration(@all_comps)) %></td>
 					</tr>
 				</tbody>
 			</table>

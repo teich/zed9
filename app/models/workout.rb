@@ -22,8 +22,9 @@ class Workout < ActiveRecord::Base
     series.in_groups_of(factor).map { |snipit| snipit.compact.average_array }
   end
   
+  # TODO: seconds conversion is in helper.  What's the DRY way of formatting this?
   def get_hr_axis
-    trackpoints.map { |tp| display_seconds(tp.time - start_time) }
+    trackpoints.map { |tp| tp.time - start_time }
   end
   
   def find_all_comps_by_activity(activity_id)
@@ -63,7 +64,4 @@ class Workout < ActiveRecord::Base
     data.map { |x| x[field] }
   end
   
-  def display_seconds(seconds)
-    Time.at(seconds).utc.strftime("%H:%M:%S")
-  end
 end
