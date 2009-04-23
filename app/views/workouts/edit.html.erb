@@ -1,10 +1,6 @@
-<h1>Workouts#edit</h1>
+<div class="main">
+	<h1>Edit Workout</h1>
 
-<% form_for @workout, :url => workout_path, :action => 'upload', :html => { :multipart => true } do |f| %>
-	<%= f.error_messages %>
-	<%= render :partial => 'form', :object => f %>
-  	<%= f.submit "Save" %> 
-<% end %>
+<%= render :partial => 'form' %>
 
-<%= link_to 'Show', @workout %> |
-<%= link_to 'Back', workouts_path %>
+</div>

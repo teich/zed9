@@ -74,13 +74,13 @@ a {
 	font-size:14px;
 }
 
-#register {
+#register, #login {
 	width: 100%;
 	text-align: left;
 	float: left;
 }
 
-#registration_form table, tr, th, td {
+#registration_form, #login_form table, tr, th, td {
 	margin-left: auto;
 	margin-right: auto;
 	font-weight: 200;
@@ -92,21 +92,21 @@ a {
 	padding: 8px 4px 8px 4px;
 }
 
-#registration_form th {
+.form th {
 	text-align:right;
 	width: 33%;
 }
 
-#registration_form .annotated {
+.form .annotated {
 	padding-bottom: 0px;
 }
 
-#registration_form .field_note {
+.form .field_note {
 	font-size: 12px;
 	padding-top: 0px;
 }
 
-#registration_form input {
+.form input {
 	font-weight: inherit;
 	font-size: inherit;
 	line-height: inherit;
@@ -123,7 +123,8 @@ a {
 }
 
 .submit {
-	background-color: blue;
+	position: relative;
+	top: 16px;
 }
 
 #nav {
@@ -155,6 +156,9 @@ a {
 h1 {
 	font-weight: 500;
 	font-size: 36px;
+}
+
+#name h1 {
 	display: inline;
 }
 
@@ -173,8 +177,11 @@ h3 {
 }
 
 #content_header {
+	text-align: left;
 	vertical-align: bottom;
 	margin-bottom: 18px;
+	float: left;
+	width: 100%;
 }
 
 #name {
@@ -212,11 +219,9 @@ p.workout_notes {
 	font-size: 14px;
 	line-height: 18px;
 	color: #828282;
-	font-style: italic;
 }
 
 .workout_comparison {
-	margin-top: 48px;
 	overflow: auto;
 }
 

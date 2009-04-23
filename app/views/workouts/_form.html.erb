@@ -1,11 +1,37 @@
-	<%= form.label :name %>
-	<%= form.text_field :name %><br />
+<% form_for @workout, :url => workouts_path, :action => 'upload', :html => { :multipart => true } do |f| %>
+<%= f.error_messages %>
+
+<!-- TODO Not the Rails Way -->
+<%= hidden_field_tag 'device_type', params[:device_type] %>
+
+<table id="edit_workout" class="form">
+	<tr>
+		<th><%= f.label :name, "Workout name" %></th>
+		<td><%= f.text_field :name %></td>
+	</tr>
+	<tr>
+		<th><%= f.label :tag_list, "Tags" %></th>
+		<td class="annotated"><%= f.text_field :tag_list %></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td class="field_note">Separate tags with a comma</td>
+	</tr>
+	<tr>
+		<th><%= f.label :activity, "Activity type" %></th>
+		<td><%= f.select "activity_id", Activity.find(:all).collect { |p| [p.name, p.id] } %></td>
+	</tr>
+	<tr>
+		<th><%= f.label "Workout file location" %></th>
+		<td><%= file_field_tag "device_file" %> </td>
+	</tr>
+	<tr>
+		<th><%= link_to 'Cancel', workouts_path, :class => "submit" %></th>
+		<td><%= f.submit "Save", :class => "submit" %></td>
+	</tr>
+</table>
+
+	<% end %>
 	
-	<%= form.label :tag_list %>
-	<%= form.text_field :tag_list %><br />
 
-	<%= form.label :activity %>
-	<%= form.select "activity_id", Activity.find(:all).collect { |p| [p.name, p.id] } %><br />
-
- 	<%= form.label "Upload your device file:" %>
-  	<%= file_field_tag "device_file" %> <br />
+	

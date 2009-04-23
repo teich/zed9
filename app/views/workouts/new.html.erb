@@ -1,12 +1,8 @@
+<div class="main">
+	<h1>Add a Workout</h1>
+
 <% if params[:device_type] %>
-<% form_for @workout, :url => workouts_path, :action => 'upload', :html => { :multipart => true } do |f| %>
-	<%= f.error_messages %>
-	
-	<!-- TODO Not the Rails Way -->
-	<%= hidden_field_tag 'device_type', params[:device_type] %>
-	<%= render :partial => 'form', :object => f %>
-  	<%= f.submit "Create" %> 
-<% end %>
+	<%= render :partial => 'form' %>
 <% else %>
 <ul>
   <li>Nike +</li>
@@ -16,4 +12,4 @@
 </ul>
 <% end -%>
  
-<%= link_to 'Back', workouts_path %>
+</div>

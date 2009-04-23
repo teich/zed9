@@ -14,7 +14,7 @@
 <div id="content" class="content">
 
 	<div id="workout">
-		<p class="workout_notes">Notes on the workout</p>
+		<!-- TO SUPPORT LATER ><p class="workout_notes">Notes on the workout</p> -->
 		<div id="workout_summary">
 			<table class="workout_comparison">
 				<thead>
@@ -67,20 +67,14 @@
 					<%= link_to "", workout_tagging_path(@workout,tag), :method => :delete, :class => "delete-x"  %><br \>
 					<% end %>
 				</div>
-				<% form_for @tagging, :url => workout_taggings_path(@workout) do |f| %>
-					<%= f.label "Add Tag" %>
-					<input type="text" name="name" id="new_tag_name" autocomplete="off"/>
-					<%= f.submit "Create" %>
-				<% end %>
-					
+				<br>
+				<div class="form">
+					<% form_for @tagging, :url => workout_taggings_path(@workout) do |f| %>
+						<input type="text" name="name" id="new_tag_name" autocomplete="off"/>
+						<%= f.submit "Add", :class => "submit" %>
+					<% end %>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="clear">
-		<br>
-	</div>
-	<p>
-		<%= link_to 'Edit', edit_workout_path(@workout) %> |
-		<%= link_to 'Back', workouts_path %>
-	</p>
 </div>
