@@ -27,11 +27,11 @@
 		<ul>
 			<li class="first"><%= link_to "Dashboard", dashboard_path %></li>
 			<li><%= link_to "Workouts", workouts_path %></li>
-			<li class="last"><a href="/account.html">Profile</a></li>
+			<li class="last"><%= link_to "Profile", account_path %></li>
 		</ul>
 	</div>
 
-	<div id="main">
+	<div id="main" style="main">
 		<div id="flash">
 			<%= flash[:notice] %>
 		</div>
@@ -40,7 +40,9 @@
 	</div>
 
 	<div id="footer">
+
 		© 2009 Zed9. All rights reserved.
+
 	</div>
 </body>
 </html>

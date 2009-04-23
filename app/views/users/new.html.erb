@@ -1,7 +1,8 @@
-<h1>Register</h1>
- 
-<% form_for @user, :url => account_path do |f| %>
-  <%= f.error_messages %>
-  <%= render :partial => "form", :object => f %>
-  <%= f.submit "Register" %>
-<% end %>
+<div id="register">
+	<h1>Register</h1><br>
+Already a member of Zed9? <%= link_to "Log in", login_path  %>.
+
+ <br><br>
+  <%= render :partial => "form" %>
+</div>
+</div>

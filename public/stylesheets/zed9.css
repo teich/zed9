@@ -28,8 +28,8 @@ a {
 
 #logo {
 	font-size: 36px;
-	font-weight: 200;
-	letter-spacing: 8px;
+	font-weight: 100;
+	letter-spacing: 10px;
 	float: left;
 	vertical-align: bottom;
 }
@@ -65,6 +65,61 @@ a {
 #logged_in .last {
 	padding-right:0px;
 	border:none;
+}
+
+.main {
+	display: block;
+	clear: both;
+	margin: 48px 0px 48px 0px;
+	font-size:14px;
+}
+
+.form {
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse:collapse;
+	font-weight: 200;
+	font-size: 18px;
+	line-height: 2.5;
+	font-family: inherit;
+	font-color: inherit;
+	border: none;
+}
+
+#register {
+	width: 100%;
+	text-align: left;
+	float: left;
+}
+
+#registration_form th {
+	text-align:right;
+}
+
+#registration_form td, #registration_form th, input {
+	font-weight: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	padding:4px;
+	border: 0px none transparent;
+	margin:0px;
+	vertical-align: inherit;
+}
+
+#registration_form input {
+	-moz-border-radius-bottomleft:5px;
+	-moz-border-radius-bottomright:5px;
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
+	border:1px solid #d9d9d9;
+	font-family: inherit;
+	color: inherit;
+	padding:8px;
+	margin:0px;
+}
+
+#registration_form .field_note {
+	font-size: 12px;
 }
 
 #nav {
@@ -111,12 +166,6 @@ h3 {
 	font-weight: 400;
 	display: inline-block;
 	margin: 0px 0px 12px 0px;
-}
-
-#main {
-	clear: both;
-	margin: 48px 0px 48px 0px;
-	font-size:14px;
 }
 
 #content_header {
@@ -167,7 +216,7 @@ p.workout_notes {
 	overflow: auto;
 }
 
-th {
+.workout_comparison th {
 	color: #9f9f9f;
 	font-weight: 400;
 	font-size: 14px;
@@ -175,7 +224,7 @@ th {
 	border-right:1px dotted #d9d9d9;
 }
 
-th.left_column {
+.workout_comparison th.left_column {
 	border-left: 1px dotted #d9d9d9;
 }
 	
@@ -223,6 +272,7 @@ div .clear {
 }
 
 #footer {
+	display: block;
 	clear: both;
 	color: #7C7B74;
 	font-size: 8pt;
