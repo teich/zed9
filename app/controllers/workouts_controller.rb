@@ -25,6 +25,18 @@ class WorkoutsController < ApplicationController
     @my_comps = foo[0]
     @all_comps = foo[1]
     @tagging = Tagging.new
+    
+    # MAP TEST
+    @map = GMap.new("map_div")
+    @map.control_init(:large_map => true,:map_type => true)
+    points = @workout.trackpoints.map { |tp| [tp.lat, tp.lng] }
+    polyline = GPolyline.new(points,"#a000f0",3,1.0)
+    start = [@workout.trackpoints[0].lat, @workout.trackpoints[0].lng]
+    @map.overlay_init(polyline)
+    @map.center_zoom_init(start,13)
+    @map.overlay_init(GMarker.new(start,:title => "Hello", :info_window => "Starting Point"))
+    
+    
     respond_to do |format|
       format.html
       format.xml {render :xml => @workout.to_xml }

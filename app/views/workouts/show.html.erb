@@ -34,9 +34,9 @@
 					</tr>
 					<tr>
 						<td>Duration</td>
-						<td><%=h @workout.display_seconds(@workout.duration) %></td>
-						<td><%=h @workout.display_seconds(@workout.comps_average_duration(@my_comps)) %></td>
-						<td><%=h @workout.display_seconds(@workout.comps_average_duration(@all_comps)) %></td>
+						<td><%=h number_to_time(@workout.duration) %></td>
+						<td><%=h number_to_time(@workout.comps_average_duration(@my_comps)) %></td>
+						<td><%=h number_to_time(@workout.comps_average_duration(@all_comps)) %></td>
 					</tr>
 				</tbody>
 			</table>
@@ -53,6 +53,9 @@
 					<%= ziya_chart workout_chart_path(@workout), :size => "600x300" -%>
 				</p>
 			</div>
+			<% if @workout.gps_data? %>
+	        <%= @map.div(:width => 600, :height => 400) %>
+			<% end %>
 		</div>
 		<div id="right_rail"> 
 			<div id="tags">

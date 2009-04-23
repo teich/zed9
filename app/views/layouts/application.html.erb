@@ -7,6 +7,10 @@
 	<title><%= controller.controller_name %>: <%= controller.action_name %></title>
 	<%= stylesheet_link_tag 'flexigrid', 'zed9' %>
 	<%= javascript_include_tag 'jquery', 'flexigrid', 'application' %>
+	<% if !@map.nil? %>
+    <%= GMap.header %>
+    <%= @map.to_html %>
+	<% end %>
 </head>
 <body>
 
@@ -21,7 +25,7 @@
 
 	<div id="nav">
 		<ul>
-			<li class="first"><a href="">Home</a></li>
+			<li class="first"><%= link_to "Dashboard", dashboard_path %></li>
 			<li><%= link_to "Workouts", workouts_path %></li>
 			<li class="last"><%= link_to "Profile", account_path %></li>
 		</ul>
