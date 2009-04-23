@@ -17,8 +17,8 @@ class ChartsController < ApplicationController
   def dashboard_duration_data
     chart = Ziya::Charts::Column.new '', 'dashboard_duration'
     @workouts = current_user.workouts.find(:all, :order => "start_time")
-    chart.add :axis_category_text, @workouts.map { |w| w.start_time.strftime("%D") }
-    chart.add :series, "Duration", @workouts.map { |w| w.duration }
+    chart.add :axis_category_text, @workouts.map { |w| w.start_time.strftime("%a\n%b %d") }
+    chart.add :series, "Duration\nminutes", @workouts.map { |w| w.duration / 60 }
     chart.add :theme, "zed9"
     respond_to do |fmt|
       fmt.xml { render :xml => chart.to_xml }

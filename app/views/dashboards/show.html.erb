@@ -1,3 +1,5 @@
 You worked out total of <%= h number_to_time(@total_time) %> across <%= @workouts.size %> workouts<BR>
+Average user did <%= h number_to_time(@atd) %> total.<BR>
+You are <%= h @total_time/@atd*100 %>% better!<BR>
 
 <%= ziya_chart dashboard_chart_path, :size => "600x300" -%>
