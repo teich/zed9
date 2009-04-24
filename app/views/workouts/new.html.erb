@@ -2,7 +2,7 @@
 	<h1>Add a Workout</h1>
 
 <% if params[:device_type] %>
-	<%= render :partial => 'form' %>
+		<%= render :partial => 'form', :locals => { :submit_url => workouts_path } %>
 <% else %>
 <ul>
   <li>Nike +</li>

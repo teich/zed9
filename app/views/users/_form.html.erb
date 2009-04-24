@@ -33,6 +33,10 @@
     <th><%= f.label :sex, "Gender" %></th>
     <td><%= f.radio_button :sex, "female" %> female &nbsp;  <%= f.radio_button :sex, "male" %> male</tr>
   </tr>
+	<tr>
+		<th><%= f.label :shared, "New workouts public?" %></th>
+		<td><%= f.check_box :shared %></td>
+	</tr>
   <tr>
     <th><%= f.label :password, f.object.new_record? ? nil : "Change password" %></th>
     <td><%= f.password_field :password %></td>

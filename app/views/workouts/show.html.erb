@@ -1,5 +1,7 @@
 <div id="content_header">
-		<h1><img class="activity_icon" src="/images/running.jpg" width="37" height="40"> <%=h @workout.name %> <%= link_to image_tag("pencil.jpg", :class => "action_icon"), edit_workout_path(@workout) %></h1>
+		<h1><img class="activity_icon" src="/images/running.jpg" width="37" height="40"> <%=h @workout.name %> <% if my_workout? %>
+		<%= link_to image_tag("pencil.jpg", :class => "action_icon"), edit_workout_path(@workout) %>
+		<% end %></h1>
 		<!-- TO SUPPORT LATER ><p class="workout_notes">Notes on the workout</p> -->
 </div>
 
@@ -53,20 +55,22 @@
 
 		<div id="right_rail"> 
 			<div id="tags">
-				<h3>Tags</h3> <a class="add-plus" href="">+</a>
+				<h3>Tags</h3> <% if my_workout? %><a class="add-plus" href="">+</a><% end %>
 				<div id="tags_list">
 					<% @workout.tags.each do |tag| %>
 					<a class="globe" href="#"><span class="displace">Global</span><img src="/images/spacer.png" width="18px" height="18px"></a> 
 					<%= link_to tag.name, workouts_path(:tag => tag.name) %>
-					<%= link_to "", workout_tagging_path(@workout,tag), :method => :delete, :class => "delete-x"  %><br \>
+					<% if my_workout? %> <%= link_to "", workout_tagging_path(@workout,tag), :method => :delete, :class => "delete-x"  %> <% end %><br \>
 					<% end %>
 				</div>
 				<br>
+				<% if my_workout? %>
 				<div class="form">
 					<% form_for @tagging, :url => workout_taggings_path(@workout) do |f| %>
 						<input type="text" name="name" id="new_tag_name" autocomplete="off"/>
 						<%= f.submit "Add", :class => "submit" %>
 					<% end %>
+				<% end %>
 				</div>
 			</div>
 		</div>
