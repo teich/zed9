@@ -7,7 +7,7 @@
 
   <%=comp :axis_category %>
     size:        14
-    skip:        300
+    skip:        50
     color:             545454    
     bold:   false
     margin: false
