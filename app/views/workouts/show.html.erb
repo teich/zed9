@@ -1,63 +1,60 @@
 <div id="content_header">
-
-	<img class="activity_icon" src="/images/running.jpg">
-
-	<span id="name">	
-		<img src="/images/spacer.png" width="1" height="78">
-		<h1><%=h @workout.name %></h1>
-		<% if my_workout? %>
+		<h1><img class="activity_icon" src="/images/running.jpg" width="37" height="40"> <%=h @workout.name %> <% if my_workout? %>
 		<%= link_to image_tag("pencil.jpg", :class => "action_icon"), edit_workout_path(@workout) %>
-		<% end %>
-	</span>
-
+		<% end %></h1>
+		<!-- TO SUPPORT LATER ><p class="workout_notes">Notes on the workout</p> -->
 </div>
 
 <div id="content" class="content">
 
-	<div id="workout">
-		<!-- TO SUPPORT LATER ><p class="workout_notes">Notes on the workout</p> -->
-		<div id="workout_summary">
-			<table class="workout_comparison">
-				<thead>
-					<tr>
-						<th class="left_column">&nbsp;</th>
-						<th><%=h @workout.name %></th>
-						<th>My 	<%= @workout.activity.name if @workout.activity %></th>
-						<th>All Zed9</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Average Heart Rate</td>
-						<td><%=h @workout.average_hr %></td>
-						<td><%=h @workout.comps_average_hr(@my_comps) %></td>
-						<td><% if false %> <%=h @workout.comps_average_hr(@all_comps) %> <% end %></td>
-					</tr>
-					<tr>
-						<td>Duration</td>
-						<td><%=h number_to_time(@workout.duration) %></td>
-						<td><%=h number_to_time(@workout.comps_average_duration(@my_comps)) %></td>
-						<td><%=h number_to_time(@workout.comps_average_duration(@all_comps)) %></td>
-					</tr>
-				</tbody>
-			</table>
+	<div id="workout_snapshot">
 
-			<p>
-				<b>Start Time</b>
-				<%=h @workout.start_time %>
-			</p>
+		<table id="summary_stats">
+				<tr>
+					<th>Start Time:</th>
+					<td><%=h @workout.start_time %></td>
+				</tr>
+				<tr>
+					<th>Activity Type:</th>
+					<td><%= @workout.activity.name if @workout.activity %></td>
+				</tr>
+		</table>
 
-			<p>
-				<b>Activity Type:</b>
-				<%= @workout.activity.name if @workout.activity %>
-				<p>
-					<%= ziya_chart workout_heart_rate_chart_path(@workout), :size => "600x300" -%>
-				</p>
-			</div>
-			<% if @workout.gps_data? %>
-	        <%= @map.div(:width => 600, :height => 400) %>
-			<% end %>
+		<div id="heart_rate_graph">
+			<%= ziya_chart workout_heart_rate_chart_path(@workout), :size => "600x300" -%>
 		</div>
+			<% if @workout.gps_data? %>
+	        <%= @map.div(:width => 400, :height => 300) %>
+			<% end %>
+	</div>
+
+	<div id="workout_details">
+
+		<table id="workout_comparison">
+			<thead>
+				<tr>
+					<th class="left_column">&nbsp;</th>
+					<th><%=h @workout.name %></th>
+					<th>My 	<%= @workout.activity.name if @workout.activity %></th>
+					<th>All Zed9</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th class="left_column">Average Heart Rate</th>
+					<td><%=h @workout.average_hr %></td>
+					<td><%=h @workout.comps_average_hr(@my_comps) %></td>
+					<td><% if false %> <%=h @workout.comps_average_hr(@all_comps) %> <% end %></td>
+				</tr>
+				<tr>
+					<th class="left_column">Duration</th>
+					<td><%=h number_to_time(@workout.duration) %></td>
+					<td><%=h number_to_time(@workout.comps_average_duration(@my_comps)) %></td>
+					<td><%=h number_to_time(@workout.comps_average_duration(@all_comps)) %></td>
+				</tr>
+			</tbody>
+		</table>
+
 		<div id="right_rail"> 
 			<div id="tags">
 				<h3>Tags</h3> <% if my_workout? %><a class="add-plus" href="">+</a><% end %>
@@ -79,5 +76,8 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
+
 </div>
+
