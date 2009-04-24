@@ -1,6 +1,5 @@
 <div class="main">
 	<h1>Edit Workout</h1>
-
-<%= render :partial => 'form' %>
+	<%= render :partial => 'form', :locals => { :submit_url => workout_path(@workout) } %>
 
 </div>

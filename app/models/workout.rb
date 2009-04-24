@@ -31,7 +31,8 @@ class Workout < ActiveRecord::Base
     @all_comps ||= Activity.find(activity_id).workouts
   end
   
-  def find_user_comps_by_activity(user, activity_id)
+  def find_user_comps_by_activity(user_id, activity_id)
+    user = User.find(user_id)
     @my_comps ||= user.workouts.by_activity(activity_id)
   end
 

@@ -3,7 +3,7 @@ class ChartsController < ApplicationController
   def show
     chart = Ziya::Charts::Line.new '', 'hr_graph'
     
-    @workout = current_user.workouts.find(params[:workout_id])
+    @workout = Workout.find(params[:workout_id])
     
     chart.add :axis_category_text, @workout.get_hr_axis
     chart.add :series, "HR", @workout.get_hr

@@ -2,9 +2,11 @@ require 'hpricot'
 require 'lib/WorkoutImporter'
 
 class WorkoutsController < ApplicationController
+  helper_method :my_workout?  
   before_filter :require_user
   
-  before_filter :find_workout, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_workout, :only => [:edit, :update, :destroy]
+  before_filter :find_and_bounce, :only => [:show]
   
   def index
     if params[:tag]
@@ -21,7 +23,8 @@ class WorkoutsController < ApplicationController
 
   def show
     # TODO - ruby way of array asignment, and get out of controller
-    foo = @workout.find_comps(current_user)
+    # TODO Also need to pull user_id from workout, not
+    foo = @workout.find_comps(@workout.user_id)
     @my_comps = foo[0]
     @all_comps = foo[1]
     @tagging = Tagging.new
@@ -47,6 +50,8 @@ class WorkoutsController < ApplicationController
 
   def new
     @workout = current_user.workouts.build
+    @workout.shared = current_user.shared
+    
   end
 
   def edit
@@ -99,6 +104,15 @@ class WorkoutsController < ApplicationController
   def find_workout
     @workout = current_user.workouts.find(params[:id])
   end    
+  
+  def find_and_bounce
+    @workout = Workout.find(params[:id])
+    
+    if ((@workout.user_id != current_user.id) && !@workout.shared)
+      flash[:notice] = "The workout you tried to view is not public"
+      redirect_to workouts_path 
+    end
+  end
 
   def is_garmin?(device)
     device == "garmin"
@@ -110,5 +124,9 @@ class WorkoutsController < ApplicationController
     
   def ensure_string(uploaded_file)
     (uploaded_file.is_a?(String)) ? uploaded_file : uploaded_file.read
+  end
+  
+  def my_workout?
+    @workout.user_id == current_user.id
   end
 end

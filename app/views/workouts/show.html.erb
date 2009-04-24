@@ -5,8 +5,9 @@
 	<span id="name">	
 		<img src="/images/spacer.png" width="1" height="78">
 		<h1><%=h @workout.name %></h1>
+		<% if my_workout? %>
 		<%= link_to image_tag("pencil.jpg", :class => "action_icon"), edit_workout_path(@workout) %>
-
+		<% end %>
 	</span>
 
 </div>
@@ -59,20 +60,22 @@
 		</div>
 		<div id="right_rail"> 
 			<div id="tags">
-				<h3>Tags</h3> <a class="add-plus" href="">+</a>
+				<h3>Tags</h3> <% if my_workout? %><a class="add-plus" href="">+</a><% end %>
 				<div id="tags_list">
 					<% @workout.tags.each do |tag| %>
 					<a class="globe" href="#"><span class="displace">Global</span><img src="/images/spacer.png" width="18px" height="18px"></a> 
 					<%= link_to tag.name, workouts_path(:tag => tag.name) %>
-					<%= link_to "", workout_tagging_path(@workout,tag), :method => :delete, :class => "delete-x"  %><br \>
+					<% if my_workout? %> <%= link_to "", workout_tagging_path(@workout,tag), :method => :delete, :class => "delete-x"  %> <% end %><br \>
 					<% end %>
 				</div>
 				<br>
+				<% if my_workout? %>
 				<div class="form">
 					<% form_for @tagging, :url => workout_taggings_path(@workout) do |f| %>
 						<input type="text" name="name" id="new_tag_name" autocomplete="off"/>
 						<%= f.submit "Add", :class => "submit" %>
 					<% end %>
+				<% end %>
 				</div>
 			</div>
 		</div>
