@@ -22,11 +22,30 @@ class Workout < ActiveRecord::Base
     series.in_groups_of(factor).map { |snipit| snipit.compact.average_array }
   end
   
+  def smooth_axis(series, factor)
+    series.in_groups_of(factor).map { |snipit| snipit[0] }
+  end
   # TODO: seconds conversion is in helper.  What's the DRY way of formatting this?
   def get_hr_axis
     trackpoints.map { |tp| tp.time - start_time }
   end
   
+  def get_smoothed_hr(points)
+    hr = get_hr
+    factor = hr.size / points
+    smooth_data(hr, factor)
+  end
+  
+  def get_smoothed_hr_axis(points)
+    hra = get_hr_axis
+    factor = hra.size / points
+    smooth_axis(hra, factor)
+  end
+  
+  def get_smoothed_and_formated_hr_axis(points)
+    seconds = get_smoothed_hr_axis(points)
+    seconds.map { |s| number_to_time(s) }
+  end
   def find_all_comps_by_activity(activity_id)
     @all_comps ||= Activity.find(activity_id).workouts
   end
@@ -68,5 +87,8 @@ class Workout < ActiveRecord::Base
   def gps_data?
     !trackpoints[0].lat.nil?
   end
-  
+
+  def number_to_time(seconds)
+    Time.at(seconds).utc.strftime("%H:%M:%S")
+  end
 end

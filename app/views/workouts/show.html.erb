@@ -51,7 +51,7 @@
 				<b>Activity Type:</b>
 				<%= @workout.activity.name if @workout.activity %>
 				<p>
-					<%= ziya_chart workout_chart_path(@workout), :size => "600x300" -%>
+					<%= ziya_chart workout_heart_rate_chart_path(@workout), :size => "600x300" -%>
 				</p>
 			</div>
 			<% if @workout.gps_data? %>

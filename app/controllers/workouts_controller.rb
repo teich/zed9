@@ -23,13 +23,11 @@ class WorkoutsController < ApplicationController
 
   def show
     # TODO - ruby way of array asignment, and get out of controller
-    # TODO Also need to pull user_id from workout, not
     foo = @workout.find_comps(@workout.user_id)
     @my_comps = foo[0]
     @all_comps = foo[1]
     @tagging = Tagging.new
     
-    # MAP TEST
     if @workout.gps_data? 
       @map = GMap.new("map_div")
       @map.control_init(:large_map => true,:map_type => true)
@@ -50,16 +48,15 @@ class WorkoutsController < ApplicationController
 
   def new
     @workout = current_user.workouts.build
-    @workout.shared = current_user.shared
     
+    # Set the workout shared state to the user default
+    @workout.shared = current_user.shared
   end
 
   def edit
   end
 
   def create
-    #@workout = current_user.workouts.build(params[:workout])
-
     uploaded_file = params[:device_file] 
     if request.post? and uploaded_file.respond_to? :read
       

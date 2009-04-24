@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :invitations
   map.resources :workouts do |workout|
-      workout.resource  :chart, :only => [:show]
+      workout.heart_rate_chart 'chart', :controller => 'charts', :action => 'workout_heart_rate' 
       workout.resources :taggings, :only => [:destroy, :create]
   end
   

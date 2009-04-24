@@ -1,12 +1,12 @@
 class ChartsController < ApplicationController
   
-  def show
+  def workout_heart_rate
     chart = Ziya::Charts::Line.new '', 'hr_graph'
     
     @workout = Workout.find(params[:workout_id])
     
-    chart.add :axis_category_text, @workout.get_hr_axis
-    chart.add :series, "HR", @workout.get_hr
+    chart.add :axis_category_text, @workout.get_smoothed_and_formated_hr_axis(200)
+    chart.add :series, "HR", @workout.get_smoothed_hr(200)
     chart.add :theme , "zed9"
     
     respond_to do |fmt|
