@@ -1,3 +1,4 @@
 authlogic  
 logging
 derailed-ziya  --source gems.github.com
+newrelic_rpm
