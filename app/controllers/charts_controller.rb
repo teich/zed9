@@ -1,19 +1,19 @@
 class ChartsController < ApplicationController
-  
+
   def workout_heart_rate
     chart = Ziya::Charts::Line.new '', 'hr_graph'
-    
+
     @workout = Workout.find(params[:workout_id])
-    
+
     chart.add :axis_category_text, @workout.get_smoothed_and_formated_hr_axis(200)
     chart.add :series, "HR", @workout.get_smoothed_hr(200)
     chart.add :theme , "zed9"
-    
+
     respond_to do |fmt|
       fmt.xml { render :xml => chart.to_xml }
     end
   end
-  
+
   def dashboard_duration_data
     chart = Ziya::Charts::Column.new '', 'dashboard_duration'
     @workouts = current_user.workouts.find(:all, :order => "start_time")
@@ -24,12 +24,11 @@ class ChartsController < ApplicationController
       fmt.xml { render :xml => chart.to_xml }
     end
   end
-  
+
   private
 
-    def smooth_data(series, factor)
-      series.in_groups_of(factor).map { |snipit| snipit.compact.average_array }
-    end
-
+  def smooth_data(series, factor)
+    series.in_groups_of(factor).map { |snipit| snipit.compact.average_array }
+  end
 
 end
