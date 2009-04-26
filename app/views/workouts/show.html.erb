@@ -1,83 +1,76 @@
 <div id="content_header">
+	<div id="workout_header">
 		<h1><img class="activity_icon" src="/images/running.jpg" width="37" height="40"> <%=h @workout.name %> <% if my_workout? %>
 		<%= link_to image_tag("pencil.jpg", :class => "action_icon"), edit_workout_path(@workout) %>
 		<% end %></h1>
-		<!-- TO SUPPORT LATER ><p class="workout_notes">Notes on the workout</p> -->
+
+		<p id="workout_description"><%=h @workout.activity.name %>, <%=h @workout.start_time %></p>
+
+		<!-- <p id="workout_notes">Notes on the workout</p> -->
+
+		<div id="tag_set">
+			<span id="tags_header">Tags:<% if my_workout? %><% end %></span>
+			<span id="tags_list">
+				<% @workout.tags.each do |tag| %>
+				<span class="tag">
+					<a class="globe" href="#"><span class="displace">Global</span><img src="/images/spacer.png" width="18px" height="18px"></a> 
+					<%= link_to tag.name, workouts_path(:tag => tag.name) %>
+					<% if my_workout? %><% end %>
+				</span>
+				<% end %>
+			</span>
+			<% if false %>
+			<span class="form">
+				<% form_for @tagging, :url => workout_taggings_path(@workout) do |f| %>
+					<input type="text" name="name" id="new_tag_name" autocomplete="off"/>
+					<%= f.submit "Add", :class => "submit" %>
+				<% end %>
+			<% end %>
+			</span>
+		</div>	
+	</div>	
+
+	<div id="view_selection">
+		selector for alternate workout views coming here soon
+	</div>	
+
 </div>
 
-<div id="content" class="content">
-
-	<div id="workout_snapshot">
-
-		<table id="summary_stats">
-				<tr>
-					<th>Start Time:</th>
-					<td><%=h @workout.start_time %></td>
-				</tr>
-				<tr>
-					<th>Activity Type:</th>
-					<td><%= @workout.activity.name if @workout.activity %></td>
-				</tr>
+<div id="content">
+		<table id="workout_comparison">
+				<thead>
+					<tr>
+						<th class="first_column">&nbsp;</th>
+						<th><%=h @workout.name %></th>
+						<th>My 	<%= @workout.activity.name if @workout.activity %></th>
+						<th class="last_column">Global</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th class="first_column">Average Heart Rate</th>
+						<td><%=h @workout.average_hr %></td>
+						<td><%=h @workout.comps_average_hr(@my_comps) %></td>
+						<td class="last_column"><% if false %> <%=h @workout.comps_average_hr(@all_comps) %> <% end %></td>
+					</tr>
+					<tr>
+						<th class="first_column">Duration</th>
+						<td><%=h number_to_time(@workout.duration) %></td>
+						<td><%=h number_to_time(@workout.comps_average_duration(@my_comps)) %></td>
+						<td class="last_column"><%=h number_to_time(@workout.comps_average_duration(@all_comps)) %></td>
+					</tr>
+				</tbody>
 		</table>
+
+		<div id="map">
+			<% if @workout.gps_data? %>
+	        <%= @map.div(:width => 400, :height => 300) %>
+			<% end %>
+		</div>
 
 		<div id="heart_rate_graph">
 			<%= ziya_chart workout_heart_rate_chart_path(@workout), :size => "600x300" -%>
 		</div>
-			<% if @workout.gps_data? %>
-	        <%= @map.div(:width => 400, :height => 300) %>
-			<% end %>
-	</div>
-
-	<div id="workout_details">
-
-		<table id="workout_comparison">
-			<thead>
-				<tr>
-					<th class="left_column">&nbsp;</th>
-					<th><%=h @workout.name %></th>
-					<th>My 	<%= @workout.activity.name if @workout.activity %></th>
-					<th>All Zed9</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th class="left_column">Average Heart Rate</th>
-					<td><%=h @workout.average_hr %></td>
-					<td><%=h @workout.comps_average_hr(@my_comps) %></td>
-					<td><% if false %> <%=h @workout.comps_average_hr(@all_comps) %> <% end %></td>
-				</tr>
-				<tr>
-					<th class="left_column">Duration</th>
-					<td><%=h number_to_time(@workout.duration) %></td>
-					<td><%=h number_to_time(@workout.comps_average_duration(@my_comps)) %></td>
-					<td><%=h number_to_time(@workout.comps_average_duration(@all_comps)) %></td>
-				</tr>
-			</tbody>
-		</table>
-
-		<div id="right_rail"> 
-			<div id="tags">
-				<h3>Tags</h3> <% if my_workout? %><a class="add-plus" href="">+</a><% end %>
-				<div id="tags_list">
-					<% @workout.tags.each do |tag| %>
-					<a class="globe" href="#"><span class="displace">Global</span><img src="/images/spacer.png" width="18px" height="18px"></a> 
-					<%= link_to tag.name, workouts_path(:tag => tag.name) %>
-					<% if my_workout? %> <%= link_to "", workout_tagging_path(@workout,tag), :method => :delete, :class => "delete-x"  %> <% end %><br \>
-					<% end %>
-				</div>
-				<br>
-				<% if my_workout? %>
-				<div class="form">
-					<% form_for @tagging, :url => workout_taggings_path(@workout) do |f| %>
-						<input type="text" name="name" id="new_tag_name" autocomplete="off"/>
-						<%= f.submit "Add", :class => "submit" %>
-					<% end %>
-				<% end %>
-				</div>
-			</div>
-		</div>
-
-	</div>
-
+&nbsp;
 </div>
 

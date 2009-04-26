@@ -17,18 +17,17 @@
 	<div id="header">
 
 		<div id="logo">
-			ZED9
+			<%= link_to "ZED9", dashboard_path %>
+		</div>
+
+		<div id="nav">
+			<ul>
+				<li class="first"><%= link_to "Workouts", workouts_path %></li>
+				<li class="last"><a href="">Analysis</a></li>
+			</ul>
 		</div>
 
 		<%= render :partial => "layouts/loginpane" %>
-	</div>
-
-	<div id="nav">
-		<ul>
-			<li class="first"><%= link_to "Dashboard", dashboard_path %></li>
-			<li><%= link_to "Workouts", workouts_path %></li>
-			<li class="last"><%= link_to "Profile", account_path %></li>
-		</ul>
 	</div>
 
 	<div id="main" style="main">

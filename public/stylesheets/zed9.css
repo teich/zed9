@@ -18,26 +18,54 @@ img {
 a {
 	text-decoration: none;
 	color:#25a1d6;
+	vertical-align: baseline;
 }
 
 #header {
-	height: 36px;
-	padding-bottom: 36px;
-	vertical-align: bottom;
+	padding-bottom: 18px;
+	vertical-align: baseline;
+	line-height: 28px;
 }
 
-#logo {
+#logo a {
+	color: #9f9f9f;
 	font-size: 36px;
 	font-weight: 100;
 	letter-spacing: 10px;
 	float: left;
-	vertical-align: bottom;
+	position: relative;
+	top: -8px;
+}
+
+#nav {
+	display: inline;
+	float: left;
+}
+
+#header ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+#nav li {
+	display:inline;
+	padding:0px 12px 0px 12px;
+	border-right:1px dotted #d9d9d9;
+}
+
+#nav .first {
+}
+
+#nav .last {
+	padding-right:0px;
+	border:none;
 }
 
 #loginpane {
 	font-size: 10pt;
 	float: right;
-	padding-top: 24px;
+	display: inline;
+	padding-top: 0px;
 	color: #9f9f9f;
 }
 
@@ -53,13 +81,12 @@ a {
 }
 
 #logged_in li{
-	display:block;
+	display:inline;
 	font-size:12px;
-	padding:4px 12px 4px 12px;
+	padding:0px 12px 0px 12px;
 	float: left;
 	border-right:1px dotted #d9d9d9;
 	position: relative;
-	bottom: 18px;
 }
 
 #logged_in .last {
@@ -127,35 +154,11 @@ a {
 	top: 16px;
 }
 
-#nav {
-	text-align: center;
-	margin-bottom:12px;
-	padding:12px;
-}
-
-#nav li {
-	display:block;
-	padding:6px 12px 4px 12px;
-	float: left;
-	position: relative;
-	left: -50px;
-	top: -24px;
-	border-right:1px dotted #d9d9d9;
-}
-
-#nav .first {
-	padding-left:0px;
-	border-left:none;
-}
-
-#nav .last {
-	padding-right:0px;
-	border:none;
-}
-
 h1 {
 	font-weight: 500;
 	font-size: 36px;
+	padding: 0px;
+	margin: 0px;
 }
 
 h2 {
@@ -173,7 +176,7 @@ h3 {
 }
 
 thead, th, td {
-	padding: 12px;
+	padding: 4px 12px;
 	border: none;
 	text-align: left;
 }
@@ -184,15 +187,14 @@ thead, th, td {
 }
 
 #content_header {
-	text-align: left;
-	vertical-align: bottom;
-	margin-bottom: 18px;
-	float: left;
 	width: 100%;
+	margin: 24px 0px 36px 0px;
+	text-align: left;
+	float: left;
 }
 
-#name {
-	margin-left: 200px;
+#workout_header {
+	float: left;
 }
 
 .activity_icon {
@@ -210,65 +212,30 @@ thead, th, td {
 	text-align: center;	
 }
 
-.content {
-	margin-top: 24px;
-}
-
-p.workout_notes {
-	display: inline;
+#workout_description, #workout_notes {
+	display: block;
 	font-size: 14px;
-	line-height: 18px;
 	color: #828282;
+	padding: 0px;
+	margin: 4px 0px 8px 0px;
 }
 
-#workout_snapshot {
-	clear: both;
+#workout_notes {
+	font-style: italic;
 }
 
-#summary_stats table, th, td {	
-	text-align: left;
-	border-right: none;
-}
-
-#summary_stats th {
-	padding-left: 0px;
-}
-
-#gps, #heart_rate_graph {
-	position: relative;
-	float: right;
-}
-
-#workout_details {
-	clear: both;
-	padding-top: 24px;
-}	
-
-#workout_comparison {
-	float: left;
-	overflow: auto;
-}
-
-#workout_comparison th, #workout_comparison td {
-	border-right:1px dotted #d9d9d9;
-	text-align: center;
-}
-
-#workout_comparison th.left_column {
-	text-align: left;
-}
-
-#right_rail {
-	width: 150px;
+#tag_set {
 	font-size: 14px;
-	line-height: 18px;
-	vertical-align: top;
-	float: right;
-	margin-left: 48px;
+	color: #828282;
+	display: inline;
 }
 
-#group_list, #tag_list {
-	margin-bottom: 36px;
+#tags_header {
+	padding-right: 4px;
+}
+
+.tag {
+	padding: 0px 4px;
 }
 
 a.globe {
@@ -295,6 +262,40 @@ a.delete-x {
 .displace {
 	position: absolute;
 	left: -5000px;
+}
+
+#view_selection {
+	float: right;
+	display: inline;
+	position: relative;
+	top: 48px;
+	font-size: 14px;
+	color: #828282;
+}
+
+#workout_comparison {
+	float: left;
+	overflow: auto;
+}
+
+#workout_comparison th, #workout_comparison td {
+	border-right:1px dotted #d9d9d9;
+	text-align: center;
+	font-size: 14px;
+}
+
+#workout_comparison th.first_column {
+	text-align: left;
+	padding-left: 0px;
+}
+
+#workout_comparison th.last_column, #workout_comparison td.last_column {
+	border-right: none;
+}
+
+#map, #heart_rate_graph {
+	position: relative;
+	float: right;
 }
 
 div .clear {
