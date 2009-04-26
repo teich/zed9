@@ -1,18 +1,24 @@
-<div class="main">
+<div id="content_header">
 	<h1>Workouts <%= link_to '+', new_workout_path %></h1>
+</div>
 
-<div class="data">
+<div id="content">
+
+	<% if (params[:tag])%>
+		Filtered by <%= h params[:tag] %> &nbsp;
+		<%= link_to 'x', workouts_path %> 
+	<% end %>
+
 	<table class="workout_listing">
 		<thead>
 			<tr>
-				<th width="170">Name</th>
-				<th width="170">Start time</th>
-				<th width="170">Tag</th>
-				<th width="170">Edit</th>
+				<th width="198px">Name</th>
+				<th width="264px">Start time</th>
+				<th width="198px">Tag</th>
+				<th width="120px">Edit</th>
 			</tr>
 		</thead>
 		<tbody>
-
 			<% for workout in @workouts %>
 			<tr>
 				<td><%=link_to workout.name, workout %></td>
@@ -26,13 +32,9 @@
 			<% end %>
 		</tbody>
 	</table>
-</div>
-<br />
-<% if (params[:tag])%>
-	<%= link_to 'Clear Tags', workouts_path %> 
-<% end %>
 
-<script type="text/javascript">
-$('.workout_listing').flexigrid();
-</script>
+	<script type="text/javascript">
+	$('.workout_listing').flexigrid();
+	</script>
+
 </div>

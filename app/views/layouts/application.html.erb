@@ -30,11 +30,12 @@
 		<%= render :partial => "layouts/loginpane" %>
 	</div>
 
-	<div id="main" style="main">
-		<div id="flash">
-			<%= flash[:notice] %>
-		</div>
+	<div id="flash">
+		<%= flash[:notice] %>
+		test flash
+	</div>
 
+	<div id="main" style="main">
 		<%= yield  %>
 	</div>
 

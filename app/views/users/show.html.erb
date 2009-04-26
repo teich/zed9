@@ -1,31 +1,40 @@
-<p>
-  <b>Login:</b>
-  <%=h @user.login %>
-</p>
- 
-<p>
-	<b>Height</b>
-	<%= @user.height %>
-</p>
+<div id="content_header">
+	<h1>Profile <span class="action"><%= link_to 'Edit', edit_account_path %></span></h1>
+</div>
 
-<p>
-	<b>Sex</b>
-	<%= @user.sex %>
-</p>
-
-<p>
-	<b>Age</b>
-	<%= @user.age %>
-</p>
-<p><b>Time Zone:</b>
-	<%= @user.time_zone %></p>
-<p>
-	<p><b>Workouts public?:</b>
-		<%= @user.shared %></p>
-		
-  <b>Login count:</b>
-  <%=h @user.login_count %>
-</p>
- 
- 
-<%= link_to 'Edit', edit_account_path %>
+<div id="content">
+	<table class="form">
+		<tr>
+			<th>User name:</th>
+			<td><%=h @user.login %></td>
+		</tr>
+		<tr>
+			<th>Email:</th>
+			<td><%=h @user.email %></td>
+		</tr>
+		<tr>
+			<th>Gender:</th>
+			<td><%= @user.sex %></td>
+		</tr>
+		<tr>
+			<th>Age:</th>
+			<td><%= @user.age %></td>
+		</tr>
+		<tr>
+			<th>Height:</th>
+			<td><%= @user.height %></td>
+		</tr>
+		<tr>
+			<th>Time zone:</th>
+			<td><%= @user.time_zone %></td>
+		</tr>
+		<tr>
+			<th>Workouts public:</th>
+			<td><%= @user.shared %></td>
+		</tr>
+		<tr>
+			<th>Login count:</th>
+			<td><%=h @user.login_count %></td>
+		</tr>
+	</table>
+</div>

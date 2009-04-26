@@ -22,12 +22,12 @@
 		<td><%= f.select "activity_id", Activity.find(:all).collect { |p| [p.name, p.id] } %></td>
 	</tr>
 	<tr>
-		<th><%= f.label :shared %></th>
-		<td><%= f.check_box :shared %></td>
+		<th><%= f.label "File location" %></th>
+		<td><%= file_field_tag "device_file" %> </td>
 	</tr>
 	<tr>
-		<th><%= f.label "Workout file location" %></th>
-		<td><%= file_field_tag "device_file" %> </td>
+		<th><%= f.label :shared %></th>
+		<td><%= f.check_box :shared %></td>
 	</tr>
 	<tr>
 		<th><%= link_to 'Cancel', workouts_path, :class => "submit" %></th>

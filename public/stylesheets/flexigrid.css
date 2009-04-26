@@ -3,19 +3,16 @@
 
 .flexigrid
 	{
-	margin-top: 36px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 11px;
+	margin: 12px 0px;
 	position: relative;
 	border: 0px solid #eee;
 	overflow: hidden;
-	color: #000;
 	}
 
 	.flexigrid.hideBody
 		{
 		height: 26px !important;
-		border-bottom: 1px solid #ccc;
+		border-bottom: 0px solid #ccc; /*changed from 1px */
 		}
 
 	.ie6fullwidthbug
@@ -49,7 +46,6 @@
 
 .flexigrid div.bDiv table
 	{
-	margin-bottom: 10px;
 	}
 	
 	.flexigrid div.bDiv table.autoht
@@ -92,27 +88,24 @@
 		border-left: 1px solid #eef8ff;
 		}
 	
+	/*sort hover icon */
 	.flexigrid div.nBtn
 		{
-		position: absolute;
 		height: 24px;
-		width: 14px;
+		width: 12px;
+		position: absolute;
 		z-index: 900;
-		background: #fafafa url(/images/fhbg.gif) repeat-x bottom;
-		border: 0px solid #ccc;
-		border-left: 1px solid #ccc;
 		top: 0px;
 		left: 0px;
-		margin-top: 1px;
 		cursor: pointer;
 		display: none;
+		border: none;
 		}
 		
 		.flexigrid div.nBtn div
 			{
 			height: 24px;
 			width: 12px;
-			border-left: 1px solid #fff;
 			float: left;
 			background: url(/images/ddn.png) no-repeat center;
 			}		
@@ -428,7 +421,6 @@ div.colCopy {
 
 	.flexigrid div.hDiv th.thOver div, .flexigrid div.hDiv th.sorted.thOver div
 	{
-	border-bottom: 1px solid orange;
 	padding-bottom: 4px;
 	}
 	
@@ -724,4 +716,3 @@ div.colCopy {
 			{
 			overflow: hidden;
 			}			
-		
