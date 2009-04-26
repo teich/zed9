@@ -1,5 +1,5 @@
 class Workout < ActiveRecord::Base
-  belongs_to  :users
+  belongs_to  :user
   belongs_to  :activity
   has_many    :trackpoints, :dependent => :destroy
 
