@@ -6,9 +6,9 @@ development:
   :user_name: outbound@zednine.com
   :password: NA*AWdCP
 production:
-  :address: mail.zed9.org
+  :address: 208.97.132.20
   :port: 25
-  :domain: => "zed9.org"
+  :domain: => "zednine.com"
   :authentication: plain
   :user_name: outbound@zednine.com
   :password: NA*AWdCP
