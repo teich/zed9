@@ -107,8 +107,10 @@ a {
 }
 
 #content_header {
+	display: block;
 	margin: 0px 0px 24px 0px;
 	text-align: left;
+	clear: both;
 }
 
 #content {
@@ -161,7 +163,6 @@ thead, th, td {
 	font-family: inherit;
 	font-color: inherit;
 	border: none;
-	padding: 0px;
 }
 
 .form th {
@@ -206,8 +207,7 @@ thead, th, td {
 }
 
 #feature_stat {
-	border: 1px dotted green;
-	margin-top: 12px;
+	padding: 8px 0px 8px 0px;
 	font-size: 18px;
 	font-weight: 500;
 	color: #3dc10b;
@@ -220,9 +220,10 @@ thead, th, td {
 
 #dashboard_stats {
 	width: 300px;
-	position: relative;
-	top: 48px;
-	left: 48px;
+	margin: 0px;
+	display: block;
+	clear: right;
+	float: left;
 }
 
 .coming_soon {
@@ -230,6 +231,11 @@ thead, th, td {
 	vertical-align: middle;
 	font-size: 14px;
 	color: #828282;
+}
+
+#public_timeline {
+	float: left;
+	margin-top: 24px;
 }
 
 #recent_workouts {
@@ -241,6 +247,8 @@ thead, th, td {
 	margin: 0px;
 	padding: 0px;
 	vertical-align: top;
+	display: block;
+	clear: right;
 }
 
 .chart_title {
@@ -256,7 +264,7 @@ thead, th, td {
 }
 
 #workout_header {
-	float: left;
+	display: block;
 }
 
 #workout_header h1 {
@@ -341,18 +349,18 @@ a.delete-x {
 	overflow: auto;
 }
 
-#workout_comparison th, #workout_comparison td {
+#workout_comparison th, #workout_comparison td, #public_timeline th, #public_timeline td {
 	border-right:1px dotted #d9d9d9;
 	text-align: center;
 	font-size: 14px;
 }
 
-#workout_comparison th.first_column {
+#workout_comparison .first_column, #public_timeline .first_column {
 	text-align: left;
 	padding-left: 0px;
 }
 
-#workout_comparison th.last_column, #workout_comparison td.last_column {
+#workout_comparison .last_column, #public_timeline .last_column {
 	border-right: none;
 }
 
