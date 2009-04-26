@@ -1,7 +1,7 @@
 <div id="content_header">
 	<div id="feature_stat">
 		<p class="feature_headline">You've logged <%= h number_to_time(@total_time) %> across <%= @workouts.size %> workouts.</p>
-		<p class="feature_details">The average user logged <%= h number_to_time(@atd) %>. You are <%= h @total_time/@atd*100 %>% above average!</p>
+		<p class="feature_details">The average user logged <%= h number_to_time(@atd) %>. You are <%= h @total_time/@atd*100 %>% vs average!</p>
 	</div>
 </div>
 
@@ -11,10 +11,12 @@
 		<span class="coming_soon">This section will show some aggregate comparison metrics. Please let us know what you would like to see!</span>
 	</div>
 
+	<% if @workouts.size > 0 %>
 	<div id="recent_workouts">
 		<span class="chart_title"><h2>Your workouts</h2></span>
 		<%= ziya_chart dashboard_chart_path, :size => "600x300" -%>
 	</div>
+	<% end %>
 
 	<div id="clear">&nbsp;</div>
 
