@@ -16,4 +16,17 @@
 		<%= ziya_chart dashboard_chart_path, :size => "600x300" -%>
 	</div>
 
+	<h2>Check out recent public workouts!</h2>
+	<table>
+	<tr><th>Username</th></tr>
+	<% @shared.each do |sw| %>
+	<tr>
+		<td><%= h sw.user.login %></td>
+		<td><%= h sw.activity.name %></td>
+		<td><%= link_to sw.name, workout_path(sw) %></td>
+		<td><%= h number_to_time(sw.duration) %></td>
+	</tr>
+	<% end %>
+	</table>
+
 </div>

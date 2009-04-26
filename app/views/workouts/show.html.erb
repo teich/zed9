@@ -1,5 +1,6 @@
 <div id="content_header">
 	<div id="workout_header">
+
 		<h1><img class="activity_icon" src="/images/running.jpg" width="37" height="40"> <%=h @workout.name %> <% if my_workout? %><span class="action"><%= link_to 'Edit', edit_workout_path(@workout) %></span><% end %></h1>
 
 		<p id="workout_description"><%=h @workout.activity.name %> on <%=h @workout.start_time %> by <%=h @workout.user.login %></p>
@@ -39,36 +40,35 @@
 				<thead>
 					<tr>
 						<th class="first_column">&nbsp;</th>
-						<th><%=h @workout.name %></th>
-						<th>My 	<%= @workout.activity.name if @workout.activity %></th>
-						<th class="last_column">Global</th>
+						<th>This workout</th>
+						<th>My 	<%= h @workout.activity.name %></th>
+						<th class="last_column">All <%= h @workout.activity.name %></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<th class="first_column">Average Heart Rate</th>
 						<td><%=h @workout.average_hr %></td>
-						<td><%=h @workout.comps_average_hr(@my_comps) %></td>
-						<td class="last_column"><% if false %> <%=h @workout.comps_average_hr(@all_comps) %> <% end %></td>
+						<td><%=h @comps[@workout.activity.name]["hr"] %></td>
+						<td class="last_column"><%=h @comps["global"]["hr"] %></td>
 					</tr>
 					<tr>
 						<th class="first_column">Duration</th>
 						<td><%=h number_to_time(@workout.duration) %></td>
-						<td><%=h number_to_time(@workout.comps_average_duration(@my_comps)) %></td>
-						<td class="last_column"><%=h number_to_time(@workout.comps_average_duration(@all_comps)) %></td>
+						<td><%=h number_to_time(@comps[@workout.activity.name]["duration"]) %></td>
+						<td class="last_column"><%=h number_to_time(@comps["global"]["duration"]) %></td>
 					</tr>
 					<tr>
 						<th class="first_column">Distance</th>
-						<!-- TODO: pull out of view -->
-						<td><%=h (@workout.distance * 0.000621371192).round(1) %> miles</td>
-						<td></td>
-						<td class="last_column"></td>
+						<td><%= h @workout.distance_in_miles %> miles</td>
+						<td><%= h @comps[@workout.activity.name]["distance"] %> miles</td>
+						<td class="last_column"><%=h @comps["global"]["distance"] %> miles</td>
 					</tr>
 					<tr>
 						<th class="first_column">Average Speed</th>
-						<td><%=h ((@workout.distance * 0.000621371192) / @workout.duration * 3600).round(1) %> mph</td>
-						<td></td>
-						<td class="last_column"></td>
+						<td><%=h @workout.avg_speed_in_mph %> mph</td>
+						<td><%= h @comps[@workout.activity.name]["speed"] %> mph</td>
+						<td class="last_column"><%=h @comps["global"]["speed"] %> mph</td>
 					</tr>
 				</tbody>
 		</table>

@@ -22,10 +22,9 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    # TODO - ruby way of array asignment, and get out of controller
-    foo = @workout.find_comps(@workout.user_id)
-    @my_comps = foo[0]
-    @all_comps = foo[1]
+    @comps = @workout.find_comps(current_user)
+
+    # need for creating new tags.  
     @tagging = Tagging.new
     
     if @workout.gps_data? 

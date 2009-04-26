@@ -1,7 +1,9 @@
 class ChartsController < ApplicationController
 
+  XMLSWF = "KTQ0A419J7YULQZ0B6SVMYWHM5SXBL"
+  
   def workout_heart_rate
-    chart = Ziya::Charts::Line.new '', 'hr_graph'
+    chart = Ziya::Charts::Line.new XMLSWF, 'hr_graph'
 
     @workout = Workout.find(params[:workout_id])
 
@@ -15,7 +17,7 @@ class ChartsController < ApplicationController
   end
 
   def dashboard_duration_data
-    chart = Ziya::Charts::Column.new '', 'dashboard_duration'
+    chart = Ziya::Charts::Column.new XMLSWF, 'dashboard_duration'
     @workouts = current_user.workouts.find(:all, :order => "start_time")
     chart.add :axis_category_text, @workouts.map { |w| w.start_time.strftime("%a\n%b %d") }
     chart.add :series, "Duration\nminutes", @workouts.map { |w| w.duration / 60 }

@@ -21,3 +21,6 @@ road_biking:
 
 p90x:
     name: P90X
+    
+hiking:
+    name: Hiking
