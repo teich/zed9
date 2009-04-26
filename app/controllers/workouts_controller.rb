@@ -66,7 +66,10 @@ class WorkoutsController < ApplicationController
       importer = PolarImporter.new(uploaded_data, params[:workout], current_user.time_zone) if is_polar?(params[:device_type])
       
       @workout = current_user.workouts.build(importer.get_workout)
-      importer.get_trackpoints.each { |tp| @workout.trackpoints.build(tp)}
+      
+      trackpoints = importer.get_trackpoints
+      trackpoints.each { |tp| @workout.trackpoints.build(tp)}
+      @workout.distance = trackpoints.last["distance"] if !trackpoints.last["distance"].nil?
       
       @workout.average_hr = @workout.calc_avg_hr if @workout.average_hr.nil?
     end

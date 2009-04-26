@@ -59,6 +59,19 @@
 						<td><%=h number_to_time(@workout.comps_average_duration(@my_comps)) %></td>
 						<td class="last_column"><%=h number_to_time(@workout.comps_average_duration(@all_comps)) %></td>
 					</tr>
+					<tr>
+						<th class="first_column">Distance</th>
+						<!-- TODO: pull out of view -->
+						<td><%=h (@workout.distance * 0.000621371192).round(1) %> miles</td>
+						<td></td>
+						<td class="last_column"></td>
+					</tr>
+					<tr>
+						<th class="first_column">Average Speed</th>
+						<td><%=h ((@workout.distance * 0.000621371192) / @workout.duration * 3600).round(1) %> mph</td>
+						<td></td>
+						<td class="last_column"></td>
+					</tr>
 				</tbody>
 		</table>
 
