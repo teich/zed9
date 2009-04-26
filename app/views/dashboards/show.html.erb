@@ -1,5 +1,19 @@
-You worked out total of <%= h number_to_time(@total_time) %> across <%= @workouts.size %> workouts<BR>
+You worked out total of <%= h number_to_time(@total_time) %> across <%= h @workouts.size %> workouts<BR>
 Average user did <%= h number_to_time(@atd) %> total.<BR>
 You are <%= h @total_time/@atd*100 %>% better!<BR>
 
+
 <%= ziya_chart dashboard_chart_path, :size => "600x300" -%>
+
+<h2>Why don't you check out some other users public workouts!</h2>
+<table>
+<tr><th>Username</th></tr>
+<% @shared.each do |sw| %>
+<tr>
+	<td><%= h sw.user.login %></td>
+	<td><%= h sw.activity.name %></td>
+	<td><%= link_to sw.name, workout_path(sw) %></td>
+	<td><%= h number_to_time(sw.duration) %></td>
+</tr>
+<% end %>
+</table>

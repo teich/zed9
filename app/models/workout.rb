@@ -56,11 +56,11 @@ class Workout < ActiveRecord::Base
   end
 
   # TODO: Refactor comparison code somehow
-  def find_comps(user)
-    all_comps = find_all_comps_by_activity(activity.id)
-    my_comps = find_user_comps_by_activity(user, activity.id)
-    return [my_comps, all_comps]
-  end
+#  def find_comps(user)
+#    all_comps = find_all_comps_by_activity(activity.id)
+#    my_comps = find_user_comps_by_activity(user, activity.id)
+#    return [my_comps, all_comps]
+#  end
 
   # TODO: The return nil check thing - seems lame
   def comps_average_hr(comps)
@@ -91,4 +91,41 @@ class Workout < ActiveRecord::Base
   def number_to_time(seconds)
     Time.at(seconds).utc.strftime("%H:%M:%S")
   end
+  
+  def distance_in_miles
+    return nil if self.distance.nil?
+    (self.distance * 0.000621371192).round(1)
+  end
+  
+  def avg_speed_in_mph
+    return nil if self.distance_in_miles.nil?
+    (self.distance_in_miles / self.duration * 3600).round(1)
+  end
+  
+  
+  # def average_comps(comps, :field)
+  #   points = comps.map {|c| c.:field}
+  #   points.compact.average_array.round(1)
+  # end
+  def find_comps(user)
+    comps = {}
+
+    my_comps = user.workouts.find_all_by_activity_id(activity.id)
+    comps[activity.name] = {}
+    
+    comps[activity.name]["hr"] = (my_comps.map { |c| c.average_hr  }).compact.average_array
+    comps[activity.name]["duration"] = (my_comps.map {|c| c.duration}).compact.average_array
+    comps[activity.name]["distance"] = (my_comps.map {|c| c.distance_in_miles}).compact.average_array.round(1)
+    comps[activity.name]["speed"] = (my_comps.map {|c| c.avg_speed_in_mph}).compact.average_array.round(1)
+    
+    all_comps = Workout.find_all_by_activity_id(activity.id)
+    comps["global"] = {}
+    comps["global"]["hr"] = (all_comps.map { |c| c.average_hr  }).compact.average_array
+    comps["global"]["duration"] = (all_comps.map {|c| c.duration}).compact.average_array
+    comps["global"]["distance"] = (all_comps.map {|c| c.distance_in_miles}).compact.average_array.round(1)
+    comps["global"]["speed"] = (all_comps.map {|c| c.avg_speed_in_mph}).compact.average_array.round(1)
+    
+    return comps
+  end
+    
 end
