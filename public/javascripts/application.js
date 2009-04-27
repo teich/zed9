@@ -9,9 +9,9 @@
 // });
 
 
-$(document).ready(function() {
-    $('.click').editable('', {
-		     tooltip   : "Click to edit...",
-		     style  : "inherit"
-		});
-});
+// $(document).ready(function() {
+//     $('.click').editable('', {
+// 		     tooltip   : "Click to edit...",
+// 		     style  : "inherit"
+// 		});
+// });
