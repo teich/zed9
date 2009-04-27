@@ -6,35 +6,35 @@
 	<table class="form">
 		<tr>
 			<th>User name:</th>
-			<td><%=h @user.login %></td>
+			<td><%= h @user.login %></td>
 		</tr>
 		<tr>
 			<th>Email:</th>
-			<td><%=h @user.email %></td>
+			<td><%= h @user.email %></td>
 		</tr>
 		<tr>
 			<th>Gender:</th>
-			<td><%= @user.sex %></td>
+			<td><%= h @user.sex %></td>
 		</tr>
 		<tr>
 			<th>Age:</th>
-			<td><%= @user.age %></td>
+			<td><%= h @user.age %></td>
 		</tr>
 		<tr>
 			<th>Height:</th>
-			<td><%= @user.height %></td>
+			<td><%= h @user.height %></td>
 		</tr>
 		<tr>
 			<th>Time zone:</th>
-			<td><%= @user.time_zone %></td>
+			<td><%= h @user.time_zone %></td>
 		</tr>
 		<tr>
 			<th>Workouts public:</th>
-			<td><%= @user.shared %></td>
+			<td><%= h @user.shared %></td>
 		</tr>
 		<tr>
 			<th>Login count:</th>
-			<td><%=h @user.login_count %></td>
+			<td><%= h @user.login_count %></td>
 		</tr>
 	</table>
 </div>

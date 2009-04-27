@@ -1,12 +1,12 @@
 development:
-  :address: mail.zednine.com
+  :address: mail.zed9.org
   :port: 25
-  :domain: => "zednine.com"
+  :domain: => "zed9.org"
   :authentication: plain
   :user_name: outbound@zednine.com
   :password: NA*AWdCP
 production:
-  :address: mail.zednine.com
+  :address: 208.97.132.20
   :port: 25
   :domain: => "zednine.com"
   :authentication: plain

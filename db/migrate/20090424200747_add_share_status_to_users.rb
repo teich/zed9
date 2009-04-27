@@ -1,6 +1,6 @@
 class AddShareStatusToUsers < ActiveRecord::Migration
   def self.up
-    add_column :users, :shared, :boolean, :default => false
+    add_column :users, :shared, :boolean, :default => true
   end
 
   def self.down

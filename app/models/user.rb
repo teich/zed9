@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   end
   
   def age
+    return nil if birthdate.nil?
     (Date.today - birthdate).to_i / 365
   end
   
