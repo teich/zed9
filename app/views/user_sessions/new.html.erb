@@ -1,10 +1,10 @@
-<div id="login" class="main">
-
+<div id="content_header">
 		<h1>Log in</h1><br>
+</div>
 
-	 <br><br>
-`
-<% form_for @user_session, :url => user_session_path do |f| %>
+<div id="content">
+
+	<% form_for @user_session, :url => user_session_path do |f| %>
 
   <%= f.error_messages %>
 
@@ -27,8 +27,6 @@
     </tr>
   </table>
 
-<% end %>
+	<% end %>
 
 </div>
-
-<br><br>
