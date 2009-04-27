@@ -96,6 +96,7 @@ a {
 	clear: both;
 	margin: 0px;
 	padding: 0px;
+	position: relative;
 }
 
 #flash {
@@ -116,6 +117,7 @@ a {
 #content {
 	margin: 0px;
 	padding: 0px;
+	position: relative;
 }
 
 h1 {
@@ -128,6 +130,7 @@ h1 {
 h2 {
 	font-size: 24px;
 	font-weight: 500;
+	text-align: center;
 }
 
 h3 {
@@ -206,6 +209,17 @@ thead, th, td {
 	top: 16px;
 }
 
+.coming_soon {
+	text-align: center;
+	vertical-align: middle;
+	font-size: 14px;
+	color: #828282;
+}
+
+.feature_headline {
+	font-size: 24px;
+}
+
 #feature_stat {
 	padding: 8px 0px 8px 0px;
 	font-size: 18px;
@@ -214,53 +228,34 @@ thead, th, td {
 	text-align: center;		
 }
 
-.feature_headline {
-	font-size: 24px;
+#left_column {
+	display: block;
+	width: 336px;
+	text-align: left;
+	margin: 0px auto 0px 0px;
 }
 
 #dashboard_stats {
-	width: 300px;
-	margin: 0px;
-	display: block;
-	clear: right;
-	float: left;
-}
-
-.coming_soon {
-	text-align: center;
-	vertical-align: middle;
-	font-size: 14px;
-	color: #828282;
 }
 
 #public_timeline {
-	float: left;
 	margin-top: 24px;
 }
 
-#recent_workouts {
-	position: relative;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	float: right;
-	margin: 0px;
-	padding: 0px;
-	vertical-align: top;
-	display: block;
-	clear: right;
+#recent_workouts_chart {
+	position: absolute;
+	top: 0;
+	right: 0;
 }
 
 .chart_title {
 	text-align: center;
 	vertical-align: top;
-	display: block;
 }
 
 .chart_title h2 {
-	display: inline;
-	padding: 0px;
-	margin: 0px;
+	padding-top: 0px;
+	margin-top: 0px;
 }
 
 #workout_header {
@@ -369,15 +364,18 @@ a.delete-x {
 	float: right;
 }
 
-div .clear {
-	clear: both;
+.clear:after {
+  content: ".";
+  display: block;
+  height: 0px;
+  clear: both;
+  visibility: hidden;
 }
 
 #footer {
-	display: block;
 	clear: both;
 	color: #7C7B74;
 	font-size: 8pt;
-	padding-bottom: 10px;
+	padding: 24px 0px 12px 0px;
 	text-align: center;
 }

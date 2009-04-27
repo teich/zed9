@@ -1,5 +1,8 @@
 <%=chart :column %>
 
+  <%=comp :chart_rect %>
+    y:  12
+
   <%=comp :chart_border %>
     bottom_thickness:   1
     left_thickness:   1

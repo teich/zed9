@@ -5,33 +5,33 @@
 	</div>
 </div>
 
-<div id="content">
+<div id="content" class="clear">
 
-	<div id="dashboard_stats">
-		<span class="coming_soon">This section will show some aggregate comparison metrics. Please let us know what you would like to see!</span>
+	<div id="left_column" class="clear">
+		<div id="dashboard_stats">
+			<span class="coming_soon">This section will show some aggregate comparison metrics. Please let us know what you would like to see!</span>
+		</div>
+
+		<div id="public_timeline">
+			<h2>Recent public workouts</h2>
+			<table>
+				<% @shared.each do |sw| %>
+				<tr>
+					<td class="first_column"><%= h sw.user.login %></td>
+					<td><%= h sw.activity.name %></td>
+					<td><%= link_to sw.name, workout_path(sw) %></td>
+					<td class="last_column"><%= h number_to_time(sw.duration) %></td>
+				</tr>
+			<% end %>
+			</table>
+		</div>
 	</div>
 
 	<% if @workouts.size > 0 %>
-	<div id="recent_workouts">
+	<div id="recent_workouts_chart" class="clear">
 		<span class="chart_title"><h2>Your workouts</h2></span>
-		<%= ziya_chart dashboard_chart_path, :size => "600x300" -%>
+		<%= ziya_chart dashboard_chart_path, :size => "528x240", :salign => "TL", :scale => "exactFit", :align => "middle" %>
 	</div>
 	<% end %>
 
-	<div id="clear">&nbsp;</div>
-
-	<div id="public_timeline">
-		<h2>Recent public workouts</h2>
-		<table>
-			<% @shared.each do |sw| %>
-			<tr>
-				<td class="first_column"><%= h sw.user.login %></td>
-				<td><%= h sw.activity.name %></td>
-				<td><%= link_to sw.name, workout_path(sw) %></td>
-				<td class="last_column"><%= h number_to_time(sw.duration) %></td>
-			</tr>
-		<% end %>
-		</table>
-	</div>
-	
 </div>
