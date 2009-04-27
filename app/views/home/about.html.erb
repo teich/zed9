@@ -1,0 +1,25 @@
+<h2>Do you use a Polar or Garmin computer?</h2>
+<h2>Do you like to help guide product development?</h2>
+
+<a href="/images/screenshots/dashboard.png"><img style="float:left" src="/images/screenshots/dashboard-small.png"></a>
+
+Zed9 is a new fitness analytics site with the goal to be like http://mint.com for fitness.  Zed9 will aggregate data from as many sources as possible, provide you with meaningful analytics, and compare and contrast your performance with others in your network, demographics, and interest groups.  Zed9 takes data from many devices including:
+<ul><li>Garmin Forerunner 405</li>
+	<li>Garmin Forerunner 305</li>
+	<li>Polar RS400</li>
+	<li>Polar RS800</li>
+	<li>Suunto coming soon</li>
+	</ul>
+	
+<a style="float:right" href="/images/screenshots/workout.png"><img src="/images/screenshots/workout-small.png"></a>
+We are looking for interested fitness oriented people to help alpha test the site.  If you have a datalogging device and would like to participate in the alpha, please leave your email address below.
+
+<div style="clear:both">&nbsp;</div>
+
+<% form_for Invitation.new do |f| %>
+	<p>
+		<%= f.label :recipient_email, "Your Email:" %>
+		<%= f.text_field :recipient_email %>
+		<%= f.submit "Submit" %>
+	</p>
+<% end %>
