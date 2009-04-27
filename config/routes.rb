@@ -3,6 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource  :user_session
   map.resource  :dashboard, :only => [:show] 
   map.resource  :account, :controller => "users"
+  map.resources :activities, :only =>[:index]
 
   map.resources :invitations
 #  map.resources :workouts, :path_prefix => ':user_name'  do |workout|
