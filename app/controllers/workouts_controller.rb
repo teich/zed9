@@ -3,7 +3,7 @@ require 'lib/WorkoutImporter'
 
 class WorkoutsController < ApplicationController
   helper_method :my_workout?  
-  before_filter :require_user
+  before_filter :require_user, :except => [:show]
   
   before_filter :find_workout, :only => [:edit, :update, :destroy]
   before_filter :find_and_bounce, :only => [:show]
