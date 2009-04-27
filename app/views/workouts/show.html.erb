@@ -13,7 +13,7 @@
 				<% @workout.tags.each do |tag| %>
 				<span class="tag">
 					<a class="globe" href="#"><span class="displace">Global</span><img src="/images/spacer.png" width="18px" height="18px"></a> 
-					<%= link_to tag.name, workouts_path(:tag => tag.name) %>
+					<%= link_to tag.name, user_workouts_path(current_user, :tag => tag.name) %>
 					<% if my_workout? %><% end %>
 				</span>
 				<% end %>
