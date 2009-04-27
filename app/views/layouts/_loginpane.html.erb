@@ -1,3 +1,12 @@
+<% if current_user %>
+
+<div id="nav">
+	<ul>
+		<li class="first"><%= link_to "Workouts", user_workouts_path(current_user) %></li>
+		<li class="last"><a href="">Analysis</a></li>
+	</ul>
+</div>
+<% end %>
 <div id="loginpane">
 	<% if !current_user %>
 	<div id="not_logged_in"> 
