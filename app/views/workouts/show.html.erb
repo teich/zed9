@@ -1,9 +1,9 @@
 <div id="content_header">
 	<div id="workout_header">
 
-		<h1><img class="activity_icon" src="/images/running.jpg" width="37" height="40"> <%=h @workout.name %> <% if my_workout? %><span class="action"><%= link_to 'Edit', edit_workout_path(@workout) %></span><% end %></h1>
+		<h1><img class="activity_icon" src="/images/running.jpg" width="37" height="40"> <span class="click"><%=h @workout.name %></span> <% if my_workout? %><span class="action"><%= link_to 'Edit', edit_workout_path(@workout) %></span><% end %></h1>
 
-		<p id="workout_description"><%=h @workout.activity.name %> on <%=h @workout.start_time %> by <%=h @workout.user.login %></p>
+		<p id="workout_description"><span class="click"><%=h @workout.activity.name %></span> on <span class="click"><%=h @workout.start_time %></span> by <%=h @workout.user.login %></p>
 
 		<!-- <p id="workout_notes">Notes on the workout</p> -->
 
@@ -36,6 +36,7 @@
 </div>
 
 <div id="content">
+	<div id="workout_left_column">
 		<table id="workout_comparison">
 				<thead>
 					<tr>
@@ -48,31 +49,33 @@
 				<tbody>
 					<tr>
 						<th class="first_column">Average Heart Rate</th>
-						<td><%=h @workout.average_hr %></td>
+						<td><span class="click"><%=h @workout.average_hr %></span></td>
 						<td><%=h @comps[@workout.activity.name]["hr"] %></td>
 						<td class="last_column"><%=h @comps["global"]["hr"] %></td>
 					</tr>
 					<tr>
 						<th class="first_column">Duration</th>
-						<td><%=h number_to_time(@workout.duration) %></td>
+						<td><span class="click"><%=h number_to_time(@workout.duration) %></span></td>
 						<td><%=h number_to_time(@comps[@workout.activity.name]["duration"]) %></td>
 						<td class="last_column"><%=h number_to_time(@comps["global"]["duration"]) %></td>
 					</tr>
 					<tr>
 						<th class="first_column">Distance</th>
-						<td><%= h @workout.distance_in_miles %> miles</td>
+						<td><span class="click"><%= h @workout.distance_in_miles %></span> miles</td>
 						<td><%= h @comps[@workout.activity.name]["distance"] %> miles</td>
 						<td class="last_column"><%=h @comps["global"]["distance"] %> miles</td>
 					</tr>
 					<tr>
 						<th class="first_column">Average Speed</th>
-						<td><%=h @workout.avg_speed_in_mph %> mph</td>
+						<td><span class="click"><%=h @workout.avg_speed_in_mph %></span> mph</td>
 						<td><%= h @comps[@workout.activity.name]["speed"] %> mph</td>
 						<td class="last_column"><%=h @comps["global"]["speed"] %> mph</td>
 					</tr>
 				</tbody>
 		</table>
+	</div>
 
+	<div id="right_column">
 		<div id="map">
 			<% if @workout.gps_data? %>
 	        <%= @map.div(:width => 400, :height => 300) %>
@@ -80,8 +83,9 @@
 		</div>
 
 		<div id="heart_rate_graph">
-			<%= ziya_chart workout_heart_rate_chart_path(@workout), :size => "600x300" -%>
+			<%= ziya_chart workout_heart_rate_chart_path(@workout), :size => "528x240", :salign => "TR", :scale => "exactFit" -%>
 		</div>
-&nbsp;
+	</div>
+	
 </div>
 

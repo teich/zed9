@@ -9,7 +9,7 @@
 
 <div id="content" class="clear">
 
-	<div id="left_column" class="clear">
+	<div id="left_column">
 		<div id="dashboard_stats">
 			<span class="coming_soon">This section will show some aggregate comparison metrics. Please let us know what you would like to see!</span>
 		</div>
@@ -27,13 +27,16 @@
 			<% end %>
 			</table>
 		</div>
+
 	</div>
 
-	<% if @workouts.size > 0 %>
-	<div id="recent_workouts_chart" class="clear">
-		<span class="chart_title"><h2>Your workouts</h2></span>
-		<%= ziya_chart dashboard_chart_path, :size => "528x240", :salign => "TL", :scale => "exactFit", :align => "middle" %>
+	<div id="workout_right_column">
+		<div id="recent_workouts_chart">
+			<% if @workouts.size > 0 %>
+			<span class="chart_title"><h2>Your workouts</h2></span>
+			<%= ziya_chart dashboard_chart_path, :size => "528x240", :salign => "TR", :scale => "noscale" -%>
+			<% end %>
+		</div>
 	</div>
-	<% end %>
 
 </div>

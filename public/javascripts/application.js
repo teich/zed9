@@ -8,3 +8,10 @@
 //   });  
 // });
 
+
+$(document).ready(function() {
+    $('.click').editable('', {
+		     tooltip   : "Click to edit...",
+		     style  : "inherit"
+		});
+});
