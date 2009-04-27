@@ -21,17 +21,18 @@
 		</div>
 
 		<%= render :partial => "layouts/loginpane" %>
+
 	</div>
 
 	<div id="flash">
 		<%= flash[:notice] %>
 	</div>
 
-	<div id="main" style="main">
+	<div id="main">
 		<%= yield  %>
 	</div>
 
-	<div id="footer" class="clear">
+	<div id="footer">
 		© 2009 Zed9. All rights reserved.
 	</div>
 	

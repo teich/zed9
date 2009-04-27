@@ -6,6 +6,8 @@ body {
 	font-weight: 300;
 	letter-spacing: .5px;
 	font-size:14px;
+	margin: 0px auto 0px auto;
+	width: 960px;
 }
 
 img {
@@ -19,9 +21,19 @@ a {
 }
 
 #header {
+	width: 100%;
 	padding-bottom: 18px;
 	vertical-align: baseline;
 	line-height: 28px;
+}
+
+#main {
+	width: 100%;
+	display: block;
+	clear: both;
+	margin: 0px;
+	padding: 0px;
+	position: relative;
 }
 
 #logo a {
@@ -89,15 +101,6 @@ a {
 #logged_in .last {
 	padding-right:0px;
 	border:none;
-}
-
-#main {
-	width: 100%;
-	display: block;
-	clear: both;
-	margin: 0px;
-	padding: 0px;
-	position: relative;
 }
 
 #flash {
@@ -394,6 +397,18 @@ a.delete-x {
 	border-right:1px dotted #d9d9d9;
 	text-align: center;
 	font-size: 14px;
+	vertical-align: top;
+	overflow: hidden;
+}
+
+#public_timeline th, #public_timeline td {
+	text-align: left;
+	border-right: none;
+	border-bottom:1px dotted #d9d9d9;
+}
+
+#public_timeline table {
+	border-top:1px dotted #d9d9d9;
 }
 
 #workout_comparison .first_column, #public_timeline .first_column {
@@ -418,6 +433,6 @@ a.delete-x {
 	width: 100%;
 	color: #7C7B74;
 	font-size: 8pt;
-	padding: 24px 0px 12px 0px;
+	padding: 36px 0px 12px 0px;
 	text-align: center;
 }
