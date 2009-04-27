@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
    
   map.dashboard_chart '/dashboard/chart_data', :controller => 'charts', :action => 'dashboard_duration_data' 
 
+  map.home ':page', :controller => 'home', :action => 'show', :page => /about|something/
   map.root      :controller => "root", :action => "index"
 
 end
