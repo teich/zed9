@@ -8,17 +8,67 @@
     <script language="javascript" type="text/javascript" src="/javascripts/jquery.js"></script>
     <script language="javascript" type="text/javascript" src="/javascripts/jquery.flot.js"></script>
  </head>
+
+	<style>
+	body {
+			font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,arial,sans-serif;
+			color: #545454;
+			padding: 24px 72px 24px 72px;
+			font-weight: 300;
+			letter-spacing: .5px;
+			font-size:14px;
+		}
+		
+		th, td {
+			font-size:18px;
+			font-weight: 100;
+			text-align: right;
+			vertical-align: middle;
+		}
+
+		td {
+			font-weight: 500;
+			text-align: left;
+			color:#25a1d6;
+		}
+		
+		.visualization {
+			width: 150px;
+			height: 50px;
+		}
+	</style>
+
     <body>
 
 <table>
 	<tr>
-		<td>Duration</td><td><div id="placeholder" style="width:150px;height:50px;"></div></td><td valign="top">1:43h</td></tr>
-    <tr><td>Distance</td><td><div id="placeholder2" style="width:150px;height:50px;"></div></td><td valign="top">8.2miles</td></tr>
-    <tr><td>Calories</td><td><div id="placeholder3" style="width:150px;height:50px;"></div></td><td>1700 kcal</td></tr>
-	<tr><td>Speed</td><td><div id="speed" style="width:150px;height:50px;"></div></td><td>15mph</td></tr>
-	<tr><td>Elevation</td><td><div id="elevation" style="width:150px;height:50px;"></div></td><td>1600 ft</td></tr>
-	<tr><td>Heart Rate</td><td><div id="heartrate" style="width:150px;height:50px;"></div></td><td>155 bpm</td></tr>
-	
+		<th>Duration</th>
+		<td><div id="placeholder" class="visualization"></div></td><td>1:43h</td>
+	</tr>
+  <tr>
+		<th>Distance</th>
+		<td><div id="placeholder2" class="visualization"></div></td>
+		<td>8.2miles</td></tr>
+  <tr>
+		<th>Calories</th>
+		<td><div id="placeholder3" class="visualization"></div></td>
+		<td>1700 kcal</td>
+	</tr>
+	<tr>
+		<th>Speed</th>
+		<td><div id="speed" class="visualization"></div></td>
+		<td>15mph</td>
+	</tr>
+	<tr>
+		<th>Elevation</th>
+		<td><div id="elevation" class="visualization"></div></td>
+		<td>1600 ft</td>
+	</tr>
+	<tr>
+		<th>Heart Rate</th>
+		<td><div id="heartrate" class="visualization"></div></td>
+		<td>155 bpm</td>
+	</tr>
 </table>
 
   
@@ -43,7 +93,7 @@ $(function () {
     $.plot( $("#placeholder"), [
             {
 				data: d1,
-	            bars: { horizontal: true, show: true, lineWidth: 1  }
+	            bars: { horizontal: true, show: true, lineWidth: 1 }
 			},
 			{
 				data: d2,
@@ -55,6 +105,7 @@ $(function () {
 			}], {
 	        xaxis: { ticks: [], min: 0 },
 	        yaxis: { ticks: [], min: 0 },
+					colors: [ "#25a1d6", "#3dc10b", "#545454" ],
 			grid: { borderWidth: 0 }
 	});
 
@@ -73,6 +124,7 @@ $(function () {
 			}], {
 	        xaxis: { ticks: [], min: 0 },
 	        yaxis: { ticks: [], min: 0 },
+					colors: [ "#25a1d6", "#3dc10b", "#545454" ],
 			grid: { borderWidth: 0 }
 	});
 	
@@ -91,7 +143,8 @@ $(function () {
 			}], {
 	        xaxis: { ticks: [], min: 0 },
 	        yaxis: { ticks: [], min: 0 },
-			grid: { borderWidth: 0 }
+					colors: [ "#25a1d6", "#3dc10b", "#545454" ],
+					grid: { borderWidth: 0 }
 	});
 	
 	$.plot( $("#heartrate"), [ 
@@ -114,7 +167,9 @@ $(function () {
 		{
 			grid: { borderWidth: 0 }, 
 			xaxis: {ticks: []}, 
-			yaxis: {ticks:[]}
+			yaxis: {ticks:[]},
+			colors: [ "#25a1d6", "#3dc10b", "#545454" ],
+			shadowSize: 0 
 		});
 		
 		$.plot( $("#elevation"), [ 
@@ -137,7 +192,9 @@ $(function () {
 			{
 				grid: { borderWidth: 0 }, 
 				xaxis: {ticks: []}, 
-				yaxis: {ticks:[]}
+				yaxis: {ticks:[]},
+				colors: [ "#25a1d6", "#3dc10b", "#545454" ],
+				shadowSize: 0 
 			});
 
 			$.plot( $("#speed"), [ 
@@ -160,7 +217,9 @@ $(function () {
 				{
 					grid: { borderWidth: 0 }, 
 					xaxis: {ticks: []}, 
-					yaxis: {ticks:[]}
+					yaxis: {ticks:[]},
+					colors: [ "#25a1d6", "#3dc10b", "#545454" ],
+					shadowSize: 0 
 				});
 
 });
