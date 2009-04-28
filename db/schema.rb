@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090424200747) do
+ActiveRecord::Schema.define(:version => 20090428170520) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20090424200747) do
     t.datetime "time"
     t.float    "altitude"
     t.float    "distance"
+    t.float    "speed"
   end
 
   create_table "users", :force => true do |t|
