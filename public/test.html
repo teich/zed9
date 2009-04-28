@@ -147,23 +147,19 @@ $(function () {
 					grid: { borderWidth: 0 }
 	});
 	
+	var myHRData;
+	$.getJSON("/workouts/4/comp.js?data=HR", function(data) {
+		myHRData = data;
+		myHRData.lines = { show: true }
+
 	$.plot( $("#heartrate"), [ 
-		{
-			data: hr,
-			lines: {show: true}
-		}, 
-		{
-			data: hra,
-			bars: { show: true, lineWidth: 1 }
-		},
-		{
-			data: hrb,
-			bars: { show: true, lineWidth: 1}
-		},
-		{
-			data: hrc,
-			bars: { show: true, lineWidth: 1}
-		}], 
+		myHRData, 
+		{ data: hra,
+			bars: { show: true, lineWidth: 1 }},
+		{ data: hrb,
+			bars: { show: true, lineWidth: 1}},
+		{data: hrc,
+			bars: { show: true, lineWidth: 1}}], 
 		{
 			grid: { borderWidth: 0 }, 
 			xaxis: {ticks: []}, 
@@ -171,57 +167,50 @@ $(function () {
 			colors: [ "#25a1d6", "#3dc10b", "#545454" ],
 			shadowSize: 0 
 		});
-		
-		$.plot( $("#elevation"), [ 
-			{
-				data: hr,
-				lines: {show: true}
-			}, 
-			{
-				data: hra,
-				bars: { show: true, lineWidth: 1 }
-			},
-			{
-				data: hrb,
-				bars: { show: true, lineWidth: 1}
-			},
-			{
-				data: hrc,
-				bars: { show: true, lineWidth: 1}
-			}], 
-			{
-				grid: { borderWidth: 0 }, 
-				xaxis: {ticks: []}, 
-				yaxis: {ticks:[]},
-				colors: [ "#25a1d6", "#3dc10b", "#545454" ],
-				shadowSize: 0 
-			});
+	});
+	var myHRData;
+	$.getJSON("/workouts/4/comp.js?data=ELEVATION", function(data) {
+		myHRData = data;
+		myHRData.lines = { show: true }
 
-			$.plot( $("#speed"), [ 
-				{
-					data: hr,
-					lines: {show: true}
-				}, 
-				{
-					data: hra,
-					bars: { show: true, lineWidth: 1 }
-				},
-				{
-					data: hrb,
-					bars: { show: true, lineWidth: 1}
-				},
-				{
-					data: hrc,
-					bars: { show: true, lineWidth: 1}
-				}], 
-				{
-					grid: { borderWidth: 0 }, 
-					xaxis: {ticks: []}, 
-					yaxis: {ticks:[]},
-					colors: [ "#25a1d6", "#3dc10b", "#545454" ],
-					shadowSize: 0 
-				});
+	$.plot( $("#elevation"), [ 
+		myHRData, 
+		{ data: hra,
+			bars: { show: true, lineWidth: 1 }},
+		{ data: hrb,
+			bars: { show: true, lineWidth: 1}},
+		{data: hrc,
+			bars: { show: true, lineWidth: 1}}], 
+		{
+			grid: { borderWidth: 0 }, 
+			xaxis: {ticks: []}, 
+			yaxis: {ticks:[]},
+			colors: [ "#25a1d6", "#3dc10b", "#545454" ],
+			shadowSize: 0 
+		});
+	});
 
+	var myHRData;
+	$.getJSON("/workouts/4/comp.js?data=SPEED", function(data) {
+		myHRData = data;
+		myHRData.lines = { show: true }
+
+	$.plot( $("#speed"), [ 
+		myHRData, 
+		{ data: hra,
+			bars: { show: true, lineWidth: 1 }},
+		{ data: hrb,
+			bars: { show: true, lineWidth: 1}},
+		{data: hrc,
+			bars: { show: true, lineWidth: 1}}], 
+		{
+			grid: { borderWidth: 0 }, 
+			xaxis: {ticks: []}, 
+			yaxis: {ticks:[]},
+			colors: [ "#25a1d6", "#3dc10b", "#545454" ],
+			shadowSize: 0 
+		});
+	});
 });
 </script>
 
