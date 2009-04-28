@@ -19,11 +19,14 @@
 			font-size:14px;
 		}
 		
-		th, td {
+		tr, th, td {
+			padding: 12px 2px;
 			font-size:18px;
 			font-weight: 100;
 			text-align: right;
-			vertical-align: middle;
+			vertical-align: top;
+			position: relative;
+			top: 12px;
 		}
 
 		td {
@@ -32,47 +35,52 @@
 			color:#25a1d6;
 		}
 		
+		#spark_bar, #spark_line {
+			padding-top: 6px;
+		}
+		
 		.visualization {
 			width: 150px;
 			height: 50px;
+			top: 0px;
 		}
+
 	</style>
 
-    <body>
+<body>
 
-<table>
-	<tr>
-		<th>Duration</th>
-		<td><div id="placeholder" class="visualization"></div></td><td>1:43h</td>
-	</tr>
-  <tr>
-		<th>Distance</th>
-		<td><div id="placeholder2" class="visualization"></div></td>
-		<td>8.2miles</td></tr>
-  <tr>
-		<th>Calories</th>
-		<td><div id="placeholder3" class="visualization"></div></td>
-		<td>1700 kcal</td>
-	</tr>
-	<tr>
-		<th>Speed</th>
-		<td><div id="speed" class="visualization"></div></td>
-		<td>15mph</td>
-	</tr>
-	<tr>
-		<th>Elevation</th>
-		<td><div id="elevation" class="visualization"></div></td>
-		<td>1600 ft</td>
-	</tr>
-	<tr>
-		<th>Heart Rate</th>
-		<td><div id="heartrate" class="visualization"></div></td>
-		<td>155 bpm</td>
-	</tr>
-</table>
+	<table>
+		<tr>
+			<th>Duration</th>
+			<td id="spark_bar"><div id="placeholder" class="visualization"></div></td>
+			<td>1:43h</td>
+		</tr>
+	  <tr>
+			<th>Distance</th>
+			<td id="spark_bar"><div id="placeholder2" class="visualization"></div></td>
+			<td>8.2miles</td></tr>
+	  <tr>
+			<th>Calories</th>
+			<td id="spark_bar"><div id="placeholder3" class="visualization"></div></td>
+			<td>1700 kcal</td>
+		</tr>
+		<tr>
+			<th>Speed</th>
+			<td id="spark_line"><div id="speed" class="visualization"></div></td>
+			<td>15mph</td>
+		</tr>
+		<tr>
+			<th>Elevation</th>
+			<td id="spark_line"><div id="elevation" class="visualization"></div></td>
+			<td>1600 ft</td>
+		</tr>
+		<tr>
+			<th>Heart Rate</th>
+			<td id="spark_line"><div id="heartrate" class="visualization"></div></td>
+			<td>155 bpm</td>
+		</tr>
+	</table>
 
-  
-	
 <script id="source" language="javascript" type="text/javascript">
 $(function () {
     var d1 = [[8.2, .8]]; 
@@ -93,34 +101,34 @@ $(function () {
     $.plot( $("#placeholder"), [
             {
 				data: d1,
-	            bars: { horizontal: true, show: true, lineWidth: 1 }
+	            bars: { horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] } }
 			},
 			{
 				data: d2,
-	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			},
 			{
 				data: d3,
-		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			}], {
 	        xaxis: { ticks: [], min: 0 },
 	        yaxis: { ticks: [], min: 0 },
-					colors: [ "#25a1d6", "#3dc10b", "#545454" ],
-			grid: { borderWidth: 0 }
+					colors: ["#25a1d6", "#3dc10b", "#545454" ],
+					grid: { borderWidth: 0 }
 	});
 
    $.plot( $("#placeholder2"), [
             {
 				data: d4,
-	            bars: { horizontal: true, show: true, lineWidth: 1  }
+	            bars: { horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }   }
 			},
 			{
 				data: d5,
-	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			},
 			{
 				data: d6,
-		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			}], {
 	        xaxis: { ticks: [], min: 0 },
 	        yaxis: { ticks: [], min: 0 },
@@ -131,15 +139,15 @@ $(function () {
 	$.plot( $("#placeholder3"), [
             {
 				data: d1,
-	            bars: { horizontal: true, show: true, lineWidth: 1  }
+	            bars: { horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }   }
 			},
 			{
 				data: d2,
-	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			},
 			{
 				data: d3,
-		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			}], {
 	        xaxis: { ticks: [], min: 0 },
 	        yaxis: { ticks: [], min: 0 },
@@ -150,80 +158,80 @@ $(function () {
 	$.plot( $("#heartrate"), [ 
 		{
 			data: hr,
-			lines: {show: true}
+			lines: {show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } }
 		}, 
 		{
 			data: hra,
-			bars: { show: true, lineWidth: 1 }
-		},
-		{
-			data: hrb,
-			bars: { show: true, lineWidth: 1}
-		},
-		{
-			data: hrc,
-			bars: { show: true, lineWidth: 1}
-		}], 
+				bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+			},
+			{
+				data: hrb,
+				bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+			},
+			{
+				data: hrc,
+				bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+			}], 
 		{
 			grid: { borderWidth: 0 }, 
 			xaxis: {ticks: []}, 
 			yaxis: {ticks:[]},
-			colors: [ "#25a1d6", "#3dc10b", "#545454" ],
+			colors: ["#25a1d6", "#25a1d6", "#3dc10b", "#545454" ],
 			shadowSize: 0 
 		});
 		
 		$.plot( $("#elevation"), [ 
 			{
 				data: hr,
-				lines: {show: true}
+				lines: {show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } }
 			}, 
 			{
 				data: hra,
-				bars: { show: true, lineWidth: 1 }
-			},
-			{
-				data: hrb,
-				bars: { show: true, lineWidth: 1}
-			},
-			{
-				data: hrc,
-				bars: { show: true, lineWidth: 1}
-			}], 
+					bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+				},
+				{
+					data: hrb,
+					bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+				},
+				{
+					data: hrc,
+					bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+				}], 
 			{
 				grid: { borderWidth: 0 }, 
 				xaxis: {ticks: []}, 
 				yaxis: {ticks:[]},
-				colors: [ "#25a1d6", "#3dc10b", "#545454" ],
+				colors: ["#25a1d6", "#25a1d6", "#3dc10b", "#545454" ],
 				shadowSize: 0 
 			});
 
 			$.plot( $("#speed"), [ 
 				{
 					data: hr,
-					lines: {show: true}
+					lines: {show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } }
 				}, 
 				{
 					data: hra,
-					bars: { show: true, lineWidth: 1 }
+					bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
 				},
 				{
 					data: hrb,
-					bars: { show: true, lineWidth: 1}
+					bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
 				},
 				{
 					data: hrc,
-					bars: { show: true, lineWidth: 1}
+					bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
 				}], 
 				{
 					grid: { borderWidth: 0 }, 
 					xaxis: {ticks: []}, 
 					yaxis: {ticks:[]},
-					colors: [ "#25a1d6", "#3dc10b", "#545454" ],
+					colors: ["#25a1d6", "#25a1d6", "#3dc10b", "#545454" ],
 					shadowSize: 0 
 				});
 
 });
 </script>
 
- </body>
+</body>
 </html>
