@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Flot Examples</title>
+    <link href="layout.css" rel="stylesheet" type="text/css"></link>
+    <!--[if IE]><script language="javascript" type="text/javascript" src="/javascript/excanvas.pack.js"></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="/javascripts/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="/javascripts/jquery.flot.js"></script>
+ </head>
+    <body>
+
+<table>
+	<tr>
+		<td>Duration</td><td><div id="placeholder" style="width:150px;height:50px;"></div></td><td valign="top">1:43h</td></tr>
+    <tr><td>Distance</td><td><div id="placeholder2" style="width:150px;height:50px;"></div></td><td valign="top">8.2miles</td></tr>
+    <tr><td>Calories</td><td><div id="placeholder3" style="width:150px;height:50px;"></div></td><td>1700 kcal</td></tr>
+	<tr><td>Speed</td><td><div id="speed" style="width:150px;height:50px;"></div></td><td>15mph</td></tr>
+	<tr><td>Elevation</td><td><div id="elevation" style="width:150px;height:50px;"></div></td><td>1600 ft</td></tr>
+	<tr><td>Heart Rate</td><td><div id="heartrate" style="width:150px;height:50px;"></div></td><td>155 bpm</td></tr>
+	
+</table>
+
+  
+	
+<script id="source" language="javascript" type="text/javascript">
+$(function () {
+    var d1 = [[8.2, .8]]; 
+    var d2 = [[10,.4]];
+    var d3 = [[7,0]];
+
+	var d4 = [[1000, .8]];
+	var d5 = [[700, .4]];
+	var d6 = [[400, 0]];
+	
+	var hr = [[1,110],[2,120],[3,130],[4,140],[5,150],[6,160],[7,180],[8,185],[9,185],
+			 [10,180],[11,150],[12,180],[13,150],[14,150],[15,155],[16,160],[17,160],
+			 [18,165],[19,150],[20,140],[21,130],[22,120]];
+	var hra = [[24, 150]];
+	var hrb = [[26, 180]];
+	var hrc = [[28, 130]];
+	  
+    $.plot( $("#placeholder"), [
+            {
+				data: d1,
+	            bars: { horizontal: true, show: true, lineWidth: 1  }
+			},
+			{
+				data: d2,
+	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+			},
+			{
+				data: d3,
+		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+			}], {
+	        xaxis: { ticks: [], min: 0 },
+	        yaxis: { ticks: [], min: 0 },
+			grid: { borderWidth: 0 }
+	});
+
+   $.plot( $("#placeholder2"), [
+            {
+				data: d4,
+	            bars: { horizontal: true, show: true, lineWidth: 1  }
+			},
+			{
+				data: d5,
+	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+			},
+			{
+				data: d6,
+		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+			}], {
+	        xaxis: { ticks: [], min: 0 },
+	        yaxis: { ticks: [], min: 0 },
+			grid: { borderWidth: 0 }
+	});
+	
+	$.plot( $("#placeholder3"), [
+            {
+				data: d1,
+	            bars: { horizontal: true, show: true, lineWidth: 1  }
+			},
+			{
+				data: d2,
+	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+			},
+			{
+				data: d3,
+		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+			}], {
+	        xaxis: { ticks: [], min: 0 },
+	        yaxis: { ticks: [], min: 0 },
+			grid: { borderWidth: 0 }
+	});
+	
+	$.plot( $("#heartrate"), [ 
+		{
+			data: hr,
+			lines: {show: true}
+		}, 
+		{
+			data: hra,
+			bars: { show: true, lineWidth: 1 }
+		},
+		{
+			data: hrb,
+			bars: { show: true, lineWidth: 1}
+		},
+		{
+			data: hrc,
+			bars: { show: true, lineWidth: 1}
+		}], 
+		{
+			grid: { borderWidth: 0 }, 
+			xaxis: {ticks: []}, 
+			yaxis: {ticks:[]}
+		});
+		
+		$.plot( $("#elevation"), [ 
+			{
+				data: hr,
+				lines: {show: true}
+			}, 
+			{
+				data: hra,
+				bars: { show: true, lineWidth: 1 }
+			},
+			{
+				data: hrb,
+				bars: { show: true, lineWidth: 1}
+			},
+			{
+				data: hrc,
+				bars: { show: true, lineWidth: 1}
+			}], 
+			{
+				grid: { borderWidth: 0 }, 
+				xaxis: {ticks: []}, 
+				yaxis: {ticks:[]}
+			});
+
+			$.plot( $("#speed"), [ 
+				{
+					data: hr,
+					lines: {show: true}
+				}, 
+				{
+					data: hra,
+					bars: { show: true, lineWidth: 1 }
+				},
+				{
+					data: hrb,
+					bars: { show: true, lineWidth: 1}
+				},
+				{
+					data: hrc,
+					bars: { show: true, lineWidth: 1}
+				}], 
+				{
+					grid: { borderWidth: 0 }, 
+					xaxis: {ticks: []}, 
+					yaxis: {ticks:[]}
+				});
+
+});
+</script>
+
+ </body>
+</html>
