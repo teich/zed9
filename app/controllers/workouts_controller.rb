@@ -3,7 +3,7 @@ require 'lib/WorkoutImporter'
 
 class WorkoutsController < ApplicationController
   helper_method :my_workout?  
-  before_filter :require_user
+  before_filter :require_user, :except => [:show]
   
   before_filter :find_workout, :only => [:edit, :update, :destroy]
   before_filter :find_and_bounce, :only => [:show]
@@ -22,7 +22,7 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    @comps = @workout.find_comps(current_user)
+    @comps = @workout.find_comps(@workout.user)
 
     # need for creating new tags.  
     @tagging = Tagging.new
@@ -107,9 +107,9 @@ class WorkoutsController < ApplicationController
   def find_and_bounce
     @workout = Workout.find(params[:id])
     
-    if ((@workout.user_id != current_user.id) && !@workout.shared)
+    if (!@workout.shared && !current_user.nil? && (@workout.user_id != current_user.id))
       flash[:notice] = "The workout you tried to view is not public"
-      redirect_to workouts_path 
+      redirect_to root_path 
     end
   end
 
@@ -126,6 +126,11 @@ class WorkoutsController < ApplicationController
   end
   
   def my_workout?
-    @workout.user_id == current_user.id
+    if logged_in? 
+      return (@workout.user_id == current_user.id)
+    else 
+      return false
+    end
+      
   end
 end

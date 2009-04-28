@@ -1,12 +1,12 @@
 <div id="content_header">
-	<h1>Workouts <%= link_to '+', new_workout_path %></h1>
+	<h1>Workouts <%= link_to '+', new_user_workout_path(current_user) %></h1>
 </div>
 
 <div id="content">
 
 	<% if (params[:tag])%>
 		Filtered by <%= h params[:tag] %> &nbsp;
-		<%= link_to 'x', workouts_path %> 
+		<%= link_to 'x', user_workouts_path(current_user) %> 
 	<% end %>
 
 	<table class="workout_listing">
@@ -24,7 +24,7 @@
 				<td><%=link_to workout.name, workout %></td>
 				<td><%=h workout.start_time %></td>
 				<td><% for tag in workout.tag_list %>
-					<%= link_to tag, workouts_path + '?tag=' + tag %>
+					<%= link_to tag, user_workouts_path(current_user, :tag => tag) %>
 					<% end %></td>
 				<td><%= link_to 'Edit', edit_workout_path(workout) %> | 
 					<%= link_to 'Delete', workout, :confirm => 'Are you sure?', :method => :delete %></td>

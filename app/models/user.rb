@@ -32,11 +32,18 @@ class User < ActiveRecord::Base
     return nil if birthdate.nil?
     (Date.today - birthdate).to_i / 365
   end
-  
+
+  def to_param
+#    "#{login}"
+    "#{login.gsub(/[^a-z0-9]+/i, '-')}"
+  end
+
   private
   
   # How many invitations does a user get?
   def set_invitation_limit
     self.invitation_limit = 0
   end
+  
+
 end
