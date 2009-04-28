@@ -1,11 +1,13 @@
 <%=chart :column %>
 
   <%=comp :chart_rect %>
-    y:  12
+    y:  0
+    x: 0
+    width: 384
 
   <%=comp :chart_border %>
     bottom_thickness:   1
-    left_thickness:   1
+    left_thickness:   0
     color:      d9d9d9
 
   <%=comp :axis_category %>
@@ -16,8 +18,8 @@
     font:   HelveticaNeue-Light
 
   <%=comp :axis_ticks %>
-    value_ticks:       true
-    major_thickness:       1
+    value_ticks:       false
+    major_thickness:       0
     minor_thickness:       0
     position:         inside
     category_ticks:     true
@@ -26,13 +28,13 @@
   <%=comp :axis_value %>
     bold:   false
     value_ticks:       false
-    major_thickness:       1
+    major_thickness:       0
     position:         inside
-    category_ticks:     true
+    category_ticks:     false
     major_color:      d9d9d9
-    steps:          4
-    size:          14
-    color:     545454
+    steps:          0
+    size:          0
+    color:     FFFFFF
     show_min:   false
     
   <%=comp :tooltip %>

@@ -20,7 +20,7 @@ class ChartsController < ApplicationController
     chart = Ziya::Charts::Column.new XMLSWF, 'dashboard_duration'
     @workouts = current_user.workouts.find(:all, :order => "start_time")
     chart.add :axis_category_text, @workouts.map { |w| w.start_time.strftime("%a\n%b %d") }
-    chart.add :series, "Duration\nminutes", @workouts.map { |w| w.duration / 60 }
+    chart.add :series, "Duration\nminutes", @workouts.map { |w| w.duration_formatted(workout_path(w)) }
     chart.add :theme, "zed9"
     respond_to do |fmt|
       fmt.xml { render :xml => chart.to_xml }

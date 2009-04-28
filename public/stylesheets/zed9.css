@@ -251,14 +251,26 @@ thead, th, td {
 }
 
 #left_column {
-	position: relative;
-	width: 480px;
+	width: 384px;
+	margin-right: 72px;
+	text-align: left;
 }
 
 #right_column {
-	position: relative;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	text-align: left;
+	width: 504px;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: top;
 }
 	
+.timeline {
+	width: 100%;
+}	
+
 #workout_left_column {
 	display: block;
 	width: 480px;
@@ -272,17 +284,11 @@ thead, th, td {
 	padding: 0px;
 }
 
-#dashboard_stats {
-}
-
-#public_timeline {
-	margin-top: 24px;
-}
-
 #recent_workouts_chart {
-	position: absolute;
+	position: relative;
 	top: 0px;
 	right: 0px;
+	overflow: hidden;
 }
 
 #map {
@@ -303,9 +309,10 @@ thead, th, td {
 	vertical-align: top;
 }
 
-.chart_title h2 {
+.chart_title h2, #public_timeline h2 {
 	padding-top: 0px;
 	margin-top: 0px;
+	text-align: left;
 }
 
 #workout_header {

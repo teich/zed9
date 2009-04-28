@@ -92,6 +92,10 @@ class Workout < ActiveRecord::Base
     Time.at(seconds).utc.strftime("%H:%M:%S")
   end
   
+  def number_to_short_time(seconds)
+    Time.at(seconds).utc.strftime("%H:%M:%S")
+  end
+
   def distance_in_miles
     return nil if self.distance.nil?
     (self.distance * 0.000621371192).round(1)
@@ -126,6 +130,14 @@ class Workout < ActiveRecord::Base
     comps["global"]["speed"] = (all_comps.map {|c| c.avg_speed_in_mph}).compact.average_array.round(1)
     
     return comps
+  end
+
+  def duration_formatted(url)
+    length = (duration / 60).round 
+    tooltip = "#{name}\n#{length} minutes"
+    tooltip += "\n#{distance_in_miles} miles" if !distance.nil?
+    { :value => length, :tooltip => tooltip, :url => url }
+
   end
     
 end
