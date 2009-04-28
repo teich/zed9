@@ -1,4 +1,7 @@
 class RootController < ApplicationController
+
+  layout "public"
+  
   def index
     @user_session = UserSession.new
     

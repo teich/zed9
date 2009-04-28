@@ -113,17 +113,17 @@ a {
 
 .errorExplanation {
 	color: red;
-	text-align: center;
-	margin-bottom: 12px;
+	margin-bottom: 36px;
+	font-size: 18px;
 }
 
 .errorExplanation h2 {
+	text-align: left;
 	font-size: 18px;
 	font-weight: 500;
 }
 
 .errorExplanation p, ul, li {
-	font-size: inherit;
 	font-weight: 100;
 }
 
@@ -156,12 +156,16 @@ h2 {
 }
 
 h3 {
-	color: #9f9f9f;
-	font-size: 16px;
+	color:#25a1d6;
+	font-size: 18px;
 	line-height: 16px;
 	font-weight: 400;
-	display: inline-block;
-	margin: 0px 0px 12px 0px;
+	margin: 12px 0px;
+}
+
+p {
+	margin: 12px 0px;
+	line-height: 1.4;
 }
 
 thead, th, td {
@@ -175,10 +179,37 @@ thead, th, td {
 	padding-left: 0px;
 }
 
-#register, #login {
-	width: 100%;
-	text-align: left;
-	float: left;
+#register, #login_form, #left_splash {
+	width: 504px;
+	padding-top: 4px;
+}
+
+.hook {
+	margin-top: 43px;
+	margin-bottom: 42px;
+}
+
+#request_invite, #login_box {
+	position: relative;
+	top: -10px;
+	padding-bottom: 24px;
+}
+
+#request_invite {
+	position: absolute;
+	top: -1px;
+	float: right;
+	padding-top: 0px;
+	padding-left: 48px;
+	border-left: 1px dotted #d9d9d9;
+	right: 0px;
+	width: 360px;
+	font-size: 18px;
+	font-weight: 200;
+}
+
+#join_list {
+	padding-top: 10px;
 }
 
 #registration_form, #login_form table, tr, th, td {
@@ -187,17 +218,16 @@ thead, th, td {
 	line-height: inherit;
 	font-family: inherit;
 	font-color: inherit;
-	border: none;
 }
 
 .form th {
 	padding-right: 4px;
 	text-align:right;
-	width: 240px;
+	width: 192px;
 }
 
 .form td {
-	padding-left: 4px;
+	padding: 8px 4px;
 	line-height: 2;
 }
 
@@ -211,15 +241,15 @@ thead, th, td {
 }
 
 .form input {
-	font-weight: inherit;
-	font-size: inherit;
-	line-height: inherit;
-	vertical-align: inherit;
 	-moz-border-radius-bottomleft:5px;
 	-moz-border-radius-bottomright:5px;
 	-moz-border-radius-topleft:5px;
 	-moz-border-radius-topright:5px;
 	border:1px solid #d9d9d9;
+	font-weight: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	vertical-align: inherit;
 	font-family: inherit;
 	color: inherit;
 	padding:8px;
@@ -231,6 +261,11 @@ thead, th, td {
 	top: 16px;
 }
 
+/*#user_session_submit {
+	width: 92px;
+	margin-top: 16px;
+}
+*/
 .coming_soon {
 	text-align: center;
 	vertical-align: middle;
@@ -251,14 +286,26 @@ thead, th, td {
 }
 
 #left_column {
-	position: relative;
-	width: 480px;
+	width: 384px;
+	margin-right: 72px;
+	text-align: left;
 }
 
 #right_column {
-	position: relative;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	text-align: left;
+	width: 504px;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: top;
 }
 	
+.timeline {
+	width: 100%;
+}	
+
 #workout_left_column {
 	display: block;
 	width: 480px;
@@ -272,17 +319,11 @@ thead, th, td {
 	padding: 0px;
 }
 
-#dashboard_stats {
-}
-
-#public_timeline {
-	margin-top: 24px;
-}
-
 #recent_workouts_chart {
-	position: absolute;
+	position: relative;
 	top: 0px;
 	right: 0px;
+	overflow: hidden;
 }
 
 #map {
@@ -303,9 +344,10 @@ thead, th, td {
 	vertical-align: top;
 }
 
-.chart_title h2 {
+.chart_title h2, #public_timeline h2 {
 	padding-top: 0px;
 	margin-top: 0px;
+	text-align: left;
 }
 
 #workout_header {
