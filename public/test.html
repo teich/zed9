@@ -7,72 +7,139 @@
     <!--[if IE]><script language="javascript" type="text/javascript" src="/javascript/excanvas.pack.js"></script><![endif]-->
     <script language="javascript" type="text/javascript" src="/javascripts/jquery.js"></script>
     <script language="javascript" type="text/javascript" src="/javascripts/jquery.flot.js"></script>
- </head>
+		<script type="text/javascript" src="/javascripts/jquery.qtip-1.0.0-rc2.js"></script> 				
+	</head>
 
 	<style>
-	body {
-			font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,arial,sans-serif;
-			color: #545454;
-			padding: 24px 72px 24px 72px;
-			font-weight: 300;
-			letter-spacing: .5px;
-			font-size:14px;
-		}
+		body {
+				font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,arial,sans-serif;
+				color: #545454;
+				padding: 72px;
+				font-size: 14px;
+				font-weight: 300;
+				letter-spacing: .5px;
+				margin: 0px;
+			}
 		
-		th, td {
-			font-size:18px;
-			font-weight: 100;
-			text-align: right;
-			vertical-align: middle;
-		}
+			span.value {
+				font-weight: 500;
+				font-size: 18px;
+			}
 
-		td {
-			font-weight: 500;
-			text-align: left;
-			color:#25a1d6;
-		}
+			p.comp_this_workout {
+				margin-top: 0px;
+				color: #25a1d6;
+			}
+
+			p.comp_my_activity {
+				margin-top: 4px;
+				color: #3dc10b;
+			}
+
+			p.comp_activity {
+				margin: 4px 0px 0px 0px;
+			}
+
+			th, td {
+				padding: 12px 2px;
+				font-weight: 300;
+				vertical-align: top;
+				position: relative;
+				top: 12px;
+			}
+
+			th {
+				font-size:18px;			
+				text-align: right;
+			}
+
+			td {
+				color:#25a1d6;
+			}
+
+			td.number {
+				width: 120px;
+			}
+
+			#spark_bar, #spark_line {
+				padding-top: 6px;
+			}
 		
-		.visualization {
-			width: 150px;
-			height: 50px;
-		}
-	</style>
+			.visualization {
+				width: 150px;
+				height: 50px;
+				top: 0px;
+			}
 
-    <body>
+		</style>
 
-<table>
-	<tr>
-		<th>Duration</th>
-		<td><div id="placeholder" class="visualization"></div></td><td>1:43h</td>
-	</tr>
-  <tr>
-		<th>Distance</th>
-		<td><div id="placeholder2" class="visualization"></div></td>
-		<td>8.2miles</td></tr>
-  <tr>
-		<th>Calories</th>
-		<td><div id="placeholder3" class="visualization"></div></td>
-		<td>1700 kcal</td>
-	</tr>
-	<tr>
-		<th>Speed</th>
-		<td><div id="speed" class="visualization"></div></td>
-		<td>15mph</td>
-	</tr>
-	<tr>
-		<th>Elevation</th>
-		<td><div id="elevation" class="visualization"></div></td>
-		<td>1600 ft</td>
-	</tr>
-	<tr>
-		<th>Heart Rate</th>
-		<td><div id="heartrate" class="visualization"></div></td>
-		<td>155 bpm</td>
-	</tr>
-</table>
+<body>
 
-  
+	<table>
+		<tr class="stat">
+			<th>Duration</th>
+			<td id="spark_bar"><div id="placeholder" class="visualization"></div></td>
+			<td><span class="value">1:43</span>h</td>
+		</tr>
+		<tr class="stat">
+			<th>Distance</th>
+			<td id="spark_bar"><div id="placeholder2" class="visualization"></div></td>
+			<td class="number"><span class="value">8.2</span>miles</td>
+		</tr>
+		<tr class="stat">
+			<th>Calories</th>
+			<td id="spark_bar"><div id="placeholder3" class="visualization"></div></td>
+			<td class="number"><span class="value">1700</span>kcal</td>
+		</tr>
+		<tr class="stat">
+			<th>Speed</th>
+			<td id="spark_line"><div id="speed" class="visualization"></div></td>
+			<td class="number"><span class="value">15</span>mph</td>
+		</tr>
+		<tr class="stat">
+			<th>Elevation</th>
+			<td id="spark_line"><div id="elevation" class="visualization"></div></td>
+			<td class="number"><span class="value">1600</span>ft</td>
+		</tr>
+		<tr class="stat">
+			<th>Heart Rate</th>
+			<td id="spark_line"><div id="heartrate" class="visualization"></div></td>
+			<td class="number"><span class="value">155</span>bpm</td>
+		</tr>
+	</table>
+
+<script id="source" language="javascript" type="text/javascript">
+
+	$('.stat').qtip({
+			content: '<div class="stat"><p class="comp_this_workout"><span class="value">1:32</span>h for this hike</p> <p class="comp_my_activity"><span class="value">2:08</span>h average for all your hikes</p> <p class="comp_activity"><span class="value">0:55</span>h average for everyone\'s hikes</p></div>',
+			show: 'mouseover',
+			hide: 'mouseout',
+			position: {
+				container: $('td.number'),
+				corner: {
+					tooltip: 'topLeft',
+					target: 'topRight'
+				},
+				adjust: {
+					x:-130,
+					y:-1
+				}				
+			},
+			style: { 
+				padding: 8,
+				background: '#f0f0f0',
+				color: '#545454',
+				textAlign: 'left',
+				border: {
+				   width: 1,
+				   radius: 8,
+				   color: '#f0f0f0'
+				},
+	   	}
+	})
 	
+</script>
+
 <script id="source" language="javascript" type="text/javascript">
 $(function () {
     var d1 = [[8.2, .8]]; 
@@ -101,34 +168,34 @@ $(function () {
     $.plot( $("#placeholder"), [
             {
 				data: d1,
-	            bars: { horizontal: true, show: true, lineWidth: 1 }
+	            bars: { horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] } }
 			},
 			{
 				data: d2,
-	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			},
 			{
 				data: d3,
-		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			}], {
 	        xaxis: { ticks: [], min: 0 },
 	        yaxis: { ticks: [], min: 0 },
-					colors: [ "#25a1d6", "#3dc10b", "#545454" ],
-			grid: { borderWidth: 0 }
+					colors: ["#25a1d6", "#3dc10b", "#545454" ],
+					grid: { borderWidth: 0 }
 	});
 
    $.plot( $("#placeholder2"), [
             {
 				data: d4,
-	            bars: { horizontal: true, show: true, lineWidth: 1  }
+	            bars: { horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }   }
 			},
 			{
 				data: d5,
-	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			},
 			{
 				data: d6,
-		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			}], {
 	        xaxis: { ticks: [], min: 0 },
 	        yaxis: { ticks: [], min: 0 },
@@ -140,15 +207,15 @@ $(function () {
 	$.plot( $("#placeholder3"), [
             {
 				data: d1,
-	            bars: { horizontal: true, show: true, lineWidth: 1  }
+	            bars: { horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }   }
 			},
 			{
 				data: d2,
-	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			},
 			{
 				data: d3,
-		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1 }
+		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			}], {
 	        xaxis: { ticks: [], min: 0 },
 	        yaxis: { ticks: [], min: 0 },
@@ -156,25 +223,83 @@ $(function () {
 					grid: { borderWidth: 0 }
 	});
 	
-	var myData;
-	var hrblock
-	// $.getJSON("/workouts/3/comp.js?data=hrcomp", function(blarg) {
-	// 	hrblock = blarg
-	// });
-	
-	var compFields = [ "heartrate", "elevation", "speed" ];
-	var workoutURL = "/workouts/" + 3 + "/comp.js?data="
-	$.each(compFields, function(i) {
-		var url = workoutURL + compFields[i];
-		$.getJSON(url, function(data) {
-			myData = data;
-			// myData.lines = { show: true };
-			$.plot($('#' + compFields[i]), [myData], options);
+	$.plot( $("#heartrate"), [ 
+		{
+			data: hr,
+			lines: {show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } }
+		}, 
+		{
+			data: hra,
+				bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+			},
+			{
+				data: hrb,
+				bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+			},
+			{
+				data: hrc,
+				bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+			}], 
+		{
+			grid: { borderWidth: 0 }, 
+			xaxis: {ticks: []}, 
+			yaxis: {ticks:[]},
+			colors: ["#25a1d6", "#25a1d6", "#3dc10b", "#545454" ],
+			shadowSize: 0 
 		});
-	});
+		
+		$.plot( $("#elevation"), [ 
+			{
+				data: hr,
+				lines: {show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } }
+			}, 
+			{
+				data: hra,
+					bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+				},
+				{
+					data: hrb,
+					bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+				},
+				{
+					data: hrc,
+					bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+				}], 
+			{
+				grid: { borderWidth: 0 }, 
+				xaxis: {ticks: []}, 
+				yaxis: {ticks:[]},
+				colors: ["#25a1d6", "#25a1d6", "#3dc10b", "#545454" ],
+				shadowSize: 0 
+			});
+
+			$.plot( $("#speed"), [ 
+				{
+					data: hr,
+					lines: {show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } }
+				}, 
+				{
+					data: hra,
+					bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+				},
+				{
+					data: hrb,
+					bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+				},
+				{
+					data: hrc,
+					bars: { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] }  }
+				}], 
+				{
+					grid: { borderWidth: 0 }, 
+					xaxis: {ticks: []}, 
+					yaxis: {ticks:[]},
+					colors: ["#25a1d6", "#25a1d6", "#3dc10b", "#545454" ],
+					shadowSize: 0 
+				});
 
 });
 </script>
 
- </body>
+</body>
 </html>
