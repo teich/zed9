@@ -470,3 +470,9 @@ a.delete-x {
 	padding: 36px 0px 12px 0px;
 	text-align: center;
 }
+
+/* FLOT STUFF */
+.visualization {
+	width: 150px;
+	height: 50px;
+}
