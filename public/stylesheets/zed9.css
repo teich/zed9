@@ -320,15 +320,27 @@ thead, th, td {
 
 #map {
 	float: right;
+	position: relative;
 	top: 0px;
 }
 
 #heart_rate_graph {
 	position: relative;
+	width: 100%;
 	clear: both;
-	float: right;
-	top: 0px;
 	overflow: hidden;
+	top: 12px;
+}
+
+#y_axis {
+	width: 96px;
+	float: left;
+	text-align: right;
+	position: relative;
+	top:112px;
+	font-size: 14px;
+	font-weight: 100;
+	display: inline-block;
 }
 
 .chart_title {
@@ -427,7 +439,7 @@ a.delete-x {
 	overflow: auto;
 }
 
-#workout_comparison th, #workout_comparison td, #public_timeline th, #public_timeline td {
+#public_timeline th, #public_timeline td {
 	border-right:1px dotted #d9d9d9;
 	text-align: center;
 	font-size: 14px;
@@ -445,12 +457,12 @@ a.delete-x {
 	border-top:1px dotted #d9d9d9;
 }
 
-#workout_comparison .first_column, #public_timeline .first_column {
+#public_timeline .first_column {
 	text-align: left;
 	padding-left: 0px;
 }
 
-#workout_comparison .last_column, #public_timeline .last_column {
+#public_timeline .last_column {
 	border-right: none;
 }
 
@@ -471,8 +483,52 @@ a.delete-x {
 	text-align: center;
 }
 
-/* FLOT STUFF */
+#workout_comparison span.value {
+	font-weight: 500;
+	font-size: 18px;
+}
+
+p.comp_this_workout {
+	margin-top: 0px;
+	color: #25a1d6;
+}
+
+p.comp_my_activity {
+	margin-top: 4px;
+	color: #3dc10b;
+}
+
+p.comp_activity {
+	margin: 4px 0px 0px 0px;
+}
+
+#workout_comparison th, td {
+	padding: 12px 2px;
+	font-weight: 300;
+	vertical-align: top;
+	position: relative;
+	top: 12px;
+}
+
+#workout_comparison th {
+	font-size:18px;			
+	text-align: right;
+}
+
+#workout_comparison td {
+	color:#25a1d6;
+}
+
+#workout_comparison td.number {
+	width: 120px;
+}
+
+#spark_bar, #spark_line {
+	padding-top: 6px;
+}
+
 .visualization {
 	width: 150px;
 	height: 50px;
+	top: 0px;
 }

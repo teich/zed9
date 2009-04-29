@@ -37,58 +37,60 @@
 </div>
 
 <div id="content">
-	<div id="workout_left_column">
-		<table id="workout_comparison">
-				<thead>
-					<tr>
-						<th class="first_column">&nbsp;</th>
-						<th>This workout</th>
-						<th><%= h @workout.user.login %>'s 	<%= h @workout.activity.name %></th>
-						<th class="last_column">All <%= h @workout.activity.name %></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th class="first_column">Heart Rate</th>
-						<td><div id="heartrate" class="visualization"></div></td>
-						<td><span class="click"><%=h @workout.average_hr %></span></td>
-					</tr>
-					<tr>
-						<th class="first_column">Duration</th>
-						<td><span class="click"><%=h number_to_time(@workout.duration) %></span></td>
-						<td><%=h number_to_time(@comps[@workout.activity.name]["duration"]) %></td>
-						<td class="last_column"><%=h number_to_time(@comps["global"]["duration"]) %></td>
-					</tr>
-					<tr>
-						<th class="first_column">Distance</th>
-						<td><span class="click"><%= h @workout.distance_in_miles %></span> miles</td>
-						<td><%= h @comps[@workout.activity.name]["distance"] %> miles</td>
-						<td class="last_column"><%=h @comps["global"]["distance"] %> miles</td>
-					</tr>
-					<tr>
-						<th class="first_column">Speed</th>
-						<td><div id="speed" class="visualization"></td>
-						<td><%= h @comps[@workout.activity.name]["speed"] %> mph</td>
-					</tr>
-					<tr>
-						<th class="fist_column">Elevation</th>
-						<td><div id="elevation" class="visualization"></td>
-						<td></td>
-					</tr>
-				</tbody>
-		</table>
-	</div>
 
+	<div id="workout_left_column">
+		
+		<table id="workout_comparison">
+			<tr class="stat">
+				<th>Duration</th>
+				<td id="spark_bar"><div id="placeholder" class="visualization"></div></td>
+				<td class="number"><span class="value"><%=h number_to_time(@workout.duration) %></span>h</td>
+			</tr>
+			<tr class="stat">
+				<th>Distance</th>
+				<td id="spark_bar"><div id="placeholder2" class="visualization"></div></td>
+				<td class="number"><span class="value"><%= h @workout.distance_in_miles %></span>miles</td>
+			</tr>
+			<tr class="stat">
+				<th>Calories</th>
+				<td id="spark_bar"><div id="placeholder3" class="visualization"></div></td>
+				<td class="number"><span class="value">N/A</span></td>
+			</tr>
+			<tr class="stat">
+				<th>Speed</th>
+				<td id="spark_line"><div id="speed" class="visualization"></div></td>
+				<td class="number"><span class="value"><%= h @comps[@workout.activity.name]["speed"] %></span>mph</td>
+			</tr>
+			<tr class="stat">
+				<th>Elevation</th>
+				<td id="spark_line"><div id="elevation" class="visualization"></div></td>
+				<td class="number"><span class="value"><%=h @workout.elevation_formatted %></span>ft</td>
+			</tr>
+			<tr class="stat">
+				<th>Heart Rate</th>
+				<td id="spark_line"><div id="heartrate" class="visualization"></div></td>
+				<td class="number"><span class="value"><%=h @workout.average_hr %></span>bpm</td>
+			</tr>
+		</table>
+
+	</div>
+		
 	<div id="right_column">
 		<div id="map">
 			<% if @workout.gps_data? %>
-	        <%= @map.div(:width => 400, :height => 300) %>
+	        <%= @map.div(:width => 512, :height => 420 ) %>
 			<% end %>
 		</div>
 
-		<div id="heart_rate_graph">
-			<%= ziya_chart workout_heart_rate_chart_path(@workout), :size => "528x240", :salign => "TR", :scale => "exactFit" -%>
+	</div>
+
+	<div id="heart_rate_graph">
+
+		<div id="y_axis">
+			<p class="axis_label">Heart Rate</p>
 		</div>
+		
+			<%= ziya_chart workout_heart_rate_chart_path(@workout), :width => "100%", :height => 168 -%>
 	</div>
 	
 </div>

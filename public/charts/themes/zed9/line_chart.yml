@@ -1,8 +1,6 @@
 <%=chart :line %>
 
   <%=comp :chart_rect %>
-    x:  0
-    y:  12
 
   <%=comp :chart_border %>
     bottom_thickness:   1

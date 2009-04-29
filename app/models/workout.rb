@@ -208,7 +208,11 @@ class Workout < ActiveRecord::Base
     { :value => length, :tooltip => tooltip, :url => url }
 
   end
-  
+
+  def elevation_formatted()
+    (elevation_gain).round
+  end  
+    
   def json_heartrate
     get_smoothed_hr(20, true)
   end

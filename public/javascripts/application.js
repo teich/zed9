@@ -36,4 +36,34 @@ $(document).ready(function () {
 	 	
 	 	
 	 });
+
+	$('.stat').qtip({
+			content: '<div class="stat"><p class="comp_this_workout"><span class="value">1:32</span>h for this hike</p> <p class="comp_my_activity"><span class="value">2:08</span>h average for all your hikes</p> <p class="comp_activity"><span class="value">0:55</span>h average for everyone\'s hikes</p></div>',
+			show: 'mouseover',
+			hide: 'mouseout',
+			position: {
+				type: 'absolute',
+				container: $('td.number'),
+				corner: {
+					tooltip: 'topLeft',
+					target: 'topRight'
+				},
+				adjust: {
+					x:-202,
+					y:-193
+				}				
+			},
+			style: { 
+				padding: 8,
+				background: '#f0f0f0',
+				color: '#545454',
+				textAlign: 'left',
+				border: {
+				   width: 1,
+				   radius: 8,
+				   color: '#f0f0f0'
+				},
+	   	}
+	});
+	
 });
