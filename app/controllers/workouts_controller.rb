@@ -67,6 +67,17 @@ class WorkoutsController < ApplicationController
       @workout = current_user.workouts.build(importer.get_workout)
       
       trackpoints = importer.get_trackpoints
+      time_one = @workout.start_time
+      distance_one = 0
+      trackpoints.each do |tp|
+        distance_two = tp["distance"].to_f
+        time_two = Time.parse(tp["time"])
+        time_delta = time_two - time_one
+        distance_delta = distance_two - distance_one
+        tp["speed"] = time_delta / distance_delta
+        distance_two = distance_one
+        time_two = time_one
+      end
       trackpoints.each { |tp| @workout.trackpoints.build(tp)}
       @workout.distance = trackpoints.last["distance"] if !trackpoints.last["distance"].nil?
       

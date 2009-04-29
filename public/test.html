@@ -156,6 +156,14 @@ $(function () {
 	var hra = [[24, 150]];
 	var hrb = [[26, 180]];
 	var hrc = [[28, 130]];
+	
+	var options = {
+		grid: { borderWidth: 0 }, 
+		xaxis: {ticks: []}, 
+		yaxis: {ticks:[]},
+		colors: [ "#25a1d6", "#3dc10b", "#545454" ],
+		shadowSize: 0 
+	};
 	  
     $.plot( $("#placeholder"), [
             {
@@ -194,6 +202,7 @@ $(function () {
 					colors: [ "#25a1d6", "#3dc10b", "#545454" ],
 			grid: { borderWidth: 0 }
 	});
+	
 	
 	$.plot( $("#placeholder3"), [
             {

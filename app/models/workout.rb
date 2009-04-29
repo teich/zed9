@@ -30,10 +30,20 @@ class Workout < ActiveRecord::Base
     trackpoints.map { |tp| tp.time - start_time }
   end
   
-  def get_smoothed_hr(points)
+  def get_smoothed_hr(points, value_array = false)
     hr = get_hr
     factor = hr.size / points
-    smooth_data(hr, factor)
+    sd = smooth_data(hr, factor)
+    if value_array
+      c = -1
+      vc = sd.map do |d|
+        c += 1
+        [c, d]
+      end
+      return vc
+    else
+      return sd
+    end
   end
   
   def get_smoothed_hr_axis(points)

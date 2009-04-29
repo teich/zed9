@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :workouts do |workout|
       workout.heart_rate_chart 'chart', :controller => 'charts', :action => 'workout_heart_rate' 
       workout.resources :taggings, :only => [:destroy, :create]
+      workout.resource :comp, :only => [:show]
     end
   end
   
