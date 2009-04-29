@@ -1,5 +1,4 @@
 require 'hpricot'
-require 'lib/WorkoutImporter'
 
 class WorkoutsController < ApplicationController
   helper_method :my_workout?  
