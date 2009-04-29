@@ -4,13 +4,7 @@
 
 
 $(document).ready(function () {  
-	Array.max = function( array ){
-	    return Math.max.apply( Math, array );
-	};
-	Array.min = function( array ){
-	    return Math.min.apply( Math, array );
-	};
-	
+
 	var heartrate;
 	var elevation;
 	var speed;
@@ -28,29 +22,18 @@ $(document).ready(function () {
 	};
 	
 
-	$.getJSON(workoutURL, function(json) {
-		heartrate = json.workout.json_heartrate;
-		elevation = json.workout.json_elevation;
-		speed = json.workout.json_speed;
-		avghr = json.workout.average_hr;
-		gain = json.workout.elevation_gain
-		avg_speed = json.workout.avg_speed
-
-		$.plot($('#heartrate'), [heartrate, {data: [[22, avghr]], bars: { show: true, lineWidth: 1 }}], options)
-		$.plot($('#elevation'), [elevation, {data: [[22, gain]], bars: { show: true, lineWidth: 1 }}], options)
-		$.plot($('#speed'), [speed, {data: [[22, avg_speed]], bars: { show: true, lineWidth: 1 }}], options)
-		
-		
-	});
-	
-	
-	
-	// $.each(compFields, function(i) {
-	// 	//var url = workoutURL + compFields[i];
-	// 	//$.getJSON(url, function(data) {
-	// 	//	myData = data;
-	// 	//	myData.lines = { show: true };
-	// 		$.plot($('#' + compFields[i]), [myData], options);
-	// 	});
-	// });
+	 $.getJSON(workoutURL, function(json) {
+	 	heartrate = json.workout.json_heartrate;
+	 	elevation = json.workout.json_elevation;
+	 	speed = json.workout.json_speed;
+	 	avghr = json.workout.average_hr;
+	 	gain = json.workout.elevation_gain
+	 	avg_speed = json.workout.avg_speed
+	 
+	 	$.plot($('#heartrate'), [heartrate, {data: [[22, avghr]], bars: { show: true, lineWidth: 1 }}], options)
+	 	$.plot($('#elevation'), [elevation, {data: [[22, gain]], bars: { show: true, lineWidth: 1 }}], options)
+	 	$.plot($('#speed'), [speed, {data: [[22, avg_speed]], bars: { show: true, lineWidth: 1 }}], options)
+	 	
+	 	
+	 });
 });
