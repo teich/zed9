@@ -2,6 +2,7 @@ class Workout < ActiveRecord::Base
   belongs_to  :user
   belongs_to  :activity
   has_many    :trackpoints, :dependent => :destroy
+  has_many    :comps
 
   validates_presence_of :name
   validates_length_of   :name,     :maximum => 100
@@ -13,9 +14,35 @@ class Workout < ActiveRecord::Base
   def get_hr
     trackpoints.map {|a|a.heart_rate}
   end
+  
+  def get_speed
+    trackpoints.map { |tp| tp.speed }
+  end
+  
+  def get_elevation
+    trackpoints.map { |tp| tp.altitude }
+  end
 
   def calc_avg_hr
     get_hr.compact.average_array
+  end
+  
+  def calc_average_speed
+    get_speed.compact.average_array
+  end
+  
+  def calc_elevation_gain
+    gain = 0
+    averaged_altitude = smooth_data(get_elevation, 10)
+    start = averaged_altitude.first
+    averaged_altitude.each do |alt|
+      diff = alt - start
+      if (diff > 0)
+        gain += diff
+      end
+      start = alt
+    end
+    return gain
   end
 
   def smooth_data(series, factor)
@@ -43,6 +70,38 @@ class Workout < ActiveRecord::Base
       return vc
     else
       return sd
+    end
+  end
+  
+  def get_smoothed_speed(points, value_array = false)
+    speed = get_speed
+    factor = speed.size / points
+    smoothed = smooth_data(speed, factor)
+    if value_array
+      c = -1
+      vc = smoothed.map do |d|
+        c += 1
+        [c, d]
+      end
+      return vc
+    else
+      return smoothed
+    end
+  end
+  
+  def get_smoothed_elevation(points, value_array = false)
+    elevation = get_elevation
+    factor = elevation.size / points
+    smoothed = smooth_data(elevation, factor)
+    if value_array
+      c = -1
+      vc = smoothed.map do |d|
+        c += 1
+        [c, d]
+      end
+      return vc
+    else
+      return smoothed
     end
   end
   
@@ -148,6 +207,18 @@ class Workout < ActiveRecord::Base
     tooltip += "\n#{distance_in_miles} miles" if !distance.nil?
     { :value => length, :tooltip => tooltip, :url => url }
 
+  end
+  
+  def json_heartrate
+    get_smoothed_hr(20, true)
+  end
+  
+  def json_speed
+    get_smoothed_speed(20,true)
+  end
+  
+  def json_elevation
+    get_smoothed_elevation(20,true)
   end
     
 end

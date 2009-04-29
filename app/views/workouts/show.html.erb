@@ -1,3 +1,4 @@
+<%= javascript_tag "var WORKOUT_ID = #{@workout.id};" -%>
 <div id="content_header">
 	<div id="workout_header">
 
@@ -48,10 +49,9 @@
 				</thead>
 				<tbody>
 					<tr>
-						<th class="first_column">Average Heart Rate</th>
+						<th class="first_column">Heart Rate</th>
+						<td><div id="heartrate" class="visualization"></div></td>
 						<td><span class="click"><%=h @workout.average_hr %></span></td>
-						<td><%=h @comps[@workout.activity.name]["hr"] %></td>
-						<td class="last_column"><%=h @comps["global"]["hr"] %></td>
 					</tr>
 					<tr>
 						<th class="first_column">Duration</th>
@@ -66,10 +66,14 @@
 						<td class="last_column"><%=h @comps["global"]["distance"] %> miles</td>
 					</tr>
 					<tr>
-						<th class="first_column">Average Speed</th>
-						<td><span class="click"><%=h @workout.avg_speed_in_mph %></span> mph</td>
+						<th class="first_column">Speed</th>
+						<td><div id="speed" class="visualization"></td>
 						<td><%= h @comps[@workout.activity.name]["speed"] %> mph</td>
-						<td class="last_column"><%=h @comps["global"]["speed"] %> mph</td>
+					</tr>
+					<tr>
+						<th class="fist_column">Elevation</th>
+						<td><div id="elevation" class="visualization"></td>
+						<td></td>
 					</tr>
 				</tbody>
 		</table>

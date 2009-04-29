@@ -42,6 +42,7 @@ class WorkoutsController < ApplicationController
     respond_to do |format|
       format.html
       format.xml {render :xml => @workout.to_xml }
+      format.js {render :js => @workout.to_json(:methods => [:json_heartrate, :json_speed, :json_elevation])}
     end
   end
 
@@ -67,20 +68,35 @@ class WorkoutsController < ApplicationController
       @workout = current_user.workouts.build(importer.get_workout)
       
       trackpoints = importer.get_trackpoints
-      time_one = @workout.start_time
-      distance_one = 0
+      time_one = Time.parse(trackpoints.first["time"])
+      distance_one = trackpoints.first["distance"].to_f
+      
       trackpoints.each do |tp|
+        
+        ## Calculate speed
         distance_two = tp["distance"].to_f
         time_two = Time.parse(tp["time"])
         time_delta = time_two - time_one
         distance_delta = distance_two - distance_one
-        tp["speed"] = time_delta / distance_delta
-        distance_two = distance_one
-        time_two = time_one
+        if (distance_delta > 0 && time_delta > 0)
+          tp["speed"] = distance_delta / time_delta
+          distance_one = distance_two
+          time_one = time_two
+        else tp["speed"] = nil
+        end
+        
+        ## Calculate altitude
+        
+        ## Calculate average speed
+        
+        ## Store the trackpoint
+        @workout.trackpoints.build(tp)
       end
-      trackpoints.each { |tp| @workout.trackpoints.build(tp)}
-      @workout.distance = trackpoints.last["distance"] if !trackpoints.last["distance"].nil?
       
+      ## Set some workout variables that require trackpoint analysis.
+      @workout.distance = trackpoints.last["distance"] if !trackpoints.last["distance"].nil?
+      @workout.avg_speed = @workout.calc_average_speed
+      @workout.elevation_gain = @workout.calc_elevation_gain
       @workout.average_hr = @workout.calc_avg_hr if @workout.average_hr.nil?
     end
     
@@ -106,7 +122,7 @@ class WorkoutsController < ApplicationController
 
   def destroy
     @workout.destroy
-    redirect_to(workouts_url)
+    redirect_to(user_workouts_url(current_user))
   end
 
   private
