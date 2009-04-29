@@ -78,13 +78,6 @@ a {
 	color: #9f9f9f;
 }
 
-#loginpane input {
-	background-image:url(/images/splash_inputs.png);
-	background-repeat:no-repeat;
-	border:light none;
-	height:16px;
-}
-
 #loginpane .login_text {
 	padding-left: 12px;
 }
@@ -217,7 +210,6 @@ thead, th, td {
 	font-size: 18px;
 	line-height: inherit;
 	font-family: inherit;
-	font-color: inherit;
 }
 
 .form th {
