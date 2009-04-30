@@ -2,3 +2,4 @@ authlogic
 logging
 derailed-ziya  --source gems.github.com
 newrelic_rpm
+hrmparser --source gems.github.com

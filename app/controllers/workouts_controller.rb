@@ -1,5 +1,4 @@
 require 'hpricot'
-require 'lib/WorkoutImporter'
 
 class WorkoutsController < ApplicationController
   helper_method :my_workout?  
@@ -60,44 +59,14 @@ class WorkoutsController < ApplicationController
     uploaded_file = params[:device_file] 
     if request.post? and uploaded_file.respond_to? :read
       
-      # Version I'm running here seems to pass as string is <10K, or file if over.
+      # Rails "optimizes" by passing a string or a Tempfile.  Always get string
       uploaded_data = ensure_string(uploaded_file)
-      importer = GarminImporter.new(uploaded_data, params[:workout]) if is_garmin?(params[:device_type])
-      importer = PolarImporter.new(uploaded_data, params[:workout], current_user.time_zone) if is_polar?(params[:device_type])
-      
-      @workout = current_user.workouts.build(importer.get_workout)
-      
-      trackpoints = importer.get_trackpoints
-      time_one = Time.parse(trackpoints.first["time"])
-      distance_one = trackpoints.first["distance"].to_f
-      
-      trackpoints.each do |tp|
-        
-        ## Calculate speed
-        distance_two = tp["distance"].to_f
-        time_two = Time.parse(tp["time"])
-        time_delta = time_two - time_one
-        distance_delta = distance_two - distance_one
-        if (distance_delta > 0 && time_delta > 0)
-          tp["speed"] = distance_delta / time_delta
-          distance_one = distance_two
-          time_one = time_two
-        else tp["speed"] = nil
-        end
-        
-        ## Calculate altitude
-        
-        ## Calculate average speed
-        
-        ## Store the trackpoint
-        @workout.trackpoints.build(tp)
-      end
-      
-      ## Set some workout variables that require trackpoint analysis.
-      @workout.distance = trackpoints.last["distance"] if !trackpoints.last["distance"].nil?
-      @workout.avg_speed = @workout.calc_average_speed
-      @workout.elevation_gain = @workout.calc_elevation_gain
-      @workout.average_hr = @workout.calc_avg_hr if @workout.average_hr.nil?
+      importer = Importer::Garmin.new(:data => uploaded_data) if params[:device_type] == "garmin"
+      importer = Importer::Polar.new(:data => uploaded_data, :time_zone => current_user.time_zone) if params[:device_type] == "polar"
+
+      iw = importer.restore
+      @workout = current_user.workouts.build()
+      @workout.build_from_imported!(iw)
     end
     
     if @workout.save
@@ -138,14 +107,6 @@ class WorkoutsController < ApplicationController
       flash[:notice] = "The workout you tried to view is not public"
       redirect_to root_path 
     end
-  end
-
-  def is_garmin?(device)
-    device == "garmin"
-  end
-    
-  def is_polar?(device)
-    device == "polar"
   end
     
   def ensure_string(uploaded_file)

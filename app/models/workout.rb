@@ -23,30 +23,8 @@ class Workout < ActiveRecord::Base
     trackpoints.map { |tp| tp.altitude }
   end
 
-  def calc_avg_hr
-    get_hr.compact.average_array
-  end
-  
-  def calc_average_speed
-    get_speed.compact.average_array
-  end
-  
-  def calc_elevation_gain
-    gain = 0
-    averaged_altitude = smooth_data(get_elevation, 10)
-    start = averaged_altitude.first
-    averaged_altitude.each do |alt|
-      diff = alt - start
-      if (diff > 0)
-        gain += diff
-      end
-      start = alt
-    end
-    return gain
-  end
-
   def smooth_data(series, factor)
-    series.in_groups_of(factor).map { |snipit| snipit.compact.average_array }
+    series.in_groups_of(factor).map { |snipit| snipit.compact.aaverage }
   end
   
   def smooth_axis(series, factor)
@@ -135,7 +113,7 @@ class Workout < ActiveRecord::Base
   def comps_average_hr(comps)
     if comps.size > 0
       hrs = comps.map { |comp| comp.average_hr }
-      return hrs.compact.average_array
+      return hrs.compact.aaverage
     end
     return "N/A"
   end
@@ -143,7 +121,7 @@ class Workout < ActiveRecord::Base
   def comps_average_duration(comps)
     if comps.size > 0
       duration = pick_array_field(comps, :duration)
-      return duration.compact.average_array.round(1)
+      return duration.compact.aaverage.round(1)
     end
     return "N/A"
   end
@@ -154,7 +132,7 @@ class Workout < ActiveRecord::Base
   end
   
   def gps_data?
-    !trackpoints[0].lat.nil?
+    !trackpoints[0].nil? && !trackpoints[0].lat.nil?
   end
 
   def number_to_time(seconds)
@@ -186,17 +164,17 @@ class Workout < ActiveRecord::Base
     my_comps = user.workouts.find_all_by_activity_id(activity.id)
     comps[activity.name] = {}
     
-    comps[activity.name]["hr"] = (my_comps.map { |c| c.average_hr  }).compact.average_array
-    comps[activity.name]["duration"] = (my_comps.map {|c| c.duration}).compact.average_array
-    comps[activity.name]["distance"] = (my_comps.map {|c| c.distance_in_miles}).compact.average_array.round(1)
-    comps[activity.name]["speed"] = (my_comps.map {|c| c.avg_speed_in_mph}).compact.average_array.round(1)
+    comps[activity.name]["hr"] = (my_comps.map { |c| c.average_hr  }).compact.aaverage
+    comps[activity.name]["duration"] = (my_comps.map {|c| c.duration}).compact.aaverage
+    comps[activity.name]["distance"] = (my_comps.map {|c| c.distance_in_miles}).compact.aaverage.round(1)
+    comps[activity.name]["speed"] = (my_comps.map {|c| c.avg_speed_in_mph}).compact.aaverage.round(1)
     
     all_comps = Workout.find_all_by_activity_id(activity.id)
     comps["global"] = {}
-    comps["global"]["hr"] = (all_comps.map { |c| c.average_hr  }).compact.average_array
-    comps["global"]["duration"] = (all_comps.map {|c| c.duration}).compact.average_array
-    comps["global"]["distance"] = (all_comps.map {|c| c.distance_in_miles}).compact.average_array.round(1)
-    comps["global"]["speed"] = (all_comps.map {|c| c.avg_speed_in_mph}).compact.average_array.round(1)
+    comps["global"]["hr"] = (all_comps.map { |c| c.average_hr  }).compact.aaverage
+    comps["global"]["duration"] = (all_comps.map {|c| c.duration}).compact.aaverage
+    comps["global"]["distance"] = (all_comps.map {|c| c.distance_in_miles}).compact.aaverage.round(1)
+    comps["global"]["speed"] = (all_comps.map {|c| c.avg_speed_in_mph}).compact.aaverage.round(1)
     
     return comps
   end
@@ -209,8 +187,8 @@ class Workout < ActiveRecord::Base
 
   end
 
-  def elevation_formatted()
-    (elevation_gain).round
+  def elevation_formatted
+    elevation_gain.nil? ? nil: elevation_gain.round
   end  
     
   def json_heartrate
@@ -227,6 +205,27 @@ class Workout < ActiveRecord::Base
   
   def json_elevation
     get_smoothed_elevation(20,true)
+  end
+  
+  def build_from_imported!(iw)
+    self.average_hr = iw.average_hr
+    self.avg_speed = iw.average_speed
+    self.distance = iw.distance
+    self.duration = iw.duration
+    self.start_time = iw.time
+    self.elevation_gain = iw.altitude_gain
+    
+    iw.trackpoints.each do |tp|
+      wtp = trackpoints.build()
+      wtp.altitude = tp.altitude
+      wtp.distance = tp.distance
+      wtp.lat = tp.lat
+      wtp.lng = tp.lng
+      wtp.speed = tp.speed
+      wtp.time = tp.time
+      wtp.heart_rate = tp.hr
+    end
+    
   end
     
 end

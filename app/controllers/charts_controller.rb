@@ -30,7 +30,7 @@ class ChartsController < ApplicationController
   private
 
   def smooth_data(series, factor)
-    series.in_groups_of(factor).map { |snipit| snipit.compact.average_array }
+    series.in_groups_of(factor).map { |snipit| snipit.compact.aaverage }
   end
 
 end
