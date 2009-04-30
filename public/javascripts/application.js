@@ -18,7 +18,7 @@ $(document).ready(function () {
 		xaxis: {ticks: []}, 
 		yaxis: {ticks:[]},
 		colors: [ "#25a1d6", "#3dc10b", "#545454" ],
-		shadowSize: 0 
+		shadowSize: 1, 
 	};
 	
 	var bar_options = {
@@ -26,7 +26,7 @@ $(document).ready(function () {
 		xaxis: { ticks: [], min: 0 },
 		yaxis: { ticks: [], min: 0},
 		colors: [ "#25a1d6", "#3dc10b", "#545454" ],
-		shadowSize: 0 
+		shadowSize: 1, 
 	};
 	
 	var full_size_options = {
@@ -34,13 +34,11 @@ $(document).ready(function () {
 			borderWidth: 0,
 			borderColor: "#d9d9d9", 
 			tickColor: '#ffffff',
-			autoHighlight: "yes",
 	    hoverable: "yes",
 	    mouseActiveRadius: 24,
-	    show: 'both'
 		}, 
 		colors: [ "#25a1d6", "#3dc10b", "#545454" ],
-		shadowSize: 0, 
+		shadowSize: 1, 
 	  xaxis: {
 	    tickSize: 30
 		},
