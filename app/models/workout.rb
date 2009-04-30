@@ -217,6 +217,10 @@ class Workout < ActiveRecord::Base
     get_smoothed_hr(20, true)
   end
   
+  def json_heartrate_big
+    get_smoothed_hr(200, true)
+  end
+  
   def json_speed
     get_smoothed_speed(20,true)
   end

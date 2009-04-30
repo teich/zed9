@@ -78,20 +78,13 @@
 	<div id="right_column">
 		<div id="map">
 			<% if @workout.gps_data? %>
-	        <%= @map.div(:width => 512, :height => 420 ) %>
+	        <%= @map.div(:width => 512, :height => 364 ) %>
 			<% end %>
 		</div>
 
 	</div>
 
-	<div id="heart_rate_graph">
-
-		<div id="y_axis">
-			<p class="axis_label">Heart Rate</p>
-		</div>
-		
-			<%= ziya_chart workout_heart_rate_chart_path(@workout), :width => "100%", :height => 168 -%>
-	</div>
+	<div id="fullsize_chart" class="big_visualization"></div>
 	
 </div>
 
