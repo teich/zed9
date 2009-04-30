@@ -65,8 +65,10 @@ class WorkoutsController < ApplicationController
       importer = Importer::Polar.new(:data => uploaded_data, :time_zone => current_user.time_zone) if params[:device_type] == "polar"
 
       iw = importer.restore
-      @workout = current_user.workouts.build()
+      @workout = current_user.workouts.build(params[:workout])
       @workout.build_from_imported!(iw)
+      @workout.shared = current_user.shared
+
     end
     
     if @workout.save

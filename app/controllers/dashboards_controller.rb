@@ -6,7 +6,11 @@ class DashboardsController < ApplicationController
     @shared = Workout.find_all_by_shared(true, :limit=>5, :order => "updated_at DESC")
     
     durations = @workouts.map { |w| w.duration }
-    @total_time = durations.asum
+    if durations.nil?
+      @total_time = 0
+    else
+      @total_time = durations.compact.asum
+    end
     
     # TODO: pull out of controller!
     # figure out how much time users spend on average working out.  ick.
@@ -14,7 +18,11 @@ class DashboardsController < ApplicationController
     aud = users.map do |u|
       uw = u.workouts.find(:all)
       uwd = uw.map { |uwm| uwm.duration }
-      utt = uwd.asum
+      if uwd.nil?
+        utt = 0
+      else
+        utt = uwd.compact.asum
+      end
     end 
     @atd = aud.aaverage
   end
