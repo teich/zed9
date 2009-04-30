@@ -31,7 +31,7 @@ Rails::Initializer.run do |config|
   config.gem "authlogic"
   config.gem "derailed-ziya", :lib => "ziya"
   config.gem "newrelic_rpm" 
-  config.gem "hrmparser", :version => "0.2.2"
+  config.gem "teich-hrmparser", :lib => "hrmparser", :version => "0.2.2"
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
