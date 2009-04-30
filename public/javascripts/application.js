@@ -21,6 +21,14 @@ $(document).ready(function () {
 		shadowSize: 0 
 	};
 	
+	var bar_options = {
+		grid: { borderWidth: 0 }, 
+		xaxis: { ticks: [], min: 0 },
+		yaxis: { ticks: [], min: 0},
+		colors: [ "#25a1d6", "#3dc10b", "#545454" ],
+		shadowSize: 0 
+	};
+	
 	var full_size_options = {
 		grid: { 
 			borderWidth: 0,
@@ -49,7 +57,53 @@ $(document).ready(function () {
 	 	avghr = json.workout.average_hr;
 	 	gain = json.workout.elevation_gain
 	 	avg_speed = json.workout.avg_speed
+		duration = json.workout.duration
+		distance = json.workout.distance
+		
+		// $.plot($('#duration'), [{ 
+		// 	data: [[0, duration]], 
+		// 	bars: { horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] } }
+		// 	}], bar_options);
 	 
+	
+	
+	//  -------------------------
+    var d1 = [[duration, .8]]; 
+    var d2 = [[4000,.4]];
+    var d3 = [[7000,0]];
+
+	var hbar_opt = {bars: { 
+		horizontal: true, 
+		show: true, 
+		lineWidth: 1, 
+		fillColor: { 
+			colors: [{ opacity: 0.2 }, { opacity: 1 }] 
+		} 
+	}}
+	$.plot( $("#duration"), [
+            {
+				data: d1,
+	            hbar_opt
+			},
+			{
+				data: d2,
+	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
+			},
+			{
+				data: d3,
+		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
+			}], {
+	        xaxis: { ticks: [], min: 0 },
+	        yaxis: { ticks: [], min: 0 },
+			colors: ["#25a1d6", "#3dc10b", "#545454" ],
+			grid: { borderWidth: 0 }
+	});
+    
+
+
+	//  -------------------------
+
+	
 	 	$.plot($('#heartrate'), [{
 				data: heartrate,
 				lines: {

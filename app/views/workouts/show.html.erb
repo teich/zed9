@@ -43,19 +43,23 @@
 		<table id="workout_comparison">
 			<tr class="stat">
 				<th>Duration</th>
-				<td id="spark_bar"><div id="placeholder" class="visualization"></div></td>
-				<td class="number"><span class="value"><%=h number_to_time(@workout.duration) %></span>h</td>
+				<td id="spark_bar"><div id="duration" class="visualization"></div></td>
+				<td class="number"><span class="value"><%= h number_to_time(@workout.duration) %></span>h</td>
 			</tr>
 			<tr class="stat">
 				<th>Distance</th>
-				<td id="spark_bar"><div id="placeholder2" class="visualization"></div></td>
+				<td id="spark_bar"><div id="distance" class="visualization"></div></td>
 				<td class="number"><span class="value"><%= h @workout.distance_in_miles %></span>miles</td>
 			</tr>
+			
+			<% if false %>
 			<tr class="stat">
 				<th>Calories</th>
-				<td id="spark_bar"><div id="placeholder3" class="visualization"></div></td>
+				<td id="spark_bar"><div id="calorie" class="visualization"></div></td>
 				<td class="number"><span class="value">N/A</span></td>
 			</tr>
+			<% end %>
+			
 			<% if !@workout.avg_speed.nil? %>
 			<tr class="stat">
 				<th>Speed</th>
@@ -63,6 +67,7 @@
 				<td class="number"><span class="value"><%= h @comps[@workout.activity.name]["speed"] %></span>mph</td>
 			</tr>
 			<% end %>
+			
 			<% if !@workout.elevation_gain.nil? %>
 			<tr class="stat">
 				<th>Elevation</th>
@@ -70,6 +75,7 @@
 				<td class="number"><span class="value"><%=h @workout.elevation_formatted %></span>ft</td>
 			</tr>
 			<% end %>
+			
 			<tr class="stat">
 				<th>Heart Rate</th>
 				<td id="spark_line"><div id="heartrate" class="visualization"></div></td>
@@ -78,17 +84,23 @@
 		</table>
 
 	</div>
+
+	<% if @workout.gps_data? %>
 		
 	<div id="right_column">
 		<div id="map">
-			<% if @workout.gps_data? %>
-	        <%= @map.div(:width => 512, :height => 364 ) %>
-			<% end %>
+	        <%= @map.div(:width => 512, :height => 420 ) %>
 		</div>
 
 	</div>
+	<% end %>
 
-	<div id="fullsize_chart" class="big_visualization"></div>
+	<div id="heart_rate_graph">
+
+		<div id="y_axis">
+			<p class="axis_label">Heart Rate</p>
+		</div>
+	</div>
 	
 </div>
 
