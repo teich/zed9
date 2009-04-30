@@ -21,19 +21,138 @@ $(document).ready(function () {
 		shadowSize: 0 
 	};
 	
-
+	var full_size_options = {
+		grid: { 
+			borderWidth: 0,
+			borderColor: "#d9d9d9", 
+			tickColor: '#ffffff',
+			autoHighlight: "yes",
+	    hoverable: "yes",
+	    mouseActiveRadius: 24,
+	    show: 'both'
+		}, 
+		colors: [ "#25a1d6", "#3dc10b", "#545454" ],
+		shadowSize: 0, 
+	  xaxis: {
+	    tickSize: 30
+		},
+	  yaxis: {
+	    tickSize: 20 
+		}
+	};
+		
 	 $.getJSON(workoutURL, function(json) {
 	 	heartrate = json.workout.json_heartrate;
+	 	heartrate_big = json.workout.json_heartrate_big;
 	 	elevation = json.workout.json_elevation;
 	 	speed = json.workout.json_speed;
 	 	avghr = json.workout.average_hr;
 	 	gain = json.workout.elevation_gain
 	 	avg_speed = json.workout.avg_speed
 	 
-	 	$.plot($('#heartrate'), [heartrate, {data: [[22, avghr]], bars: { show: true, lineWidth: 1 }}], options)
-	 	$.plot($('#elevation'), [elevation, {data: [[22, gain]], bars: { show: true, lineWidth: 1 }}], options)
-	 	$.plot($('#speed'), [speed, {data: [[22, avg_speed]], bars: { show: true, lineWidth: 1 }}], options)
+	 	$.plot($('#heartrate'), [{
+				data: heartrate,
+				lines: {
+					show: true, 
+					fill: true, 
+					fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } 
+				}
+			}, {
+				data: [[22, avghr]], 
+				bars: { 
+					show: true, 
+					lineWidth: 1, 
+					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
+				}
+			}, {
+				data: [[24, avghr]], 
+				bars: { 
+					show: true, 
+					lineWidth: 1, 
+					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
+					}
+				}, {
+					data: [[26, avghr]], 
+					bars: { 
+						show: true, 
+						lineWidth: 1, 
+						fillColor: {colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
+					}
+				}], 
+				options
+			)
+
+	 	$.plot($('#elevation'), [ {
+			data: elevation,
+			lines: {
+				show: true, 
+				fill: true, 
+				fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } 
+			}
+		}, {
+				data: [[22, gain]], 
+				bars: { 
+					show: true, 
+					lineWidth: 1, 
+					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
+				}
+			}, {
+				data: [[24, gain]], 
+				bars: { 
+					show: true, 
+					lineWidth: 1, 
+					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
+				}
+			}, {
+				data: [[26, gain]], 
+				bars: { 
+					show: true, 
+					lineWidth: 1,
+					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
+				}
+			}], 
+			options)
+
+	 	$.plot($('#speed'), [ {
+				data: speed,
+				lines: {
+					show: true, 
+					fill: true, 
+					fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } 
+				}
+			}, {
+				data: [[22, avg_speed]], 
+				bars: { 
+					show: true, 
+					lineWidth: 1, 
+					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
+				}
+			}, {
+				data: [[24, avg_speed]], 
+				bars: { 
+					show: true, 
+					lineWidth: 1, 
+					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
+				}
+			}, {
+				data: [[26, avg_speed]], 
+				bars: { 
+					show: true, 
+					lineWidth: 1, 
+					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
+				}
+			}], 
+			options)
 	 	
+	 	$.plot($('#fullsize_chart'), [ {
+				data: heartrate_big, 
+				lines: {
+					show: true, 
+					fill: true, 
+					fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } 
+				}
+			}],
+			full_size_options)
 	 	
 	 });
 
@@ -49,11 +168,12 @@ $(document).ready(function () {
 					target: 'topRight'
 				},
 				adjust: {
-					x:-202,
-					y:-193
+					x:-204,
+					y:-201
 				}				
 			},
 			style: { 
+				width: 288,
 				padding: 8,
 				background: '#f0f0f0',
 				color: '#545454',
