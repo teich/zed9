@@ -72,20 +72,18 @@ $(document).ready(function () {
     var d2 = [[4000,.4]];
     var d3 = [[7000,0]];
 
-	var hbar_opt = {bars: { 
-		horizontal: true, 
-		show: true, 
-		lineWidth: 1, 
-		fillColor: { 
-			colors: [{ opacity: 0.2 }, { opacity: 1 }] 
-		} 
-	}}
-	$.plot( $("#duration"), [
-            {
+
+	$.plot( $("#duration"), [{
 				data: d1,
-	            hbar_opt
-			},
-			{
+	            bars: { 
+					horizontal: true, 
+					show: true, 
+					lineWidth: 1, 
+					fillColor: { 
+						colors: [{ opacity: 0.2 }, { opacity: 1 }] 
+					} 
+				}
+			}, {
 				data: d2,
 	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			},
