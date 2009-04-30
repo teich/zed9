@@ -56,16 +56,20 @@
 				<td id="spark_bar"><div id="placeholder3" class="visualization"></div></td>
 				<td class="number"><span class="value">N/A</span></td>
 			</tr>
+			<% if !@workout.avg_speed.nil? %>
 			<tr class="stat">
 				<th>Speed</th>
 				<td id="spark_line"><div id="speed" class="visualization"></div></td>
 				<td class="number"><span class="value"><%= h @comps[@workout.activity.name]["speed"] %></span>mph</td>
 			</tr>
+			<% end %>
+			<% if !@workout.elevation_gain.nil? %>
 			<tr class="stat">
 				<th>Elevation</th>
 				<td id="spark_line"><div id="elevation" class="visualization"></div></td>
 				<td class="number"><span class="value"><%=h @workout.elevation_formatted %></span>ft</td>
 			</tr>
+			<% end %>
 			<tr class="stat">
 				<th>Heart Rate</th>
 				<td id="spark_line"><div id="heartrate" class="visualization"></div></td>

@@ -23,28 +23,6 @@ class Workout < ActiveRecord::Base
     trackpoints.map { |tp| tp.altitude }
   end
 
-  def calc_avg_hr
-    get_hr.compact.aaverage
-  end
-  
-  def calc_average_speed
-    get_speed.compact.aaverage
-  end
-  
-  def calc_elevation_gain
-    gain = 0
-    averaged_altitude = smooth_data(get_elevation, 10)
-    start = averaged_altitude.first
-    averaged_altitude.each do |alt|
-      diff = alt - start
-      if (diff > 0)
-        gain += diff
-      end
-      start = alt
-    end
-    return gain
-  end
-
   def smooth_data(series, factor)
     series.in_groups_of(factor).map { |snipit| snipit.compact.aaverage }
   end
@@ -154,7 +132,7 @@ class Workout < ActiveRecord::Base
   end
   
   def gps_data?
-    !trackpoints[0].lat.nil?
+    !trackpoints[0].nil? && !trackpoints[0].lat.nil?
   end
 
   def number_to_time(seconds)
@@ -209,8 +187,8 @@ class Workout < ActiveRecord::Base
 
   end
 
-  def elevation_formatted()
-    (elevation_gain).round
+  def elevation_formatted
+    elevation_gain.nil? ? nil: elevation_gain.round
   end  
     
   def json_heartrate
@@ -223,6 +201,27 @@ class Workout < ActiveRecord::Base
   
   def json_elevation
     get_smoothed_elevation(20,true)
+  end
+  
+  def build_from_imported!(iw)
+    self.average_hr = iw.average_hr
+    self.avg_speed = iw.average_speed
+    self.distance = iw.distance
+    self.duration = iw.duration
+    self.start_time = iw.time
+    self.elevation_gain = iw.altitude_gain
+    
+    iw.trackpoints.each do |tp|
+      wtp = trackpoints.build()
+      wtp.altitude = tp.altitude
+      wtp.distance = tp.distance
+      wtp.lat = tp.lat
+      wtp.lng = tp.lng
+      wtp.speed = tp.speed
+      wtp.time = tp.time
+      wtp.heart_rate = tp.hr
+    end
+    
   end
     
 end
