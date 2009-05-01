@@ -2,7 +2,9 @@
 <div id="content_header">
 	<div id="workout_header">
 
-		<h1><img class="activity_icon" src="/images/running.jpg" width="37" height="40"> <span class="click"><%=h @workout.name %></span> <% if my_workout? %><span class="action"><%= link_to 'Edit', edit_workout_path(@workout) %></span><% end %></h1>
+		<h1>
+			<!-- <img class="activity_icon" src="/images/running.jpg" width="37" height="40"> -->
+			<img class="activity_icon" src="/images/activities/running.png"><span class="click"><%=h @workout.name %></span> <% if my_workout? %><span class="action"><%= link_to 'Edit', edit_workout_path(@workout) %></span><% end %></h1>
 
 		<p id="workout_description"><span class="click"><%=h @workout.activity.name %></span> on <span class="click"><%=h activity_timestamp(@workout.start_time) %></span> by <%=h @workout.user.login %></p>
 

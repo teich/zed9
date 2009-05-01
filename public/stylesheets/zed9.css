@@ -357,7 +357,9 @@ thead, th, td {
 
 .activity_icon {
 	position: relative;
-	bottom: -6px;
+	padding-right: 4px;
+	height: 32px;
+	width: auto;
 }
 
 .action_icon {
