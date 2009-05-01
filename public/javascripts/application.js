@@ -50,41 +50,18 @@ $(document).ready(function () {
 	};
 		
 	 $.getJSON(workoutURL, function(json) {
-	 	heartrate = json.workout.json_heartrate;
-	 	heartrate_big = json.workout.json_heartrate_big;
-	 	elevation = json.workout.json_elevation;
-	 	speed = json.workout.json_speed;
-	 	avghr = json.workout.average_hr;
-	 	gain = json.workout.elevation_gain
-	 	avg_speed = json.workout.avg_speed
-		duration = json.workout.duration
-		distance = json.workout.distance
+		workout = json.workout
+		all_comps = json.workout.json_comps.all_comps;
+		my_comps = json.workout.json_comps.my_comps;
 		
-		all_comps_speed = json.workout.json_comps.all_comps.speed
-		all_comps_duration = json.workout.json_comps.all_comps.duration
-		all_comps_distance = json.workout.json_comps.all_comps.distance
-		all_comps_hr = json.workout.json_comps.all_comps.hr
-		all_comps_elevation = json.workout.json_comps.all_comps.elevation
-		
-		
-		my_comps_speed = json.workout.json_comps.my_comps.speed
-		my_comps_duration = json.workout.json_comps.my_comps.duration
-		my_comps_distance = json.workout.json_comps.my_comps.distance
-		my_comps_hr = json.workout.json_comps.my_comps.hr
-		my_comps_elevation = json.workout.json_comps.my_comps.elevation
-		
-				
-		// $.plot($('#duration'), [{ 
-		// 	data: [[0, duration]], 
-		// 	bars: { horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] } }
-		// 	}], bar_options);
+
 	 
 	
 	
 	//  -------------------------
 
-	$.plot( $("#duration"), [{
-				data: [[duration, .8]],
+	$.plot( $("#spark_duration"), [{
+				data: [[workout.duration, .8]],
 	            bars: { 
 					horizontal: true, 
 					show: true, 
@@ -94,11 +71,11 @@ $(document).ready(function () {
 					} 
 				}
 			}, {
-				data: [[my_comps_duration, .4]],
+				data: [[my_comps.duration, .4]],
 	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			},
 			{
-				data: [[all_comps_duration, 0.0]],
+				data: [[all_comps.duration, 0.0]],
 		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			}], {
 	        xaxis: { ticks: [], min: 0 },
@@ -107,15 +84,15 @@ $(document).ready(function () {
 			grid: { borderWidth: 0 }
 	});
 	
-	$.plot($('#heartrate'), [{
-			data: heartrate,
+	$.plot($('#spark_heartrate'), [{
+			data: workout.json_heartrate,
 			lines: {
 				show: true, 
 				fill: true, 
 				fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } 
 			}
 		}, {
-			data: [[22, avghr]], 
+			data: [[22, workout.hr]], 
 			yaxis: 2,
 			bars: { 
 				show: true, 
@@ -123,7 +100,7 @@ $(document).ready(function () {
 				fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
 			}
 		}, {
-			data: [[24, my_comps_hr]], 
+			data: [[24, my_comps.hr]], 
 			yaxis: 2,
 			bars: { 
 				show: true, 
@@ -131,7 +108,7 @@ $(document).ready(function () {
 				fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
 				}
 			}, {
-				data: [[26, all_comps_hr]], 
+				data: [[26, all_comps.hr]], 
 				yaxis: 2,
 				bars: { 
 					show: true, 
@@ -142,8 +119,8 @@ $(document).ready(function () {
 			options
 		)
 		
-	 	$.plot($('#fullsize_chart'), [ {
-				data: heartrate_big, 
+	 	$.plot($('#spark_fullsize_chart'), [ {
+				data: workout.json_heartrate_big, 
 				lines: {
 					show: true, 
 					fill: true, 
@@ -154,8 +131,8 @@ $(document).ready(function () {
 
 
     
-	$.plot( $("#distance"), [{
-				data: [[distance, .8]],
+	$.plot( $("#spark_distance"), [{
+				data: [[workout.distance, .8]],
 	            bars: { 
 					horizontal: true, 
 					show: true, 
@@ -165,11 +142,11 @@ $(document).ready(function () {
 					} 
 				}
 			}, {
-				data: [[my_comps_distance, .4]],
+				data: [[my_comps.distance, .4]],
 	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			},
 			{
-				data: [[all_comps_distance, 0.0]],
+				data: [[all_comps.distance, 0.0]],
 		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			}], {
 	        xaxis: { ticks: [], min: 0 },
@@ -184,15 +161,15 @@ $(document).ready(function () {
 	
 
 
-	 	$.plot($('#elevation'), [ {
-			data: elevation,
+	 	$.plot($('#spark_elevation'), [ {
+			data: workout.json_elevation,
 			lines: {
 				show: true, 
 				fill: true, 
 				fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } 
 			}
 		}, {
-				data: [[22, gain]], 
+				data: [[22, workout.elevation]], 
 				yaxis: 2,
 				bars: { 
 					show: true, 
@@ -200,7 +177,7 @@ $(document).ready(function () {
 					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
 				}
 			}, {
-				data: [[24, my_comps_elevation]], 
+				data: [[24, my_comps.elevation]], 
 				yaxis: 2,
 				bars: { 
 					show: true, 
@@ -208,7 +185,7 @@ $(document).ready(function () {
 					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
 				}
 			}, {
-				data: [[26, all_comps_elevation]],
+				data: [[26, all_comps.elevation]],
 				yaxis: 2,
 				bars: { 
 					show: true, 
@@ -218,15 +195,15 @@ $(document).ready(function () {
 			}], 
 			options)
 
-	 	$.plot($('#speed'), [ {
-				data: speed,
+	 	$.plot($('#spark_speed'), [ {
+				data: workout.json_speed,
 				lines: {
 					show: true, 
 					fill: true, 
 					fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } 
 				}
 			}, {
-				data: [[22, avg_speed]], 
+				data: [[22, workout.speed]], 
 				yaxis: 2,
 				bars: { 
 					show: true, 
@@ -234,7 +211,7 @@ $(document).ready(function () {
 					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
 				}
 			}, {
-				data: [[24, my_comps_speed]], 
+				data: [[24, my_comps.speed]], 
 				yaxis: 2,
 				bars: { 
 					show: true, 
@@ -242,7 +219,7 @@ $(document).ready(function () {
 					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
 				}
 			}, {
-				data: [[26, all_comps_speed]], 
+				data: [[26, all_comps.speed]], 
 				yaxis: 2,
 				bars: { 
 					show: true, 
@@ -254,8 +231,10 @@ $(document).ready(function () {
 	 	
 
 
-	$('.stat').qtip({
-			content: '<div class="stat"><p class="comp_this_workout"><span class="value">1:32</span>h for this hike</p> <p class="comp_my_activity"><span class="value">2:08</span>h average for all your hikes</p> <p class="comp_activity"><span class="value">0:55</span>h average for everyone\'s hikes</p></div>',
+	$(".stat").each(function(i) {
+			
+	$(this).qtip({
+			content: '<div class="stat"><p class="comp_this_workout"><span class="value">' + workout[this.id] + '</span>h for this hike</p> <p class="comp_my_activity"><span class="value">' + my_comps[this.id] + '</span>h average for all your hikes</p> <p class="comp_activity"><span class="value">' + all_comps[this.id] + '</span>h average for everyone\'s hikes</p></div>',
 			show: 'mouseover',
 			hide: 'mouseout',
 			position: {
@@ -284,4 +263,5 @@ $(document).ready(function () {
 	   	}
 	});
  });
+});
 });

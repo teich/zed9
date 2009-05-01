@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090429003516) do
+ActiveRecord::Schema.define(:version => 20090501184248) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -76,14 +76,14 @@ ActiveRecord::Schema.define(:version => 20090429003516) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "login",                                  :null => false
-    t.string   "crypted_password",                       :null => false
-    t.string   "password_salt",                          :null => false
-    t.string   "persistence_token",                      :null => false
-    t.string   "single_access_token",                    :null => false
-    t.string   "perishable_token",                       :null => false
-    t.integer  "login_count",         :default => 0,     :null => false
-    t.integer  "failed_login_count",  :default => 0,     :null => false
+    t.string   "login",                                 :null => false
+    t.string   "crypted_password",                      :null => false
+    t.string   "password_salt",                         :null => false
+    t.string   "persistence_token",                     :null => false
+    t.string   "single_access_token",                   :null => false
+    t.string   "perishable_token",                      :null => false
+    t.integer  "login_count",         :default => 0,    :null => false
+    t.integer  "failed_login_count",  :default => 0,    :null => false
     t.datetime "last_request_at"
     t.datetime "last_login_at"
     t.datetime "current_login_at"
@@ -98,23 +98,23 @@ ActiveRecord::Schema.define(:version => 20090429003516) do
     t.string   "sex"
     t.integer  "height"
     t.string   "time_zone"
-    t.boolean  "shared",              :default => false
+    t.boolean  "shared",              :default => true
   end
 
   create_table "workouts", :force => true do |t|
     t.datetime "start_time"
     t.float    "distance"
-    t.integer  "average_hr"
+    t.integer  "hr"
     t.float    "duration"
-    t.string   "name",           :default => "Unnamed"
+    t.string   "name",        :default => "Unnamed"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "activity_id",    :default => 0
+    t.integer  "activity_id", :default => 0
     t.string   "device_type"
     t.boolean  "shared"
-    t.float    "elevation_gain"
-    t.float    "avg_speed"
+    t.float    "elevation"
+    t.float    "speed"
   end
 
 end

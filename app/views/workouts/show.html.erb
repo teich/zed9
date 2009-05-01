@@ -43,48 +43,48 @@
 	<div id="workout_left_column">
 		
 		<table id="workout_comparison">
-			<tr class="stat">
+			<tr class="stat" id="duration">
 				<th>Duration</th>
-				<td id="spark_bar"><div id="duration" class="visualization"></div></td>
+				<td id="spark_bar"><div id="spark_duration" class="visualization"></div></td>
 				<td class="number"><span class="value"><%= h number_to_time(@workout.duration) %></span>h</td>
 			</tr>
 			
 			<% if !@workout.distance.nil? %>
-			<tr class="stat">
+			<tr class="stat" id="distance">
 				<th>Distance</th>
-				<td id="spark_bar"><div id="distance" class="visualization"></div></td>
+				<td id="spark_bar"><div id="spark_distance" class="visualization"></div></td>
 				<td class="number"><span class="value"><%= h @workout.distance_in_miles %></span>miles</td>
 			</tr>
 			<% end -%>
 			
 			<% if false %>
-			<tr class="stat">
+			<tr class="stat" id="calorie">
 				<th>Calories</th>
-				<td id="spark_bar"><div id="calorie" class="visualization"></div></td>
+				<td id="spark_bar"><div id="spark_calorie" class="visualization"></div></td>
 				<td class="number"><span class="value">N/A</span></td>
 			</tr>
 			<% end -%>
 			
-			<% if !@workout.avg_speed.nil? %>
-			<tr class="stat">
+			<% if !@workout.speed.nil? %>
+			<tr class="stat" id="speed">
 				<th>Speed</th>
-				<td id="spark_line"><div id="speed" class="visualization"></div></td>
+				<td id="spark_line"><div id="spark_speed" class="visualization"></div></td>
 				<td class="number"><span class="value"> <%= h @workout.avg_speed_in_mph %> </span>mph</td>
 			</tr>
 			<% end -%>
 			
-			<% if !@workout.elevation_gain.nil? %>
-			<tr class="stat">
+			<% if !@workout.elevation.nil? %>
+			<tr class="stat" id="elevation">
 				<th>Elevation</th>
-				<td id="spark_line"><div id="elevation" class="visualization"></div></td>
-				<td class="number"><span class="value"><%=h @workout.elevation_gain_in_feet %></span>ft</td>
+				<td id="spark_line"><div id="spark_elevation" class="visualization"></div></td>
+				<td class="number"><span class="value"><%=h @workout.elevation_in_feet %></span>ft</td>
 			</tr>
 			<% end -%>
 			
-			<tr class="stat">
+			<tr class="stat" id="hr">
 				<th>Heart Rate</th>
-				<td id="spark_line"><div id="heartrate" class="visualization"></div></td>
-				<td class="number"><span class="value"><%=h @workout.average_hr %></span>bpm</td>
+				<td id="spark_line"><div id="spark_heartrate" class="visualization"></div></td>
+				<td class="number"><span class="value"><%=h @workout.hr %></span>bpm</td>
 			</tr>
 		</table>
 
@@ -100,7 +100,7 @@
 	</div>
 	<% end %>
 
-	<div id="fullsize_chart" class="big_visualization">
+	<div id="spark_fullsize_chart" class="big_visualization">
 	</div>
 	
 </div>
