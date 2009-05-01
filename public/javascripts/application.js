@@ -23,7 +23,7 @@ $(document).ready(function() {
     };
 
     var full_size_options = {
-        grid: { borderWidth: 0, borderColor: "#d9d9d9", tickColor: '#ffffff', hoverable: "yes", mouseActiveRadius: 24, },
+				grid: { borderWidth: 0, borderColor: "#d9d9d9", tickColor: '#ffffff', hoverable: "yes", mouseActiveRadius: 24, },
         colors: ["#25a1d6", "#3dc10b", "#545454"],
         shadowSize: 1,
         xaxis: { tickSize: 30 },
@@ -92,6 +92,7 @@ $(document).ready(function() {
         });
 
 
+			// Fullsize chart
         $.plot($('#spark_fullsize_chart'), [{
             data: workout.json_heartrate_big,
             lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } }
@@ -101,12 +102,11 @@ $(document).ready(function() {
 		// Iterate over all the class "stat" and qtip them.
         $(".stat").each(function(i) {
             $(this).qtip({
-                content: '<div class="stat"><p class="comp_this_workout"><span class="value">' + Math.round(workout[this.id]*10)/10 + '</span> ' + $(this).attr('unit') + ' for this ' + workout.activity_name + '</p> <p class="comp_my_activity"><span class="value">' + Math.round(my_comps[this.id]*10)/10 + '</span> ' + $(this).attr('unit') + ' average for all your ' + workout.activity_name + '</p> <p class="comp_activity"><span class="value">' + Math.round(all_comps[this.id]*10)/10 + '</span> ' + $(this).attr('unit') + ' average for everyones ' + workout.activity_name + '</p></div > ',
-                show: 'mouseover',
-                hide: 'mouseout',
-				fixed: true,
-                position: { type: 'absolute', container: $('td.number'), corner: { tooltip: 'topLeft', target: 'topRight' }, adjust: { x: -204, y: -201 } },
-                style: { width: 288, padding: 8, background: '#f0f0f0', color: '#545454', textAlign: 'left', border: { width: 1, radius: 8, color: '#f0f0f0' } }
+            	content: '<div class="stat"><p class="comp_this_workout"><span class="value">' + Math.round(workout[this.id]*10)/10 + '</span> ' + $(this).attr('unit') + ' for this ' + workout.activity_name + '</p> <p class="comp_my_activity"><span class="value">' + Math.round(my_comps[this.id]*10)/10 + '</span> ' + $(this).attr('unit') + ' average for all your ' + workout.activity_name + '</p> <p class="comp_activity"><span class="value">' + Math.round(all_comps[this.id]*10)/10 + '</span> ' + $(this).attr('unit') + ' average for everyones ' + workout.activity_name + '</p></div > ',
+				show: 'mouseover',
+				hide: { when: 'mouseout', fixed: true },
+				position: { target: $(this).children(':last'), corner: { tooltip: 'topLeft', target: 'topLeft' }, adjust: { x: -4, y: -13 } },
+				style: { width: 288, padding: 8, background: '#f0f0f0', color: '#545454', textAlign: 'left', border: { width: 1, radius: 8, color: '#f0f0f0' } }
             });
         });
     });
