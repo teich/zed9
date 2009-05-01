@@ -69,7 +69,7 @@
 			<tr class="stat">
 				<th>Speed</th>
 				<td id="spark_line"><div id="speed" class="visualization"></div></td>
-				<td class="number"><span class="value"> <%= h @workout.avg_speed.round(1) %> </span>mph</td>
+				<td class="number"><span class="value"> <%= h @workout.avg_speed_in_mph %> </span>mph</td>
 			</tr>
 			<% end -%>
 			
@@ -77,7 +77,7 @@
 			<tr class="stat">
 				<th>Elevation</th>
 				<td id="spark_line"><div id="elevation" class="visualization"></div></td>
-				<td class="number"><span class="value"><%=h @workout.elevation_gain.round(1) %></span>ft</td>
+				<td class="number"><span class="value"><%=h @workout.elevation_gain_in_feet %></span>ft</td>
 			</tr>
 			<% end -%>
 			
