@@ -43,14 +43,14 @@
 	<div id="workout_left_column">
 		
 		<table id="workout_comparison">
-			<tr class="stat" id="duration">
+			<tr class="stat" unit="seconds" id="duration">
 				<th>Duration</th>
 				<td id="spark_bar"><div id="duration" class="sparkbar"></div></td>
 				<td class="number"><span class="value"><%= h number_to_time(@workout.duration) %></span>h</td>
 			</tr>
 			
 			<% if !@workout.distance.nil? %>
-			<tr class="stat" id="distance">
+			<tr class="stat" unit="miles" id="distance">
 				<th>Distance</th>
 				<td id="spark_bar"><div id="distance" class="sparkbar"></div></td>
 				<td class="number"><span class="value"><%= h @workout.distance_in_miles %></span>miles</td>
@@ -58,7 +58,7 @@
 			<% end -%>
 			
 			<% if false %>
-			<tr class="stat" id="calorie">
+			<tr class="stat" unit="kCal" id="calorie">
 				<th>Calories</th>
 				<td id="spark_bar"><div id="calorie" class="sparkbar"></div></td>
 				<td class="number"><span class="value">N/A</span></td>
@@ -66,7 +66,7 @@
 			<% end -%>
 			
 			<% if !@workout.speed.nil? %>
-			<tr class="stat" id="speed">
+			<tr class="stat" unit="mph" id="speed">
 				<th>Speed</th>
 				<td id="spark_line"><div id="speed" class="sparkline"></div></td>
 				<td class="number"><span class="value"> <%= h @workout.avg_speed_in_mph %> </span>mph</td>
@@ -74,14 +74,14 @@
 			<% end -%>
 			
 			<% if !@workout.elevation.nil? %>
-			<tr class="stat" id="elevation">
+			<tr class="stat" unit="feet" id="elevation">
 				<th>Elevation</th>
 				<td id="spark_line"><div id="elevation" class="sparkline"></div></td>
 				<td class="number"><span class="value"><%=h @workout.elevation_in_feet %></span>ft</td>
 			</tr>
 			<% end -%>
 			
-			<tr class="stat" id="hr">
+			<tr class="stat" unit="bpm" id="hr">
 				<th>Heart Rate</th>
 				<td id="spark_line"><div id="hr" class="sparkline"></div></td>
 				<td class="number"><span class="value"><%=h @workout.hr %></span>bpm</td>

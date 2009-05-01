@@ -37,6 +37,21 @@ $(document).ready(function() {
         all_comps = json.workout.json_comps.all_comps;
         my_comps = json.workout.json_comps.my_comps;
 
+		// TODO: Handle units correctly
+		// This hack converts everything to imperial
+		workout.speed *= 2.23693629
+		all_comps.speed *= 2.23693629
+		my_comps.speed *= 2.23693629
+		
+		workout.elevation *= 3.28
+		all_comps.elevation *= 3.28
+		my_comps.elevation *= 3.28
+		
+		workout.distance *= 0.000621371192
+		all_comps.distance *= 0.000621371192
+		my_comps.distance *= 0.000621371192
+		
+
 		// Iterate over all the sparklines, and flot them.
         $(".sparkline").each(function(i) {
             $.plot($(this), [{
@@ -86,7 +101,7 @@ $(document).ready(function() {
 		// Iterate over all the class "stat" and qtip them.
         $(".stat").each(function(i) {
             $(this).qtip({
-                content: '<div class="stat"><p class="comp_this_workout"><span class="value">' + workout[this.id] + '</span>h for this ' + workout.activity_name + '</p> <p class="comp_my_activity"><span class="value">' + my_comps[this.id] + '</span>h average for all your ' + workout.activity_name + '</p> <p class="comp_activity"><span class="value">' + all_comps[this.id] + '</span>h average for everyones ' + workout.activity_name + '</p></div > ',
+                content: '<div class="stat"><p class="comp_this_workout"><span class="value">' + Math.round(workout[this.id]*10)/10 + '</span> ' + $(this).attr('unit') + ' for this ' + workout.activity_name + '</p> <p class="comp_my_activity"><span class="value">' + Math.round(my_comps[this.id]*10)/10 + '</span> ' + $(this).attr('unit') + ' average for all your ' + workout.activity_name + '</p> <p class="comp_activity"><span class="value">' + Math.round(all_comps[this.id]*10)/10 + '</span> ' + $(this).attr('unit') + ' average for everyones ' + workout.activity_name + '</p></div > ',
                 show: 'mouseover',
                 hide: 'mouseout',
 				fixed: true,

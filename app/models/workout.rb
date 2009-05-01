@@ -145,8 +145,9 @@ class Workout < ActiveRecord::Base
   end
   
   def avg_speed_in_mph
-    return nil if self.distance_in_miles.nil?
-    (self.distance_in_miles / self.duration * 3600).round(1)
+    return nil if self.speed.nil?
+#    (self.distance_in_miles / self.duration * 3600).round(1)
+    (self.speed * 2.23693629).round(1)
   end
   
   
