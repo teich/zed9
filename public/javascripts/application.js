@@ -77,6 +77,7 @@ $(document).ready(function() {
         });
 
 
+			// Fullsize chart
         $.plot($('#spark_fullsize_chart'), [{
             data: workout.json_heartrate_big,
             lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } }
@@ -93,16 +94,15 @@ $(document).ready(function() {
 							    fixed: true
 							},
 							position: {
-									target: this.number,
-									container: this.number,
+									target: $(this).children(':last'),
 							    corner: {
 							        tooltip: 'topLeft',
 							        target: 'topLeft'
 							    },
-							    // adjust: {
-							    //     x: -204,
-							    //     y: -201
-							    // }
+							    adjust: {
+							        x: -4,
+							        y: -13
+							    }
 							},
 							style: {
 							    width: 288,
