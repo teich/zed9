@@ -41,7 +41,7 @@ class WorkoutsController < ApplicationController
     respond_to do |format|
       format.html
       format.xml {render :xml => @workout.to_xml }
-      format.js {render :js => @workout.to_json(:methods => [:json_hr, :json_heartrate_big, :json_speed, :json_elevation, :json_comps])}
+      format.js {render :js => @workout.to_json(:methods => [:json_hr, :json_heartrate_big, :json_speed, :json_elevation, :json_comps, :activity_name])}
     end
   end
 

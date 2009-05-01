@@ -218,6 +218,10 @@ class Workout < ActiveRecord::Base
     (elevation * 3.28).round(1)
   end
   
+  def activity_name
+    activity.name
+  end
+  
   def build_from_imported!(iw)
     self.hr = iw.average_hr
     self.speed = iw.average_speed
