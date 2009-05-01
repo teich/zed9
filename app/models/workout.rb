@@ -108,7 +108,7 @@ class Workout < ActiveRecord::Base
   # TODO: The return nil check thing - seems lame
   def comps_average_hr(comps)
     if comps.size > 0
-      hrs = comps.map { |comp| comp.average_hr }
+      hrs = comps.map { |comp| comp.hr }
       return hrs.compact.aaverage
     end
     return "N/A"
@@ -160,23 +160,23 @@ class Workout < ActiveRecord::Base
     
     mc = self.user.workouts.find_all_by_activity_id(activity.id)
     distance = (mc.map {|c| c.distance}).compact.aaverage
-    speed = (mc.map {|c| c.avg_speed}).compact.aaverage
+    speed = (mc.map {|c| c.speed}).compact.aaverage
 
-    mycomps["hr"] = (mc.map { |c| c.average_hr  }).compact.aaverage
+    mycomps["hr"] = (mc.map { |c| c.hr  }).compact.aaverage
     mycomps["duration"] = (mc.map {|c| c.duration}).compact.aaverage
     mycomps["distance"]  = distance.round(1) if !distance.nil?
     mycomps["speed"] = speed.round(1) if !speed.nil?
-    mycomps["elevation"] = (mc.map {|c| c.elevation_gain}).compact.aaverage
+    mycomps["elevation"] = (mc.map {|c| c.elevation}).compact.aaverage
     
     ac = Workout.find_all_by_activity_id(activity.id)
     distance = (ac.map {|c| c.distance}).compact.aaverage
-    speed = (ac.map {|c| c.avg_speed}).compact.aaverage
+    speed = (ac.map {|c| c.speed}).compact.aaverage
         
-    allcomps["hr"] = (ac.map { |c| c.average_hr  }).compact.aaverage
+    allcomps["hr"] = (ac.map { |c| c.hr  }).compact.aaverage
     allcomps["duration"] = (ac.map {|c| c.duration}).compact.aaverage
     allcomps["distance"]  = distance.round(1) if !distance.nil?
     allcomps["speed"] = speed.round(1) if !speed.nil?
-    allcomps["elevation"] = (ac.map {|c| c.elevation_gain}).compact.aaverage
+    allcomps["elevation"] = (ac.map {|c| c.elevation}).compact.aaverage
     
     
     return { :my_comps => mycomps, :all_comps => allcomps }
@@ -214,17 +214,17 @@ class Workout < ActiveRecord::Base
     get_smoothed_elevation(20,true)
   end
   
-  def elevation_gain_in_feet
-    (elevation_gain * 3.28).round(1)
+  def elevation_in_feet
+    (elevation * 3.28).round(1)
   end
   
   def build_from_imported!(iw)
-    self.average_hr = iw.average_hr
-    self.avg_speed = iw.average_speed
+    self.hr = iw.average_hr
+    self.speed = iw.average_speed
     self.distance = iw.distance
     self.duration = iw.duration
     self.start_time = iw.time
-    self.elevation_gain = iw.altitude_gain
+    self.elevation = iw.altitude_gain
     
     iw.trackpoints.each do |tp|
       wtp = trackpoints.build()
