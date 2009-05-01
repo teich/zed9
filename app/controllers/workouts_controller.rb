@@ -21,7 +21,7 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    @comps = @workout.find_comps(@workout.user)
+#    @comps = @workout.find_comps(@workout.user)
 
     # need for creating new tags.  
     @tagging = Tagging.new
@@ -41,7 +41,7 @@ class WorkoutsController < ApplicationController
     respond_to do |format|
       format.html
       format.xml {render :xml => @workout.to_xml }
-      format.js {render :js => @workout.to_json(:methods => [:json_heartrate, :json_heartrate_big, :json_speed, :json_elevation])}
+      format.js {render :js => @workout.to_json(:methods => [:json_heartrate, :json_heartrate_big, :json_speed, :json_elevation, :json_comps])}
     end
   end
 

@@ -17,6 +17,8 @@ $(document).ready(function () {
 		grid: { borderWidth: 0 }, 
 		xaxis: {ticks: []}, 
 		yaxis: {ticks:[]},
+		y2axis: {ticks:[]},
+		
 		colors: [ "#25a1d6", "#3dc10b", "#545454" ],
 		shadowSize: 0 
 	};
@@ -60,6 +62,20 @@ $(document).ready(function () {
 		duration = json.workout.duration
 		distance = json.workout.distance
 		
+		all_comps_speed = json.workout.json_comps.all_comps.speed
+		all_comps_duration = json.workout.json_comps.all_comps.duration
+		all_comps_distance = json.workout.json_comps.all_comps.distance
+		all_comps_hr = json.workout.json_comps.all_comps.hr
+		all_comps_elevation = json.workout.json_comps.all_comps.elevation
+		
+		
+		my_comps_speed = json.workout.json_comps.my_comps.speed
+		my_comps_duration = json.workout.json_comps.my_comps.duration
+		my_comps_distance = json.workout.json_comps.my_comps.distance
+		my_comps_hr = json.workout.json_comps.my_comps.hr
+		my_comps_elevation = json.workout.json_comps.my_comps.elevation
+		
+				
 		// $.plot($('#duration'), [{ 
 		// 	data: [[0, duration]], 
 		// 	bars: { horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] } }
@@ -68,13 +84,9 @@ $(document).ready(function () {
 	
 	
 	//  -------------------------
-    var d1 = [[duration, .8]]; 
-    var d2 = [[4000,.4]];
-    var d3 = [[7000,0]];
-
 
 	$.plot( $("#duration"), [{
-				data: d1,
+				data: [[duration, .8]],
 	            bars: { 
 					horizontal: true, 
 					show: true, 
@@ -84,11 +96,11 @@ $(document).ready(function () {
 					} 
 				}
 			}, {
-				data: d2,
+				data: [[my_comps_duration, .4]],
 	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			},
 			{
-				data: d3,
+				data: [[all_comps_duration, 0.0]],
 		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
 			}], {
 	        xaxis: { ticks: [], min: 0 },
@@ -97,6 +109,29 @@ $(document).ready(function () {
 			grid: { borderWidth: 0 }
 	});
     
+	$.plot( $("#distance"), [{
+				data: [[distance, .8]],
+	            bars: { 
+					horizontal: true, 
+					show: true, 
+					lineWidth: 1, 
+					fillColor: { 
+						colors: [{ opacity: 0.2 }, { opacity: 1 }] 
+					} 
+				}
+			}, {
+				data: [[my_comps_distance, .4]],
+	            bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
+			},
+			{
+				data: [[all_comps_distance, 0.0]],
+		        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
+			}], {
+	        xaxis: { ticks: [], min: 0 },
+	        yaxis: { ticks: [], min: 0 },
+			colors: ["#25a1d6", "#3dc10b", "#545454" ],
+			grid: { borderWidth: 0 }
+	});
 
 
 	//  -------------------------
@@ -111,20 +146,23 @@ $(document).ready(function () {
 				}
 			}, {
 				data: [[22, avghr]], 
+				yaxis: 2,
 				bars: { 
 					show: true, 
 					lineWidth: 1, 
 					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
 				}
 			}, {
-				data: [[24, avghr]], 
+				data: [[24, my_comps_hr]], 
+				yaxis: 2,
 				bars: { 
 					show: true, 
 					lineWidth: 1, 
 					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
 					}
 				}, {
-					data: [[26, avghr]], 
+					data: [[26, all_comps_hr]], 
+					yaxis: 2,
 					bars: { 
 						show: true, 
 						lineWidth: 1, 
@@ -143,20 +181,23 @@ $(document).ready(function () {
 			}
 		}, {
 				data: [[22, gain]], 
+				yaxis: 2,
 				bars: { 
 					show: true, 
 					lineWidth: 1, 
 					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
 				}
 			}, {
-				data: [[24, gain]], 
+				data: [[24, my_comps_elevation]], 
+				yaxis: 2,
 				bars: { 
 					show: true, 
 					lineWidth: 1, 
 					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
 				}
 			}, {
-				data: [[26, gain]], 
+				data: [[26, all_comps_elevation]],
+				yaxis: 2,
 				bars: { 
 					show: true, 
 					lineWidth: 1,
@@ -174,20 +215,23 @@ $(document).ready(function () {
 				}
 			}, {
 				data: [[22, avg_speed]], 
+				yaxis: 2,
 				bars: { 
 					show: true, 
 					lineWidth: 1, 
 					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
 				}
 			}, {
-				data: [[24, avg_speed]], 
+				data: [[24, my_comps_speed]], 
+				yaxis: 2,
 				bars: { 
 					show: true, 
 					lineWidth: 1, 
 					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
 				}
 			}, {
-				data: [[26, avg_speed]], 
+				data: [[26, all_comps_speed]], 
+				yaxis: 2,
 				bars: { 
 					show: true, 
 					lineWidth: 1, 

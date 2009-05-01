@@ -23,6 +23,7 @@ class Workout < ActiveRecord::Base
     trackpoints.map { |tp| tp.altitude }
   end
 
+  ## TODO: I think the hrmparser array function now includes this.  Nuke.
   def smooth_data(series, factor)
     series.in_groups_of(factor).map { |snipit| snipit.compact.aaverage }
   end
@@ -93,21 +94,16 @@ class Workout < ActiveRecord::Base
     seconds = get_smoothed_hr_axis(points)
     seconds.map { |s| number_to_time(s) }
   end
-  def find_all_comps_by_activity(activity_id)
-    @all_comps ||= Activity.find(activity_id).workouts
-  end
-  
-  def find_user_comps_by_activity(user_id, activity_id)
-    user = User.find(user_id)
-    @my_comps ||= user.workouts.by_activity(activity_id)
-  end
+
+  # def find_all_comps_by_activity(activity_id)
+  #   Activity.find(activity_id).workouts
+  # end
+  # 
+  # def find_my_comps_by_activity(activity_id)
+  #   self.user.workouts.by_activity(activity_id)
+  # end
 
   # TODO: Refactor comparison code somehow
-#  def find_comps(user)
-#    all_comps = find_all_comps_by_activity(activity.id)
-#    my_comps = find_user_comps_by_activity(user, activity.id)
-#    return [my_comps, all_comps]
-#  end
 
   # TODO: The return nil check thing - seems lame
   def comps_average_hr(comps)
@@ -158,25 +154,36 @@ class Workout < ActiveRecord::Base
   #   points = comps.map {|c| c.:field}
   #   points.compact.average_array.round(1)
   # end
-  def find_comps(user)
-    comps = {}
+  def find_comps()
+    mycomps = {}
+    allcomps = {}
+    
+    mc = self.user.workouts.find_all_by_activity_id(activity.id)
+    distance = (mc.map {|c| c.distance}).compact.aaverage
+    speed = (mc.map {|c| c.avg_speed}).compact.aaverage
 
-    my_comps = user.workouts.find_all_by_activity_id(activity.id)
-    comps[activity.name] = {}
+    mycomps["hr"] = (mc.map { |c| c.average_hr  }).compact.aaverage
+    mycomps["duration"] = (mc.map {|c| c.duration}).compact.aaverage
+    mycomps["distance"]  = distance.round(1) if !distance.nil?
+    mycomps["speed"] = speed.round(1) if !speed.nil?
+    mycomps["elevation"] = (mc.map {|c| c.elevation_gain}).compact.aaverage
     
-    comps[activity.name]["hr"] = (my_comps.map { |c| c.average_hr  }).compact.aaverage
-    comps[activity.name]["duration"] = (my_comps.map {|c| c.duration}).compact.aaverage
-    comps[activity.name]["distance"] = (my_comps.map {|c| c.distance_in_miles}).compact.aaverage.round(1)
-    comps[activity.name]["speed"] = (my_comps.map {|c| c.avg_speed_in_mph}).compact.aaverage.round(1)
+    ac = Workout.find_all_by_activity_id(activity.id)
+    distance = (ac.map {|c| c.distance}).compact.aaverage
+    speed = (ac.map {|c| c.avg_speed}).compact.aaverage
+        
+    allcomps["hr"] = (ac.map { |c| c.average_hr  }).compact.aaverage
+    allcomps["duration"] = (ac.map {|c| c.duration}).compact.aaverage
+    allcomps["distance"]  = distance.round(1) if !distance.nil?
+    allcomps["speed"] = speed.round(1) if !speed.nil?
+    allcomps["elevation"] = (ac.map {|c| c.elevation_gain}).compact.aaverage
     
-    all_comps = Workout.find_all_by_activity_id(activity.id)
-    comps["global"] = {}
-    comps["global"]["hr"] = (all_comps.map { |c| c.average_hr  }).compact.aaverage
-    comps["global"]["duration"] = (all_comps.map {|c| c.duration}).compact.aaverage
-    comps["global"]["distance"] = (all_comps.map {|c| c.distance_in_miles}).compact.aaverage.round(1)
-    comps["global"]["speed"] = (all_comps.map {|c| c.avg_speed_in_mph}).compact.aaverage.round(1)
     
-    return comps
+    return { :my_comps => mycomps, :all_comps => allcomps }
+  end
+
+  def json_comps
+    find_comps
   end
 
   def duration_formatted(url)
