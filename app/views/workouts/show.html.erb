@@ -74,7 +74,7 @@
 			<% end -%>
 			
 			<% if !@workout.elevation.nil? %>
-			<tr class="stat" unit="feet" id="elevation">
+			<tr class="stat" unit="ft" id="elevation">
 				<th>Elevation</th>
 				<td id="spark_line"><div id="elevation" class="sparkline"></div></td>
 				<td class="number"><span class="value"><%=h @workout.elevation_in_feet %></span>ft</td>
