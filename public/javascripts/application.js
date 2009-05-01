@@ -17,7 +17,7 @@ $(document).ready(function () {
 		grid: { borderWidth: 0 }, 
 		xaxis: {ticks: []}, 
 		yaxis: {ticks:[]},
-		y2axis: {ticks:[]},
+		y2axis: {ticks:[], autoscaleMargin: .2},
 		
 		colors: [ "#25a1d6", "#3dc10b", "#545454" ],
 		shadowSize: 1, 
@@ -106,6 +106,53 @@ $(document).ready(function () {
 			colors: ["#25a1d6", "#3dc10b", "#545454" ],
 			grid: { borderWidth: 0 }
 	});
+	
+	$.plot($('#heartrate'), [{
+			data: heartrate,
+			lines: {
+				show: true, 
+				fill: true, 
+				fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } 
+			}
+		}, {
+			data: [[22, avghr]], 
+			yaxis: 2,
+			bars: { 
+				show: true, 
+				lineWidth: 1, 
+				fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
+			}
+		}, {
+			data: [[24, my_comps_hr]], 
+			yaxis: 2,
+			bars: { 
+				show: true, 
+				lineWidth: 1, 
+				fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
+				}
+			}, {
+				data: [[26, all_comps_hr]], 
+				yaxis: 2,
+				bars: { 
+					show: true, 
+					lineWidth: 1, 
+					fillColor: {colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
+				}
+			}], 
+			options
+		)
+		
+	 	$.plot($('#fullsize_chart'), [ {
+				data: heartrate_big, 
+				lines: {
+					show: true, 
+					fill: true, 
+					fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } 
+				}
+			}],
+			full_size_options)
+
+
     
 	$.plot( $("#distance"), [{
 				data: [[distance, .8]],
@@ -135,40 +182,7 @@ $(document).ready(function () {
 	//  -------------------------
 
 	
-	 	$.plot($('#heartrate'), [{
-				data: heartrate,
-				lines: {
-					show: true, 
-					fill: true, 
-					fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } 
-				}
-			}, {
-				data: [[22, avghr]], 
-				yaxis: 2,
-				bars: { 
-					show: true, 
-					lineWidth: 1, 
-					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
-				}
-			}, {
-				data: [[24, my_comps_hr]], 
-				yaxis: 2,
-				bars: { 
-					show: true, 
-					lineWidth: 1, 
-					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
-					}
-				}, {
-					data: [[26, all_comps_hr]], 
-					yaxis: 2,
-					bars: { 
-						show: true, 
-						lineWidth: 1, 
-						fillColor: {colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
-					}
-				}], 
-				options
-			)
+
 
 	 	$.plot($('#elevation'), [ {
 			data: elevation,
@@ -238,17 +252,7 @@ $(document).ready(function () {
 			}], 
 			options)
 	 	
-	 	$.plot($('#fullsize_chart'), [ {
-				data: heartrate_big, 
-				lines: {
-					show: true, 
-					fill: true, 
-					fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } 
-				}
-			}],
-			full_size_options)
-	 	
-	 });
+
 
 	$('.stat').qtip({
 			content: '<div class="stat"><p class="comp_this_workout"><span class="value">1:32</span>h for this hike</p> <p class="comp_my_activity"><span class="value">2:08</span>h average for all your hikes</p> <p class="comp_activity"><span class="value">0:55</span>h average for everyone\'s hikes</p></div>',
@@ -279,5 +283,5 @@ $(document).ready(function () {
 				},
 	   	}
 	});
-	
+ });
 });
