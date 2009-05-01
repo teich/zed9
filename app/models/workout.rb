@@ -214,6 +214,10 @@ class Workout < ActiveRecord::Base
     get_smoothed_elevation(20,true)
   end
   
+  def elevation_gain_in_feet
+    (elevation_gain * 3.28).round(1)
+  end
+  
   def build_from_imported!(iw)
     self.average_hr = iw.average_hr
     self.avg_speed = iw.average_speed
