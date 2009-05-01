@@ -23,7 +23,7 @@ $(document).ready(function() {
     };
 
     var full_size_options = {
-        grid: { borderWidth: 0, borderColor: "#d9d9d9", tickColor: '#ffffff', hoverable: "yes", mouseActiveRadius: 24, },
+				grid: { borderWidth: 0, borderColor: "#d9d9d9", tickColor: '#ffffff', hoverable: "yes", mouseActiveRadius: 24, },
         colors: ["#25a1d6", "#3dc10b", "#545454"],
         shadowSize: 1,
         xaxis: { tickSize: 30 },
@@ -86,12 +86,36 @@ $(document).ready(function() {
 		// Iterate over all the class "stat" and qtip them.
         $(".stat").each(function(i) {
             $(this).qtip({
-                content: '<div class="stat"><p class="comp_this_workout"><span class="value">' + workout[this.id] + '</span>h for this ' + workout.activity_name + '</p> <p class="comp_my_activity"><span class="value">' + my_comps[this.id] + '</span>h average for all your ' + workout.activity_name + '</p> <p class="comp_activity"><span class="value">' + all_comps[this.id] + '</span>h average for everyones ' + workout.activity_name + '</p></div > ',
-                show: 'mouseover',
-                hide: 'mouseout',
-				fixed: true,
-                position: { type: 'absolute', container: $('td.number'), corner: { tooltip: 'topLeft', target: 'topRight' }, adjust: { x: -204, y: -201 } },
-                style: { width: 288, padding: 8, background: '#f0f0f0', color: '#545454', textAlign: 'left', border: { width: 1, radius: 8, color: '#f0f0f0' } }
+							content: '<div class="stat"><p class="comp_this_workout"><span class="value">' + workout[this.id] + '</span>h for this ' + workout.activity_name + '</p> <p class="comp_my_activity"><span class="value">' + my_comps[this.id] + '</span>h average for all your ' + workout.activity_name + '</p> <p class="comp_activity"><span class="value">' + all_comps[this.id] + '</span>h average for everyones ' + workout.activity_name + '</p></div > ',
+							show: 'mouseover',
+							hide: {
+							    when: 'mouseout',
+							    fixed: true
+							},
+							position: {
+									target: this.number,
+									container: this.number,
+							    corner: {
+							        tooltip: 'topLeft',
+							        target: 'topLeft'
+							    },
+							    // adjust: {
+							    //     x: -204,
+							    //     y: -201
+							    // }
+							},
+							style: {
+							    width: 288,
+							    padding: 8,
+							    background: '#f0f0f0',
+							    color: '#545454',
+							    textAlign: 'left',
+							    border: {
+							        width: 1,
+							        radius: 8,
+							        color: '#f0f0f0'
+							    }
+							}
             });
         });
     });

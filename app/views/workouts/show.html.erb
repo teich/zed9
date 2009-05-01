@@ -52,7 +52,7 @@
 			<% if !@workout.distance.nil? %>
 			<tr class="stat" id="distance">
 				<th>Distance</th>
-				<td id="spark_bar"><div id="distance" class="sparkbar"></div></td>
+				<td id="spark_bar" id="distance"><div id="distance" class="sparkbar"></div></td>
 				<td class="number"><span class="value"><%= h @workout.distance_in_miles %></span>miles</td>
 			</tr>
 			<% end -%>
