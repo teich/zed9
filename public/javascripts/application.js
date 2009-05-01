@@ -250,6 +250,34 @@ $(document).ready(function () {
 	 	
 	 });
 
+ // ---------------------
+
+	// $.plot( $("#recent_workouts"), [{
+	// 			data: [[duration, .8]],
+	//             bars: { 
+	// 				horizontal: true, 
+	// 				show: true, 
+	// 				lineWidth: 1, 
+	// 				fillColor: { 
+	// 					colors: [{ opacity: 0.2 }, { opacity: 1 }] 
+	// 				} 
+	// 			}
+	// 		}, {
+	// 			data: [[my_comps_duration, .4]],
+	//             bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
+	// 		},
+	// 		{
+	// 			data: [[all_comps_duration, 0.0]],
+	// 	        bars: { barWidth: .2, horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }  }
+	// 		}], {
+	//         xaxis: { ticks: [], min: 0 },
+	//         yaxis: { ticks: [], min: 0 },
+	// 		colors: ["#25a1d6", "#3dc10b", "#545454" ],
+	// 		grid: { borderWidth: 0 }
+	// });
+	// 
+
+
 	$('.stat').qtip({
 			content: '<div class="stat"><p class="comp_this_workout"><span class="value">1:32</span>h for this hike</p> <p class="comp_my_activity"><span class="value">2:08</span>h average for all your hikes</p> <p class="comp_activity"><span class="value">0:55</span>h average for everyone\'s hikes</p></div>',
 			show: 'mouseover',

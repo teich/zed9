@@ -318,6 +318,10 @@ thead, th, td {
 	overflow: hidden;
 }
 
+.recent_workouts_graph {
+	
+}
+
 #map {
 	float: right;
 	position: relative;
@@ -360,6 +364,14 @@ thead, th, td {
 	padding-right: 4px;
 	height: 32px;
 	width: auto;
+}
+
+.activity_icon_small {
+	position: relative;
+	padding-right: 8px;
+	height: 24px;
+	width: auto;
+	vertical-align: top;
 }
 
 .action_icon {
