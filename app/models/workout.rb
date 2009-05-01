@@ -198,7 +198,7 @@ class Workout < ActiveRecord::Base
     elevation_gain.nil? ? nil: elevation_gain.round
   end  
     
-  def json_heartrate
+  def json_hr
     get_smoothed_hr(20, true)
   end
   

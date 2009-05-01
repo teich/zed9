@@ -550,12 +550,17 @@ p.comp_activity {
 	padding-bottom: 24px;
 }
 
-.visualization {
+.sparkbar {
 	width: 150px;
 	height: 50px;
 	top: 0px;
 }
 
+.sparkline {
+	width: 150px;
+	height: 50px;
+	top: 0px;
+}
 .stat, .number {
 	font-size: 14px;
 }
