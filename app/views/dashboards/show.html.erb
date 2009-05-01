@@ -21,6 +21,8 @@
 			<% end %>
 		</div>
 
+		<div id="recent_workouts" class="recent_workouts_graph"></div>
+
 	</div>
 
 	<div id="right_column">
@@ -30,10 +32,10 @@
 			<table class="timeline">
 				<% @shared.each do |sw| %>
 				<tr>
-					<td class="first_column"><%= h sw.user.login %></td>
-					<td><%= h sw.activity.name %></td>
-					<td><%= link_to sw.name, workout_path(sw) %></td>
-					<td class="last_column"><%= h number_to_short_time(sw.duration) %></td>
+					<td class="first_column"><img class="activity_icon_small" src="/images/activities/running.png"><%= h sw.activity.name %></td>
+					<td class="name"><%= link_to sw.name, workout_path(sw) %></td>
+					<td><%= h number_to_short_time(sw.duration) %></td>
+					<td class="last_column"><%= h sw.user.login %></td>
 				</tr>
 			<% end %>
 			</table>
