@@ -16,4 +16,21 @@ module ApplicationHelper
     end
     start_time.strftime("%A, %B %d, %Y at #{short_time.downcase}")
   end
+  
+  def time_as_date(start_time)
+    month = start_time.strftime("%m")
+    if (month =~ /^0(.*$)/)
+      short_month = $1
+    else
+      short_month = month
+    end
+    day = start_time.strftime("%d")
+    if (day =~ /^0(.*$)/)
+      short_day = $1
+    else
+      short_day = day
+    end
+    start_time.strftime("#{short_month}/#{short_day}/%g")
+  end
+  
 end

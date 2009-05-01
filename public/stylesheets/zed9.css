@@ -22,7 +22,7 @@ a {
 
 #header {
 	width: 100%;
-	padding-bottom: 18px;
+	padding-bottom: 24px;
 	vertical-align: baseline;
 	line-height: 28px;
 }
@@ -172,7 +172,7 @@ thead, th, td {
 	padding-left: 0px;
 }
 
-#register, #login_form, #left_splash {
+#register, #login_form, #left_splash, #edit_workout {
 	width: 504px;
 	padding-top: 4px;
 }
@@ -184,7 +184,7 @@ thead, th, td {
 
 #request_invite, #login_box {
 	position: relative;
-	top: -10px;
+	top: -6px;
 	padding-bottom: 24px;
 }
 
@@ -221,6 +221,7 @@ thead, th, td {
 .form td {
 	padding: 8px 4px;
 	line-height: 2;
+	vertical-align: top;
 }
 
 .form .annotated {
@@ -237,14 +238,18 @@ thead, th, td {
 	-moz-border-radius-bottomright:5px;
 	-moz-border-radius-topleft:5px;
 	-moz-border-radius-topright:5px;
+	border-radius-bottomleft:5px;
+	border-radius-bottomright:5px;
+	border-radius-topleft:5px;
+	border-radius-topright:5px;
 	border:1px solid #d9d9d9;
 	font-weight: inherit;
 	font-size: inherit;
 	line-height: inherit;
-	vertical-align: inherit;
+	vertical-align: middle;
 	font-family: inherit;
 	color: inherit;
-	padding:8px;
+	padding:4px 8px;
 	margin:0px;
 }
 
@@ -294,10 +299,6 @@ thead, th, td {
 	vertical-align: top;
 }
 	
-.timeline {
-	width: 100%;
-}	
-
 #workout_left_column {
 	display: block;
 	width: 480px;
@@ -441,31 +442,36 @@ a.delete-x {
 	right: 0px;
 }
 
-#public_timeline th, #public_timeline td {
-	border-right:1px dotted #d9d9d9;
-	text-align: center;
+#public_timeline table, #workouts table {
+	border-top: 1px dotted #d9d9d9;
+	width: 100%;
+}
+
+#public_timeline th, #public_timeline td, #workouts th, #workouts td {
 	font-size: 14px;
 	vertical-align: top;
 	overflow: hidden;
-}
-
-#public_timeline th, #public_timeline td {
-	text-align: left;
-	border-right: none;
+	text-align: right;
 	border-bottom:1px dotted #d9d9d9;
+	padding: 12px;
 }
 
-#public_timeline table {
-	border-top:1px dotted #d9d9d9;
-}
-
-#public_timeline .first_column {
+#public_timeline .first_column, #workouts .first_column {
 	text-align: left;
 	padding-left: 0px;
 }
 
-#public_timeline .last_column {
+#public_timeline .name, #workouts .name {
+	text-align: left;
+}
+
+#public_timeline .tags, #workouts .tags {
+	text-align: center;
+}
+
+#public_timeline .last_column, #workouts .last_column {
 	border-right: none;
+	padding-right: 0px;
 }
 
 .clear:after {
