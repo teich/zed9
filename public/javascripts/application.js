@@ -23,12 +23,14 @@ $(document).ready(function() {
     };
 
     var full_size_options = {
-				grid: { borderWidth: 0, borderColor: "#d9d9d9", tickColor: '#ffffff', hoverable: "yes", mouseActiveRadius: 24, },
+		grid: { borderWidth: 0, borderColor: "#d9d9d9", tickColor: '#ffffff', hoverable: "yes", mouseActiveRadius: 48 },
+		// crosshair: { mode: "x", color: '#d9d9d9' },
         colors: ["#25a1d6", "#3dc10b", "#545454"],
         shadowSize: 1,
         xaxis: { tickSize: 30 },
-        yaxis: { tickSize: 20 }
-    };
+        yaxis: { tickSize: 20 },
+		selection: { mode: "xy" }
+	};
 
 	// All the data for our workout pages comes from JSON.  Just wrapping the loops in the JSON call
 	// TODO: Only call this on the workout page.  Search for some class I suppose.
@@ -99,10 +101,77 @@ $(document).ready(function() {
         }],
         full_size_options)
 
+
 		// Fullsize chart tooltip
 			
-			
+	    function showTooltip(x, y, contents) {
+	        $('<div id="tooltip">' + contents + '</div>').css( {
+	            position: 'absolute',
+	            display: 'none',
+	            top: y - 41,
+	            left: x + 1,
+	            border: '1px solid #d9d9d9',
+	            padding: '8px',
+				'color': '#25a1d6',
+				'font-size': '18px',
+				'font-weight': 500,
+	            'background-color': '#f0f0f0',
+	            opacity: .9,
+				'-moz-border-radius-bottomleft': '5px',
+				'-moz-border-radius-bottomright': '5px',
+				'-moz-border-radius-topleft': '5px',
+				'-moz-border-radius-topright': '5px',
+				'border-radius-bottomleft': '5px',
+				'border-radius-bottomright': '5px',
+				'border-radius-topleft': '5px',
+				'border-radius-topright': '5px'
+	        }).appendTo("body").fadeIn(200);
+	    }
+	    
+		var unit = '<span style="font-size: 14px; font-weight: 100">bpm</span>'
+	
+	    var previousPoint = null;
+	
+	    $("#spark_fullsize_chart").bind("plothover", function (event, pos, item) {
+	        // $("#x").text(pos.x.toFixed(2));
+	        // $("#y").text(pos.y.toFixed(2));
+            if (item) {
+                if (previousPoint != item.datapoint) {
+                    previousPoint = item.datapoint;
+    
+                    $("#tooltip").remove();
+                    var x = item.datapoint[0].toFixed(2),
+                        y = item.datapoint[1].toFixed(0);
+    
+                    showTooltip(item.pageX, item.pageY, y + unit);
+                }
+            }
+            else {
+                $("#tooltip").remove();
+                previousPoint = null;            
+            }
+	    });
 
+	    // $("#spark_fullsize_chart").bind("plothover", function (event, pos, item) {
+	    //     $("#x").text(pos.x.toFixed(2));
+	    //     $("#y").text(pos.y.toFixed(2));
+	    //             if (item) {
+	    //                 if (previousPoint != item.datapoint) {
+	    //                     previousPoint = item.datapoint;
+	    //     
+	    //                     $("#tooltip").remove();
+	    //                     var x = item.datapoint[0].toFixed(2),
+	    //                         y = item.datapoint[1].toFixed(2);
+	    //     
+	    //                     showTooltip(item.pageX, item.pageY, Math.round(y) + unit);
+	    //                 }
+	    //             }
+	    //             else {
+	    //                 $("#tooltip").remove();
+	    //                 previousPoint = null;            
+	    //             }
+	    // });
+	    
 
 		// Iterate over all the class "stat" and qtip them.
 		
