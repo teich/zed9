@@ -44,14 +44,14 @@
 		
 		<table id="workout_comparison">
 			<tr class="stat" unit="seconds" id="duration">
-				<th>Duration</th>
+				<th class="spark_bar_title">Duration</th>
 				<td id="spark_bar"><div id="duration" class="sparkbar"></div></td>
 				<td class="number"><span class="value"><%= h number_to_time(@workout.duration) %></span>h</td>
 			</tr>
 			
 			<% if !@workout.distance.nil? %>
 			<tr class="stat" unit="miles" id="distance">
-				<th>Distance</th>
+				<th class="spark_bar_title">Distance</th>
 				<td id="spark_bar" id="distance"><div id="distance" class="sparkbar"></div></td>
 				<td class="number"><span class="value"><%= h @workout.distance_in_miles %></span>miles</td>
 			</tr>
@@ -59,7 +59,7 @@
 			
 			<% if false %>
 			<tr class="stat" unit="kCal" id="calorie">
-				<th>Calories</th>
+				<th class="spark_bar_title">Calories</th>
 				<td id="spark_bar"><div id="calorie" class="sparkbar"></div></td>
 				<td class="number"><span class="value">N/A</span></td>
 			</tr>
@@ -67,24 +67,24 @@
 			
 			<% if !@workout.speed.nil? %>
 			<tr class="stat" unit="mph" id="speed">
-				<th>Speed</th>
+				<th class="spark_line_title">Speed</th>
 				<td id="spark_line"><div id="speed" class="sparkline"></div></td>
-				<td class="number"><span class="value"> <%= h @workout.avg_speed_in_mph %> </span>mph</td>
+				<td class="number spark_line_title"><span class="value"> <%= h @workout.avg_speed_in_mph %> </span>mph</td>
 			</tr>
 			<% end -%>
 			
 			<% if !@workout.elevation.nil? %>
 			<tr class="stat" unit="ft" id="elevation">
-				<th>Elevation</th>
+				<th class="spark_line_title">Elevation</th>
 				<td id="spark_line"><div id="elevation" class="sparkline"></div></td>
-				<td class="number"><span class="value"><%=h @workout.elevation_in_feet %></span>ft</td>
+				<td class="number spark_line_title"><span class="value"><%=h @workout.elevation_in_feet %></span>ft</td>
 			</tr>
 			<% end -%>
 			
 			<tr class="stat" unit="bpm" id="hr">
-				<th>Heart Rate</th>
+				<th class="spark_line_title">Heart Rate</th>
 				<td id="spark_line"><div id="hr" class="sparkline"></div></td>
-				<td class="number"><span class="value"><%=h @workout.hr %></span>bpm</td>
+				<td class="number spark_line_title"><span class="value"><%=h @workout.hr %></span>bpm</td>
 			</tr>
 		</table>
 
@@ -94,7 +94,7 @@
 		
 	<div id="right_column">
 		<div id="map">
-	        <%= @map.div(:width => 536, :height => 280 ) %>
+	        <%= @map.div(:width => 536, :height => 296 ) %>
 		</div>
 
 	</div>

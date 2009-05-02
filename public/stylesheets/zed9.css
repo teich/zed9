@@ -387,7 +387,6 @@ thead, th, td {
 #workout_description, #workout_notes {
 	display: block;
 	font-size: 14px;
-	color: #828282;
 	padding: 0px;
 	margin: 2px 0px;
 }
@@ -398,7 +397,6 @@ thead, th, td {
 
 #tag_set {
 	font-size: 14px;
-	color: #828282;
 	display: inline;
 }
 
@@ -516,11 +514,10 @@ p.comp_activity {
 }
 
 #workout_comparison th, td {
-	padding: 4px 4px;
+	padding: 8px 4px;
 	font-weight: 300;
 	vertical-align: top;
 	position: relative;
-	top: 12px;
 }
 
 #workout_comparison th {
@@ -572,6 +569,7 @@ p.comp_activity {
 	height: 50px;
 	top: 0px;
 }
+
 .stat, .number {
 	font-size: 14px;
 }
