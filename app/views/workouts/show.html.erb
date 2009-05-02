@@ -32,17 +32,13 @@
 		</div>	
 	</div>	
 
-	<!-- <div id="view_selection">
-		<span class="coming_soon">selector for alternate workout views coming here soon</span>
-	</div>	 -->
-
 </div>
 
 <div id="content">
 
-	<div id="workout_left_column">
+	<div class="workout_left_column">
 		
-		<table id="workout_comparison">
+		<table id="workout_stats">
 			<tr class="stat" unit="seconds" id="duration">
 				<th class="spark_bar_title">Duration</th>
 				<td id="spark_bar"><div id="duration" class="sparkbar"></div></td>
@@ -92,7 +88,7 @@
 
 	<% if @workout.gps_data? %>
 		
-	<div id="right_column">
+	<div class="right_column">
 		<div id="map">
 	        <%= @map.div(:width => 536, :height => 296 ) %>
 		</div>

@@ -9,8 +9,8 @@
 		<%= link_to 'x', user_workouts_path(current_user) %> 
 	<% end %>
 
-	<div id="workouts">
-		<table class="workouts_list">
+	<div id="workouts_list">
+		<table class="newsfeed">
 			<% for workout in @workouts %>
 			<tr>
 				<td class="first_column"><img class="activity_icon_small" src="/images/activities/running.png"><%= h workout.activity.name %></td>

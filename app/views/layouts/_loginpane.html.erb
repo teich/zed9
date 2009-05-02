@@ -1,22 +1,19 @@
-<% if current_user %>
-
-<div id="nav">
-	<ul>
-		<li class="first"><%= link_to "Workouts", user_workouts_path(current_user) %></li>
-		<li class="last"><%= link_to "Profile", account_path %></li>
-	</ul>
-</div>
-<% end %>
 <div id="loginpane">
+
 	<% if !current_user %>
+
 	<div id="not_logged_in"> 
+
 		<div id="login">
 
 			<%= link_to "Log in", login_path  %>
 
 		</div>
+
 	</div>
+
 	<% else %>
+
 	<div id="logged_in">
 		<ul>
 			<li>Welcome, <%= link_to current_user.login, account_path %></li>
@@ -26,5 +23,7 @@
 			<li class="last"><%= link_to "Log out", user_session_path, :method => :delete %></li>
 		</ul>
 	</div>
+
 	<% end %>
+
 </div>

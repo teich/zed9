@@ -1,14 +1,85 @@
+/*---- Global layout elements ----*/
+
+html, body {
+	height: 100%;
+}
+
 body {
 	background-color: white;
 	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,arial,sans-serif;
 	color: #545454;
-	padding: 24px 72px 24px 72px;
+	margin: 0px auto;
 	font-weight: 300;
 	letter-spacing: .5px;
 	font-size:14px;
-	margin: 0px auto 0px auto;
 	width: 960px;
+	text-align: center;
 }
+
+#wrapper {
+	position: relative;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin-bottom: -48px;
+}
+
+#header {
+	padding-top: 24px;
+	width: 100%;
+	padding-bottom: 24px;
+	vertical-align: baseline;
+	line-height: 28px;
+}
+
+#nav {
+	display: inline;
+	float: left;
+}
+
+#main {
+	width: 100%;
+	display: block;
+	clear: both;
+	margin: 0px;
+	padding: 0px 0px 36px 0px;
+	position: relative;
+}
+
+#content_header {
+	display: block;
+	padding-bottom: 24px;
+	text-align: left;
+	clear: both;
+}
+
+#content {
+	clear: both;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	position: relative;
+	text-align: left;
+}
+
+.clearfooter {
+	height: 48px;
+	clear: both;
+}
+
+#footer {
+	position: relative;
+	width: 100%;
+	color: #7C7B74;
+	font-size: 8pt;
+	text-align: center;
+	height: 48px;
+	padding: 0px;
+	margin: 0px;
+	vertical-align: bottom;
+}
+
+/*---- Global element attributes ----*/
 
 img {
 	border: 0px;
@@ -17,23 +88,59 @@ img {
 a {
 	text-decoration: none;
 	color:#25a1d6;
-	vertical-align: baseline;
 }
 
-#header {
-	width: 100%;
-	padding-bottom: 24px;
-	vertical-align: baseline;
-	line-height: 28px;
+h1 {
+	display: inline;
+	font-weight: 500;
+	font-size: 36px;
+	padding: 0px;
 }
 
-#main {
-	width: 100%;
-	display: block;
-	clear: both;
+h2 {
+	font-size: 24px;
+	font-weight: 500;
+	text-align: left;
+}
+
+h3 {
+	color:#25a1d6;
+	font-size: 18px;
+	line-height: 16px;
+	font-weight: 400;
+	padding: 8px 0px;
+	text-align: left;
+}
+
+p {
+	padding: 8px 0px;
+	line-height: 1.4;
+}
+
+thead, th, td {
+	padding: 4px 12px;
+	border: none;
+	text-align: left;
+}
+
+/*---- General table column styling ----*/
+
+.first_column {
+	text-align: left;
+	padding-left: 0px;
+}
+
+.last_column {
+	border-right: none;
+	padding-right: 0px;
+	text-align: right;
+}
+
+/*---- Header styling ----*/
+
+#header ul {
 	margin: 0px;
 	padding: 0px;
-	position: relative;
 }
 
 #logo a {
@@ -44,16 +151,6 @@ a {
 	float: left;
 	position: relative;
 	top: -8px;
-}
-
-#nav {
-	display: inline;
-	float: left;
-}
-
-#header ul {
-	margin: 0px;
-	padding: 0px;
 }
 
 #nav li {
@@ -70,19 +167,17 @@ a {
 	border:none;
 }
 
+/*Loginpane is the top-right div containing the welcome, user...*/
 #loginpane {
 	font-size: 10pt;
 	float: right;
 	display: inline;
 	padding-top: 0px;
 	color: #9f9f9f;
-}
-
-#loginpane .login_text {
 	padding-left: 12px;
 }
 
-#logged_in li{
+#loginpane li{
 	display:inline;
 	font-size:12px;
 	padding:0px 12px 0px 12px;
@@ -91,13 +186,24 @@ a {
 	position: relative;
 }
 
-#logged_in .last {
+#loginpane .last {
 	padding-right:0px;
 	border:none;
 }
 
+
+/*---- Marketing page styles ----*/
+
+.marketing_tagline {
+	padding-top: 24px;
+	padding-bottom: 24px;
+	font-weight: 500;
+}
+
+/*---- Action result messages and alerts ----*/
+
 #flash {
-	margin: 24px 0px;
+	padding-bottom: 24px;
 	font-size: 18px;
 	font-weight: 500;
 	color: #3dc10b;
@@ -106,7 +212,7 @@ a {
 
 .errorExplanation {
 	color: red;
-	margin-bottom: 36px;
+	padding-bottom: 36px;
 	font-size: 18px;
 }
 
@@ -120,89 +226,30 @@ a {
 	font-weight: 100;
 }
 
-#content_header {
-	display: block;
-	margin: 0px 0px 24px 0px;
-	text-align: left;
-	clear: both;
-}
-
-#content {
-	clear: both;
-	width: 100%;
-	margin: 0px;
-	padding: 0px;
-	position: relative;
-}
-
-h1 {
-	display: inline;
-	font-weight: 500;
-	font-size: 36px;
-	padding: 0px;
-}
-
-h2 {
-	font-size: 24px;
-	font-weight: 500;
-	text-align: center;
-}
-
-h3 {
-	color:#25a1d6;
-	font-size: 18px;
-	line-height: 16px;
-	font-weight: 400;
-	margin: 12px 0px;
-}
-
-p {
-	margin: 12px 0px;
-	line-height: 1.4;
-}
-
-thead, th, td {
-	padding: 4px 12px;
-	border: none;
-	text-align: left;
-}
-
-.left_column {
-	text-align: left;
-	padding-left: 0px;
-}
+/*---- General use form styles ----*/
 
 #register, #login_form, #left_splash, #edit_workout {
 	width: 504px;
 	padding-top: 4px;
 }
 
-.hook {
-	margin-top: 43px;
-	margin-bottom: 42px;
-}
-
-#request_invite, #login_box {
-	position: relative;
-	top: -6px;
-	padding-bottom: 24px;
-}
-
-#request_invite {
+.request_invite {
 	position: absolute;
-	top: -1px;
+	top: -1px; /*Position adjustment to align text with left column*/
 	float: right;
 	padding-top: 0px;
 	padding-left: 48px;
+	padding-bottom: 24px;
 	border-left: 1px dotted #d9d9d9;
 	right: 0px;
 	width: 360px;
 	font-size: 18px;
-	font-weight: 200;
+	font-weight: 100;
+	text-align: left;
 }
 
 #join_list {
-	padding-top: 10px;
+	padding-top: 15px; /*Position adjustment to align text with left column*/
 }
 
 #registration_form, #login_form table, tr, th, td {
@@ -213,21 +260,26 @@ thead, th, td {
 }
 
 .form th {
+	font-size: inherit;
 	padding-right: 4px;
 	text-align:right;
 	width: 192px;
 }
 
 .form td {
+	font-size: inherit;
 	padding: 8px 4px;
 	line-height: 2;
 	vertical-align: top;
+	text-align: left;
 }
 
+/*Form row that has a note displayed below the field*/
 .form .annotated {
 	padding-bottom: 0px;
 }
 
+/*Explanatory note displayed below a form field*/
 .form .field_note {
 	font-size: 12px;
 	padding-top: 0px;
@@ -250,31 +302,73 @@ thead, th, td {
 	font-family: inherit;
 	color: inherit;
 	padding:4px 8px;
-	margin:0px;
 }
 
+/*Submit button styling for forms*/
 .submit {
-	position: relative;
-	top: 16px;
+/*	position: relative;
+	top: 12px;
+*/}
+
+/*---- Dashboard timeline styling ----*/
+
+#public_newsfeed h2 {
+	text-align: left;
+	padding-bottom: 12px;
 }
 
-/*#user_session_submit {
-	width: 92px;
-	margin-top: 16px;
+/*#public_newsfeed table {
+	width: 100%;	
+	border-top: 1px dotted #d9d9d9;
+}
+
+#public_newsfeed th, #public_newsfeed td {
+	font-size: 14px;
+	text-align: left;
+	vertical-align: top;
+	border-bottom:1px dotted #d9d9d9;
+	padding: 12px;
 }
 */
-.coming_soon {
-	text-align: center;
-	vertical-align: middle;
+/*---- Workouts index ----*/
+
+table.newsfeed {
+	width: 100%;	
+	border-top: 1px dotted #d9d9d9;
+}
+
+.newsfeed th, .newsfeed td {
 	font-size: 14px;
-	color: #828282;
+	text-align: left;
+	vertical-align: top;
+	border-bottom:1px dotted #d9d9d9;
+	padding: 12px;	
 }
 
-.feature_headline {
-	font-size: 24px;
+.newsfeed .first_column {
+	text-align: left;
+	padding-left: 0px;
 }
 
-#feature_stat {
+.newsfeed .last_column {
+	text-align: right;
+	padding-right: 0px;
+}
+
+.newsfeed .tags {
+	text-align: center;
+}
+
+.activity_icon_small {
+	position: relative;
+	padding-right: 8px;
+	height: 24px;
+	width: auto;
+	vertical-align: top;
+}
+
+/*Container for featuring interesting stat headline and details*/
+#headline_news {
 	padding: 8px 0px 8px 0px;
 	font-size: 18px;
 	font-weight: 500;
@@ -282,13 +376,19 @@ thead, th, td {
 	text-align: center;		
 }
 
-#left_column {
+.headline_title {
+	font-size: 24px;
+}
+
+/*---- Dashboard content layout ----*/
+
+.content_left_column {
 	width: 384px;
-	margin-right: 72px;
+	padding-right: 72px;
 	text-align: left;
 }
 
-#right_column {
+.content_right_column {
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -298,19 +398,8 @@ thead, th, td {
 	padding: 0px;
 	vertical-align: top;
 }
-	
-#workout_left_column {
-	display: block;
-	width: 480px;
-	text-align: left;
-	margin: 0px auto 0px 0px;
-}
 
-#workout_right_column {
-	float: right;
-	margin: 0px;
-	padding: 0px;
-}
+/*---- Dashboard content ----*/
 
 #recent_workouts_chart {
 	position: relative;
@@ -319,60 +408,30 @@ thead, th, td {
 	overflow: hidden;
 }
 
-.recent_workouts_graph {
-	
-}
+/*---- Workout content layout ----*/
 
-#map {
-	float: right;
-	position: relative;
-	top: 0px;
-	border: 1px solid #d9d9d9;
-}
-
-#y_axis {
-	width: 96px;
-	float: left;
-	text-align: right;
-	position: relative;
-	top:96px;
-	font-size: 14px;
-	font-weight: 100;
-	display: inline-block;
-}
-
-.chart_title {
-	text-align: center;
-	vertical-align: top;
-}
-
-.chart_title h2, #public_timeline h2 {
-	padding-top: 0px;
-	margin-top: 0px;
-	text-align: left;
-}
-
-#workout_header {
+.workout_left_column {
 	display: block;
+	width: 480px;
+	text-align: left;
+	margin: 0px auto 0px 0px;
 }
 
-#workout_header h1 {
-	margin-bottom: 0px;
+.workout_right_column {
+	float: right;
+	margin: 0px;
+	padding: 0px;
 }
+
+/*---- Workout content ----*/
+
+/*Workout title and details styles*/
 
 .activity_icon {
 	position: relative;
 	padding-right: 4px;
 	height: 32px;
 	width: auto;
-}
-
-.activity_icon_small {
-	position: relative;
-	padding-right: 8px;
-	height: 24px;
-	width: auto;
-	vertical-align: top;
 }
 
 .action_icon {
@@ -387,8 +446,7 @@ thead, th, td {
 #workout_description, #workout_notes {
 	display: block;
 	font-size: 14px;
-	padding: 0px;
-	margin: 2px 0px;
+	padding: 2px 0px;
 }
 
 #workout_notes {
@@ -434,128 +492,43 @@ a.delete-x {
 	left: -5000px;
 }
 
-#view_selection {
-	position: absolute;
-	top: 80px;
-	right: 0px;
-}
+/*---- Workout comparison stats view ----*/
 
-#public_timeline table, #workouts table {
-	border-top: 1px dotted #d9d9d9;
-	width: 100%;
-}
-
-#public_timeline th, #public_timeline td, #workouts th, #workouts td {
-	font-size: 14px;
-	vertical-align: top;
-	overflow: hidden;
-	text-align: right;
-	border-bottom:1px dotted #d9d9d9;
-	padding: 12px;
-}
-
-#public_timeline .first_column, #workouts .first_column {
-	text-align: left;
-	padding-left: 0px;
-}
-
-#public_timeline .name, #workouts .name {
-	text-align: left;
-}
-
-#public_timeline .tags, #workouts .tags {
-	text-align: center;
-}
-
-#public_timeline .last_column, #workouts .last_column {
-	border-right: none;
-	padding-right: 0px;
-}
-
-.clear:after {
-  content: ".";
-  display: block;
-  height: 0px;
-  clear: both;
-  visibility: hidden;
-}
-
-#footer {
-	clear: both;
-	width: 100%;
-	color: #7C7B74;
-	font-size: 8pt;
-	padding: 36px 0px 12px 0px;
-	text-align: center;
-}
-
-span.value {
-	font-weight: 500;
-	font-size: 18px;
-}
-
-#workout_comparison {
+#workout_stats {
 	float: left;
 	overflow: auto;
 }
 
-p.comp_this_workout {
-	margin-top: 0px;
-	color: #25a1d6;
+#workout_stats table, th, td {
+	border: 0px;
+	text-align: left;
 }
 
-p.comp_my_activity {
-	margin-top: 4px;
-	color: #3dc10b;
-}
-
-p.comp_activity {
-	margin: 4px 0px 0px 0px;
-}
-
-#workout_comparison th, td {
+#workout_stats th, td {
 	padding: 8px 4px;
 	font-weight: 300;
 	vertical-align: top;
 	position: relative;
 }
 
-#workout_comparison th {
+#workout_stats th {
 	font-size:18px;			
 	text-align: right;
 	padding-left: 0px;
 }
 
-#workout_comparison td {
+#workout_stats td.number {
+	text-align: left;
 	color:#25a1d6;
+	width: 120px;
 }
 
-#workout_comparison td.number {
-	width: 120px;
+.stat, .number {
+	font-size: 14px;
 }
 
 #spark_bar, #spark_line {
 	padding-top: 0px;
-}
-
-.big_visualization {
-	width: 100%;
-	height: 196px;
-	position: relative;
-	clear: both;
-	top: 12px;
-}
-
-#fullsize_chart_area {
-	position: relative;
-	top: 24px;
-	padding-bottom: 48px;
-	clear: both;
-}
-
-#fullsize_chart_area h2 {
-	text-align: left;
-	display: inline;
 }
 
 .sparkbar {
@@ -570,6 +543,63 @@ p.comp_activity {
 	top: 0px;
 }
 
-.stat, .number {
-	font-size: 14px;
+/*larger font to display the number (vs. unit)*/
+span.value {
+	font-weight: 500;
+	font-size: 18px;
+}
+
+/*Formatting for content in comparison tooltip*/
+
+p.comp_this_workout {
+	margin-top: 0px;
+	padding-top: 0px;
+	color: #25a1d6;
+}
+
+p.comp_my_activity {
+	padding-top: 4px;
+	color: #3dc10b;
+}
+
+p.comp_activity {
+	padding: 4px 0px 0px 0px;
+}
+
+/*Formatting for full-size stat view*/
+
+#fullsize_chart_area {
+	text-align: left;
+	position: relative;
+	top: 24px;
+	padding-bottom: 48px;
+	clear: both;
+}
+
+#fullsize_chart_area h2 {
+	text-align: left;
+	display: inline;
+}
+
+.big_visualization {
+	width: 100%;
+	height: 196px;
+	position: relative;
+	clear: both;
+	top: 12px;
+}
+
+/*Workout gps map*/
+
+#map {
+	float: right;
+	position: relative;
+	top: 0px;
+	border: 1px solid #d9d9d9;
+}
+
+/*Global*/
+* {
+	margin: 0px;
+	padding: 0px;
 }

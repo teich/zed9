@@ -1,22 +1,22 @@
 <div id="content_header">
-	<div id="feature_stat">
-		<p class="feature_headline">You've logged <%= h number_to_time(@total_time) %> across <%= @workouts.size %> workouts.</p>
+	<div id="headline_news">
+		<p class="headline_title">You've logged <%= h number_to_time(@total_time) %> across <%= @workouts.size %> workouts.</p>
 		<% if !@atd.nil? && @atd > 0 %>
-		<p class="feature_details">The average user logged <%= h number_to_time(@atd) %>. You are <%= h @total_time/@atd*100 %>% vs average!</p>
+		<p class="headline_details">The average user logged <%= h number_to_time(@atd) %>. You are <%= h @total_time/@atd*100 %>% vs average!</p>
 		<% end %>
 	</div>
 </div>
 
-<div id="content" class="clear">
+<div id="content">
 
-	<div id="left_column">
+	<div class="content_left_column">
 
 		<div id="dashboard_stats">
 		</div>
 
 		<div id="recent_workouts_chart">
 			<% if @workouts.size > 0 %>
-			<span class="chart_title"><h2>Your workouts</h2></span>
+			<h2>Your workouts</h2>
 			<%= ziya_chart dashboard_chart_path, :salign => "TL", :width => "100%", :height => "240px" -%>
 			<% end %>
 		</div>
@@ -25,11 +25,11 @@
 
 	</div>
 
-	<div id="right_column">
+	<div class="content_right_column">
 
-		<div id="public_timeline">
+		<div id="public_newsfeed">
 			<h2>Recent public workouts</h2>
-			<table class="timeline">
+			<table class="newsfeed">
 				<% @shared.each do |sw| %>
 				<tr>
 					<td class="first_column"><img class="activity_icon_small" src="/images/activities/running.png"><%= h sw.activity.name %></td>
