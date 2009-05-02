@@ -36,15 +36,17 @@ class Workout < ActiveRecord::Base
     trackpoints.map { |tp| tp.time - start_time }
   end
   
-  def get_smoothed_hr(points, value_array = false)
+  def get_smoothed_hr(points, value_array = false, milliseconds = false)
     hr = get_hr
     factor = hr.size / points
     sd = smooth_data(hr, factor)
+    point_interval = self.duration / sd.size
     if value_array
       c = -1
       vc = sd.map do |d|
         c += 1
-        [c, d]
+        multiplier = milliseconds ? point_interval * 1000 : 1
+        [(c*multiplier).to_i, d] # Converting to milliseconds for flot
       end
       return vc
     else
@@ -204,7 +206,7 @@ class Workout < ActiveRecord::Base
   end
   
   def json_heartrate_big
-    get_smoothed_hr(200, true)
+    get_smoothed_hr(200, true, true)
   end
   
   def json_speed

@@ -27,7 +27,7 @@ $(document).ready(function() {
 		// crosshair: { mode: "x", color: '#d9d9d9' },
         colors: ["#25a1d6", "#3dc10b", "#545454"],
         shadowSize: 1,
-        xaxis: { tickSize: 30 },
+        xaxis: { mode: "time", timeformat: "%h:%M", minTickSize: [15, "minute"] },
         yaxis: { tickSize: 20 },
 		selection: { mode: "xy" }
 	};
