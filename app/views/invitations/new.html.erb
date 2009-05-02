@@ -1,8 +1,20 @@
-<%= error_messages_for :invitation %>
-<% form_for @invitation do |f| %>
-  <p>
-    <%= f.label :recipient_email, "Friend's email address" %><br />
-    <%= f.text_field :recipient_email %>
-  </p>
-  <p><%= f.submit "Invite!" %></p>
+<div id="send_invite">
+	
+	<%= error_messages_for :invitation %>
+	<% form_for @invitation do |f| %>
+
+	<table id="send_invite" class="form">
+		<tr>
+			<th><%= f.label :recipient_email, "Friend's email address" %></th>
+			<td><%= f.text_field :recipient_email %></td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td><%= f.submit "Invite!" %></td>
+		</tr>
+	</table>
+
 <% end %>
+
+</div>
+

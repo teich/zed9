@@ -195,9 +195,33 @@ thead, th, td {
 /*---- Marketing page styles ----*/
 
 .marketing_tagline {
-	padding-top: 24px;
+	padding-top: 25px;
 	padding-bottom: 24px;
 	font-weight: 500;
+}
+
+#supported_devices_list ul {
+	padding-left: 1em;
+	line-height: 1.4;
+	list-style: none;
+}
+#supported_devices_list ul li:before {
+	content: "\00BB \0020";
+}
+
+#left_splash {
+	position: relative;
+	top: 2px;
+}
+
+#left_splash .qualifier {
+	padding: 6px 0px;
+	font-style: oblique;
+	font-weight: 100;
+}
+
+#left_splash .coming_soon {
+	font-style: oblique;	
 }
 
 /*---- Action result messages and alerts ----*/
@@ -211,19 +235,30 @@ thead, th, td {
 }
 
 .errorExplanation {
+	text-align: left;
 	color: red;
 	padding-bottom: 36px;
 	font-size: 18px;
 }
 
 .errorExplanation h2 {
-	text-align: left;
 	font-size: 18px;
 	font-weight: 500;
 }
 
 .errorExplanation p, ul, li {
 	font-weight: 100;
+	font-size: 14px;
+}
+
+.errorExplanation ul {
+	padding-left: 1em;
+	line-height: 1.4;
+	list-style: none;
+}
+
+.errorExplanation ul li:before {
+	content: "\00BB \0020";
 }
 
 /*---- General use form styles ----*/
@@ -231,6 +266,11 @@ thead, th, td {
 #register, #login_form, #left_splash, #edit_workout {
 	width: 504px;
 	padding-top: 4px;
+}
+
+#login_form {
+	position: relative;
+	top: -10px;
 }
 
 .request_invite {
@@ -248,8 +288,17 @@ thead, th, td {
 	text-align: left;
 }
 
+#login_page .request_invite {
+	top: -1px; /*Position adjustment to align text with left column*/	
+}
+
 #join_list {
-	padding-top: 15px; /*Position adjustment to align text with left column*/
+	padding-top: 6px; /*Position adjustment to align text with left column*/
+}
+
+#new_invitation {
+	text-align: left;
+	font-size: 18px;
 }
 
 #registration_form, #login_form table, tr, th, td {
@@ -263,7 +312,7 @@ thead, th, td {
 	font-size: inherit;
 	padding-right: 4px;
 	text-align:right;
-	width: 192px;
+	width: 204px;
 }
 
 .form td {
@@ -332,6 +381,10 @@ thead, th, td {
 */
 /*---- Workouts index ----*/
 
+.filtered {
+	padding-top: 0px;
+}
+
 table.newsfeed {
 	width: 100%;	
 	border-top: 1px dotted #d9d9d9;
@@ -355,6 +408,13 @@ table.newsfeed {
 	padding-right: 0px;
 }
 
+.newsfeed .no_right_padding {
+	padding-right: 0px;
+}
+
+.newsfeed .no_left_padding {
+	padding-left: 0px;
+}
 .newsfeed .tags {
 	text-align: center;
 }

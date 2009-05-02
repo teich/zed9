@@ -72,10 +72,10 @@ class WorkoutsController < ApplicationController
     end
     
     if @workout.save
-      flash[:notice] = 'Workout was successfully created.'
+      flash[:notice] = 'Workout added!'
       redirect_to @workout
     else
-      flash[:notice] = "can't save workout for some lame reason."
+      flash[:notice] = "Unable to save workout for some lame reason."
       render :action => "new"
     end
   end
@@ -83,7 +83,7 @@ class WorkoutsController < ApplicationController
 
   def update
     if @workout.update_attributes(params[:workout])
-      flash[:notice] = 'Workout was successfully updated.'
+      flash[:notice] = 'Workout updated.'
       redirect_to @workout
     else
       render :action => "edit"
@@ -106,7 +106,7 @@ class WorkoutsController < ApplicationController
     @workout = Workout.find(params[:id])
     
     if (!@workout.shared && !current_user.nil? && (@workout.user_id != current_user.id))
-      flash[:notice] = "The workout you tried to view is not public"
+      flash[:notice] = "This workout is private"
       redirect_to root_path 
     end
   end

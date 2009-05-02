@@ -18,7 +18,7 @@
 		<ul>
 			<li>Welcome, <%= link_to current_user.login, account_path %></li>
 			<% if current_user.invitation_limit > 0 %>
-			<li><%= link_to "Invite Friends", new_invitation_path %> (<%= current_user.invitation_limit %> remaining)</li>
+			<li><%= link_to "Invite friends", new_invitation_path %> (<%= current_user.invitation_limit %> remaining)</li>
 			<% end %>
 			<li class="last"><%= link_to "Log out", user_session_path, :method => :delete %></li>
 		</ul>

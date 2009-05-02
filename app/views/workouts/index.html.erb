@@ -5,8 +5,8 @@
 <div id="content">
 
 	<% if (params[:tag])%>
-		Filtered by <%= h params[:tag] %> &nbsp;
-		<%= link_to 'x', user_workouts_path(current_user) %> 
+		<p class="filtered">Filtered by: <%= h params[:tag] %>&nbsp;
+		<%= link_to 'x', user_workouts_path(current_user) %> </p>
 	<% end %>
 
 	<div id="workouts_list">

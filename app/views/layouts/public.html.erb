@@ -14,27 +14,34 @@
 </head>
 <body>
 
-	<div id="header">
+	<div id="wrapper">
 
-		<div id="logo">
-			<%= link_to "ZED9", root_path %>
+		<div id="header">
+
+			<div id="logo">
+				<%= link_to "ZED9", root_path %>
+			</div>
+
+			<%= render :partial => "layouts/loginpane" %>
+
 		</div>
 
-		<%= render :partial => "layouts/loginpane" %>
+		<div id="flash">
+			<%= flash[:notice] %>
+		</div>
+
+		<div id="main">
+			<%= yield  %>
+		</div>
+
+		<div class="clearfooter"></div>
 
 	</div>
-
-	<div id="flash">
-		<%= flash[:notice] %>
-	</div>
-
-	<div id="main">
-		<%= yield  %>
-	</div>
-
+	
 	<div id="footer">
 		© 2009 Zed9. All rights reserved.
 	</div>
+	
 	
 	<script type="text/javascript">
 	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
