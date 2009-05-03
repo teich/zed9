@@ -3,7 +3,21 @@
 
 $(document).ready(function() {
 
-    var workoutURL = "/workouts/" + WORKOUT_ID + ".js"
+
+    $('#foofookachoo').each(function() {
+		var myURL = this.baseURI
+		var jsURL = myURL + ".js"
+		$.getJSON(jsURL, function(data) {
+			var duration = [];
+			
+			for (var i = 0; i < data.length; i++) {
+				duration.push([i, data[i].workout.duration]);
+			}
+			$.plot($('#foofookachoo'), duration);
+		});
+	})
+
+	var workoutURL = "/workouts/" + WORKOUT_ID + ".js"
 
     var options = {
         grid: { borderWidth: 0 },

@@ -1,4 +1,6 @@
 class DashboardsController < ApplicationController
+  before_filter :require_user
+  
   def show
     @workouts = current_user.workouts.find(:all)
     
@@ -25,5 +27,10 @@ class DashboardsController < ApplicationController
       end
     end 
     @atd = aud.aaverage
+    
+    respond_to do |format|
+       format.html
+       format.js {render :js => @workouts.to_json }
+     end
   end
 end
