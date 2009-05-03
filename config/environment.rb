@@ -29,7 +29,6 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
 
   config.gem "authlogic"
-  config.gem "derailed-ziya", :lib => "ziya"
   config.gem "newrelic_rpm" 
   config.gem "teich-hrmparser", :lib => "hrmparser", :version => "0.2.2"
 

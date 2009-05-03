@@ -1,5 +1,4 @@
 authlogic  
 logging
-derailed-ziya  --source gems.github.com
 newrelic_rpm
 teich-hrmparser -v 0.2.2 --source gems.github.com
