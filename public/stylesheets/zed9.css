@@ -21,7 +21,7 @@ body {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	margin-bottom: -48px;
+	margin-bottom: -60px;
 }
 
 #header {
@@ -63,7 +63,7 @@ body {
 }
 
 .clearfooter {
-	height: 48px;
+	height: 60px;
 	clear: both;
 }
 
@@ -73,7 +73,7 @@ body {
 	color: #7C7B74;
 	font-size: 8pt;
 	text-align: center;
-	height: 48px;
+	height: 60px;
 	padding: 0px;
 	margin: 0px;
 	vertical-align: bottom;
@@ -112,6 +112,12 @@ h3 {
 	text-align: left;
 }
 
+h4 {
+	font-size: 16px;
+	font-weight: 500;
+	padding-top: 12px;
+}
+
 p {
 	padding: 8px 0px;
 	line-height: 1.4;
@@ -123,7 +129,20 @@ thead, th, td {
 	text-align: left;
 }
 
-/*---- General use to display a right column ----*/
+#content ul {
+	padding-left: 1em;
+	line-height: 1.4;
+	list-style: none;
+}
+#content ul li:before {
+	content: "\00BB \0020";
+}
+
+/*---- General use to display columns ----*/
+
+.left_column {
+	position: relative;
+}
 
 .right_column {
 	position: absolute;
@@ -131,7 +150,9 @@ thead, th, td {
 	right: 0px;
 	top: 0px;
 	margin: 0px;
-	padding: 0px;
+	padding: 0px 0px 0px 48px;
+	border-left: 1px dotted #d9d9d9;
+	text-align: left;
 }
 
 /*---- General table column styling ----*/
@@ -221,8 +242,8 @@ thead, th, td {
 }
 
 #left_splash {
-	position: relative;
-	top: 2px;
+	width: 504px;
+	padding-top: 6px;
 }
 
 #left_splash .qualifier {
@@ -237,12 +258,7 @@ thead, th, td {
 
 #right_splash, #right_login {
 	width: 360px;
-	padding-top: 0px;
-	padding-left: 48px;
 	padding-bottom: 24px;
-	border-left: 1px dotted #d9d9d9;
-	right: 0px;
-	text-align: left;
 }
 
 #external_newsfeed {
@@ -310,7 +326,7 @@ thead, th, td {
 
 /*---- General use form styles ----*/
 
-#register, #login_form, #left_splash, #edit_workout {
+#register, #login_form, #edit_workout {
 	width: 504px;
 	padding-top: 4px;
 }
@@ -671,6 +687,25 @@ p.comp_activity {
 	position: relative;
 	top: 0px;
 	border: 1px solid #d9d9d9;
+}
+
+/*---- Footer ----*/
+
+#footer ul {
+	padding: 0px;
+	padding-bottom: 8px;
+}
+
+#footer li {
+	display:inline;
+	border-right:1px dotted #d9d9d9;
+	font-size: 12px;
+	padding-left: 8px;
+	padding-right: 14px;
+}
+
+#footer .last {
+	border: 0px;
 }
 
 /*Global*/
