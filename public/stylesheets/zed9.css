@@ -123,6 +123,17 @@ thead, th, td {
 	text-align: left;
 }
 
+/*---- General use to display a right column ----*/
+
+.right_column {
+	position: absolute;
+	float: right;
+	right: 0px;
+	top: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
 /*---- General table column styling ----*/
 
 .first_column {
@@ -224,6 +235,42 @@ thead, th, td {
 	font-style: oblique;	
 }
 
+#right_splash, #right_login {
+	width: 360px;
+	padding-top: 0px;
+	padding-left: 48px;
+	padding-bottom: 24px;
+	border-left: 1px dotted #d9d9d9;
+	right: 0px;
+	text-align: left;
+}
+
+#external_newsfeed {
+	position: relative;
+	width: 100%;
+	top: 48px;
+	padding-bottom: 48px;
+}
+
+#external_newsfeed h2 {
+	font-size: 18px;
+	font-weight: 100;
+	text-align: left;
+	padding-bottom:12px;
+}
+
+.request_invite {
+	position: relative;
+	top: -1px; /*Position adjustment to align text with left column*/
+	float: right;
+	font-size: 18px;
+	font-weight: 100;
+}
+
+#join_list {
+	padding-top: 6px; /*Position adjustment to align text with left column*/
+}
+
 /*---- Action result messages and alerts ----*/
 
 #flash {
@@ -271,29 +318,6 @@ thead, th, td {
 #login_form {
 	position: relative;
 	top: -10px;
-}
-
-.request_invite {
-	position: absolute;
-	top: -1px; /*Position adjustment to align text with left column*/
-	float: right;
-	padding-top: 0px;
-	padding-left: 48px;
-	padding-bottom: 24px;
-	border-left: 1px dotted #d9d9d9;
-	right: 0px;
-	width: 360px;
-	font-size: 18px;
-	font-weight: 100;
-	text-align: left;
-}
-
-#login_page .request_invite {
-	top: -1px; /*Position adjustment to align text with left column*/	
-}
-
-#join_list {
-	padding-top: 6px; /*Position adjustment to align text with left column*/
 }
 
 #new_invitation {
@@ -361,24 +385,15 @@ thead, th, td {
 
 /*---- Dashboard timeline styling ----*/
 
+#public_newsfeed {
+	position: relative;
+}
+
 #public_newsfeed h2 {
 	text-align: left;
 	padding-bottom: 12px;
 }
 
-/*#public_newsfeed table {
-	width: 100%;	
-	border-top: 1px dotted #d9d9d9;
-}
-
-#public_newsfeed th, #public_newsfeed td {
-	font-size: 14px;
-	text-align: left;
-	vertical-align: top;
-	border-bottom:1px dotted #d9d9d9;
-	padding: 12px;
-}
-*/
 /*---- Workouts index ----*/
 
 .filtered {

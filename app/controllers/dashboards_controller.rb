@@ -4,8 +4,8 @@ class DashboardsController < ApplicationController
   def show
     @workouts = current_user.workouts.find(:all)
     
-    # list of 5 most recent public workouts
-    @shared = Workout.find_all_by_shared(true, :limit=>5, :order => "updated_at DESC")
+    # list of 10 most recent public workouts
+    @shared = Workout.find_all_by_shared(true, :limit=>10, :order => "updated_at DESC")
     
     durations = @workouts.map { |w| w.duration }
     if durations.nil?
