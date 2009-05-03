@@ -31,20 +31,38 @@
 
 	</div>
 
-	<div class="request_invite">
-		<p>Not a member of ZED9? We're in an early alpha and scaling as fast as we can. Put your name on the list for an invitation!</p>
-		<% form_for Invitation.new do |f| %>
-			<table id="join_list" class="form">
+	<div id="right_splash" class="right_column">
+
+		<div class="request_invite">
+			<p>Not a member of ZED9? We're in an early alpha and scaling as fast as we can. Put your name on the list for an invitation!</p>
+			<% form_for Invitation.new do |f| %>
+				<table id="join_list" class="form">
+					<tr>
+						<th><%= f.label :recipient_email, "Email" %></th>
+						<td><%= f.text_field :recipient_email %></td>
+					</tr>
+					<tr>
+						<th>&nbsp;</th>
+						<td><%= f.submit "Reserve your spot", :class => "submit" %>
+					</tr>
+				</table>
+			<% end %>
+
+		</div>
+
+		<div id="external_newsfeed">
+			<h2>Recent public workouts</h2>
+			<table class="newsfeed">
+				<% @shared.each do |sw| %>
 				<tr>
-					<th><%= f.label :recipient_email, "Email" %></th>
-					<td><%= f.text_field :recipient_email %></td>
+					<td class="first_column no_right_padding"><img class="activity_icon_small" src="/images/activities/running.png"></td>
+					<td class="name"><%= link_to sw.name, workout_path(sw) %></td>
+					<td><%= h number_to_short_time(sw.duration) %></td>
+					<td class="last_column"><%= h sw.user.login %></td>
 				</tr>
-				<tr>
-					<th>&nbsp;</th>
-					<td><%= f.submit "Reserve your spot", :class => "submit" %>
-				</tr>
+			<% end %>
 			</table>
-		<% end %>
+		</div>
 
 	</div>
 
