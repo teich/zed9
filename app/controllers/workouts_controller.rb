@@ -33,7 +33,7 @@ class WorkoutsController < ApplicationController
       points = @workout.trackpoints.map { |tp| [tp.lat, tp.lng] }
       polyline = GPolyline.new(points,"#a000f0",3,1.0)
       @map.overlay_init(polyline)
-      @map.center_zoom_init(start,13)
+      @map.center_zoom_on_points_init(*points)
       @map.overlay_init(GMarker.new(start,:title => "Hello", :info_window => "Starting Point"))
     end
     
