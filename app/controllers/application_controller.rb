@@ -5,7 +5,6 @@ require 'authlogic'
 
 class ApplicationController < ActionController::Base
   #helper :all # include all helpers, all the time
-  helper Ziya::Helper
   
   include ArrayMath
 

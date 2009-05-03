@@ -3,7 +3,23 @@
 
 $(document).ready(function() {
 
-    var workoutURL = "/workouts/" + WORKOUT_ID + ".js"
+
+	// Displays dashboard graph
+    $('#foofookachoo').each(function() {
+		var myURL = this.baseURI
+		var jsURL = myURL + ".js"
+		$.getJSON(jsURL, function(data) {
+			var duration = [];
+			for (var i = 0; i < data.length; i++) {
+				duration.push([i, data[i].workout.duration]);
+			}
+			$.plot($('#foofookachoo'), [duration], {bars: {show: true}});
+		});
+	})
+
+
+	// All this to display workout graphs
+	var workoutURL = "/workouts/" + WORKOUT_ID + ".js"
 
     var options = {
         grid: { borderWidth: 0 },
