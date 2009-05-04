@@ -8,6 +8,11 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :invitations
  
+  map.namespace :admin do |admin|
+    admin.resources :users
+    admin.resources :activities
+  end
+  
   map.resources :users, :only => [:show], :shallow => true do |user|
     user.resources :workouts do |workout|
 #      workout.heart_rate_chart 'chart', :controller => 'charts', :action => 'workout_heart_rate' 
