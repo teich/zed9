@@ -68,4 +68,12 @@ class ApplicationController < ActionController::Base
       @user_session = UserSession.new
     end
   end
+  
+  def require_admin
+    unless current_user.admin_user?
+      flash[:notice]= "You don't have permission to view this page"
+      redirect_to root_url
+      return false
+    end
+  end
 end

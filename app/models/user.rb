@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     (Date.today - birthdate).to_i / 365
   end
 
+  def admin_user?
+    admin
+  end
+  
   def to_param
 #    "#{login}"
     "#{login.gsub(/[^a-z0-9]+/i, '-')}"

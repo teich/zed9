@@ -1,0 +1,25 @@
+<h1>Admin site</h1>
+	<h2>There are <%= @users.size %> users registered</h2>
+	<table>
+		<tr>
+			<th>Login Name</th>
+			<th>Last Login</th>
+			<th>Login count</th>
+			<th>Email</th>
+		</tr>
+<% for user in @users %>
+
+		<tr>
+			<td><%= h user.login %></td>
+			<td><%= h user.last_login_at %></td>
+			<td><%= h user.login_count %></td>
+			<td><%= h user.email %></td>
+		</tr>
+<% end %>
+</table>
+
+<h2>There are <%= h @invitations.size %> invitations</h2>
+Signed up on the website: 
+<% for invite in @invitations %>
+<%= h invite.recipient_email if invite.sender_id.nil? %>
+<% end %>
