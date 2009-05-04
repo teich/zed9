@@ -2,7 +2,7 @@ class DashboardsController < ApplicationController
   before_filter :require_user
   
   def show
-    @workouts = current_user.workouts.find(:all)
+    @workouts = current_user.workouts.find(:all, :order => "start_time")
     
     # list of 10 most recent public workouts
     @shared = Workout.find_all_by_shared(true, :limit=>5, :order => "updated_at DESC")
