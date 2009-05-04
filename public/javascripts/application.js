@@ -3,17 +3,110 @@
 
 $(document).ready(function() {
 
+    function axes(axes) {
+        var markings = [];
+        var y = axes.yaxis.min;
+        var x = axes.xaxis.min;
+        markings.push({ yaxis: { from: y, to: y }, color: "#d9d9d9", lineWidth: 1 }, { xaxis: { from: x, to: x }, color: "#d9d9d9", lineWidth: 1 } );
+        return markings;
+    }
+
+    function xAxis(axes) {
+        var markings = [];
+        var y = axes.yaxis.min;
+        markings.push({ yaxis: { from: y, to: y }, color: "#d9d9d9", lineWidth: 1 });
+        return markings;
+    }
 
 	// Displays dashboard graph
-    $('#foofookachoo').each(function() {
+
+    $('#recent_workouts_chart').each(function() {
 		var myURL = this.baseURI
 		var jsURL = myURL + ".js"
 		$.getJSON(jsURL, function(data) {
 			var duration = [];
+			var date = [];
 			for (var i = 0; i < data.length; i++) {
+				var millisec = data[i].workout.json_date * 1000;
+				var d = new Date(millisec);
+				var display_date = d.getMonth() + 1 + "/" + d.getDate();
 				duration.push([i, data[i].workout.duration]);
+				date.push([i, display_date]);
 			}
-			$.plot($('#foofookachoo'), [duration], {bars: {show: true}});
+	    var dashboard_options = {
+				grid: { 
+					borderWidth: 0, 
+					borderColor: "#d9d9d9", 
+					tickColor: 'transparent', 
+					hoverable: "yes", 
+					clickable: true,
+					mouseActiveRadius: 48, 
+					markings: xAxis 
+				},
+	      xaxis: { ticks: date, labelWidth: 12 },
+	      yaxis: { ticks: [], autoscaleMargin: 0.2 },
+	      colors: ["#25a1d6"],
+	      shadowSize: 1,
+			};
+			$.plot($('#recent_workouts_chart'), [{data: duration, bars: { 
+					show: true, 
+					barWidth: .9, 
+					lineWidth: 1, 
+					fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } 
+				}}], 
+				dashboard_options);
+
+		// Dashboard chart tooltip
+
+	    	function barTooltip(x, y, contents) {
+	        $('<div id="bar_tooltip" class="tooltip">' + contents + '</div>').css( {
+            top: y-465,
+            left: x-90,
+	        }).appendTo("#recent_workouts").fadeIn(200);
+	    }
+
+			var unit = "seconds";
+
+	    var previousPoint = null;
+
+	    $("#recent_workouts_chart").bind("plothover", function (event, pos, item) {
+	          if (item) {
+	              if (previousPoint != item.datapoint) {
+	                  previousPoint = item.datapoint;
+
+	                  $("#bar_tooltip").remove();
+	                  var x = item.datapoint[0].toFixed(0);
+	                  var y = item.datapoint[1].toFixed(0);
+										var millisec = data[x].workout.json_date * 1000;
+										var d = new Date(millisec);
+										var m_names = new Array("January", "February", "March", 
+										"April", "May", "June", "July", "August", "September", 
+										"October", "November", "December");
+										var display_date = m_names[d.getMonth() + 1] + " " + d.getDate() + ", " + d.getFullYear();
+										var name = data[x].workout.name;
+										var activity_name = data[x].workout.activity_name;
+										var	tip_text = "<span class='tooltip_extra_info'>" + activity_name + ":</span><br>" + name + "<br><span class='tooltip_extra_info'>" + display_date + "<br>" + y + unit + "</span>";
+
+	                  barTooltip(item.pageX, item.pageY, tip_text );
+	              }
+	          }
+	          else {
+	              $("#bar_tooltip").remove();
+	              previousPoint = null;            
+	          }
+	    });	    
+
+			// Click-through from bar to workout view
+	    // 
+	    // $("#recent_workouts_chart").bind("plotclick", function (event, pos, item) {
+	    //     alert("You clicked at " + pos.x + ", " + pos.y);
+	    // 
+	    //     if (item) {
+	    //       highlight(item.series, item.datapoint);
+	    //       alert("You clicked a point!");
+	    //     }
+	    // });
+	    // 
 		});
 	})
 
@@ -37,14 +130,6 @@ $(document).ready(function() {
         colors: ["#25a1d6", "#3dc10b", "#545454"],
         shadowSize: 1,
     };
-
-    function axes(axes) {
-        var markings = [];
-        var y = axes.yaxis.min;
-        var x = axes.xaxis.min;
-        markings.push({ yaxis: { from: y, to: y }, color: "#d9d9d9", lineWidth: 1 }, { xaxis: { from: x, to: x }, color: "#d9d9d9", lineWidth: 1 } );
-        return markings;
-    }
 
     var full_size_options = {
 		grid: { borderWidth: 0, borderColor: "#d9d9d9", tickColor: 'transparent', hoverable: "yes", mouseActiveRadius: 48, markings: axes },
@@ -129,30 +214,13 @@ $(document).ready(function() {
 		// Fullsize chart tooltip
 			
 	    function showTooltip(x, y, contents) {
-	        $('<div id="tooltip">' + contents + '</div>').css( {
-	            position: 'absolute',
-	            display: 'none',
+	        $('<div id="fullsize_tooltip" class="tooltip">' + contents + '</div>').css( {
 	            top: y - 41,
 	            left: x + 1,
-	            border: '1px solid #d9d9d9',
-	            padding: '8px',
-				'color': '#25a1d6',
-				'font-size': '18px',
-				'font-weight': 500,
-	            'background-color': '#f0f0f0',
-	            opacity: .9,
-				'-moz-border-radius-bottomleft': '5px',
-				'-moz-border-radius-bottomright': '5px',
-				'-moz-border-radius-topleft': '5px',
-				'-moz-border-radius-topright': '5px',
-				'border-radius-bottomleft': '5px',
-				'border-radius-bottomright': '5px',
-				'border-radius-topleft': '5px',
-				'border-radius-topright': '5px'
 	        }).appendTo("body").fadeIn(200);
 	    }
 	    
-		var unit = '<span style="font-size: 14px; font-weight: 100">bpm</span>'
+			var unit = '<span class="tooltip_unit">bpm</span>'
 	
 	    var previousPoint = null;
 	
@@ -163,7 +231,7 @@ $(document).ready(function() {
                 if (previousPoint != item.datapoint) {
                     previousPoint = item.datapoint;
     
-                    $("#tooltip").remove();
+                    $("#fullsize_tooltip").remove();
                     var x = item.datapoint[0].toFixed(2),
                         y = item.datapoint[1].toFixed(0);
     
@@ -171,7 +239,7 @@ $(document).ready(function() {
                 }
             }
             else {
-                $("#tooltip").remove();
+                $("#fullsize_tooltip").remove();
                 previousPoint = null;            
             }
 	    });	    
@@ -212,6 +280,8 @@ $(document).ready(function() {
 		// 	    }
 		// 	    
 		// 
+		
+	
 		// Iterate over all the class "stat" and qtip them.
 		
         $(".stat").each(function(i) {

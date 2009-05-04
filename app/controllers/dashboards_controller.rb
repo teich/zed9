@@ -30,7 +30,7 @@ class DashboardsController < ApplicationController
     
     respond_to do |format|
        format.html
-       format.js {render :js => @workouts.to_json }
+       format.js {render :js => @workouts.to_json(:methods => [:json_date, :activity_name]) }
      end
   end
 end

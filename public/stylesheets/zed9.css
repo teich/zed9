@@ -138,6 +138,10 @@ thead, th, td {
 	content: "\00BB \0020";
 }
 
+.coming_soon {
+	font-style: oblique;	
+}
+
 /*---- General use to display columns ----*/
 
 .left_column {
@@ -250,10 +254,6 @@ thead, th, td {
 	padding: 6px 0px;
 	font-style: oblique;
 	font-weight: 100;
-}
-
-#left_splash .coming_soon {
-	font-style: oblique;	
 }
 
 #right_splash, #right_login {
@@ -399,6 +399,45 @@ thead, th, td {
 	top: 12px;
 */}
 
+/*---- Tool tip general styling ----*/
+
+.tooltip {
+	position: absolute;
+	display: none;
+  border: 1px solid #d9d9d9;
+  padding: 8px;
+	color: #25a1d6;
+	font-size: 18px;
+	font-weight: 500;
+  background-color: #f0f0f0;
+  opacity: .9;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-radius-bottomleft: 5px;
+	border-radius-bottomright: 5px;
+	border-radius-topleft: 5px;
+	border-radius-topright: 5px;
+}
+
+.tooltip_extra_info {
+	font-size: 14px; 
+	font-weight: 100;
+	line-height: 1.6;	
+}
+
+.tooltip_unit {
+	font-size: 14px; 
+	font-weight: 100;
+}
+
+.tickLabel {
+	font-size: 12px;
+	font-family: inherit;
+	font-weight: 100;
+}
+
 /*---- Dashboard timeline styling ----*/
 
 #public_newsfeed {
@@ -494,9 +533,16 @@ table.newsfeed {
 
 #recent_workouts_chart {
 	position: relative;
-	top: 0px;
-	right: 0px;
+	top: -24px;
+	left: -4px;
 	overflow: hidden;
+	width: 312px;
+	height: 244px;
+}
+
+#bar_tooltip {
+	width: 220px;
+	position: relative;
 }
 
 /*---- Workout content layout ----*/
@@ -634,6 +680,10 @@ a.delete-x {
 	top: 0px;
 }
 
+#fullsize_tooltip {
+	position: absolute;
+}
+
 /*larger font to display the number (vs. unit)*/
 span.value {
 	font-weight: 500;
@@ -678,11 +728,6 @@ p.comp_activity {
 	position: relative;
 	clear: both;
 	top: 12px;
-}
-
-#foofookachoo {
-	width: 200px;
-	height: 196px;
 }
 
 /*Workout gps map*/

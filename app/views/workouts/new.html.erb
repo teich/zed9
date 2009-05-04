@@ -1,15 +1,20 @@
 <div class="main">
-	<h1>Add a Workout</h1>
+	<div id="content_header">
+		<h1>Add a Workout</h1>
+	</div>
+	
+	<div id="content">
+		<% if params[:device_type] %>
+				<%= render :partial => 'form', :locals => { :submit_url => user_workouts_path(current_user) } %>
+		<% else %>
+		<ul>
+		  <li><%= link_to 'Garmin', url_for(:action => 'new', :device_type => 'garmin') %></li>
+		  <li><%= link_to 'Polar', url_for(:action => 'new', :device_type => 'polar') %></li>
+			<li class="coming_soon">Suunto</li>
+		  <li class="coming_soon">Nike+</li>
+		  <li class="coming_soon">GPS data log</li>
+		</ul>
+		<% end -%>
+	</div>
 
-<% if params[:device_type] %>
-		<%= render :partial => 'form', :locals => { :submit_url => user_workouts_path(current_user) } %>
-<% else %>
-<ul>
-  <li>Nike +</li>
-  <li><%= link_to 'Garmin', url_for(:action => 'new', :device_type => 'garmin') %></li>
-  <li><%= link_to 'Polar', url_for(:action => 'new', :device_type => 'polar') %></li>
-  <li>Generic GPS</li>
-</ul>
-<% end -%>
- 
 </div>
