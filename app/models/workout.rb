@@ -188,6 +188,10 @@ class Workout < ActiveRecord::Base
   def json_comps
     find_comps
   end
+  
+  def json_date
+    start_time.to_i
+  end  
 
   def duration_formatted(url)
     length = (duration / 60).round 
