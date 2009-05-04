@@ -739,6 +739,41 @@ p.comp_activity {
 	border: 1px solid #d9d9d9;
 }
 
+
+/*---- Admin pages ----*/
+
+#registered_users table {
+	width: 100%;	
+}
+
+#registered_users th, #registered_users td {
+	font-size: 14px;
+	text-align: left;
+	vertical-align: top;
+	border-bottom:1px dotted #d9d9d9;
+	padding: 12px;	
+}
+
+#registered_users th {
+	font-weight: 500;
+}
+
+#registered_users .first_column {
+	padding-left: 0px;
+}
+
+#registered_users .last_column {
+	padding-right: 0px;
+}
+
+#registered_users .centered {
+	text-align: center;
+}
+
+#invites_sent, #invite_requests, #registered_users {
+	padding-bottom: 36px;
+}
+
 /*---- Footer ----*/
 
 #footer ul {
