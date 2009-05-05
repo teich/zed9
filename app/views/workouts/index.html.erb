@@ -4,6 +4,17 @@
 
 <div id="content">
 
+<!-- Layout for workout count by activity -->
+	<!-- <div id="workouts_stats">
+		<ul class="activity_summary">
+			<li><div><img class="activity_icon_small" src="/images/activities/running.png">Trail Running: <span class="count">12</span></div></li>
+			<li><div><img class="activity_icon_small" src="/images/activities/running.png">Hiking: <span class="count">7</span></div></li>
+			<li><div><img class="activity_icon_small" src="/images/activities/running.png">Road Running: <span class="count">3</span></div></li>
+			<li><div><img class="activity_icon_small" src="/images/activities/running.png">Road Running: <span class="count">3</span></div></li>
+		</ul>
+		<br>
+	</div> -->
+
 	<% if (params[:tag])%>
 		<p class="filtered">Filtered by: <%= h params[:tag] %>&nbsp;
 		<%= link_to 'x', user_workouts_path(current_user) %> </p>

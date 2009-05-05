@@ -13,7 +13,7 @@ class WorkoutsController < ApplicationController
     else
       @workouts = current_user.workouts.find(:all, :order => "start_time DESC")
     end
-    
+        
     respond_to do |format|
       format.html
       format.xml {render :xml => @workouts.to_xml }
