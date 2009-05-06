@@ -22,6 +22,17 @@ class Workout < ActiveRecord::Base
   def get_elevation
     trackpoints.map { |tp| tp.altitude }
   end
+  
+  # Return the Global Information, AKA lat and lng.
+  def gis
+    gis = []
+    for tp in trackpoints do
+      if !tp.lat.nil?
+        gis << [tp.lat, tp.lng]
+      end
+    end
+    return gis
+  end
 
   ## TODO: I think the hrmparser array function now includes this.  Nuke.
   def smooth_data(series, factor)
