@@ -1,0 +1,36 @@
+<table>
+	<tr>
+		<th>Parent</th>
+		<th>Activity</th>
+		<th>ID</th>
+		<th><th>
+	</tr>
+	<% for activity in @activities %>
+	<tr>
+		<% form_for activity do |f| %>
+		<td><%= activity.name %></td>
+		<td>&nbsp;</td>
+		<td><%= activity.id %></td>
+		<td><%= collection_select(:activity, :parent_id, @activities, :id, :name) %>
+
+			<%= f.submit "Submit", :disable_with => 'Submiting...' %>
+			<%= link_to 'Delete', activity, :method => :delete %></td>
+			<% end %>
+			
+	</tr>
+	<% for child in activity.children %>
+	<tr>
+		<td>&nbsp;</td>
+		<td><%= child.name %></td>
+		<td><%= child.id %></td>
+		<td><%= link_to 'Delete', child, :method => :delete %></td>
+	</tr>
+	<% end %>
+	<% end %>
+</table>
+
+<% form_for @activity do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name %>
+<%= f.submit "New Activity" %>
+<% end %>

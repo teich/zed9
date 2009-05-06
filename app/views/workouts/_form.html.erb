@@ -19,7 +19,9 @@
 	</tr>
 	<tr>
 		<th><%= f.label :activity, "Activity type" %></th>
-		<td><%= f.select "activity_id", Activity.find(:all).collect { |p| [p.name, p.id] } %></td>
+		<td><select id="workout_activity_id" name="workout[activity_id]">
+		<%= option_groups_from_collection_for_select(Activity.find_all_by_parent_id(nil), :children, :name, :id, :name, @workout.activity.id) %>
+		</select></td>
 	</tr>
 	<tr>
 		<th><%= f.label "File location" %></th>

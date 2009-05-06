@@ -2,7 +2,9 @@ class Admin::ActivitiesController < ApplicationController
   before_filter :require_admin
   
   def index
-    @users = User.find(:all)
+    @activities = Activity.find_all_by_parent_id(nil)
+
+	@activity = Activity.new
   end
   
 end

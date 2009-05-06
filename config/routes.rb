@@ -4,8 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource  :dashboard, :only => [:show] 
   # I think I need to move this to a new controller called account.
   map.resource  :account, :controller => "users"
-  map.resources :activities, :only =>[:index]
-
+  map.resources :activities
   map.resources :invitations
  
   map.namespace :admin do |admin|
