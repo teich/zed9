@@ -77,11 +77,13 @@
 			</tr>
 			<% end -%>
 			
+			<% if !@workout.hr.nil? %>
 			<tr class="stat" unit="bpm" id="hr">
 				<th class="spark_line_title">Heart Rate</th>
 				<td id="spark_line"><div id="hr" class="sparkline"></div></td>
 				<td class="number spark_line_title"><span class="value"><%=h @workout.hr %></span>bpm</td>
 			</tr>
+			<% end %>
 		</table>
 
 	</div>
