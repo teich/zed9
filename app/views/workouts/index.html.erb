@@ -24,7 +24,7 @@
 		<table class="newsfeed">
 			<% for workout in @workouts %>
 			<tr>
-				<td class="first_column"><img class="activity_icon_small" src="/images/activities/running.png"><%= h workout.activity.name %></td>
+				<td class="first_column"><%= image_tag(workout.activity.root.icon_path, :class => "activity_icon_small") %> <%= h workout.activity.name %> </td>
 				<td class="name"><%= link_to workout.name, workout %></td>
 				<td><%=h time_as_date(workout.start_time) %></td>
 				<td><%= h number_to_short_time(workout.duration) %></td>

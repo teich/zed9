@@ -2,27 +2,32 @@
 	<tr>
 		<th>Parent</th>
 		<th>Activity</th>
-		<th>ID</th>
 		<th><th>
 	</tr>
 	<% for activity in @activities %>
 	<tr>
-		<% form_for activity do |f| %>
 		<td><%= activity.name %></td>
 		<td>&nbsp;</td>
-		<td><%= activity.id %></td>
+		<td><%=h activity.icon_path %>
+		<% form_for activity do |f| %>
 		<td><%= collection_select(:activity, :parent_id, @activities, :id, :name) %>
-
-			<%= f.submit "Submit", :disable_with => 'Submiting...' %>
-			<%= link_to 'Delete', activity, :method => :delete %></td>
+			<%= f.submit "Save Parent", :disable_with => 'Submiting...' %>
+		<% end %>
+			<% form_for activity do |f| %>
+			<select id="activity_icon_path" name="activity[icon_path]">
+				<% for icon in @icons %>
+				<option value="<%= icon %>"><%= icon %></option>
+				<% end %>
+			<%= f.submit "Save Icon", :disable_with => 'Submiting...' %>
 			<% end %>
+			</select>
+			<%= link_to 'Delete', activity, :method => :delete %></td>
 			
 	</tr>
 	<% for child in activity.children %>
 	<tr>
 		<td>&nbsp;</td>
 		<td><%= child.name %></td>
-		<td><%= child.id %></td>
 		<td><%= link_to 'Delete', child, :method => :delete %></td>
 	</tr>
 	<% end %>
