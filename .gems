@@ -1,4 +1,4 @@
 authlogic  
 logging
 newrelic_rpm
-teich-hrmparser -v 0.2.2 --source gems.github.com
+teich-hrmparser -v 0.3.0 --source gems.github.com

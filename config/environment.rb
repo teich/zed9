@@ -30,7 +30,7 @@ Rails::Initializer.run do |config|
 
   config.gem "authlogic"
   config.gem "newrelic_rpm" 
-  config.gem "teich-hrmparser", :lib => "hrmparser", :version => "0.2.3"
+  config.gem "teich-hrmparser", :lib => "hrmparser", :version => "0.3.0"
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
