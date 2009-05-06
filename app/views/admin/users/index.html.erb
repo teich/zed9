@@ -1,25 +1,48 @@
-<h1>Admin site</h1>
-	<h2>There are <%= @users.size %> users registered</h2>
-	<table>
-		<tr>
-			<th>Login Name</th>
-			<th>Last Login</th>
-			<th>Login count</th>
-			<th>Email</th>
-		</tr>
-<% for user in @users %>
+<div id="main">
+	<div id="content_header">
+		<h1>User Stats</h1>
+	</div>
+	
+	<div id="content">
 
-		<tr>
-			<td><%= h user.login %></td>
-			<td><%= h user.last_login_at %></td>
-			<td><%= h user.login_count %></td>
-			<td><%= h user.email %></td>
-		</tr>
-<% end %>
-</table>
+		<div id="registered_users">
+			<h2><%= @users.size %> registered users</h2>
 
-<h2>There are <%= h @invitations.size %> invitations</h2>
-Signed up on the website: 
-<% for invite in @invitations %>
-<%= h invite.recipient_email if invite.sender_id.nil? %>
-<% end %>
+			<table>
+				<tr>
+					<th class="first_column">User name</th>
+					<th class="centered">Last login</th>
+					<th class="centered">Login count</th>
+					<th class="last_column">Email</th>
+				</tr>
+				<% for user in @users %>
+				<tr>
+					<td class="first_column"><%= h user.login %></td>
+					<td class="centered"><%= h user.last_login_at %></td>
+					<td class="centered"><%= h user.login_count %></td>
+					<td class="last_column"><%= h user.email %></td>
+				</tr>
+				<% end %>
+			</table>
+
+		</div>
+
+		<div id="invites_sent">
+			<h2><%= h @invitations.size %> invitations sent</h2>
+		</div>
+		
+		<div id="invite_requests">
+			<h2>Invitation requests</h2>
+			<p>Email addresses submitted through the website.</p>
+
+			<table>
+				<% for invite in @invitations %>
+				<tr>
+					<td class="first_column"><%= h invite.recipient_email if invite.sender_id.nil? %></td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+
+	</div>
+</div>

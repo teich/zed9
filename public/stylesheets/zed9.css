@@ -134,6 +134,7 @@ thead, th, td {
 	line-height: 1.4;
 	list-style: none;
 }
+
 #content ul li:before {
 	content: "\00BB \0020";
 }
@@ -545,6 +546,65 @@ table.newsfeed {
 	position: relative;
 }
 
+
+/*---- Workouts index ----*/
+
+#workouts_stats {
+	padding-bottom: 24px;
+}
+
+#workouts_stats ul {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	width: 100%;
+}
+
+#workouts_stats ul li:before {
+	content: none;
+}
+
+#workouts_stats li {
+	float: left;
+	width: 216px;
+	padding: 0px 12px 12px 12px;
+	display:inline;
+}
+
+#workouts_stats div {
+	width: auto;
+	padding:12px;
+	border:1px solid #d9d9d9;
+	font-weight: 100;
+	color: #545454;
+	font-size: 18px;
+	background-color: #f0f0f0;
+	opacity: .9;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-radius-bottomleft: 5px;
+	border-radius-bottomright: 5px;
+	border-radius-topleft: 5px;
+	border-radius-topright: 5px;
+	text-align: center;
+}
+
+#workouts_stats .activity_icon_small {
+	top: 4px;
+}
+
+.count {
+	font-size: 24px;
+	color: #25a1d6;
+	font-weight: 500;
+}
+
+#workouts_stats br {
+	clear: left;
+}
+
 /*---- Workout content layout ----*/
 
 .workout_left_column {
@@ -737,6 +797,41 @@ p.comp_activity {
 	position: relative;
 	top: 0px;
 	border: 1px solid #d9d9d9;
+}
+
+
+/*---- Admin pages ----*/
+
+#registered_users table {
+	width: 100%;	
+}
+
+#registered_users th, #registered_users td {
+	font-size: 14px;
+	text-align: left;
+	vertical-align: top;
+	border-bottom:1px dotted #d9d9d9;
+	padding: 12px;	
+}
+
+#registered_users th {
+	font-weight: 500;
+}
+
+#registered_users .first_column {
+	padding-left: 0px;
+}
+
+#registered_users .last_column {
+	padding-right: 0px;
+}
+
+#registered_users .centered {
+	text-align: center;
+}
+
+#invites_sent, #invite_requests, #registered_users {
+	padding-bottom: 36px;
 }
 
 /*---- Footer ----*/

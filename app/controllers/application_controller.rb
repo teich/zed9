@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   end
   
   def require_admin
-    unless current_user.admin_user?
+    unless current_user && current_user.admin_user?
       flash[:notice]= "You don't have permission to view this page"
       redirect_to root_url
       return false
