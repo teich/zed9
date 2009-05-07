@@ -21,7 +21,7 @@ body {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	margin-bottom: -60px;
+	margin-bottom: -84px;
 }
 
 #header {
@@ -53,6 +53,15 @@ body {
 	clear: both;
 }
 
+#join_prompt {
+	float: right;
+	width: 280px;
+	padding-top: 18px;
+	text-align: right;
+	font-style: oblique;
+	font-size: 18px;
+}
+
 #content {
 	clear: both;
 	width: 100%;
@@ -63,7 +72,7 @@ body {
 }
 
 .clearfooter {
-	height: 60px;
+	height: 84px;
 	clear: both;
 }
 
@@ -73,7 +82,7 @@ body {
 	color: #7C7B74;
 	font-size: 8pt;
 	text-align: center;
-	height: 60px;
+	height: 84px;
 	padding: 0px;
 	margin: 0px;
 	vertical-align: bottom;
@@ -139,6 +148,10 @@ thead, th, td {
 	content: "\00BB \0020";
 }
 
+#content li {
+	padding-bottom: 8px;
+}
+
 .coming_soon {
 	font-style: oblique;	
 }
@@ -147,10 +160,11 @@ thead, th, td {
 
 .left_column {
 	position: relative;
+	float: left;
 }
 
 .right_column {
-	position: absolute;
+	position: relative;
 	float: right;
 	right: 0px;
 	top: 0px;
@@ -188,6 +202,10 @@ thead, th, td {
 	float: left;
 	position: relative;
 	top: -8px;
+}
+
+#logo a:hover {
+	color:#25a1d6;
 }
 
 #nav li {
@@ -233,7 +251,7 @@ thead, th, td {
 
 .marketing_tagline {
 	padding-top: 25px;
-	padding-bottom: 24px;
+	padding-bottom: 12px;
 	font-weight: 500;
 }
 
@@ -252,9 +270,18 @@ thead, th, td {
 }
 
 #left_splash .qualifier {
-	padding: 6px 0px;
+	padding: 6px 0px 16px 0px;
 	font-style: oblique;
 	font-weight: 100;
+}
+
+.marketing_screenshot {
+	text-align: center;
+}
+
+#example_stats {
+	padding: 12px 0px 18px 0px;
+	width: 380px;
 }
 
 #right_splash, #right_login {
@@ -264,11 +291,9 @@ thead, th, td {
 
 #external_newsfeed {
 	width: 100%;
-	padding-bottom: 48px;
 }
 
 #external_newsfeed h2 {
-	font-size: 18px;
 	font-weight: 100;
 	text-align: left;
 	padding-bottom:12px;
@@ -280,12 +305,26 @@ thead, th, td {
 	float: right;
 	font-size: 18px;
 	font-weight: 100;
-	padding-bottom: 48px;
+	padding-bottom: 36px;
 }
 
 #join_list {
 	padding-top: 6px; /*Position adjustment to align text with left column*/
 }
+
+
+/*---- Dashboard timeline styling ----*/
+
+#public_newsfeed {
+	width: 100%;
+	padding-bottom: 24px;
+}
+
+#public_newsfeed h2 {
+	text-align: left;
+	padding-bottom: 12px;
+}
+
 
 /*---- Action result messages and alerts ----*/
 
@@ -327,6 +366,7 @@ thead, th, td {
 /*---- General use form styles ----*/
 
 #register, #login_form, #edit_workout {
+	float: left;
 	width: 504px;
 	padding-top: 4px;
 }
@@ -406,9 +446,9 @@ thead, th, td {
 	display: none;
   border: 1px solid #d9d9d9;
   padding: 8px;
-	color: #25a1d6;
 	font-size: 18px;
 	font-weight: 500;
+	text-align: left;
   background-color: #f0f0f0;
   opacity: .9;
 	-moz-border-radius-bottomleft: 5px;
@@ -419,6 +459,7 @@ thead, th, td {
 	border-radius-bottomright: 5px;
 	border-radius-topleft: 5px;
 	border-radius-topright: 5px;
+	z-index: 1000;
 }
 
 .tooltip_extra_info {
@@ -436,17 +477,6 @@ thead, th, td {
 	font-size: 12px;
 	font-family: inherit;
 	font-weight: 100;
-}
-
-/*---- Dashboard timeline styling ----*/
-
-#public_newsfeed {
-	position: relative;
-}
-
-#public_newsfeed h2 {
-	text-align: left;
-	padding-bottom: 12px;
 }
 
 /*---- Workouts index ----*/
@@ -512,28 +542,24 @@ table.newsfeed {
 
 /*---- Dashboard content layout ----*/
 
-.content_left_column {
-	width: 384px;
-	padding-right: 72px;
+#content_left_column {
 	text-align: left;
 }
 
-.content_right_column {
-	position: absolute;
-	top: 0px;
-	right: 0px;
+#content_right_column {
 	text-align: left;
 	width: 504px;
-	margin: 0px;
-	padding: 0px;
 	vertical-align: top;
 }
 
 /*---- Dashboard content ----*/
 
+#recent_workouts {
+	height: auto;
+}
+
 #recent_workouts_chart {
 	position: relative;
-	top: -24px;
 	left: -4px;
 	overflow: hidden;
 	width: 312px;
@@ -542,7 +568,6 @@ table.newsfeed {
 
 #bar_tooltip {
 	width: 220px;
-	position: relative;
 }
 
 
@@ -606,17 +631,12 @@ table.newsfeed {
 
 /*---- Workout content layout ----*/
 
-.workout_left_column {
-	display: block;
-	width: 480px;
+#workout_left_column {
 	text-align: left;
-	margin: 0px auto 0px 0px;
 }
 
-.workout_right_column {
-	float: right;
-	margin: 0px;
-	padding: 0px;
+#workout_right_column {
+	border-left: 0px;
 }
 
 /*---- Workout content ----*/
@@ -716,7 +736,6 @@ a.delete-x {
 #workout_stats td.number {
 	text-align: left;
 	color:#25a1d6;
-	width: 120px;
 }
 
 .stat, .number {
@@ -772,7 +791,7 @@ p.comp_activity {
 	text-align: left;
 	position: relative;
 	top: 24px;
-	padding-bottom: 48px;
+	padding-bottom: 24px;
 	clear: both;
 }
 
@@ -841,10 +860,10 @@ p.comp_activity {
 	padding-bottom: 8px;
 }
 
-/*---- Footer ----*/
+/*---- Footer styling ----*/
 
 #footer ul {
-	padding: 0px;
+	padding: 24px 0px 0px 0px;
 	padding-bottom: 8px;
 }
 

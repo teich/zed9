@@ -36,7 +36,7 @@ class ActivitiesController < ApplicationController
 
 	def destroy
 		@activity.destroy
-		flash[:notice] = 'Destroyed activity.  Mwuhahaha.'
+		flash[:notice] = 'Destroyed activity.  Mwahahaha.'
 		redirect_to admin_activities_path
 	end
 

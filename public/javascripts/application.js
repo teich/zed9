@@ -8,7 +8,7 @@ var previousPoint = null;
 
 // Define global graph options
 var options = {
-    grid: { borderWidth: 0 },
+    grid: { borderWidth: 0, tickColor: "white" },
     xaxis: { ticks: [] },
     yaxis: { ticks: [] },
     y2axis: { ticks: [], autoscaleMargin: .2 },
@@ -17,7 +17,7 @@ var options = {
 };
 
 var full_size_options = {
-	grid: { borderWidth: 0, borderColor: "#d9d9d9", tickColor: 'transparent', hoverable: "yes", mouseActiveRadius: 48, markings: axes },
+		grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 48, markings: axes },
 	// crosshair: { mode: "x", color: '#d9d9d9' },
     colors: ["#25a1d6", "#3dc10b", "#545454"],
     shadowSize: 1,
@@ -82,9 +82,9 @@ function draw_dashboard_graph(data) {
 				tip_text += name + "<br><span class='tooltip_extra_info'>" + display_date + "<br>" + y + unit + "</span>";
 
 				$('<div id="bar_tooltip" class="tooltip">' + tip_text + '</div>').css({
-	                top: item.pageY - 465,
-	                left: item.pageX - 90
-	            }).appendTo("#recent_workouts").fadeIn(200);
+	                top: item.pageY + 8,
+	                left: item.pageX + 8
+	            }).appendTo("body").fadeIn(200);
 	        }
 	    }
 	    else {
@@ -104,7 +104,7 @@ function draw_dashboard_graph(data) {
 	}
 	
 	 var dashboard_options = {
-		grid: { borderWidth: 0, borderColor: "#d9d9d9", tickColor: 'transparent', hoverable: "yes", clickable: true, mouseActiveRadius: 48, markings: xAxis },
+		grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", clickable: true, mouseActiveRadius: 48, markings: xAxis },
 		xaxis: { ticks: date, labelWidth: 12 },
 		yaxis: { ticks: [], autoscaleMargin: 0.2 },
 		colors: ["#25a1d6"],

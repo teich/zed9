@@ -2,8 +2,8 @@ class RootController < ApplicationController
   
   def index
 
-    # list of 5 most recent public workouts
-    @shared = Workout.find_all_by_shared(true, :limit=>5, :order => "updated_at DESC")
+    # list of 6 most recent public workouts
+    @shared = Workout.find_all_by_shared(true, :limit=>6, :order => "updated_at DESC")
 
     @user_session = UserSession.new
     
