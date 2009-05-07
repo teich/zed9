@@ -34,14 +34,11 @@
 		<div id="invite_requests">
 			<h2>Invitation requests</h2>
 			<p>Email addresses submitted through the website.</p>
-
-			<table>
-				<% for invite in @invitations %>
-				<tr>
-					<td class="first_column"><%= h invite.recipient_email if invite.sender_id.nil? %></td>
-				</tr>
-				<% end %>
-			</table>
+			<ol>
+			<% for invite in @invitations %>
+					<li><%= h invite.recipient_email if invite.sender_id.nil? %></li>
+			<% end %>
+			</ol>
 		</div>
 
 	</div>

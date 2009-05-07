@@ -833,6 +833,14 @@ p.comp_activity {
 	padding-bottom: 36px;
 }
 
+#invite_requests ol {
+	padding-left: 20px;
+}
+
+#invite_requests li {
+	padding-bottom: 8px;
+}
+
 /*---- Footer ----*/
 
 #footer ul {

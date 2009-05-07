@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(:version => 20090506223904) do
     t.string   "sex"
     t.integer  "height"
     t.string   "time_zone"
-    t.boolean  "shared",              :default => true
+    t.boolean  "shared",              :default => false
     t.boolean  "admin",               :default => false
   end
 
