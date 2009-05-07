@@ -55,7 +55,7 @@
 			<table class="newsfeed">
 				<% @shared.each do |sw| %>
 				<tr>
-					<td class="first_column no_right_padding"><img class="activity_icon_small" src="/images/activities/running.png"></td>
+					<td class="first_column no_right_padding"><%= image_tag(sw.activity.root.icon_path, :class => "activity_icon_small") %></td>
 					<td><%= h sw.user.login %></td>
 					<td class="name"><%= link_to sw.name, workout_path(sw) %></td>
 					<td class="last_column"><%= h number_to_short_time(sw.duration) %></td>
