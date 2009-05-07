@@ -1,0 +1,16 @@
+<h1><%=h @activity.name %></h1>
+
+<h2>Longest</h2>
+<% for workout in @longest %>
+<%= link_to workout.name, workout %> <%= h workout.distance_in_miles %><BR>
+<% end %>
+
+<h2>Polka Dot Jersey (climber)</h2>
+<% for workout in @climbers %>
+<%= link_to workout.name, workout %> <%= h workout.elevation_in_feet %><BR>
+<% end %>
+
+<h2>Fastest</h2>
+<% for workout in @fastest %>
+<%= link_to workout.name, workout %> <%= h workout.avg_speed_in_mph %><BR>
+<% end %>

@@ -1,8 +1,13 @@
 class ActivitiesController < ApplicationController
-	before_filter :require_admin, :except => :index
+	before_filter :require_admin, :except => [:index, :show]
 
-	before_filter :find_activity, :only => [:edit, :update, :destroy]
+	before_filter :find_activity, :only => [:edit, :update, :destroy, :show]
 
+	def show
+		@longest = @activity.workouts.find(:all, :order => "distance DESC", :limit => 5)
+		@fastest = @activity.workouts.find(:all, :order => "speed DESC", :limit => 5)
+		@climbers = @activity.workouts.find(:all, :order => "elevation DESC", :limit => 5)
+	end
 
 	def index
 		@activities = Activity.find(:all)
