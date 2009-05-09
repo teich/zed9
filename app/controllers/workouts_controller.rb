@@ -65,6 +65,8 @@ class WorkoutsController < ApplicationController
       importer = Importer::Garmin.new(:data => uploaded_data) if params[:device_type] == "garmin"
       importer = Importer::Polar.new(:data => uploaded_data, :time_zone => current_user.time_zone) if params[:device_type] == "polar"
       importer = Importer::Suunto.new(:data => uploaded_data, :time_zone => current_user.time_zone) if params[:device_type] == "suunto"
+      importer = Importer::GPX.new(:data => uploaded_data) if params[:device_type] == "gpx"
+
 
       iw = importer.restore
       @workout = current_user.workouts.build(params[:workout])
