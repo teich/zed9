@@ -4,9 +4,15 @@ class ActivitiesController < ApplicationController
 	before_filter :find_activity, :only => [:edit, :update, :destroy, :show]
 
 	def show
-		@longest = @activity.workouts.find(:all, :order => "distance DESC", :limit => 5)
-		@fastest = @activity.workouts.find(:all, :order => "speed DESC", :limit => 5)
-		@climbers = @activity.workouts.find(:all, :order => "elevation DESC", :limit => 5)
+		@longest = @activity.workouts.find(:all, :order => "duration DESC", :limit => 5)
+		@fastest = @activity.workouts.find(:all, :conditions => "speed > 0", :order => "speed DESC", :limit => 5)
+		@climbers = @activity.workouts.find(:all, :conditions => "elevation > 0", :order => "elevation DESC", :limit => 5)
+		@farthest = @activity.workouts.find(:all, :conditions => "distance > 0", :order => "distance DESC", :limit => 5)
+		@heart_pumping = @activity.workouts.find(:all, :conditions => "hr > 0", :order => "hr DESC", :limit => 5)
+
+    # list of most recent public workouts
+    @shared = @activity.workouts.find_all_by_shared(true, :limit=>12, :order => "updated_at DESC")
+
 	end
 
 	def index

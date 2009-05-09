@@ -148,6 +148,7 @@ class Workout < ActiveRecord::Base
     Time.at(seconds).utc.strftime("%H:%M:%S")
   end
   
+  # Output: 2:03:45
   def number_to_short_time(seconds)
     Time.at(seconds).utc.strftime("%H:%M:%S")
   end

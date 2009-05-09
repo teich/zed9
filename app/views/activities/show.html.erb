@@ -1,16 +1,128 @@
-<h1><%=h @activity.name %></h1>
+<div id="content_header">
+	<h1><%= image_tag(@activity.root.icon_path, :class => "activity_icon") %><%=h @activity.name %></h1>
+</div>
 
-<h2>Longest</h2>
-<% for workout in @longest %>
-<%= link_to workout.name, workout %> <%= h workout.distance_in_miles %><BR>
-<% end %>
+<div id="content">
 
-<h2>Polka Dot Jersey (climber)</h2>
-<% for workout in @climbers %>
-<%= link_to workout.name, workout %> <%= h workout.elevation_in_feet %><BR>
-<% end %>
+	<div id="activity_left_column" class="left_column">
 
-<h2>Fastest</h2>
-<% for workout in @fastest %>
-<%= link_to workout.name, workout %> <%= h workout.avg_speed_in_mph %><BR>
-<% end %>
+		<% if @farthest.size > 0 %>		
+		<div class="leaderboard">
+			<div class="border">
+				<h2><img src="../images/road.png" height="24px" style="vertical-align:top; padding-right: 8px">Farthest</h2>
+				<ol>
+					<!-- fix function -->
+					<% for workout in @farthest %>
+					<li><span class="number"><%=h workout.distance_in_miles %></span><span class="unit">miles</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%=h workout.user.login %> on <%=h time_as_date(workout.start_time) %></li>
+					<% end %>
+				</ol>
+			</div>
+		</div>
+		<% end %>	
+
+		<% if @fastest.size > 0 %>		
+		<div class="leaderboard">
+			<div class="border">
+				<h2><img src="../images/flag.png" height="28px" style="vertical-align:top; padding-right: 8px">Fastest</h2>
+				<ol>
+					<% for workout in @fastest %>
+					<li><span class="number"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%=h workout.user.login %> on <%=h time_as_date(workout.start_time) %></li>
+					<% end %>
+				</ol>
+			</div>
+		</div>
+		<% end %>	
+
+		<% if @longest.size > 0 %>		
+		<div class="leaderboard">
+			<div class="border">
+				<h2><img src="../images/clock.png" height="22px" style="vertical-align:top; padding-top:4px; padding-right: 8px">Longest</h2>
+				<ol>
+					<!-- define for time -->
+					<% for workout in @longest %> 
+					<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%=h workout.user.login %> on <%=h time_as_date(workout.start_time) %></li>
+					<% end %>
+				</ol>
+			</div>
+		</div>
+		<% end %>	
+
+		<% if @heart_pumping.size > 0 %>		
+		<div class="leaderboard">
+			<div class="border">
+				<h2><img src="../images/heart.png" height="24px" style="vertical-align:top; padding-right: 8px">Heart-pumpers</h2>
+				<p>Highest average heart rate in a single workout</p>
+				<ol>
+					<% for workout in @heart_pumping %>
+					<li>
+						<span class="number"><%=h workout.hr %></span><span class="unit">bpm</span>: 
+						<span class="workout_name"><%= link_to workout.name, workout %></span> 
+						by <%=h workout.user.login %> 
+						on <%=h time_as_date(workout.start_time) %>
+					</li>
+					<% end %>
+				</ol>
+			</div>
+		</div>
+		<% end %>	
+
+		<% if @climbers.size > 0 %>		
+		<div class="leaderboard">
+			<div class="border">
+				<h2><img src="../images/peaks.png" height="24px" style="vertical-align:middle; padding-right: 8px; padding-bottom:2px">Polka Dot Jersey</h2>
+				<p>Biggest climb in a single workout</p>
+				<ol>
+					<% for workout in @climbers %>
+					<li>
+						<span class="number"><%=h workout.elevation_in_feet %></span><span class="unit">ft</span>: 
+						<span class="workout_name"><%= link_to workout.name, workout %></span> 
+						by <%=h workout.user.login %> 
+						on <%=h time_as_date(workout.start_time) %>
+					</li>
+					<% end %>
+				</ol>
+			</div>
+		</div>
+		<% end %>	
+
+		<!-- Additional leaderboards to implement:
+			- Highest total (cumulative) distance
+			- Longest (cumulative) total time
+			- Most dedicated (total workouts)
+			- Most "fit"
+		-->
+
+	</div>
+
+
+	<div id="activity_right_column" class="right_column">
+
+		<!-- To do: How everyone for this activity measures up to ZED9 as a whole, plus how you measure up if logged in 
+		<div id="activity_summary_stats">
+		</div>
+		-->
+
+		<div id="public_newsfeed">
+			<h2>Recent public workouts</h2>
+			<table class="newsfeed">
+				<% @shared.each do |sw| %>
+				<tr>
+					<td class="first_column"><%= link_to sw.name, workout_path(sw) %></td>
+					<td><%= h number_to_short_time(sw.duration) %></td>
+					<td class="last_column"><%= h sw.user.login %></td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+
+		<!-- To do: tag cloud for workouts in this activity 
+		<div id="tag_cloud">
+			<h2>Tags</h2><br>
+			<span class="coming_soon">Coming soon</span>
+		</div>
+		-->
+
+		
+	</div>
+
+</div>

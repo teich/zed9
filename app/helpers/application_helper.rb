@@ -2,11 +2,15 @@ module ApplicationHelper
   def number_to_time(seconds)
     Time.at(seconds).utc.strftime("%H:%M:%S")
   end
+
+  # Output: 1:34 
   def number_to_short_time(seconds)
-    twodigit_time = Time.at(seconds).utc.strftime("%H:%Mh")
+    twodigit_time = Time.at(seconds).utc.strftime("%H:%M")
     twodigit_time =~ /^0(.*$)/
     return $1
   end
+
+  # Output: Monday, April 06, 2009 at 11:58am
   def activity_timestamp(start_time)
     time = start_time.strftime("%I:%M%p")
     if (time =~ /^0(.*$)/)
@@ -17,6 +21,7 @@ module ApplicationHelper
     start_time.strftime("%A, %B %d, %Y at #{short_time.downcase}")
   end
   
+  # Output: 5/8/09
   def time_as_date(start_time)
     month = start_time.strftime("%m")
     if (month =~ /^0(.*$)/)
