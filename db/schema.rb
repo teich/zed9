@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090506223904) do
+ActiveRecord::Schema.define(:version => 20090509203923) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(:version => 20090506223904) do
     t.string   "sex"
     t.integer  "height"
     t.string   "time_zone"
-    t.boolean  "shared",              :default => false
+    t.boolean  "shared",              :default => true
     t.boolean  "admin",               :default => false
   end
 
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(:version => 20090506223904) do
     t.boolean  "shared"
     t.float    "elevation"
     t.float    "speed"
+    t.datetime "end_time"
   end
 
 end

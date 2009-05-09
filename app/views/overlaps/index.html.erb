@@ -1,0 +1,12 @@
+<div id="content">
+List of workouts that overlap with: <%=h @workout.name %><BR>
+
+Please select which workout you would like to merge into this workout:<BR>
+<ul>
+<% for item in @overlap %>
+<li><%= h item.name %> - <%= link_to 'Merge', workout_overlap_path(@workout, item), :method => :delete %></li>
+<% end %>
+</ul>
+<BR>
+<%= link_to "Don't merge this workout", @workout %>
+</div>

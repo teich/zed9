@@ -122,14 +122,15 @@ function draw_dashboard_graph(data) {
 
 function workout_page_graphs(data) {
 	function full_tooltip(event, pos, item) {
-		var unit = '<span class="tooltip_unit">bpm</span>';
+		// TODO: units are now dependent on data
+		//var unit = '<span class="tooltip_unit">bpm</span>';
 	    if (item) {
 			if (previousPoint != item.datapoint) {
 	            previousPoint = item.datapoint;
 	            $("#fullsize_tooltip").remove();
 	            var x = item.datapoint[0].toFixed(2);
 				var y = item.datapoint[1].toFixed(0);
-				$('<div id="fullsize_tooltip" class="tooltip">' + y + unit + '</div>').css( {
+				$('<div id="fullsize_tooltip" class="tooltip">' + y + '</div>').css( {
 	            	top: item.pageY - 41,
 	            	left: item.pageX + 1
 		        }).appendTo("body").fadeIn(200);
@@ -187,14 +188,15 @@ function workout_page_graphs(data) {
 		], sparkbar_options);
     });
 
-	$.plot($('#spark_fullsize_chart'), [{
-        data: workout.json_heartrate_big,
-        lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } }
-    }],
-    full_size_options);
+	$(".big_visualization").each(function(){ 
+		$.plot($('.big_visualization'), [{
+        	data: workout[this.id],
+        	lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } }
+    		}],
+    	full_size_options);
 
-    $("#spark_fullsize_chart").bind("plothover", full_tooltip);
-
+    	$(".big_visualization").bind("plothover", full_tooltip);
+	});
 
     $(".stat").each(function() {
 		var tip = '<div class="stat">';

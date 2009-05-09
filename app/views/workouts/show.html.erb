@@ -106,8 +106,13 @@
 	<% end %>
 	
 	<div id="fullsize_chart_area">
+		<% if @workout.hr %>
 		<h2>Heart Rate</h2>
-		<div id="spark_fullsize_chart" class="big_visualization"></div>	
+		<div id="json_heartrate_big" class="big_visualization"></div>
+		<% else %>
+		<h2>Speed</h2>
+		<div id="json_speed_big" class="big_visualization"></div>
+		<% end %>
 	</div>
 	
 </div>
