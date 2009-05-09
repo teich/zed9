@@ -14,8 +14,9 @@ class OverlapsController < ApplicationController
 		
 		dup = current_user.workouts.find(params[:id])
 		@workout.start_time = dup.start_time if (@workout.start_time > dup.start_time)
-		@workout.end_time = dup.end_time if (@workout.end_time > dup.end_time)
+		@workout.end_time = dup.end_time if (@workout.end_time < dup.end_time)
 		@workout.distance = dup.distance if (@workout.distance.nil?)
+		@workout.duration = dup.duration if (@workout.duration < dup.duration)
 		@workout.trackpoints += dup.trackpoints
 		
 		@workout.hr = @workout.calc_average_hr
