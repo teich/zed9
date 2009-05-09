@@ -513,9 +513,6 @@ table.newsfeed {
 	padding-right: 0px;
 }
 
-.newsfeed .no_left_padding {
-	padding-left: 0px;
-}
 .newsfeed .tags {
 	text-align: center;
 }
