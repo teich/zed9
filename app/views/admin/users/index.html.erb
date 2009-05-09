@@ -6,7 +6,7 @@
 	<div id="content">
 
 		<div id="registered_users">
-			<h2><%= @users.size %> registered users</h2>
+			<h2>Registered users - <%=h @users.size %></h2>
 
 			<table>
 				<tr>
@@ -28,15 +28,21 @@
 		</div>
 
 		<div id="invites_sent">
-			<h2><%= h @invitations.size %> invitations sent</h2>
+			<h2>Invited - <%=h @invited.size %></h2>
+			<table>
+			<% for invite in @invited %>
+			<tr>
+			<td><%=h invite.recipient_email %></td><td><%=h invite.sender.login %></td><td><%=h invite.sent_at %></td>
+			</tr>
+			<% end %>
+			</table>
 		</div>
 		
 		<div id="invite_requests">
-			<h2>Invitation requests</h2>
-			<p>Email addresses submitted through the website.</p>
+			<h2>Waiting list - <%=h @waiting.size %></h2>
 			<ol>
-			<% for invite in @invitations %>
-					<li><%= h invite.recipient_email if invite.sender_id.nil? %></li>
+			<% for wait in @waiting %>
+					<li><%= h wait.recipient_email %> - <%=h wait.created_at %></li>
 			<% end %>
 			</ol>
 		</div>
