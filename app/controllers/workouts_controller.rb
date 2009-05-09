@@ -29,7 +29,7 @@ class WorkoutsController < ApplicationController
 		if @workout.gps_data? 
 			@map = GMap.new("map_div")
 			@map.control_init(:large_map => true,:map_type => true)
-			start = @workout.first_gps
+			start = @workout.gis.first
 			points = @workout.gis
 			less_points = points.compact.in_groups_of(50).map {|tp| tp[0]}
 			polyline = GPolyline.new(points,"#a000f0",3,1.0)
