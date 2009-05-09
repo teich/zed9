@@ -50,7 +50,7 @@ class Workout < ActiveRecord::Base
 	def get_smoothed_hr(points, value_array = false, milliseconds = false)
 		hr = get_hr.compact
 		return nil if hr.size == 0
-		
+
 		factor = hr.size / points
 		sd = smooth_data(hr, factor)
 		point_interval = self.duration / sd.size
@@ -73,7 +73,7 @@ class Workout < ActiveRecord::Base
 		factor = speed.size / points
 		smoothed = smooth_data(speed, factor)
 		point_interval = self.duration / smoothed.size
-		
+
 		if value_array
 			c = -1
 			vc = smoothed.map do |d|
@@ -90,11 +90,11 @@ class Workout < ActiveRecord::Base
 	def get_smoothed_elevation(points, value_array = false, milliseconds = false)
 		elevation = get_elevation.compact
 		return nil if elevation.size == 0
-		
+
 		factor = elevation.size / points
 		smoothed = smooth_data(elevation, factor)
 		point_interval = self.duration / smoothed.size
-		
+
 		if value_array
 			c = -1
 			vc = smoothed.map do |d|
@@ -119,17 +119,6 @@ class Workout < ActiveRecord::Base
 		seconds.map { |s| number_to_time(s) }
 	end
 
-	# def find_all_comps_by_activity(activity_id)
-	#   Activity.find(activity_id).workouts
-	# end
-	# 
-	# def find_my_comps_by_activity(activity_id)
-	#   self.user.workouts.by_activity(activity_id)
-	# end
-
-	# TODO: Refactor comparison code somehow
-
-	# TODO: The return nil check thing - seems lame
 	def comps_average_hr(comps)
 		if comps.size > 0
 			hrs = comps.map { |comp| comp.hr }
@@ -152,8 +141,7 @@ class Workout < ActiveRecord::Base
 	end
 
 	def gps_data?
-		foo = first_gps
-		return first_gps.size > 0
+		return gis.size > 0
 	end
 
 	def number_to_time(seconds)
@@ -176,10 +164,6 @@ class Workout < ActiveRecord::Base
 	end
 
 
-	# def average_comps(comps, :field)
-	#   points = comps.map {|c| c.:field}
-	#   points.compact.average_array.round(1)
-	# end
 	def find_comps()
 		mycomps = {}
 		allcomps = {}
@@ -239,7 +223,7 @@ class Workout < ActiveRecord::Base
 	def json_speed
 		get_smoothed_speed(20,true)
 	end
-	
+
 	def json_speed_big
 		get_smoothed_speed(200, true, true)
 	end
@@ -259,7 +243,7 @@ class Workout < ActiveRecord::Base
 	def activity_name
 		activity.name
 	end
-	
+
 	def overlap?(user)
 		overlapping = user.workouts.find(:all, :conditions => ['start_time <= ? AND end_time >= ?', self.end_time, self.start_time])
 		overlapping.map { |o| o.id }
@@ -283,43 +267,32 @@ class Workout < ActiveRecord::Base
 			wtp.time = tp.time
 			wtp.heart_rate = tp.hr
 		end
-		
+
 		self.end_time = self.trackpoints.last.time
 
 	end
-	
-	def calc_average_hr
-      get_hr.compact.aaverage
-    end
-    
-    def calc_average_speed
-      get_speed.compact.aaverage
-    end
-    
-    def calc_altitude_gain
-      gain = 0
-      smoothed_altitude = get_elevation.compact.smoothed(10)
-      start = smoothed_altitude.first
-      smoothed_altitude.each do |alt|
-       diff = alt - start
-       if (diff > 0)
-         gain += diff
-       end
-       start = alt
-      end
-      @altitude_gain = gain
-      
-    end
 
-	def first_gps
-		foo = []
-		trackpoints.each do |tp|
-			if !tp.lat.nil?
-				foo = [tp.lat, tp.lng]
-				break
-			end
-		end
-		return foo
+	def calc_average_hr
+		get_hr.compact.aaverage
 	end
 
+
+	def calc_average_speed
+		get_speed.compact.aaverage
+	end
+
+	def calc_altitude_gain
+		gain = 0
+		smoothed_altitude = get_elevation.compact.smoothed(10)
+		start = smoothed_altitude.first
+		smoothed_altitude.each do |alt|
+			diff = alt - start
+			if (diff > 0)
+				gain += diff
+			end
+			start = alt
+		end
+		@altitude_gain = gain
+
+	end
 end

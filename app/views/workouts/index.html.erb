@@ -24,11 +24,11 @@
 		<table class="newsfeed">
 			<% for workout in @workouts %>
 			<tr>
-				<td class="first_column no_right_padding"><%= image_tag(workout.activity.root.icon_path, :class => "activity_icon_small") %></td>
-				<td><%= h workout.activity.name %></td>
+				<td class="first_column no_right_padding activity_icon"><%= image_tag(workout.activity.root.icon_path, :class => "activity_icon_small") %></td>
+				<td><%=h workout.activity.name %></td>
 				<td class="name"><%= link_to workout.name, workout %></td>
 				<td><%=h time_as_date(workout.start_time) %></td>
-				<td><%= h number_to_short_time(workout.duration) %></td>
+				<td><%=h number_to_short_time(workout.duration) %>h</td>
 				<td class="tags"><% for tag in workout.tag_list %>
 					<%= link_to tag, user_workouts_path(current_user, :tag => tag) %>
 					<% end %></td>

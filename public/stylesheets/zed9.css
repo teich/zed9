@@ -79,7 +79,7 @@ body {
 #footer {
 	position: relative;
 	width: 100%;
-	color: #7C7B74;
+	color: #9f9f9f;
 	font-size: 8pt;
 	text-align: center;
 	height: 84px;
@@ -161,6 +161,7 @@ thead, th, td {
 .left_column {
 	position: relative;
 	float: left;
+	text-align: left;
 }
 
 .right_column {
@@ -500,8 +501,12 @@ table.newsfeed {
 
 .newsfeed .first_column {
 	padding: 8px 8px 8px 0px;
-	text-align: center;
+	text-align: left;
 	vertical-align: middle;
+}
+
+.newsfeed .activity_icon {
+	text-align: center;
 }
 
 .newsfeed .last_column {
@@ -539,11 +544,9 @@ table.newsfeed {
 /*---- Dashboard content layout ----*/
 
 #content_left_column {
-	text-align: left;
 }
 
 #content_right_column {
-	text-align: left;
 	width: 504px;
 	vertical-align: top;
 }
@@ -574,6 +577,65 @@ table.newsfeed {
 	width: 220px;
 }
 
+
+/*---- Activity page layout ----*/
+
+#activity_left_column {
+	width: 468px;
+}
+
+#activity_right_column {
+	width: 396px;
+	vertical-align: top;
+}
+
+
+/*---- Activity page styles*/
+
+.leaderboard {
+	padding-bottom: 24px;
+}
+
+.leaderboard .border {
+	padding: 12px;
+  border: 1px solid #d9d9d9;
+	background: #f2f9fd;
+	-moz-border-radius-bottomleft: 8px;
+	-moz-border-radius-bottomright: 8px;
+	-moz-border-radius-topleft: 8px;
+	-moz-border-radius-topright: 8px;
+	border-radius-bottomleft: 8px;
+	border-radius-bottomright: 8px;
+	border-radius-topleft: 8px;
+	border-radius-topright: 8px;
+}
+
+.leaderboard p {
+	padding: 0px;
+	color: #545454;	
+}
+
+.leaderboard ol {
+	padding: 8px 0px 0px 22px;
+	line-height: 1.4;
+}
+
+.leaderboard li {
+	padding-bottom: 18px;
+}
+
+.leaderboard span.number {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.leaderboard span.unit {
+	font-size: 12px;
+}
+
+#tag_cloud {
+	padding: 24px 0px 24px 0px;
+}
 
 /*---- Workouts index ----*/
 
@@ -649,9 +711,10 @@ table.newsfeed {
 
 .activity_icon {
 	position: relative;
-	padding-right: 4px;
-	height: 36px;
+	padding: 0px 8px 0px 0px;
+	height: 42px;
 	width: auto;
+	vertical-align: bottom;
 }
 
 .action_icon {
