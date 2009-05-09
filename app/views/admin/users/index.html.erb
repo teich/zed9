@@ -32,7 +32,7 @@
 			<table>
 			<% for invite in @invited %>
 			<tr>
-			<td><%=h invite.recipient_email %></td><td><%=h invite.sender.login %></td><td><%=h invite.sent_at %></td>
+			<td><%=h invite.recipient_email %></td><td><%=h invite.sender.login if !invite.sender.nil? %></td><td><%=h invite.sent_at %></td>
 			</tr>
 			<% end %>
 			</table>
