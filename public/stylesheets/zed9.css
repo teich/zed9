@@ -493,14 +493,15 @@ table.newsfeed {
 .newsfeed th, .newsfeed td {
 	font-size: 14px;
 	text-align: left;
-	vertical-align: top;
+	vertical-align: middle;
 	border-bottom:1px dotted #d9d9d9;
 	padding: 12px;	
 }
 
 .newsfeed .first_column {
-	text-align: left;
-	padding-left: 0px;
+	padding: 8px 8px 8px 0px;
+	text-align: center;
+	vertical-align: middle;
 }
 
 .newsfeed .last_column {
@@ -521,10 +522,8 @@ table.newsfeed {
 
 .activity_icon_small {
 	position: relative;
-	padding-right: 8px;
-	height: 24px;
-	width: auto;
-	vertical-align: top;
+	max-height: 32px;
+	max-width: 44px;
 }
 
 /*Container for featuring interesting stat headline and details*/
@@ -556,6 +555,14 @@ table.newsfeed {
 
 #recent_workouts {
 	height: auto;
+}
+
+#recent_workouts a {
+	color: #545454;
+}
+
+#recent_workouts a:hover {
+	color:#25a1d6;
 }
 
 #recent_workouts_chart {
@@ -646,7 +653,7 @@ table.newsfeed {
 .activity_icon {
 	position: relative;
 	padding-right: 4px;
-	height: 32px;
+	height: 36px;
 	width: auto;
 }
 

@@ -16,7 +16,7 @@
 		
 		<div id="recent_workouts">
 			<% if @workouts.size > 0 %>
-			<h2>Your recent workouts</h2>
+			<h2><%= link_to "Your recent workouts", user_workouts_path(current_user) %></h2>
 			<div id="recent_workouts_chart"></div>
 			<% end %>
 		</div>
