@@ -885,6 +885,32 @@ p.comp_activity {
 }
 
 
+/*---- Overlap ----*/
+
+#overlap {
+	text-align: left;
+}
+
+#overlap p {
+	padding-bottom: 12px;
+}
+
+#overlap a {
+	font-weight: 500;
+}
+
+#overlap ul {
+	padding: 0px 0px 0px 48px;
+}
+
+#overlap li {
+	padding-bottom: 12px;
+}
+
+#overlap .name {
+	font-style: oblique;
+}
+
 /*---- Admin pages ----*/
 
 #registered_users table {

@@ -1,12 +1,19 @@
-<div id="content">
-List of workouts that overlap with: <%=h @workout.name %><BR>
+<div id="content_header">
+	<h1>Merge Workouts</h1>
+</div>	
 
-Please select which workout you would like to merge into this workout:<BR>
-<ul>
-<% for item in @overlap %>
-<li><%= h item.name %> - <%= link_to 'Merge', workout_overlap_path(@workout, item), :method => :delete %></li>
-<% end %>
-</ul>
-<BR>
-<%= link_to "Don't merge this workout", @workout %>
+<div class="content" id="overlap">
+	
+	<p>This workout <span class="name"><%=h @workout.name %></span> appears to overlap with an existing workout.</p>
+
+	<p>You can merge this workout with one from the list below to combine the data. For example, you can join your heart rate data from any tracking watch with a GPS log for a more complete picture of your workout.</p>
+
+	<p>Would you like to merge this workout with the following?</p>
+	<ul>
+		<% for item in @overlap %>
+		<li><span class="name"><%= h item.name %>,</span> last edited on <%= h activity_timestamp(item.updated_at) %> &mdash; <%= link_to 'merge', workout_overlap_path(@workout, item), :method => :delete %></li>
+		<% end %>
+	</ul>
+	<p>Keep the data for this workout separate &mdash; <%= link_to "do not merge", @workout %></p>
+
 </div>
