@@ -72,7 +72,7 @@ function draw_dashboard_graph(data) {
 	            var x = item.datapoint[0].toFixed(0);
 	            var y = item.datapoint[1].toFixed(0);
 	            var d = new Date(data[x].workout.json_date * 1000);
-	            var m_names = new Array("January", "February", "March",
+	            var m_names = new Array("", "January", "February", "March",
 	            "April", "May", "June", "July", "August", "September",
 	            "October", "November", "December");
 	            var display_date = m_names[d.getMonth() + 1] + " " + d.getDate() + ", " + d.getFullYear();
