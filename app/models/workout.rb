@@ -34,18 +34,19 @@ class Workout < ActiveRecord::Base
 		return gis
 	end
 
-	## TODO: I think the hrmparser array function now includes this.  Nuke.
 	def smooth_data(series, factor)
+		return series if factor == 0
 		series.in_groups_of(factor).map { |snipit| snipit.compact.aaverage }
 	end
 
 	def smooth_axis(series, factor)
 		series.in_groups_of(factor).map { |snipit| snipit[0] }
 	end
+	
 	# TODO: seconds conversion is in helper.  What's the DRY way of formatting this?
-	def get_hr_axis
-		trackpoints.map { |tp| tp.time - start_time }
-	end
+	# def get_hr_axis
+	# 	trackpoints.map { |tp| tp.time - start_time }
+	# end
 
 	def get_smoothed_hr(points, value_array = false, milliseconds = false)
 		hr = get_hr.compact
