@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   
   # How many invitations does a user get?
   def set_invitation_limit
-    self.invitation_limit = 0
+    self.invitation_limit = 10
   end
   
 

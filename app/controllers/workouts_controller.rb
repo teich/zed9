@@ -101,8 +101,6 @@ class WorkoutsController < ApplicationController
 		end
 
 		overlap = @workout.overlap?(current_user)
-		# overlap_string = overlap.join(',')
-		# 		logger.debug "OVERLAP:- #{overlap.nil?}"
 
 		if @workout.save
 			flash[:notice] = 'Workout added!'

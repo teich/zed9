@@ -305,6 +305,7 @@ class Workout < ActiveRecord::Base
 			wtp.speed = tp.speed
 			wtp.time = tp.time
 			wtp.heart_rate = tp.hr
+			self.trackpoints << wtp
 		end
 
 		self.end_time = self.trackpoints.last.time
