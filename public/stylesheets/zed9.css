@@ -46,7 +46,7 @@ body {
 	position: relative;
 }
 
-#content_header {
+.content_header {
 	display: block;
 	padding-bottom: 24px;
 	text-align: left;
@@ -70,7 +70,7 @@ body {
 	font-size: 18px;
 }
 
-#content {
+.content {
 	clear: both;
 	width: 100%;
 	margin: 0px;
@@ -146,17 +146,17 @@ thead, th, td {
 	text-align: left;
 }
 
-#content ul {
+.content ul {
 	padding-left: 1em;
 	line-height: 1.4;
 	list-style: none;
 }
 
-#content ul li:before {
+.content ul li:before {
 	content: "\00BB \0020";
 }
 
-#content li {
+.content li {
 	padding-bottom: 8px;
 }
 
@@ -548,11 +548,11 @@ table.newsfeed {
 /*---- Dashboard content layout ----*/
 
 #content_left_column {
+	width: 468px;
 }
 
 #content_right_column {
-	width: 504px;
-	vertical-align: top;
+	width: 396px;
 }
 
 /*---- Dashboard content ----*/
@@ -573,7 +573,7 @@ table.newsfeed {
 	position: relative;
 	left: -4px;
 	overflow: hidden;
-	width: 312px;
+	width: 468px;
 	height: 244px;
 }
 

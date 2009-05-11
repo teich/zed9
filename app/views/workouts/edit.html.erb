@@ -1,10 +1,8 @@
-<div id="main">
-	<div id="content_header">
+<div class="content_header">
 	<h1>Edit Workout</h1>
-	</div>
-
-	<div id="content">
-	<%= render :partial => 'form', :locals => { :submit_url => workout_path(@workout) } %>
-	</div>
-
 </div>
+
+<div class="content">
+	<%= render :partial => 'form', :locals => { :submit_url => workout_path(@workout) } %>
+</div>
+

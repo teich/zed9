@@ -1,51 +1,49 @@
-<div id="main">
-	<div id="content_header">
-		<h1>User Stats</h1>
-	</div>
-	
-	<div id="content">
+<div class="content_header">
+	<h1>User Stats</h1>
+</div>
 
-		<div id="registered_users">
-			<h2>Registered users - <%=h @users.size %></h2>
+<div class="content">
 
-			<table>
-				<tr>
-					<th class="first_column">User name</th>
-					<th class="centered">Last login</th>
-					<th class="centered">Login count</th>
-					<th class="last_column">Email</th>
-				</tr>
-				<% for user in @users %>
-				<tr>
-					<td class="first_column"><%= h user.login %></td>
-					<td class="centered"><%= h user.last_login_at %></td>
-					<td class="centered"><%= h user.login_count %></td>
-					<td class="last_column"><%= h user.email %></td>
-				</tr>
-				<% end %>
-			</table>
+	<div id="registered_users">
+		<h2>Registered users - <%=h @users.size %></h2>
 
-		</div>
-
-		<div id="invites_sent">
-			<h2>Invited - <%=h @invited.size %></h2>
-			<table>
-			<% for invite in @invited %>
+		<table>
 			<tr>
-			<td><%=h invite.recipient_email %></td><td><%=h invite.sender.login if !invite.sender.nil? %></td><td><%=h invite.sent_at %></td>
+				<th class="first_column">User name</th>
+				<th class="centered">Last login</th>
+				<th class="centered">Login count</th>
+				<th class="last_column">Email</th>
+			</tr>
+			<% for user in @users %>
+			<tr>
+				<td class="first_column"><%= h user.login %></td>
+				<td class="centered"><%= h user.last_login_at %></td>
+				<td class="centered"><%= h user.login_count %></td>
+				<td class="last_column"><%= h user.email %></td>
 			</tr>
 			<% end %>
-			</table>
-		</div>
-		
-		<div id="invite_requests">
-			<h2>Waiting list - <%=h @waiting.size %></h2>
-			<ol>
-			<% for wait in @waiting %>
-					<li><%= h wait.recipient_email %> - <%=h wait.created_at %></li>
-			<% end %>
-			</ol>
-		</div>
+		</table>
 
 	</div>
+
+	<div id="invites_sent">
+		<h2>Invited - <%=h @invited.size %></h2>
+		<table>
+		<% for invite in @invited %>
+		<tr>
+		<td><%=h invite.recipient_email %></td><td><%=h invite.sender.login if !invite.sender.nil? %></td><td><%=h invite.sent_at %></td>
+		</tr>
+		<% end %>
+		</table>
+	</div>
+	
+	<div id="invite_requests">
+		<h2>Waiting list - <%=h @waiting.size %></h2>
+		<ol>
+		<% for wait in @waiting %>
+				<li><%= h wait.recipient_email %> - <%=h wait.created_at %></li>
+		<% end %>
+		</ol>
+	</div>
+
 </div>
