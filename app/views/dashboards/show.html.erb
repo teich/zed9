@@ -1,13 +1,13 @@
-<div id="content_header">
+<div class="content_header">
 	<div id="headline_news">
 		<p class="headline_title">You've logged <%= h number_to_time(@total_time) %> across <%= @workouts.size %> workouts.</p>
 		<% if !@atd.nil? && @atd > 0 %>
-		<p class="headline_details">The average user logged <%= h number_to_time(@atd) %>. You are <%= h @total_time/@atd*100 %>% vs average!</p>
+		<p class="headline_details">The average user logged <%= h number_to_time(@atd) %>. You are <%= h (@total_time/@atd*100).to_i %>% vs average!</p>
 		<% end %>
 	</div>
 </div>
 
-<div id="content">
+<div class="content">
 
 	<div id="content_left_column" class="left_column">
 
