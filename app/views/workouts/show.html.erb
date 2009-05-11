@@ -32,7 +32,7 @@
 				<span class="form">
 					<% form_for @tagging, :url => workout_taggings_path(@workout) do |f| %>
 						<input type="text" name="name" id="new_tag_name" autocomplete="off"/>
-						<%= f.submit "Add", :class => "submit" %>
+						<%= f.submit "add", :class => "submit_no_button" %>
 					<% end %>
 				<% end %>
 				</span>
