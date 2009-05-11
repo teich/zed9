@@ -227,6 +227,7 @@ class Workout < ActiveRecord::Base
 		#get trackpoints that have a HR
 		hr_trackpoints = trackpoints.map { |tp| tp if (!tp.heart_rate.nil? && tp.heart_rate > 0) }
 		hr_trackpoints.compact!
+		return nil if hr_trackpoints.first.nil?
 		
 		#Find first offset
 		start_offset = hr_trackpoints.first.time - start_time
@@ -236,7 +237,9 @@ class Workout < ActiveRecord::Base
 		start_percent = start_offset / duration
 		end_percent = end_offset / duration
 
-		number_points = 200
+		# we can't have more points than we have data.  Scale down if needed
+		number_points = 200 > hr_trackpoints.size ? hr_trackpoints.size : 200
+
 		first_blanks = (number_points * start_percent).to_i
 		end_blanks = (number_points * end_percent).to_i
 		
@@ -248,6 +251,7 @@ class Workout < ActiveRecord::Base
 		
 		graphing_points = number_points - first_blanks - end_blanks
 		factor = hr_trackpoints.size / graphing_points
+		#factor = 1 if factor == 0
 		graphing_points.times do |i| 
 			points << [step * (i+first_blanks), hr_trackpoints[i * factor].heart_rate]
 		end

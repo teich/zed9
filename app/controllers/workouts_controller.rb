@@ -10,18 +10,32 @@ class WorkoutsController < ApplicationController
 
 	def index
 
-		if params[:tag]
-			@workouts = @user.workouts.find_tagged_with(params[:tag])
+		# Personal leaderboards.  
+		# TODO: DRY
+		if my_workouts?
+			if params[:tag]
+				@workouts = @user.workouts.find_tagged_with(params[:tag])
+			else
+				@workouts = @user.workouts.find(:all, :order => "start_time DESC")
+			end
+			@farthest = @user.workouts.find(:all, :conditions => "distance > 0", :order => "distance DESC", :limit => 5)
+			@longest = @user.workouts.find(:all, :order => "duration DESC", :limit => 5)
+			@climbers = @user.workouts.find(:all, :conditions => "elevation > 0", :order => "elevation DESC", :limit => 5)
+			@fastest = @user.workouts.find(:all, :conditions => "speed > 0", :order => "speed DESC", :limit => 5)
+			@heart_pumping = @user.workouts.find(:all, :conditions => "hr > 0", :order => "hr DESC", :limit => 5)
 		else
-			@workouts = @user.workouts.find(:all, :order => "start_time DESC")
+			if params[:tag]
+				@workouts = @user.workouts.find_tagged_with(params[:tag])
+			else
+				@workouts = @user.workouts.find_all_by_shared(true, :order => "start_time DESC")
+			end
+			
+			@farthest = @user.workouts.find_all_by_shared(true, :conditions => "distance > 0", :order => "distance DESC", :limit => 5)
+			@longest = @user.workouts.find_all_by_shared(true, :order => "duration DESC", :limit => 5)
+			@climbers = @user.workouts.find_all_by_shared(true, :conditions => "elevation > 0", :order => "elevation DESC", :limit => 5)
+			@fastest = @user.workouts.find_all_by_shared(true, :conditions => "speed > 0", :order => "speed DESC", :limit => 5)
+			@heart_pumping = @user.workouts.find_all_by_shared(true, :conditions => "hr > 0", :order => "hr DESC", :limit => 5)
 		end
-
-		# Personal leaderboards
-		@farthest = @user.workouts.find(:all, :order => "distance DESC", :limit => 5)
-		@longest = @user.workouts.find(:all, :order => "duration DESC", :limit => 5)
-		@climbers = @user.workouts.find(:all, :conditions => "elevation > 0", :order => "elevation DESC", :limit => 5)
-		@fastest = @user.workouts.find(:all, :conditions => "speed > 0", :order => "speed DESC", :limit => 5)
-		@heart_pumping = @user.workouts.find(:all, :conditions => "hr > 0", :order => "hr DESC", :limit => 5)
 
 		respond_to do |format|
 			format.html
