@@ -52,6 +52,7 @@ class Workout < ActiveRecord::Base
 		hr = get_hr.compact
 		return nil if hr.size == 0
 
+		vc = []
 		factor = hr.size / points
 		sd = smooth_data(hr, factor)
 		point_interval = self.duration / sd.size
@@ -59,8 +60,12 @@ class Workout < ActiveRecord::Base
 			c = -1
 			vc = sd.map do |d|
 				c += 1
-				multiplier = milliseconds ? point_interval * 1000 : 1
-				[(c*multiplier).to_i, d] # Converting to milliseconds for flot
+				if milliseconds
+					axis = c * point_interval * 1000
+				else
+					axis = c
+				end
+				[axis.to_i, d] 
 			end
 			return vc
 		else
@@ -218,7 +223,35 @@ class Workout < ActiveRecord::Base
 	end
 
 	def json_heartrate_big
-		get_smoothed_hr(200, true, true)
+		
+		#get trackpoints that have a HR
+		hr_trackpoints = trackpoints.map { |tp| tp if (!tp.heart_rate.nil? && tp.heart_rate > 0) }
+		hr_trackpoints.compact!
+		
+		#Find first offset
+		start_offset = hr_trackpoints.first.time - start_time
+
+		#Find last offset
+		end_offset = end_time - hr_trackpoints.last.time
+		start_percent = start_offset / duration
+		end_percent = end_offset / duration
+
+		number_points = 200
+		first_blanks = (number_points * start_percent).to_i
+		end_blanks = (number_points * end_percent).to_i
+		
+		points = []
+		
+		# flot wants things in milliseconds. 
+		step = (duration * 1000 / number_points).to_i
+		first_blanks.times { |i| points << [step * i, nil] }
+		
+		graphing_points = number_points - first_blanks - end_blanks
+		factor = hr_trackpoints.size / graphing_points
+		graphing_points.times do |i| 
+			points << [step * (i+first_blanks), hr_trackpoints[i * factor].heart_rate]
+		end
+		points
 	end
 
 	def json_speed
@@ -260,6 +293,7 @@ class Workout < ActiveRecord::Base
 
 		iw.trackpoints.each do |tp|
 			wtp = trackpoints.build()
+			
 			wtp.altitude = tp.altitude
 			wtp.distance = tp.distance
 			wtp.lat = tp.lat

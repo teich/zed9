@@ -5,7 +5,7 @@
 		</div>
 	<% end %>
 
-	<h1><%=h @user.login %>'s workouts <% if my_workout? %><span class="action"><%= link_to 'Add', new_user_workout_path(current_user) %></span><% end %></h1>
+	<h1><%=h @user.login %>'s workouts <% if my_workouts? %><span class="action"><%= link_to 'Add', new_user_workout_path(current_user) %></span><% end %></h1>
 </div>
 
 <div id="content">
@@ -28,7 +28,7 @@
 					<td class="tags"><% for tag in workout.tag_list %>
 						<%= link_to tag, user_workouts_path(@user, :tag => tag) %>
 						<% end %><br></td>
-					<% if my_workout? %><td class="last_column no_wrap"><%= link_to image_submit_tag("../../images/pencil.png", :class => "action_icon", :onmouseover => "this.src='../../images/pencil_on.png'", :onmouseout => "this.src='../../images/pencil.png'"), edit_workout_path(workout) %>&nbsp;<%= link_to image_tag("../../images/trash.png", :class => "action_icon",  :onmouseover => "this.src='../../images/trash_on.png'", :onmouseout => "this.src='../../images/trash.png'"), workout, :method => :delete, :confirm => "Are you sure you want to delete this workout?" %><br></td><% end %>
+					<% if my_workouts? %><td class="last_column no_wrap"><%= link_to image_submit_tag("../../images/pencil.png", :class => "action_icon", :onmouseover => "this.src='../../images/pencil_on.png'", :onmouseout => "this.src='../../images/pencil.png'"), edit_workout_path(workout) %>&nbsp;<%= link_to image_tag("../../images/trash.png", :class => "action_icon",  :onmouseover => "this.src='../../images/trash_on.png'", :onmouseout => "this.src='../../images/trash.png'"), workout, :method => :delete, :confirm => "Are you sure you want to delete this workout?" %><br></td><% end %>
 				</tr>
 			<% end %>
 			</table>

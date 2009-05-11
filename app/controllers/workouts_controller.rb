@@ -1,12 +1,12 @@
 require 'hpricot'
 
 class WorkoutsController < ApplicationController
-	helper_method :my_workout?  
+	helper_method :my_workout?, :my_workouts?
 	before_filter :require_user, :except => [:show, :index]
 
 	before_filter :find_workout, :only => [:edit, :update, :destroy, :merge]
 	before_filter :find_and_bounce, :only => [:show]
-  before_filter :find_user_and_require_shared, :only => [:index]
+	before_filter :find_user_and_require_shared, :only => [:index]
 
 	def index
 
@@ -16,7 +16,7 @@ class WorkoutsController < ApplicationController
 			@workouts = @user.workouts.find(:all, :order => "start_time DESC")
 		end
 
-    # Personal leaderboards
+		# Personal leaderboards
 		@farthest = @user.workouts.find(:all, :order => "distance DESC", :limit => 5)
 		@longest = @user.workouts.find(:all, :order => "duration DESC", :limit => 5)
 		@climbers = @user.workouts.find(:all, :conditions => "elevation > 0", :order => "elevation DESC", :limit => 5)
@@ -124,7 +124,7 @@ class WorkoutsController < ApplicationController
 	def merge
 		overlap = params[:overlap].split(/,/)
 		@overlap = current_user.workouts.find(overlap)
-		
+
 	end
 
 	private
@@ -146,14 +146,14 @@ class WorkoutsController < ApplicationController
 		(uploaded_file.is_a?(String)) ? uploaded_file : uploaded_file.read
 	end
 
-  def find_user_and_require_shared
-    @user = User.find_by_login(params[:user_id])
+	def find_user_and_require_shared
+		@user = User.find_by_login(params[:user_id])
 
-    if (!@user.shared && !current_user.nil? && (@user.id != current_user.id))
-      flash[:notice] = "This page is private"
-      redirect_to root_path
-    end
-  end
+		if !(!current_user.nil? && current_user.id == @user.id) && !@user.shared
+			flash[:notice] = "This page is private"
+			redirect_to root_path
+		end
+	end
 
 	def my_workout?
 		if logged_in? 
@@ -161,6 +161,13 @@ class WorkoutsController < ApplicationController
 		else 
 			return false
 		end
+	end
 
+	def my_workouts?
+		if logged_in?
+			return @user == current_user
+		else
+			return false
+		end
 	end
 end
