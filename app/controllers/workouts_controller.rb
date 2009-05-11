@@ -2,25 +2,36 @@ require 'hpricot'
 
 class WorkoutsController < ApplicationController
 	helper_method :my_workout?  
-	before_filter :require_user, :except => [:show]
+	before_filter :require_user, :except => [:show, :index]
 
 	before_filter :find_workout, :only => [:edit, :update, :destroy, :merge]
 	before_filter :find_and_bounce, :only => [:show]
+  before_filter :find_user_and_require_shared, :only => [:index]
 
 	def index
+
 		if params[:tag]
-			@workouts = current_user.workouts.find_tagged_with(params[:tag])
+			@workouts = @user.workouts.find_tagged_with(params[:tag])
 		else
-			@workouts = current_user.workouts.find(:all, :order => "start_time DESC")
+			@workouts = @user.workouts.find(:all, :order => "start_time DESC")
 		end
+
+    # Personal leaderboards
+		@farthest = @user.workouts.find(:all, :order => "distance DESC", :limit => 5)
+		@longest = @user.workouts.find(:all, :order => "duration DESC", :limit => 5)
+		@climbers = @user.workouts.find(:all, :conditions => "elevation > 0", :order => "elevation DESC", :limit => 5)
+		@fastest = @user.workouts.find(:all, :conditions => "speed > 0", :order => "speed DESC", :limit => 5)
+		@heart_pumping = @user.workouts.find(:all, :conditions => "hr > 0", :order => "hr DESC", :limit => 5)
 
 		respond_to do |format|
 			format.html
 			format.xml {render :xml => @workouts.to_xml }
 		end
+
 	end
 
 	def show
+
 		#    @comps = @workout.find_comps(@workout.user)
 
 		# need for creating new tags.  
@@ -134,6 +145,15 @@ class WorkoutsController < ApplicationController
 	def ensure_string(uploaded_file)
 		(uploaded_file.is_a?(String)) ? uploaded_file : uploaded_file.read
 	end
+
+  def find_user_and_require_shared
+    @user = User.find_by_login(params[:user_id])
+
+    if (!@user.shared && !current_user.nil? && (@user.id != current_user.id))
+      flash[:notice] = "This page is private"
+      redirect_to root_path
+    end
+  end
 
 	def my_workout?
 		if logged_in? 
