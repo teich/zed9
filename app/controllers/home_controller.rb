@@ -1,16 +1,16 @@
 class HomeController < ApplicationController
 
-  def index
+	def index
 
-    # render the landing page
+		# render the landing page
 
-  end
+	end
 
-  def show
+	def show
 
-    render :action => params[:page]
+		render :action => params[:page]
 
-  end
+	end
 
 end
 
