@@ -428,14 +428,9 @@ thead, th, td {
 }
 
 .form input {
-	-moz-border-radius-bottomleft:5px;
-	-moz-border-radius-bottomright:5px;
-	-moz-border-radius-topleft:5px;
-	-moz-border-radius-topright:5px;
-	border-radius-bottomleft:5px;
-	border-radius-bottomright:5px;
-	border-radius-topleft:5px;
-	border-radius-topright:5px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
 	border:1px solid #d9d9d9;
 	font-weight: inherit;
 	font-size: inherit;
@@ -448,9 +443,10 @@ thead, th, td {
 
 /*Submit button styling for forms*/
 .submit {
+  background-color: #f0f0f0;
 /*	position: relative;
-	top: 12px;
-*/}
+	top: 12px;*/
+}
 
 /*---- Tool tip general styling ----*/
 
@@ -464,14 +460,9 @@ thead, th, td {
 	text-align: left;
   background-color: #f0f0f0;
   opacity: .9;
-	-moz-border-radius-bottomleft: 5px;
-	-moz-border-radius-bottomright: 5px;
-	-moz-border-radius-topleft: 5px;
-	-moz-border-radius-topright: 5px;
-	border-radius-bottomleft: 5px;
-	border-radius-bottomright: 5px;
-	border-radius-topleft: 5px;
-	border-radius-topright: 5px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
 	z-index: 1000;
 }
 
@@ -613,14 +604,9 @@ table.newsfeed {
 	padding: 12px;
   border: 1px solid #d9d9d9;
 	background: #f2f9fd;
-	-moz-border-radius-bottomleft: 8px;
-	-moz-border-radius-bottomright: 8px;
-	-moz-border-radius-topleft: 8px;
-	-moz-border-radius-topright: 8px;
-	border-radius-bottomleft: 8px;
-	border-radius-bottomright: 8px;
-	border-radius-topleft: 8px;
-	border-radius-topright: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
 }
 
 .leaderboard p {
@@ -692,14 +678,9 @@ table.newsfeed {
 	font-size: 18px;
 	background-color: #f0f0f0;
 	opacity: .9;
-	-moz-border-radius-bottomleft: 5px;
-	-moz-border-radius-bottomright: 5px;
-	-moz-border-radius-topleft: 5px;
-	-moz-border-radius-topright: 5px;
-	border-radius-bottomleft: 5px;
-	border-radius-bottomright: 5px;
-	border-radius-topleft: 5px;
-	border-radius-topright: 5px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
 	text-align: center;
 }
 
