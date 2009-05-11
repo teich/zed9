@@ -29,7 +29,7 @@ class WorkoutsController < ApplicationController
 			else
 				@workouts = @user.workouts.find_all_by_shared(true, :order => "start_time DESC")
 			end
-			
+
 			@farthest = @user.workouts.find_all_by_shared(true, :conditions => "distance > 0", :order => "distance DESC", :limit => 5)
 			@longest = @user.workouts.find_all_by_shared(true, :order => "duration DESC", :limit => 5)
 			@climbers = @user.workouts.find_all_by_shared(true, :conditions => "elevation > 0", :order => "elevation DESC", :limit => 5)

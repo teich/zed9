@@ -42,7 +42,7 @@ class Workout < ActiveRecord::Base
 	def smooth_axis(series, factor)
 		series.in_groups_of(factor).map { |snipit| snipit[0] }
 	end
-	
+
 	# TODO: seconds conversion is in helper.  What's the DRY way of formatting this?
 	# def get_hr_axis
 	# 	trackpoints.map { |tp| tp.time - start_time }
@@ -223,12 +223,12 @@ class Workout < ActiveRecord::Base
 	end
 
 	def json_heartrate_big
-		
+
 		#get trackpoints that have a HR
 		hr_trackpoints = trackpoints.map { |tp| tp if (!tp.heart_rate.nil? && tp.heart_rate > 0) }
 		hr_trackpoints.compact!
 		return nil if hr_trackpoints.first.nil?
-		
+
 		#Find first offset
 		start_offset = hr_trackpoints.first.time - start_time
 
@@ -242,13 +242,13 @@ class Workout < ActiveRecord::Base
 
 		first_blanks = (number_points * start_percent).to_i
 		end_blanks = (number_points * end_percent).to_i
-		
+
 		points = []
-		
+
 		# flot wants things in milliseconds. 
 		step = (duration * 1000 / number_points).to_i
 		first_blanks.times { |i| points << [step * i, nil] }
-		
+
 		graphing_points = number_points - first_blanks - end_blanks
 		factor = hr_trackpoints.size / graphing_points
 		#factor = 1 if factor == 0
@@ -297,7 +297,7 @@ class Workout < ActiveRecord::Base
 
 		iw.trackpoints.each do |tp|
 			wtp = trackpoints.build()
-			
+
 			wtp.altitude = tp.altitude
 			wtp.distance = tp.distance
 			wtp.lat = tp.lat

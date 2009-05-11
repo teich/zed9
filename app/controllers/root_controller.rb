@@ -1,16 +1,16 @@
 class RootController < ApplicationController
-  
-  def index
 
-    # list of 6 most recent public workouts
-    @shared = Workout.find_all_by_shared(true, :limit=>6, :order => "updated_at DESC")
+	def index
 
-    @user_session = UserSession.new
-    
-    if current_user
-      redirect_to dashboard_path
-    end
+		# list of 6 most recent public workouts
+		@shared = Workout.find_all_by_shared(true, :limit=>6, :order => "updated_at DESC")
 
-  end
+		@user_session = UserSession.new
+
+		if current_user
+			redirect_to dashboard_path
+		end
+
+	end
 
 end
