@@ -207,18 +207,35 @@ thead, th, td {
 	padding: 0px;
 }
 
+#logo {
+	display: inline-block;
+	text-align: left;
+	float: left;
+	position: relative;
+	top: -8px;
+	display: inline;
+	padding-right: 12px;
+}
+
 #logo a {
 	color: #9f9f9f;
 	font-size: 36px;
 	font-weight: 100;
 	letter-spacing: 10px;
-	float: left;
-	position: relative;
-	top: -8px;
 }
 
 #logo a:hover {
 	color:#25a1d6;
+}
+
+#logo .beta {
+	font-size: 12px;
+	font-weight: 100;
+	color: #9f9f9f;
+	text-align: left;
+	display: inline;
+	position: relative;
+	left: -4px;
 }
 
 #nav li {
@@ -343,10 +360,11 @@ thead, th, td {
 
 #flash {
 	padding-bottom: 24px;
-	font-size: 18px;
+	font-size: 22px;
 	font-weight: 500;
 	color: #3dc10b;
 	text-align: center;	
+	clear: both;
 }
 
 .errorExplanation {
@@ -444,8 +462,10 @@ thead, th, td {
 /*Submit button styling for forms*/
 .submit {
   background-color: #f0f0f0;
-/*	position: relative;
-	top: 12px;*/
+}
+
+.submit_no_button {
+	background-color: none;
 }
 
 /*---- Tool tip general styling ----*/

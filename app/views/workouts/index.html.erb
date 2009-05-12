@@ -5,7 +5,7 @@
 		</div>
 	<% end %>
 
-	<h1><%=h @user.login %>'s workouts <% if my_workouts? %><span class="action"><%= link_to 'Add', new_user_workout_path(current_user) %></span><% end %></h1>
+	<h1><%=h @user.login %>'s workouts <% if my_workouts? %><span class="action"><%= link_to 'add', new_user_workout_path(current_user) %></span><% end %></h1>
 </div>
 
 <div class="content">

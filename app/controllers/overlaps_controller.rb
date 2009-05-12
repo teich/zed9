@@ -28,7 +28,7 @@ class OverlapsController < ApplicationController
 		@workout.elevation = @workout.calc_altitude_gain
 
 		@workout.save && dup.destroy
-		flash[:notice] = 'Merged the two activities.'
+		flash[:notice] = 'Workouts successfully merged'
 		redirect_to @workout
 
 	end
