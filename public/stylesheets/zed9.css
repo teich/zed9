@@ -147,13 +147,10 @@ thead, th, td {
 }
 
 .content ul {
+	list-style-type: disc;
 	padding-left: 1em;
-	line-height: 1.4;
-	list-style: none;
-}
-
-.content ul li:before {
-	content: "\00BB \0020";
+	margin-left: 2em;
+	list-style-position: outside;
 }
 
 .content li {
@@ -285,15 +282,6 @@ thead, th, td {
 	font-weight: 500;
 }
 
-#supported_devices_list ul {
-	padding-left: 1em;
-	line-height: 1.4;
-	list-style: none;
-}
-#supported_devices_list ul li:before {
-	content: "\00BB \0020";
-}
-
 #left_splash {
 	width: 504px;
 	padding-top: 6px;
@@ -398,7 +386,6 @@ thead, th, td {
 
 #register, #login_form, #edit_workout {
 	float: left;
-	width: 504px;
 	padding-top: 4px;
 }
 
@@ -421,15 +408,16 @@ thead, th, td {
 
 .form th {
 	font-size: inherit;
-	padding-right: 4px;
+	padding: 12px 4px 12px 0px;
 	text-align:right;
-	width: 204px;
+	width: 140px;
+	vertical-align: middle;
 }
 
 .form td {
+	width: 300px;
 	font-size: inherit;
-	padding: 8px 4px;
-	line-height: 2;
+	padding: 12px 4px;
 	vertical-align: top;
 	text-align: left;
 }
@@ -437,6 +425,13 @@ thead, th, td {
 /*Form row that has a note displayed below the field*/
 .form .annotated {
 	padding-bottom: 0px;
+}
+
+.form .comments {
+	padding-left: 12px;
+	width: auto;
+	font-size: 12px;
+	font-style: oblique;
 }
 
 /*Explanatory note displayed below a form field*/
@@ -466,6 +461,11 @@ thead, th, td {
 
 .submit_no_button {
 	background-color: none;
+}
+
+#edit_workout .submit, #edit_workout .submit_no_button, #register .submit, #register .submit_no_button {
+	position: relative;
+	top: 18px;
 }
 
 /*---- Tool tip general styling ----*/
@@ -716,6 +716,48 @@ table.newsfeed {
 
 #workouts_stats br {
 	clear: left;
+}
+
+
+/*---- Add Workout ----*/
+
+/*Content div id */
+#select_device {
+	
+}
+
+.device_name {
+	font-weight: 500;
+}
+
+#locating_files {
+	float: right;
+	right: 0px;
+	z-index: -100;
+	text-align: left;
+	width: 400px;
+	padding-top: 18px;
+	font-size: 12px;
+}
+
+#locating_files h3 {
+	padding-bottom: 24px;
+}
+
+#locating_files ol {
+	margin-left: 8px;
+	padding-left: 1em;
+}
+
+#locating_files li {
+	font-size: 12px;
+}
+
+/*Span style for examples of supported devices*/
+.device_details {
+	font-size: 12px;
+	font-style: oblique;
+	color: #9f9f9f;
 }
 
 /*---- Workout content layout ----*/
