@@ -71,7 +71,7 @@
 				<ol>
 					<!-- define for time -->
 					<% for workout in @longest %> 
-					<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> on <%=h time_as_date(workout.start_time) %></li>
+			<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> on <%=h time_as_date(workout.start_time) %></li>
 					<% end %>
 				</ol>
 			</div>

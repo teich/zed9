@@ -76,43 +76,46 @@ class WorkoutsController < ApplicationController
 
 		# Set the workout shared state to the user default
 		@workout.shared = current_user.shared
+		# setup one device for form.
+		@workout.devices.build
 	end
 
 	def edit
 	end
 
 	def create
-		uploaded_file = params[:workout][:source] 
-		if request.post? and uploaded_file.respond_to? :read
-
-			# Rails "optimizes" by passing a string or a Tempfile.  Always get string
-			uploaded_data = ensure_string(uploaded_file)
-			importer = Importer::Garmin.new(:data => uploaded_data) if params[:device_type] == "garmin"
-			importer = Importer::Polar.new(:data => uploaded_data, :time_zone => current_user.time_zone) if params[:device_type] == "polar"
-			importer = Importer::Suunto.new(:data => uploaded_data, :time_zone => current_user.time_zone) if params[:device_type] == "suunto"
-			importer = Importer::GPX.new(:data => uploaded_data) if params[:device_type] == "gpx"
-
-
-			iw = importer.restore
 			@workout = current_user.workouts.create(params[:workout])
-			@workout.build_from_imported!(iw)
-			@workout.shared = current_user.shared
-
-		end
-
-		overlap = @workout.overlap?(current_user)
-
-		if @workout.save
-			flash[:notice] = 'Workout added!'
-			if overlap.size > 0
-				redirect_to workout_overlaps_path(@workout)
+			if @workout.devices.first.nil?
+				@workout.destroy
+				flash[:notice] = "you must specifiy a file to upload"
+				redirect_to :action => "new", :device_type => params[:device_type]
 			else
-				redirect_to @workout
+				uploaded_data = ensure_string(@workout.devices.first.source.to_file.data)
+		
+				importer = Importer::Garmin.new(:data => uploaded_data) if params[:device_type] == "garmin"
+				importer = Importer::Polar.new(:data => uploaded_data, :time_zone => current_user.time_zone) if params[:device_type] == "polar"
+				importer = Importer::Suunto.new(:data => uploaded_data, :time_zone => current_user.time_zone) if params[:device_type] == "suunto"
+				importer = Importer::GPX.new(:data => uploaded_data) if params[:device_type] == "gpx"
+
+
+				iw = importer.restore
+				@workout.build_from_imported!(iw)
+
+
+				overlap = @workout.overlap?(current_user)
+
+				if @workout.save
+					flash[:notice] = 'Workout added!'
+					if overlap.size > 0
+						redirect_to workout_overlaps_path(@workout)
+					else
+						redirect_to @workout
+					end
+				else
+					flash[:notice] = "Unable to save workout for some lame reason."
+					render :action => "new"
+				end
 			end
-		else
-			flash[:notice] = "Unable to save workout for some lame reason."
-			render :action => "new"
-		end
 	end
 
 
@@ -129,14 +132,9 @@ class WorkoutsController < ApplicationController
 	def destroy
 		# Destroying here so that the merge can call .destroy on a workout
 		@workout.trackpoints.each { |tp| tp.destroy }
+		@workout.devices.each { |d| d.destroy }
 		@workout.destroy
 		redirect_to(user_workouts_url(current_user))
-	end
-
-	def merge
-		overlap = params[:overlap].split(/,/)
-		@overlap = current_user.workouts.find(overlap)
-
 	end
 
 	private

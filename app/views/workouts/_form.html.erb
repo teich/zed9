@@ -25,8 +25,10 @@
 		</select></td>
 	</tr>
 	<tr>
-		<th class="annotated"><%= f.label "File location" %></th>
-		<td class="annotated"><%= f.file_field :source %></td>
+		<% f.fields_for :devices do |d_f| %>
+		<th class="annotated"><%= d_f.label "File location" %></th>
+		<td class="annotated"><%= d_f.file_field :source %></td>
+		<% end %>
 	</tr>
 	<tr>
 		<th>&nbsp;</th>

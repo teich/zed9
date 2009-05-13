@@ -26,6 +26,9 @@ class OverlapsController < ApplicationController
 		@workout.hr = @workout.calc_average_hr
 		@workout.speed = @workout.calc_average_speed
 		@workout.elevation = @workout.calc_altitude_gain
+		
+		# Move who owns the device
+		@workout.devices += dup.devices
 
 		@workout.save && dup.destroy
 		flash[:notice] = 'Workouts successfully merged'
