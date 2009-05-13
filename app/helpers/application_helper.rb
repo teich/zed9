@@ -1,10 +1,12 @@
 module ApplicationHelper
   def number_to_time(seconds)
+	return nil if seconds.nil?
     Time.at(seconds).utc.strftime("%H:%M:%S")
   end
 
   # Output: 1:34 
   def number_to_short_time(seconds)
+	return nil if seconds.nil?
     twodigit_time = Time.at(seconds).utc.strftime("%H:%M")
     twodigit_time =~ /^0(.*$)/
     return $1
@@ -12,6 +14,7 @@ module ApplicationHelper
 
   # Output: Monday, April 06, 2009 at 11:58am
   def activity_timestamp(start_time)
+	return "" if start_time.nil?
     time = start_time.strftime("%I:%M%p")
     if (time =~ /^0(.*$)/)
       short_time = $1
@@ -23,6 +26,7 @@ module ApplicationHelper
   
   # Output: 5/8/09
   def time_as_date(start_time)
+	return "" if start_time.nil?
     month = start_time.strftime("%m")
     if (month =~ /^0(.*$)/)
       short_month = $1
