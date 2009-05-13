@@ -31,6 +31,7 @@ Rails::Initializer.run do |config|
   config.gem "authlogic"
   config.gem "newrelic_rpm" 
   config.gem "teich-hrmparser", :lib => "hrmparser", :version => "0.4.6", :source => "http://gems.github.com"
+  config.gem "thoughtbot-paperclip"
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
