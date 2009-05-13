@@ -82,7 +82,7 @@ class WorkoutsController < ApplicationController
 	end
 
 	def create
-		uploaded_file = params[:device_file] 
+		uploaded_file = params[:workout][:source] 
 		if request.post? and uploaded_file.respond_to? :read
 
 			# Rails "optimizes" by passing a string or a Tempfile.  Always get string
@@ -94,7 +94,7 @@ class WorkoutsController < ApplicationController
 
 
 			iw = importer.restore
-			@workout = current_user.workouts.build(params[:workout])
+			@workout = current_user.workouts.create(params[:workout])
 			@workout.build_from_imported!(iw)
 			@workout.shared = current_user.shared
 

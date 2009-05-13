@@ -3,6 +3,15 @@ class Workout < ActiveRecord::Base
 	belongs_to  :activity
 	has_many    :trackpoints
 	has_many    :comps
+	has_attached_file :source,
+		:storage => :s3,
+		:s3_credentials => {
+			:access_key_id => ENV['S3_KEY'],
+			:secret_access_key => ENV['S3_SECRET']
+		},
+		:bucket => ENV['S3_BUCKET'],
+		:path => ":class/:attachment/:id/:basename.:extension",
+		:s3_permissions => "private"
 
 	validates_presence_of :name
 	validates_length_of   :name,     :maximum => 100
@@ -309,6 +318,7 @@ class Workout < ActiveRecord::Base
 		end
 
 		self.end_time = self.trackpoints.last.time
+		self.source_processed_at = Time.now
 
 	end
 

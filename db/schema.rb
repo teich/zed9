@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090509203923) do
+ActiveRecord::Schema.define(:version => 20090513154816) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -109,16 +109,21 @@ ActiveRecord::Schema.define(:version => 20090509203923) do
     t.float    "distance"
     t.integer  "hr"
     t.float    "duration"
-    t.string   "name",        :default => "Unnamed"
+    t.string   "name",                :default => "Unnamed"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "activity_id", :default => 0
+    t.integer  "activity_id",         :default => 0
     t.string   "device_type"
     t.boolean  "shared"
     t.float    "elevation"
     t.float    "speed"
     t.datetime "end_time"
+    t.string   "source_file_name"
+    t.string   "source_content_type"
+    t.integer  "source_file_size"
+    t.datetime "source_updated_at"
+    t.datetime "source_processed_at"
   end
 
 end

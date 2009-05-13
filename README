@@ -1,7 +1,5 @@
 Hosted on Zed9
 
-Run "rake db:seed" to populate with the first user
-
 Initial Setup:
 Get GIT access
  	ssh-keygen
@@ -19,6 +17,12 @@ Add github as a gem source:
 Install necessary gems:
 	sudo gem install derailed-ziya
 	sudo rake gems:install
+	
+Setup S3 credentials:
+	Edit ~/.profile and make sure you have:
+	export S3_BUCKET=YOUR TESTING BUCKET
+	export S3_KEY=YOUR KEY 
+	export S3_SECRET=YOUR SECRET
 	
 Setup the DB:
 	rake db:migrate
