@@ -1,49 +1,27 @@
-This is your invitation email to join the alpha testing for Zed9.
-Please follow this link to create your account:
+You are invited to join the ZED9 private beta! 
+
+ZED9 is a new site for social fitness analytics where you can learn about, compare, and improve your performance. 
+
+Follow this link to create your account:
 
 <%= @signup_url %>
 
-Zed9 is your site for social fitness analytics.  Zed9 aggregates data from as many sources as possible, providing you with meaningful analytics on your workouts. Compare and contrast your performance with others in your network, demographics, and interest groups.  
+By joining the ZED9 beta, you can:
 
-Zed9 Alpha Release 0.1 Features:
- * Upload workouts from supported file types (see below for specific list)
- * See HR graph for uploaded workouts
- * See map of workout if GPS data included
- * Compare individual workouts to all your workouts and to zed9 wide statistics
- * Share your workout with other registered Zed9 users.
- * Merge workouts from multiple devices into one workout!
- * Site-wide leader board for each activity
- * Make sure to hover over your stats on a workout to see details!
+     * Track all your workouts in one place, no matter what device(s) you use. You can even merge independent data from a heart rate monitor, GPS logger, etc. to get the full picture of any workout
 
-Some caveats to be aware of:
- * You will likely need to re-upload any workouts at a later time as the DB evolves.
- * Uploading workouts with RR data (i.e. from a Polar RS800) is SLOW.  It can take up to 5 minutes.  This will be fixed in a future release.
- * Deleting activities can be slow.  This will be fixed in a future release.
+     * See what's working (tons of data porn!): cool graphs and stats for every workout let you see how you measure up and help you (or a trainer) identify ways to improve your performance
 
-Features planned for the next few weeks:
- * Faster processing of RR based workouts
- * Additional graphs included speed & altitude
- * Upload multiple files at once
- * Edit workouts inline
- * Track weight & VO2 over time
- * Calculate calories based on HR data
- * More advanced comparative analytics
+     * Compare and compete with friends, groups, and the community, no matter where they are or what tracking device they use
 
-Supported Devices:
-I've tested this with the following devices.  If your device isn't listed, please get in touch so I can support it!
- * Polar RS400
- * Polar RS800
- * Garmin Forerunner 405
- * Garmin Forerunner 305
- * Suunto T6c
- * Generic GPX files
+     * Find new motivation to up your standing on the leader boards
 
-Where can I find my workouts to upload?
-For garmin, please see this quick video ( less than 1 min ) http://vimeo.com/4279824
-For Polar, it depends on the device.  you can often easily export them from ProTrainer by going to file->email
+     * Shape the future of ZED9 with your feedback
 
-The more feedback I receive, the better this product will be.  If you have any specific features, bugs, or input on changes, please email me and let me know what you would like to see.  I will be contacting you in the next week to follow up on your experience so far, and see what I can do to make Zed9 better.
+     * Access all of the analytics and features on ZED9 for free (for beta users).
 
-Thank you for helping alpha test Zed9.
-Oren Teich
-oren@zednine.com
+To participate in the beta, you need access to the Internet and a fitness tracking device (like a heart rate monitor or GPS logger) that connects to a computer. ZED9 currently supports several models from Garmin, Polar, Suunto, and any .gpx format GPS logs. See the full list at http://zednine.com/devices.
+
+Hope to see you soon on ZED9!
+
+<%=h current_user.login %>
