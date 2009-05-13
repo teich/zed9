@@ -601,6 +601,11 @@ table.newsfeed {
 	width: 220px;
 }
 
+/*---- Invite ----*/
+
+#send_invite th {
+	width: auto;
+}
 
 /*---- Activity page layout ----*/
 
@@ -977,11 +982,11 @@ p.comp_activity {
 
 /*---- Admin pages ----*/
 
-#registered_users table {
+#users table {
 	width: 100%;	
 }
 
-#registered_users th, #registered_users td {
+#users th, #users td {
 	font-size: 14px;
 	text-align: left;
 	vertical-align: top;
@@ -989,32 +994,36 @@ p.comp_activity {
 	padding: 12px;	
 }
 
-#registered_users th {
+#users th {
 	font-weight: 500;
 }
 
-#registered_users .first_column {
+#users .first_column {
 	padding-left: 0px;
 }
 
-#registered_users .last_column {
+#users .last_column {
 	padding-right: 0px;
 }
 
-#registered_users .centered {
+#users .centered {
 	text-align: center;
 }
 
-#invites_sent, #invite_requests, #registered_users {
+#users .name {
+	font-weight: 500;
+}
+
+#users div {
 	padding-bottom: 36px;
 }
 
-#invite_requests ol {
-	padding-left: 20px;
+#users ol {
+	padding: 12px 0px 24px 20px;
 }
 
-#invite_requests li {
-	padding-bottom: 8px;
+#users li {
+	padding-bottom: 12px;
 }
 
 /*---- Footer styling ----*/

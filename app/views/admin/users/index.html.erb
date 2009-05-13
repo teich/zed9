@@ -2,10 +2,10 @@
 	<h1>User Stats</h1>
 </div>
 
-<div class="content">
+<div class="content" id="users">
 
 	<div id="registered_users">
-		<h2>Registered users - <%=h @users.size %></h2>
+		<h2><%=h @users.size %> registered users</h2>
 
 		<table>
 			<tr>
@@ -16,7 +16,7 @@
 			</tr>
 			<% for user in @users %>
 			<tr>
-				<td class="first_column"><%= h user.login %></td>
+				<td class="first_column name"><%= h user.login %></td>
 				<td class="centered"><%= h user.last_login_at %></td>
 				<td class="centered"><%= h user.login_count %></td>
 				<td class="last_column"><%= h user.email %></td>
@@ -27,21 +27,28 @@
 	</div>
 
 	<div id="invites_sent">
-		<h2>Invited - <%=h @invited.size %></h2>
+		<h2><%=h @invited.size %> invites sent</h2>
 		<table>
 		<% for invite in @invited %>
-		<tr>
-		<td><%=h invite.recipient_email %></td><td><%=h invite.sender.login if !invite.sender.nil? %></td><td><%=h invite.sent_at %></td>
-		</tr>
+			<tr>
+				<th class="first_column">Recipient's email</th>
+				<th class="centered">Sender's login</th>
+				<th class="last_column">Invitation date</th>
+			</tr>
+			<tr>
+				<td class="first_column name"><%=h invite.recipient_email %></td>
+				<td class="centered"><%=h invite.sender.login if !invite.sender.nil? %></td>
+				<td class="last_column"><%=h time_as_date(invite.sent_at) %></td>
+			</tr>
 		<% end %>
 		</table>
 	</div>
 	
 	<div id="invite_requests">
-		<h2>Waiting list - <%=h @waiting.size %></h2>
+		<h2><%=h @waiting.size %> people have put their name on the wait list</h2>
 		<ol>
 		<% for wait in @waiting %>
-				<li><%= h wait.recipient_email %> - <%=h wait.created_at %></li>
+				<li><span class="name"><%= h wait.recipient_email %></span> on <%=h time_as_date(wait.created_at) %></li>
 		<% end %>
 		</ol>
 	</div>
