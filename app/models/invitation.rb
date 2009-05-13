@@ -17,7 +17,7 @@ class Invitation < ActiveRecord::Base
 
     def sender_has_invitations
       unless sender.invitation_limit > 0
-        errors.add_to_base 'You have reached your limit of invitations to send.'
+        errors.add_to_base 'You are out of invitations. Please contact us if you would like more.'
       end
     end
 

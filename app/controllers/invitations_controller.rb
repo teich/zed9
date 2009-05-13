@@ -12,7 +12,7 @@ class InvitationsController < ApplicationController
 				flash[:notice] = "Thank you. Invitation sent!"
 				redirect_to dashboard_url
 			else
-				flash[:notice] = "Thank you. We will notify you when we are ready."
+				flash[:notice] = "Thanks for putting your name on the list!<br>We will email you an invitation as soon as we have a spot open in the beta."
 				redirect_to root_url
 			end
 		else
