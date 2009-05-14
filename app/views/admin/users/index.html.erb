@@ -29,12 +29,12 @@
 	<div id="invites_sent">
 		<h2><%=h @invited.size %> invites sent</h2>
 		<table>
-		<% for invite in @invited %>
 			<tr>
 				<th class="first_column">Recipient's email</th>
 				<th class="centered">Sender's login</th>
 				<th class="last_column">Invitation date</th>
 			</tr>
+		<% for invite in @invited %>
 			<tr>
 				<td class="first_column name"><%=h invite.recipient_email %></td>
 				<td class="centered"><%=h invite.sender.login if !invite.sender.nil? %></td>
