@@ -27,7 +27,7 @@
 	<tr>
 		<% f.fields_for :devices do |d_f| %>
 		<th class="annotated"><%= d_f.label "File location" %></th>
-		<td class="annotated"><%= d_f.file_field :source %></td>
+		<td class="annotated"><%= d_f.file_field :source, :size => 20 %></td>
 		<% end %>
 	</tr>
 	<tr>
