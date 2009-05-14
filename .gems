@@ -1,6 +1,6 @@
 authlogic  
 logging
 newrelic_rpm
-teich-hrmparser -v 0.4.6 --source gems.github.com
+teich-hrmparser -v 0.4.7 --source gems.github.com
 right_aws
 thoughtbot-paperclip --source gems.github.com
