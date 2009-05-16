@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
 	before_create :set_invitation_limit
 
-	attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :birthdate, :sex, :height, :time_zone, :shared
+	attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :birthdate, :sex, :height, :time_zone, :shared, :displayname
 
 	def invitation_token
 		invitation.token if invitation
@@ -42,6 +42,13 @@ class User < ActiveRecord::Base
 		"#{login.gsub(/[^a-z0-9]+/i, '-')}"
 	end
 
+	def display_name
+		if displayname.nil? || displayname == ""
+			return login
+		else 
+			return displayname
+		end
+	end
 	private
 
 	# How many invitations does a user get?

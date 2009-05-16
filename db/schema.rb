@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090513173622) do
+ActiveRecord::Schema.define(:version => 20090516230448) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20090513173622) do
     t.string   "time_zone"
     t.boolean  "shared",              :default => true
     t.boolean  "admin",               :default => false
+    t.string   "displayname"
   end
 
   create_table "workouts", :force => true do |t|
