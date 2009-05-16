@@ -7,7 +7,7 @@ class WorkoutsController < ApplicationController
 	before_filter :find_workout, :only => [:edit, :update, :destroy, :merge]
 	before_filter :find_and_bounce, :only => [:show]
 	before_filter :find_user_and_require_shared, :only => [:index]
-
+	
 	def index
 
 		# Personal leaderboards.  

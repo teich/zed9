@@ -9,7 +9,7 @@
 		<% if @farthest.size > 0 %>		
 		<div class="leaderboard">
 			<div class="border">
-				<h2><img src="../images/road.png" height="24px" style="vertical-align:top; padding-right: 8px">Farthest</h2>
+				<h2><img src="../images/road.png" height="24px" style="vertical-align:top; padding-right: 8px">Farthest this week</h2>
 				<ol>
 					<!-- fix function -->
 					<% for workout in @farthest %>
@@ -23,7 +23,7 @@
 		<% if @fastest.size > 0 %>		
 		<div class="leaderboard">
 			<div class="border">
-				<h2><img src="../images/flag.png" height="28px" style="vertical-align:top; padding-right: 8px">Fastest</h2>
+				<h2><img src="../images/flag.png" height="28px" style="vertical-align:top; padding-right: 8px">Fastest this week</h2>
 				<ol>
 					<% for workout in @fastest %>
 					<li><span class="number"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%=h workout.user.login %> on <%=h time_as_date(workout.start_time) %></li>
@@ -36,7 +36,7 @@
 		<% if @longest.size > 0 %>		
 		<div class="leaderboard">
 			<div class="border">
-				<h2><img src="../images/clock.png" height="22px" style="vertical-align:top; padding-top:4px; padding-right: 8px">Longest</h2>
+				<h2><img src="../images/clock.png" height="22px" style="vertical-align:top; padding-top:4px; padding-right: 8px">Longest this week</h2>
 				<ol>
 					<!-- define for time -->
 					<% for workout in @longest %> 
@@ -50,7 +50,7 @@
 		<% if @heart_pumping.size > 0 %>		
 		<div class="leaderboard">
 			<div class="border">
-				<h2><img src="../images/heart.png" height="24px" style="vertical-align:top; padding-right: 8px">Heart-pumpers</h2>
+				<h2><img src="../images/heart.png" height="24px" style="vertical-align:top; padding-right: 8px">Heart-pumpers this week</h2>
 				<p>Highest average heart rate in a single workout</p>
 				<ol>
 					<% for workout in @heart_pumping %>
@@ -69,7 +69,7 @@
 		<% if @climbers.size > 0 %>		
 		<div class="leaderboard">
 			<div class="border">
-				<h2><img src="../images/peaks.png" height="24px" style="vertical-align:middle; padding-right: 8px; padding-bottom:2px">Polka Dot Jersey</h2>
+				<h2><img src="../images/peaks.png" height="24px" style="vertical-align:middle; padding-right: 8px; padding-bottom:2px">Polka Dot Jersey this week</h2>
 				<p>Biggest climb in a single workout</p>
 				<ol>
 					<% for workout in @climbers %>

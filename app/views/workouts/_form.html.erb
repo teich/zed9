@@ -11,6 +11,9 @@
 		<td class="comments">&nbsp;</td>
 	</tr>
 	<tr>
+		<th><%= f.label :notes %></th>
+		<td><%= f.text_area :notes, :size => "33x4" %></td>
+	<tr>
 		<th class="annotated"><%= f.label :tag_list, "Tags" %></th>
 		<td class="annotated"><%= f.text_field :tag_list %></td>
 	</tr>

@@ -6,8 +6,10 @@ class Workout < ActiveRecord::Base
 	
 	accepts_nested_attributes_for :devices
 
-	validates_presence_of :name
-	validates_length_of   :name,     :maximum => 100
+	validates_presence_of	:name
+	validates_length_of 	:name,		:maximum => 100
+	validates_length_of		:notes,		:maximum => 600
+	
 
 	validates_presence_of :user_id
 

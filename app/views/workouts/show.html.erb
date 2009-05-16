@@ -17,7 +17,7 @@
 			
 			<p id="workout_description"><span class="click"><%= link_to @workout.activity.name, activity_path(@workout.activity) %>	</span> on <span class="click"><%=h activity_timestamp(@workout.start_time) %></span> by <%=h @workout.user.display_name %></p>
 
-			<!-- <p id="workout_notes">Notes on the workout</p> -->
+			<p id="workout_notes"><%= h @workout.notes %></p>
 
 			<div id="tag_set">
 				<span id="tags_header">Tags:<% if my_workout? %><% end %></span>
