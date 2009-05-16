@@ -24,5 +24,6 @@ ActionController::Routing::Routes.draw do |map|
 
 	map.home ':page', :controller => 'home', :action => 'show', :page => /about|contact|devices/
 	map.root :controller => "root", :action => "index"
+	map.connect '*path' , :controller => 'four_oh_fours'
 
 end
