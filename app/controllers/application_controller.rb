@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
 
 	before_filter :create_user_session
 	before_filter :set_user_time_zone
+	
+	rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
 	private
 
@@ -75,5 +77,10 @@ class ApplicationController < ActionController::Base
 			redirect_to root_url
 			return false
 		end
+	end
+	
+	def record_not_found
+		flash[:notice] = "Sorry, that page wasn't found. It may have moved or been deleted."
+		redirect_to root_path
 	end
 end
