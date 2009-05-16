@@ -34,7 +34,7 @@
 					<td><%= link_to sw.activity.name, activity_path(sw.activity) %></td>
 					<td class="name"><%= link_to sw.name, workout_path(sw) %></td>
 					<td><%= h number_to_short_time(sw.duration) %>h</td>
-					<td class="last_column"><%= h sw.user.display_name %></td>
+					<td class="last_column"> <%= link_to sw.user.display_name, user_workouts_path(sw.user) %></td>
 				</tr>
 			<% end %>
 			</table>

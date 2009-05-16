@@ -13,7 +13,8 @@
 				<ol>
 					<!-- fix function -->
 					<% for workout in @farthest %>
-					<li><span class="number"><%=h workout.distance_in_miles %></span><span class="unit">miles</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%=h workout.user.login %> on <%=h time_as_date(workout.start_time) %></li>
+					<li><span class="number"><%=h workout.distance_in_miles %></span><span class="unit">miles</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> byby <%= link_to workout.user.display_name, user_workouts_path(workout.user) %> 
+					 on <%=h time_as_date(workout.start_time) %></li>
 					<% end %>
 				</ol>
 			</div>
@@ -26,7 +27,8 @@
 				<h2><img src="../images/flag.png" height="28px" style="vertical-align:top; padding-right: 8px">Fastest this week</h2>
 				<ol>
 					<% for workout in @fastest %>
-					<li><span class="number"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%=h workout.user.login %> on <%=h time_as_date(workout.start_time) %></li>
+					<li><span class="number"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %> 
+					 on <%=h time_as_date(workout.start_time) %></li>
 					<% end %>
 				</ol>
 			</div>
@@ -40,7 +42,8 @@
 				<ol>
 					<!-- define for time -->
 					<% for workout in @longest %> 
-					<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%=h workout.user.login %> on <%=h time_as_date(workout.start_time) %></li>
+					<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %> 
+					 on <%=h time_as_date(workout.start_time) %></li>
 					<% end %>
 				</ol>
 			</div>
@@ -57,7 +60,7 @@
 					<li>
 						<span class="number"><%=h workout.hr %></span><span class="unit">bpm</span>: 
 						<span class="workout_name"><%= link_to workout.name, workout %></span> 
-						by <%=h workout.user.login %> 
+						by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %> 
 						on <%=h time_as_date(workout.start_time) %>
 					</li>
 					<% end %>
@@ -76,7 +79,7 @@
 					<li>
 						<span class="number"><%=h workout.elevation_in_feet %></span><span class="unit">ft</span>: 
 						<span class="workout_name"><%= link_to workout.name, workout %></span> 
-						by <%=h workout.user.login %> 
+						by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %> 
 						on <%=h time_as_date(workout.start_time) %>
 					</li>
 					<% end %>
