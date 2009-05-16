@@ -21,6 +21,7 @@
     <th><%= f.label :birthdate %></th>
     <td><%= f.date_select :birthdate, :start_year => Time.now.year - 12, :end_year => Time.now.year - 100 %></td>
   </tr>
+<% if false %>
   <tr>
     <th class="annotated"><%= f.label :height %></th>
     <td class="annotated"><%= f.text_field :height, :size => "4" %> millimeters</td>
@@ -29,6 +30,7 @@
 		<th>&nbsp;</th>
 		<td class="field_note">Yes, this is lame. It's on the todo list. For reference, 5'10" = 1778mm. </td>
  	</tr>
+<% end %>
   <tr>
     <th><%= f.label :time_zone %></th>
     <td><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></td>
