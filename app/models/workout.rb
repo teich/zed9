@@ -90,7 +90,10 @@ class Workout < ActiveRecord::Base
 			vc = smoothed.map do |d|
 				c += 1
 				multiplier = milliseconds ? point_interval * 1000 : 1
-				[(c*multiplier).to_i, d] # Converting to milliseconds for flot
+				
+				# TODOL Converting to speed inline right now.  Ick.
+				# Converting to milliseconds for flot
+				[(c*multiplier).to_i, d*2.236936] 
 			end
 			return vc
 		else
