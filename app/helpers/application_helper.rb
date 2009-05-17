@@ -6,7 +6,7 @@ module ApplicationHelper
 
   # Output: 1:34 
   def number_to_short_time(seconds)
-	return nil if seconds.nil?
+	return "0:00:00 " + seconds if seconds.nil?
     twodigit_time = Time.at(seconds).utc.strftime("%H:%M")
     twodigit_time =~ /^0(.*$)/
     return $1
