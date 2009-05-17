@@ -7,9 +7,9 @@ module ApplicationHelper
   # Output: 1:34 
   def number_to_short_time(seconds)
 	return "0:00:00 " + seconds if seconds.nil?
-    twodigit_time = Time.at(seconds).utc.strftime("%H:%M")
-    twodigit_time =~ /^0(.*$)/
-    return $1
+	hours = (seconds / 3600).to_i
+	minutes = ((seconds - 3600 * hours) / 60).to_i
+    return "#{hours}:#{minutes}"
   end
 
   # Output: Monday, April 06, 2009 at 11:58am
