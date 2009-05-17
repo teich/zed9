@@ -331,19 +331,6 @@ thead, th, td {
 }
 
 
-/*---- Dashboard timeline styling ----*/
-
-#public_newsfeed {
-	width: 100%;
-	padding-bottom: 24px;
-}
-
-#public_newsfeed h2 {
-	text-align: left;
-	padding-bottom: 12px;
-}
-
-
 /*---- Action result messages and alerts ----*/
 
 #flash {
@@ -440,7 +427,7 @@ thead, th, td {
 	padding-top: 0px;
 }
 
-.form input {
+.form input, .form textarea {
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
@@ -577,8 +564,42 @@ table.newsfeed {
 
 /*---- Dashboard content ----*/
 
+#dashboard .your_number {
+	color: #25a1d6;
+}
+
+#dashboard .unit {
+	font-size: 14px;
+	font-weight: 100;
+	color: #25a1d6;	
+}
+
+#dashboard .comp_number {
+	font-weight: 500;
+}
+
+#dashboard .comp_unit {
+	font-weight: 100;
+	font-size: 12px;
+}
+
+/*Used on activity and dashboard*/
+#public_newsfeed {
+	width: 100%;
+	padding-bottom: 24px;
+}
+
+#public_newsfeed h2 {
+	text-align: left;
+	padding-bottom: 12px;
+}
+
 #recent_workouts {
 	height: auto;
+}
+
+#recent_workouts h2 {
+	padding-top: 36px;
 }
 
 #recent_workouts a {

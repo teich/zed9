@@ -1,17 +1,17 @@
 <div class="content_header">
 	<div id="headline_news">
-		<p class="headline_title">You've logged <%= h number_to_time(@total_time) %> across <%= @workouts.size %> workouts.</p>
-		<% if !@atd.nil? && @atd > 0 %>
-		<p class="headline_details">The average user logged <%= h number_to_time(@atd) %>. You are <%= h (@total_time/@atd*100).to_i %>% vs average!</p>
-		<% end %>
 	</div>
 </div>
 
-<div class="content">
+<div class="content" id="dashboard">
 
 	<div id="content_left_column" class="left_column">
 
 		<div id="dashboard_stats">
+			<h2>You've logged <span class="your_number"><%= link_to number_to_short_time(@total_time), user_workouts_path(current_user) %></span><span class="unit">h</span> across <span class="your_number"><%= link_to @workouts.size, user_workouts_path(current_user) %></span> workouts</h2>
+			<% if !@atd.nil? && @atd > 0 %>
+			<p class="headline_details">The average user logged <span class="comp_number"><%= h number_to_short_time(@atd) %></span><span class="comp_unit">h</span>. You are <span class="comp_number"><%= h (@total_time/@atd*100).to_i %></span><span class="comp_unit">%</span> vs average!</p>
+			<% end %>
 		</div>
 		
 		<div id="recent_workouts">
