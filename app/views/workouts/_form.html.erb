@@ -40,6 +40,7 @@
 			
 			<% if params[:device_type] == "garmin" %>
 				Garmin files end in the extension .tcx.<br>
+				For GPS-only models, you can <%= link_to 'upload .gpx files here', url_for(:action => 'new', :device_type => 'gpx') %> instead
 			<% end %>
 			
 			<% if params[:device_type] == "polar" %>
