@@ -8,7 +8,7 @@
 	<div id="content_left_column" class="left_column">
 
 		<div id="dashboard_stats">
-			<h2>You've logged <span class="your_number"><%= link_to number_to_short_time(@total_time), user_workouts_path(current_user) %></span><span class="unit">h</span> across <span class="your_number"><%= link_to @workouts.size, user_workouts_path(current_user) %></span> workouts</h2>
+			<h2>You've logged <span class="your_number"><%=  h number_to_short_time(@total_time) %></span><span class="unit">h</span> across <span class="your_number"><%= link_to @workouts.size, user_workouts_path(current_user) %></span> workouts</h2>
 			<% if !@atd.nil? && @atd > 0 %>
 			<p class="headline_details">The average user logged <span class="comp_number"><%= h number_to_short_time(@atd) %></span><span class="comp_unit">h</span>. You are <span class="comp_number"><%= h (@total_time/@atd*100).to_i %></span><span class="comp_unit">%</span> vs average!</p>
 			<% end %>
