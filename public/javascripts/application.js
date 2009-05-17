@@ -48,6 +48,8 @@ var tooltip_style = {
 // END GRAPH OPTIONS
 
 
+// END MAP STUFF
+
 // HELPER FUNCTIONS
 function axes(axes) {
     var markings = [];
@@ -137,6 +139,10 @@ function workout_page_graphs(data) {
 	            $("#fullsize_tooltip").remove();
 	            var x = item.datapoint[0].toFixed(2);
 				var y = item.datapoint[1].toFixed(0);
+				
+				key = (x / 10000).toFixed(0);
+				point = z9map.pointsByRoundedTime[key];
+				setCurrLoc(z9map, point.y, point.x);
 				$('<div id="fullsize_tooltip" class="tooltip">' + y + '</div>').css( {
 	            	top: item.pageY - 41,
 	            	left: item.pageX + 1
@@ -147,7 +153,6 @@ function workout_page_graphs(data) {
 	         previousPoint = null;            
 	    }
 	}
-	
 	var workout = data.workout
     var all_comps = workout.json_comps.all_comps;
     var my_comps = workout.json_comps.my_comps;
@@ -236,10 +241,14 @@ function workout_page_graphs(data) {
 		});
 	});
 
+	google.setOnLoadCallback(z9MapInit(data.workout.gis));
+	
+
 }
 
 // THIS IS THE MAIN AREA.  CALLED ON PAGE LOAD
 $(document).ready(function() {
+
 
 	// I'm using the .each selector really as a page identifier.  
 	// TODO: be more overt in the naming.  i.e. #workout_page, #dashboard_page

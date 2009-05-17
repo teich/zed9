@@ -30,9 +30,10 @@ class Workout < ActiveRecord::Base
 	# Return the Global Information, AKA lat and lng.
 	def gis
 		gis = []
+		start = trackpoints.first.time
 		for tp in trackpoints do
 			if !tp.lat.nil?
-				gis << [tp.lat, tp.lng]
+				gis << {:time => ((tp.time - start) / 10).round, :data => [tp.lat, tp.lng]}
 			end
 		end
 		return gis

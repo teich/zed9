@@ -45,29 +45,13 @@ class WorkoutsController < ApplicationController
 	end
 
 	def show
-
-		#    @comps = @workout.find_comps(@workout.user)
-
 		# need for creating new tags.  
 		@tagging = Tagging.new
-
-		if @workout.gps_data? 
-			@map = GMap.new("map_div")
-			@map.control_init(:large_map => true,:map_type => true)
-			start = @workout.gis.first
-			points = @workout.gis
-			less_points = points.compact.in_groups_of(50).map {|tp| tp[0]}
-			polyline = GPolyline.new(points,"#a000f0",3,1.0)
-			@map.overlay_init(polyline)
-			@map.center_zoom_on_points_init(*less_points)
-			@map.overlay_init(GMarker.new(start,:title => "Hello", :info_window => "Starting Point"))
-		end
-
 
 		respond_to do |format|
 			format.html
 			format.xml {render :xml => @workout.to_xml }
-			format.js {render :js => @workout.to_json(:methods => [:json_hr, :json_heartrate_big, :json_speed, :json_speed_big, :json_elevation, :json_elevation_big, :json_comps, :activity_name])}
+			format.js {render :js => @workout.to_json(:methods => [:json_hr, :json_heartrate_big, :json_speed, :json_speed_big, :json_elevation, :json_elevation_big, :json_comps, :activity_name, :gis])}
 		end
 	end
 
