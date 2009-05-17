@@ -16,6 +16,13 @@ var options = {
     shadowSize: 1
 };
 
+function hms(secs)
+{
+	var t = new Date(1970,0,1);
+	t.setSeconds(secs);
+	return t.toTimeString().substr(0,8);
+}
+
 var full_size_options = {
 		grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 48, markings: axes },
 	// crosshair: { mode: "x", color: '#d9d9d9' },
@@ -79,7 +86,7 @@ function draw_dashboard_graph(data) {
 	            var name = data[x].workout.name;
 	            var activity_name = data[x].workout.activity_name;
 	            var tip_text = "<span class='tooltip_extra_info'>" + activity_name.toLowerCase() + ":</span><br>"; 
-				tip_text += name + "<br><span class='tooltip_extra_info'>" + display_date + "<br>" + y + unit + "</span>";
+				tip_text += name + "<br><span class='tooltip_extra_info'>" + display_date + "<br>" + hms(y) + "</span>";
 
 				$('<div id="bar_tooltip" class="tooltip">' + tip_text + '</div>').css({
 	                top: item.pageY + 8,
@@ -200,14 +207,24 @@ function workout_page_graphs(data) {
 
     $(".stat").each(function() {
 		var tip = '<div class="stat">';
+		if (this.id == "duration") {
+			data1 = hms(workout[this.id]);
+			data2 = hms(my_comps[this.id]);
+			data3 = hms(all_comps[this.id]);
+		} else {
+			data1 = workout[this.id].toFixed(1);
+			data2 = my_comps[this.id].toFixed(1);
+			data3 = my_comps[this.id].toFixed(1);
+		}
+			
 		tip += '<p class="comp_this_workout"><span class="value">';
-		tip += workout[this.id].toFixed(1);
+		tip += data1;
 		tip += '</span>' + $(this).attr('unit') + ' for this workout</p>';
 		tip += '<p class="comp_my_activity"><span class="value">';
-		tip += my_comps[this.id].toFixed(1) + '</span>';
+		tip += data2 + '</span>';
 		tip += $(this).attr('unit') + ' for your ' + workout.activity_name + '</p>';
 		tip += '<p class="comp_activity"><span class="value">';
-		tip += all_comps[this.id].toFixed(1) + '</span>';
+		tip += data3 + '</span>';
 		tip += $(this).attr('unit') + ' for ZED9 ' + workout.activity_name + '</p></div >';
 					
 		$(this).qtip({
