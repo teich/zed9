@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-	acts_as_authentic
+	acts_as_authentic do |c|
+		c.validates_length_of_login_field_options = {:within => 2..20}
+	end
 
 	# TODO: for testing, I'm removing this till I figure out how to bypass
 	validates_presence_of :invitation_id, :message => 'is required'
