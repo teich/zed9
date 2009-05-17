@@ -78,7 +78,7 @@ function draw_dashboard_graph(data) {
 	            var display_date = m_names[d.getMonth() + 1] + " " + d.getDate() + ", " + d.getFullYear();
 	            var name = data[x].workout.name;
 	            var activity_name = data[x].workout.activity_name;
-	            var tip_text = "<span class='tooltip_extra_info'>" + activity_name + ":</span><br>"; 
+	            var tip_text = "<span class='tooltip_extra_info'>" + activity_name.toLowerCase() + ":</span><br>"; 
 				tip_text += name + "<br><span class='tooltip_extra_info'>" + display_date + "<br>" + y + unit + "</span>";
 
 				$('<div id="bar_tooltip" class="tooltip">' + tip_text + '</div>').css({
