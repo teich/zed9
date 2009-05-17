@@ -105,7 +105,9 @@ function draw_dashboard_graph(data) {
 	var duration = [];
 	var date = [];
 	
-	for (var i = 0; i < data.length; i++) {
+	barsDisplayed = data.length > 12 ? 12 : data.length;
+	
+	for (var i = 0; i < barsDisplayed; i++) {
 		var d = new Date(data[i].workout.json_date * 1000);
 		var display_date = d.getMonth() + 1 + "/" + d.getDate();
         duration.push([i, data[i].workout.duration]);
