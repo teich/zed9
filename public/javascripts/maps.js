@@ -39,7 +39,7 @@ function z9MapInit(points) {
 	var currLocIcon = new google.maps.Icon();
 	currLocIcon.image = "/images/curr_loc.png";
 	currLocIcon.shadow = "";
-	currLocIcon.iconSize = new google.maps.Size(52,52);
+	currLocIcon.iconSize = new google.maps.Size(50,50);
 	currLocIcon.iconAnchor = new google.maps.Point(26, 26);
 	var currLocMarkerOptions = { icon:currLocIcon, clickable:false };
 	z9map.currLocMarker = new google.maps.Marker(z9map.defaultLoc, currLocMarkerOptions);
