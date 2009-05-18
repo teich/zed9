@@ -94,7 +94,7 @@ class Workout < ActiveRecord::Base
 				
 				# TODOL Converting to speed inline right now.  Ick.
 				# Converting to milliseconds for flot
-				[(c*multiplier).to_i, d*2.236936] 
+				[(c*multiplier).to_i, d] 
 			end
 			return vc
 		else
