@@ -71,7 +71,7 @@ class WorkoutsController < ApplicationController
 			@workout = current_user.workouts.create(params[:workout])
 			if @workout.devices.first.nil?
 				@workout.destroy
-				flash[:notice] = "you must specifiy a file to upload"
+				flash[:notice] = "Select a file to upload"
 				redirect_to :action => "new", :device_type => params[:device_type]
 			else
 				uploaded_data = ensure_string(@workout.devices.first.source.to_file.data)
