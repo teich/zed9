@@ -406,6 +406,7 @@ thead, th, td {
 /*---- Action result messages and alerts ----*/
 
 #flash {
+	padding-top: 12px;
 	padding-bottom: 24px;
 	font-size: 22px;
 	font-weight: 500;
