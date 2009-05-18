@@ -277,7 +277,7 @@ thead, th, td {
 /*---- Marketing page styles ----*/
 
 .marketing_tagline {
-	padding-top: 25px;
+	padding-top: 29px;
 	padding-bottom: 12px;
 	font-weight: 500;
 }
@@ -331,6 +331,78 @@ thead, th, td {
 }
 
 
+/*---- Get Satisfaction Contact Widget*/
+
+#fdbk_iframe_inline {
+	width: 100%;
+	height: 360px;
+}
+
+/*---- Get Satisfaction Topics Widget*/
+/*
+#gsfn_list_widget img { 
+	border: none; 
+}
+
+#gsfn_list_widget { 
+	font-size: 12px; 
+	width: 280px; 
+  border: 1px solid #d9d9d9;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	padding: 12px; 
+	position: absolute;
+	right: 0px;
+	top: 139px;
+}
+
+#gsfn_list_widget a.widget_title { 
+	color: #545454; 
+	display: block; 
+	margin-bottom: 12px; 
+	font-weight: 500;
+	font-size: 18px; 
+}
+
+#gsfn_list_widget .powered_by { 
+	padding-top: 12px; 
+	border-top: 1px solid #d9d9d9; 
+}
+
+#gsfn_list_widget .powered_by a { 
+	color: #9f9f9f; 
+	font-size: 11px; 
+}
+
+#gsfn_list_widget div#gsfn_content { 
+	padding-bottom: 12px;
+}
+
+#gsfn_list_widget div#gsfn_content ul { 
+	margin-left: 0px;
+	padding-left: 0px;
+	list-style: none;
+}
+
+#gsfn_list_widget div#gsfn_content li { 
+	text-align:left; 
+	padding-bottom:6px;
+}
+
+#gsfn_list_widget div#gsfn_content a.gsfn_link { 
+	line-height: 1; 
+}
+
+#gsfn_list_widget div#gsfn_content span.time { 
+	font-size: 11px; 
+	padding-left: 3px; 
+}
+
+#gsfn_list_widget div#gsfn_content p.gsfn_summary { 
+	padding-top: 4px 
+}
+*/
 /*---- Action result messages and alerts ----*/
 
 #flash {
