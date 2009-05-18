@@ -105,7 +105,10 @@ function draw_dashboard_graph(data) {
 	var duration = [];
 	var date = [];
 	
-	for (var i = 0; i < data.length; i++) {
+	var barsDisplayed = data.length > 12 ? 12 : data.length;
+	var last = data.length - barsDisplayed - 1;
+	
+	for (i = data.length -1; i > last; --i) {
 		var d = new Date(data[i].workout.json_date * 1000);
 		var display_date = d.getMonth() + 1 + "/" + d.getDate();
         duration.push([i, data[i].workout.duration]);
@@ -164,9 +167,9 @@ function workout_page_graphs(data) {
 
 	// TODO: Handle units correctly
 	// This hack converts everything to imperial
-	workout.speed *= 20.23693629;
-	all_comps.speed *= 20.23693629;
-	my_comps.speed *= 20.23693629;
+	workout.speed *= 2.23693629;
+	all_comps.speed *= 2.23693629;
+	my_comps.speed *= 2.23693629;
 	
 	workout.elevation *= 3.28;
 	all_comps.elevation *= 3.28;

@@ -30,6 +30,7 @@ class Workout < ActiveRecord::Base
 	# Return the Global Information, AKA lat and lng.
 	def gis
 		gis = []
+		return 0 if trackpoints.size < 5
 		start = trackpoints.first.time
 		for tp in trackpoints do
 			if !tp.lat.nil?
