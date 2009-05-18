@@ -9,6 +9,8 @@ module ApplicationHelper
 	return "0:00:00 " + seconds if seconds.nil?
 	hours = (seconds / 3600).to_i
 	minutes = ((seconds - 3600 * hours) / 60).to_i
+	minutes = "0#{minutes}" if minutes < 10 # hack to add leading 0
+		
     return "#{hours}:#{minutes}"
   end
 
