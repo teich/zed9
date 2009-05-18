@@ -222,7 +222,7 @@ function workout_page_graphs(data) {
 		} else {
 			data1 = workout[this.id].toFixed(1);
 			data2 = my_comps[this.id].toFixed(1);
-			data3 = my_comps[this.id].toFixed(1);
+			data3 = all_comps[this.id].toFixed(1);
 		}
 			
 		tip += '<p class="comp_this_workout"><span class="value">';
