@@ -3,6 +3,8 @@ class Workout < ActiveRecord::Base
 	belongs_to  :activity
 	has_many    :trackpoints
 	has_many	:devices
+	has_many	:accomplishments
+	has_many	:achievements, :through => :accomplishments
 	
 	accepts_nested_attributes_for :devices
 
@@ -164,7 +166,8 @@ class Workout < ActiveRecord::Base
 	end
 
 	def number_to_short_time(seconds)
-		Time.at(seconds).utc.strftime("%H:%M:%S")
+		return "0:00:00 " if seconds.nil?
+	Time.at(seconds).utc.strftime("%H:%M:%S")
 	end
 
 	def distance_in_miles
