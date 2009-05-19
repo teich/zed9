@@ -6,6 +6,32 @@ var jsURL = document.location.href + ".js";
 var previousPoint = null;
 // END GLOBAL VARIABLES
 
+
+// Toggle view of bests on leaderboards
+
+$(document).ready(function() {
+	$('div.bests').hide();  
+	$('div.foo').hover(function() { 
+		$(this).children('div.bests').slideToggle('fast');
+		$(".toggle").attr("src", "/images/open.png");
+	}, 
+	function() { 
+		$(this).children('div.bests').slideToggle('fast');
+		$(".toggle").attr("src", "/images/closed.png");
+	});
+});
+
+// Newsfeed hover highlight
+
+$(document).ready(function() {
+	$('tr.newsfeed_workout_summary').hover(function() {
+		$(this).children().addClass("highlight");
+	},
+	function() {
+		$(this).children().removeClass("highlight");
+	}	);
+});
+
 // Define global graph options
 var options = {
     grid: { borderWidth: 0, tickColor: "white" },

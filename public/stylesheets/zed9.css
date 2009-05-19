@@ -165,6 +165,11 @@ thead, th, td {
 	white-space:nowrap;
 }
 
+.unit {
+	font-weight: 100;
+	font-size: 12px;
+}
+
 /*---- General use to display columns ----*/
 
 .left_column {
@@ -571,26 +576,58 @@ thead, th, td {
 
 table.newsfeed {
 	width: 100%;	
-	border-top: 1px dotted #d9d9d9;
+/*	border-top: 1px dotted #d9d9d9;*/
 }
 
 .newsfeed th, .newsfeed td {
 	font-size: 14px;
-	text-align: left;
+	text-align: center;
 	vertical-align: top;
 	border-bottom:1px dotted #d9d9d9;
-	padding: 12px;	
+	padding: 6px 4px;	
+}
+
+.newsfeed th {
+	font-size: 12px;
+	font-weight: 100;
+	color: #9f9f9f;
 }
 
 .newsfeed .first_column {
-	padding: 8px 8px 8px 0px;
+	padding-left: 0px;
 	text-align: left;
 	vertical-align: middle;
 }
 
-.newsfeed .activity_icon {
-	text-align: center;
+/*Column for activity icon*/
+.newsfeed .icon_col {
+	width: 32px;
+	text-align: left;
 	vertical-align: top;
+	padding: 0px;
+}
+
+/*Small activity icon, e.g., for newsfeed*/
+.activity_icon_small {
+	position: relative;
+	max-height: 32px;
+	max-width: 44px;
+	padding: 0px 4px 0px 0px;
+}
+
+.newsfeed .activity_name {
+	text-align: left;
+}
+
+.newsfeed .name {
+	text-align: left;
+}
+
+.newsfeed .no_left_padding {
+	padding-left: 0px;
+}
+
+.newsfeed .date, .newsfeed .duration, .newsfeed .tags {
 }
 
 .newsfeed .last_column {
@@ -602,14 +639,13 @@ table.newsfeed {
 	padding-right: 0px;
 }
 
-.newsfeed .tags {
-	text-align: center;
+.newsfeed .unit {
+	font-weight: 100;
+	font-size: 12px;
 }
 
-.activity_icon_small {
-	position: relative;
-	max-height: 32px;
-	max-width: 44px;
+.highlight {
+	background-color: #f7fdff;
 }
 
 /*Container for featuring interesting stat headline and details*/
@@ -641,7 +677,7 @@ table.newsfeed {
 	color: #25a1d6;
 }
 
-#dashboard .unit {
+#dashboard .title_unit {
 	font-size: 14px;
 	font-weight: 100;
 	color: #25a1d6;	
@@ -649,11 +685,6 @@ table.newsfeed {
 
 #dashboard .comp_number {
 	font-weight: 500;
-}
-
-#dashboard .comp_unit {
-	font-weight: 100;
-	font-size: 12px;
 }
 
 /*Used on activity and dashboard*/
@@ -757,40 +788,39 @@ table.newsfeed {
 
 /*---- Workouts index ----*/
 
-#workouts_left_column {
-	width: 468px;	
+#workouts_list {
+	width: 100%;	
 }
 
-#workouts_right_column {
-	width: 396px;
-	vertical-align: top;	
+#personal_bests {
+	padding-bottom: 12px;
 }
 
-#workouts_stats {
-	padding-bottom: 24px;
-}
-
-#workouts_stats ul {
+#personal_bests ul {
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
 	width: 100%;
 }
 
-#workouts_stats ul li:before {
+#personal_bests ul li:before {
 	content: none;
 }
 
-#workouts_stats li {
+#personal_bests li {
 	float: left;
-	width: 216px;
-	padding: 0px 12px 12px 12px;
+	width: 474px;
+	padding: 0px 0px 12px 0px;
 	display:inline;
 }
 
-#workouts_stats div {
+#personal_bests .even {
+	padding-right: 12px;
+}
+
+#personal_bests div {
 	width: auto;
-	padding:12px;
+	padding:6px 12px 12px 12px;
 	border:1px solid #d9d9d9;
 	font-weight: 100;
 	color: #545454;
@@ -800,20 +830,54 @@ table.newsfeed {
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
-	text-align: center;
+	text-align: left;
+	vertical-align: top;
 }
 
-#workouts_stats .activity_icon_small {
+#personal_bests .activity_headline {
+	padding: 0px;
+	border: none;
+	width: 100%;
+}
+
+.toggle {
+	display: compact;
+	vertical-align: middle;
+	text-align: right;
+	right: 0px;
+}
+
+#personal_bests .activity_icon_small {
 	top: 4px;
 }
 
 .count {
-	font-size: 24px;
+	font-size: 28px;
 	color: #25a1d6;
 	font-weight: 500;
 }
 
-#workouts_stats br {
+#personal_bests .total_time {
+	font-size: 20px;	
+	font-weight: 500;
+}
+
+#personal_bests .bests {
+	padding: 0px;
+	border: none;
+	display: none;
+}
+
+#personal_bests p {
+	font-size: 12px;
+	padding: 6px 0px 0px 0px;
+}
+
+#personal_bests .name {
+	font-size: 14px;
+}
+
+#personal_bests br {
 	clear: left;
 }
 

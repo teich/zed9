@@ -8,9 +8,9 @@
 	<div id="content_left_column" class="left_column">
 
 		<div id="dashboard_stats">
-			<h2>You've logged <span class="your_number"><%= number_to_short_time(@total_time) %></span><span class="unit">h</span> across <span class="your_number"><%= link_to @workouts.size, user_workouts_path(current_user) %></span> workouts</h2>
+			<h2>You've logged <span class="your_number"><%= number_to_short_time(@total_time) %></span><span class="title_unit">h</span> across <span class="your_number"><%= link_to @workouts.size, user_workouts_path(current_user) %></span> workouts</h2>
 			<% if !@atd.nil? && @atd > 0 %>
-			<p class="headline_details">The average user logged <span class="comp_number"><%= h number_to_short_time(@atd) %></span><span class="comp_unit">h</span>. You are <span class="comp_number"><%= h (@total_time/@atd*100).to_i %></span><span class="comp_unit">%</span> vs average!</p>
+			<p class="headline_details">The average user logged <span class="comp_number"><%= h number_to_short_time(@atd) %></span><span class="unit">h</span>. You are <span class="comp_number"><%= h (@total_time/@atd*100).to_i %></span><span class="unit">%</span> vs average!</p>
 			<% end %>
 		</div>
 		
@@ -21,6 +21,7 @@
 			<% end %>
 		</div>
 
+
 	</div>
 
 	<div id="content_right_column" class="right_column">
@@ -30,10 +31,10 @@
 			<table class="newsfeed">
 				<% @shared.each do |sw| %>
 				<tr>
-					<td class="first_column no_right_padding activity_icon"><%= link_to image_tag(sw.activity.root.icon_path, :class => "activity_icon_small"), activity_path(sw.activity) %></td>
-					<td><%= link_to sw.activity.name, activity_path(sw.activity) %></td>
+					<td class="icon_col"><%= link_to image_tag(sw.activity.root.icon_path, :class => "activity_icon_small", :alt => sw.activity.name, :title => sw.activity.name ), activity_path(sw.activity) %></td>
+					<!-- <td class="activity_name"><%= link_to sw.activity.name, activity_path(sw.activity) %></td> -->
 					<td class="name"><%= link_to sw.name, workout_path(sw) %></td>
-					<td><%= h number_to_short_time(sw.duration) %>h</td>
+					<td><%= h number_to_short_time(sw.duration) %><span class="unit">h</span></td>
 					<td class="last_column"> <%= link_to sw.user.display_name, user_workouts_path(sw.user) %></td>
 				</tr>
 			<% end %>
