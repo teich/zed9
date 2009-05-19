@@ -35,7 +35,7 @@
 				<td class="icon_col"><%= link_to image_tag(workout.activity.root.icon_path, :class => "activity_icon_small", :alt => workout.activity.name, :title => workout.activity.name), activity_path(workout.activity) %></td>
 				<td class="name"><%= link_to workout.name, workout %></td>
 				<td class="date"><%=h time_as_date(workout.start_time) %><br></td>
-				<td class="duration"><%=h number_to_short_time(workout.duration) %><span class="unit">h</span></td>
+				<td class="duration"><% if !workout.duration.nil? %><%= h number_to_short_time(workout.duration) %><span class="unit">h</span><% end %><br></td>
 				<td class="distance"><% if !workout.distance_in_miles.nil? %><%=h workout.distance_in_miles %><span class="unit">miles</span><% end %><br></td>
 				<td class="speed"><% if !workout.avg_speed_in_mph.nil? %><%=h workout.avg_speed_in_mph %><span class="unit">mph</span><% end %><br></td>				
 				<td class="elevation"><% if !workout.elevation.nil? %><%=h workout.elevation.round(0).to_i %><span class="unit">ft</span><% end %><br></td>

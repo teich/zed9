@@ -10,14 +10,11 @@ var previousPoint = null;
 // Toggle view of bests on leaderboards
 
 $(document).ready(function() {
-	$('div.bests').hide();  
-	$('div.foo').hover(function() { 
-		$(this).children('div.bests').slideToggle('fast');
-		$(".toggle").attr("src", "/images/open.png");
-	}, 
-	function() { 
-		$(this).children('div.bests').slideToggle('fast');
-		$(".toggle").attr("src", "/images/closed.png");
+	$('div.more').hide();  
+	$('div.leaderboard').click(function() { 
+		// $(this).children('.more').slideToggle('fast');
+		$(this).children('.more').slideToggle('fast');
+		$(this).toggleClass('open');
 	});
 });
 

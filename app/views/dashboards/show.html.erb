@@ -8,7 +8,7 @@
 	<div id="content_left_column" class="left_column">
 
 		<div id="dashboard_stats">
-			<h2>You've logged <span class="your_number"><%= number_to_short_time(@total_time) %></span><span class="title_unit">h</span> across <span class="your_number"><%= link_to @workouts.size, user_workouts_path(current_user) %></span> workouts</h2>
+			<h2>You've logged <span class="your_number"><%= link_to number_to_short_time(@total_time), user_workouts_path(current_user) %></span><span class="title_unit">h</span> across <span class="your_number"><%= link_to @workouts.size, user_workouts_path(current_user) %></span> workouts</h2>
 			<% if !@atd.nil? && @atd > 0 %>
 			<p class="headline_details">The average user logged <span class="comp_number"><%= h number_to_short_time(@atd) %></span><span class="unit">h</span>. You are <span class="comp_number"><%= h (@total_time/@atd*100).to_i %></span><span class="unit">%</span> vs average!</p>
 			<% end %>
@@ -21,26 +21,115 @@
 			<% end %>
 		</div>
 
+		<div id="leaderboards">
+			<h2>Personal bests</h2>
+
+			<% if @farthest.size > 0 %>		
+			<div class="leaderboard">
+				<div class="activity_headline" onMouseOver="show_bests('')" onMouseOut="hide_bests('')">
+					<h3><img src="../images/road.png" class="icon">
+						Farthest: <span class="number_top"><%=h @farthest.first.distance_in_miles %></span><span class="unit">miles</span></h3>
+				</div>
+				<div class="more">
+					<div class="bests">
+						<ol>
+							<% for workout in @farthest %> 
+								<li><span class="number"><%=h workout.distance_in_miles %></span><span class="unit">miles</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<% end %>	
+
+			<br>
+			
+			<% if @fastest.size > 0 %>		
+			<div class="leaderboard">
+				<div class="activity_headline" onMouseOver="show_bests('')" onMouseOut="hide_bests('')">
+					<h3><img src="../images/flag.png" class="icon">
+						Fastest: <span class="number_top"><%=h @fastest.first.avg_speed_in_mph %></span><span class="unit">mph</span></h3>
+				</div>
+				<div class="more">
+					<div class="bests">
+						<ol>
+							<% for workout in @fastest %> 
+								<li><span class="number"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<% end %>	
+
+			<br>
+			
+			<% if @longest.size > 0 %>		
+			<div class="leaderboard">
+				<div class="activity_headline" onMouseOver="show_bests('')" onMouseOut="hide_bests('')">
+					<h3><img src="../images/clock.png" class="icon">
+						Longest: <span class="number_top"><%=h number_to_short_time(@longest.first.duration) %></span><span class="unit">h</span></h3>
+				</div>
+				<div class="more">
+					<div class="bests">
+						<ol>
+							<% for workout in @longest %> 
+								<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<% end %>	
+
+			<br>
+			
+			<% if @climbers.size > 0 %>		
+			<div class="leaderboard">
+				<div class="activity_headline" onMouseOver="show_bests('')" onMouseOut="hide_bests('')">
+					<h3><img src="../images/peaks.png" class="icon">
+						Elevation Gain: <span class="number_top"><%=h @climbers.first.elevation_in_feet %></span><span class="unit">ft</span></h3>
+				</div>
+				<div class="more">
+					<div class="bests">
+						<ol>
+							<% for workout in @climbers %> 
+								<li><span class="number"><%=h workout.elevation_in_feet %></span><span class="unit">ft</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<% end %>	
+
+			<br>
+			
+			<% if @heart_pumping.size > 0 %>		
+			<div class="leaderboard">
+				<div class="activity_headline" onMouseOver="show_bests('')" onMouseOut="hide_bests('')">
+					<h3><img src="../images/heart.png" class="icon">
+						Heart-pumping: <span class="number_top"><%=h @heart_pumping.first.hr %></span><span class="unit">bpm</span></h3>
+				</div>
+				<div class="more">
+					<div class="bests">
+						<ol>
+							<% for workout in @heart_pumping %> 
+								<li><span class="number"><%=h workout.hr %></span><span class="unit">bpm</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<% end %>	
+
+		</div>
 
 	</div>
 
 	<div id="content_right_column" class="right_column">
 
-		<div id="public_newsfeed">
-			<h2>Recent public workouts</h2>
-			<table class="newsfeed">
-				<% @shared.each do |sw| %>
-				<tr>
-					<td class="icon_col"><%= link_to image_tag(sw.activity.root.icon_path, :class => "activity_icon_small", :alt => sw.activity.name, :title => sw.activity.name ), activity_path(sw.activity) %></td>
-					<!-- <td class="activity_name"><%= link_to sw.activity.name, activity_path(sw.activity) %></td> -->
-					<td class="name"><%= link_to sw.name, workout_path(sw) %></td>
-					<td><%= h number_to_short_time(sw.duration) %><span class="unit">h</span></td>
-					<td class="last_column"> <%= link_to sw.user.display_name, user_workouts_path(sw.user) %></td>
-				</tr>
-			<% end %>
-			</table>
-		</div>
-
+		<%= render :partial => "layouts/publicfeed" %>
+		
 	</div>
 
 </div>

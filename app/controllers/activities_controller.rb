@@ -4,11 +4,11 @@ class ActivitiesController < ApplicationController
 	before_filter :find_activity, :only => [:edit, :update, :destroy, :show]
 
 	def show
-		@longest = @activity.workouts.find(:all, :conditions => ['start_time > ?', 7.days.ago], :order => "duration DESC", :limit => 5)
-		@fastest = @activity.workouts.find(:all, :conditions => ['speed > ? AND start_time > ?', 0, 7.days.ago], :order => "speed DESC", :limit => 5)
-		@climbers = @activity.workouts.find(:all, :conditions => ['elevation > ? AND start_time > ?', 0, 7.days.ago], :order => "elevation DESC", :limit => 5)
-		@farthest = @activity.workouts.find(:all, :conditions => ['distance > ? AND start_time > ?', 0, 7.days.ago], :order => "distance DESC", :limit => 5)
-		@heart_pumping = @activity.workouts.find(:all, :conditions => ['hr > ? AND start_time > ?', 0, 7.days.ago], :order => "hr DESC", :limit => 5)
+		@farthest = @activity.workouts.find_all_by_shared(true, :conditions => ['distance > ? AND start_time > ?', 0, 7.days.ago], :order => "distance DESC", :limit => 5)
+		@fastest = @activity.workouts.find_all_by_shared(true, :conditions => ['speed > ? AND start_time > ?', 0, 7.days.ago], :order => "speed DESC", :limit => 5)
+		@longest = @activity.workouts.find_all_by_shared(true, :conditions => ['start_time > ?', 7.days.ago], :order => "duration DESC", :limit => 5)
+		@climbers = @activity.workouts.find_all_by_shared(true, :conditions => ['elevation > ? AND start_time > ?', 0, 7.days.ago], :order => "elevation DESC", :limit => 5)
+		@heart_pumping = @activity.workouts.find_all_by_shared(true, :conditions => ['hr > ? AND start_time > ?', 0, 7.days.ago], :order => "hr DESC", :limit => 5)
 
     # list of most recent public workouts
     @shared = @activity.workouts.find_all_by_shared(true, :limit=>12, :order => "updated_at DESC")

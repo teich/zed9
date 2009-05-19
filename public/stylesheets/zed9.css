@@ -312,16 +312,6 @@ thead, th, td {
 	padding-bottom: 24px;
 }
 
-#external_newsfeed {
-	width: 100%;
-}
-
-#external_newsfeed h2 {
-	font-weight: 100;
-	text-align: left;
-	padding-bottom:12px;
-}
-
 .request_invite {
 	position: relative;
 	top: -1px; /*Position adjustment to align text with left column*/
@@ -568,10 +558,17 @@ thead, th, td {
 	font-weight: 100;
 }
 
-/*---- Workouts index ----*/
+/*---- Newsfeed styling (on marketing pages, dashboard, activities, and workouts index) ----*/
 
-.filtered {
-	padding-top: 0px;
+/*Div containing newsfeed table*/
+#public_newsfeed {
+	width: 100%;
+	padding-bottom: 24px;
+	overflow: hidden;
+}
+
+#public_newsfeed h2 {
+	padding-bottom: 12px;
 }
 
 table.newsfeed {
@@ -645,21 +642,93 @@ table.newsfeed {
 	font-size: 12px;
 }
 
-.highlight {
-	background-color: #f7fdff;
+/*---- Leaderboards ----*/
+
+#leaderboards {
+	padding: 0px 0px 24px 0px;
 }
 
-/*Container for featuring interesting stat headline and details*/
-#headline_news {
-	padding: 8px 0px 8px 0px;
+#leaderboards h2 {
+	padding-bottom: 12px;
+}
+	
+#leaderboards	.display_name {
+	font-weight: 100;
+}
+
+.leaderboard {
+	width: auto;
+	padding: 12px;
+	background: #f0f0f0 url(/images/closed.png) no-repeat 442px 14px;
+	opacity: .9;
+  border: 1px solid #d9d9d9;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	color: #545454;
+	font-weight: 100;
+	font-size: 18px;
+	text-align: left;
+	vertical-align: top;
+}
+
+.leaaderboard .activity_headline {
+	border: none;
+	width: 100%;
+}
+
+.leaderboard h3 {
+	color: #545454;
+	padding: 0px;	
+}
+
+.leaderboard .icon {
+	vertical-align:top; 
+	padding-right: 4px;
+	height: 16px; 
+}
+
+.leaderboard .number_top {
 	font-size: 18px;
 	font-weight: 500;
-	color: #3dc10b;
-	text-align: center;		
 }
 
-.headline_title {
-	font-size: 24px;
+.open {
+	background: #f0f0f0 url(/images/open.png) no-repeat 442px 14px;
+}
+
+.leaderboards .more {
+	display: none;	
+}
+
+.leaderboards .bests {
+	padding: 0px 6px 6px 6px;
+	border: none;
+}
+
+.leaderboard ol {
+	padding: 6px 0px 0px 24px;
+	line-height: 1.2;
+}
+
+.leaderboard li {
+	padding: 6px 0px 0px 7px;
+	font-size: 12px;
+	line-height: 1.4;
+}
+
+.leaderboard .number {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.leaderboard .workout_name {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.leaderboard span.unit {
+	font-size: 12px;
 }
 
 /*---- Dashboard content layout ----*/
@@ -673,6 +742,19 @@ table.newsfeed {
 }
 
 /*---- Dashboard content ----*/
+
+/*Container for featuring interesting stat headline and details*/
+#headline_news {
+	padding: 8px 0px 8px 0px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #3dc10b;
+	text-align: center;		
+}
+
+.headline_title {
+	font-size: 24px;
+}
 
 #dashboard .your_number {
 	color: #25a1d6;
@@ -688,23 +770,22 @@ table.newsfeed {
 	font-weight: 500;
 }
 
-/*Used on activity and dashboard*/
-#public_newsfeed {
-	width: 100%;
-	padding-bottom: 24px;
-}
-
-#public_newsfeed h2 {
+#dashboard h2 {
 	text-align: left;
 	padding-bottom: 12px;
 }
 
-#recent_workouts {
-	height: auto;
+#dashboard_stats {
+	padding-bottom: 24px;
 }
 
-#recent_workouts h2 {
-	padding-top: 36px;
+#dashboard_stats h2, #recent_workouts h2 {
+	padding-bottom: 0px;
+}
+
+#recent_workouts {
+	height: auto;
+	padding: 0px 0px 36px 0px;
 }
 
 #recent_workouts a {
@@ -720,7 +801,7 @@ table.newsfeed {
 	left: -4px;
 	overflow: hidden;
 	width: 468px;
-	height: 244px;
+	height: 196px;
 }
 
 #bar_tooltip {
@@ -747,42 +828,6 @@ table.newsfeed {
 
 /*---- Activity page styles*/
 
-.leaderboard {
-	padding-bottom: 24px;
-}
-
-.leaderboard .border {
-	padding: 12px;
-  border: 1px solid #d9d9d9;
-	background: #f2f9fd;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
-}
-
-.leaderboard p {
-	padding: 0px;
-	color: #545454;	
-}
-
-.leaderboard ol {
-	padding: 8px 0px 0px 22px;
-	line-height: 1.4;
-}
-
-.leaderboard li {
-	padding-bottom: 18px;
-}
-
-.leaderboard span.number {
-	font-size: 18px;
-	font-weight: 500;
-}
-
-.leaderboard span.unit {
-	font-size: 12px;
-}
-
 #tag_cloud {
 	padding: 24px 0px 24px 0px;
 }
@@ -793,95 +838,13 @@ table.newsfeed {
 	width: 100%;	
 }
 
-#personal_bests {
-	padding-bottom: 12px;
+.filtered {
+	padding-top: 0px;
 }
 
-#personal_bests ul {
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
-	width: 100%;
+.highlight {
+	background-color: #f7fdff;
 }
-
-#personal_bests ul li:before {
-	content: none;
-}
-
-#personal_bests li {
-	float: left;
-	width: 474px;
-	padding: 0px 0px 12px 0px;
-	display:inline;
-}
-
-#personal_bests .even {
-	padding-right: 12px;
-}
-
-#personal_bests div {
-	width: auto;
-	padding:6px 12px 12px 12px;
-	border:1px solid #d9d9d9;
-	font-weight: 100;
-	color: #545454;
-	font-size: 18px;
-	background-color: #f0f0f0;
-	opacity: .9;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
-	text-align: left;
-	vertical-align: top;
-}
-
-#personal_bests .activity_headline {
-	padding: 0px;
-	border: none;
-	width: 100%;
-}
-
-.toggle {
-	display: compact;
-	vertical-align: middle;
-	text-align: right;
-	right: 0px;
-}
-
-#personal_bests .activity_icon_small {
-	top: 4px;
-}
-
-.count {
-	font-size: 28px;
-	color: #25a1d6;
-	font-weight: 500;
-}
-
-#personal_bests .total_time {
-	font-size: 20px;	
-	font-weight: 500;
-}
-
-#personal_bests .bests {
-	padding: 0px;
-	border: none;
-	display: none;
-}
-
-#personal_bests p {
-	font-size: 12px;
-	padding: 6px 0px 0px 0px;
-}
-
-#personal_bests .name {
-	font-size: 14px;
-}
-
-#personal_bests br {
-	clear: left;
-}
-
 
 /*---- Add Workout ----*/
 
@@ -924,7 +887,7 @@ table.newsfeed {
 	color: #9f9f9f;
 }
 
-/*---- Workout content layout ----*/
+/*---- Workout layout ----*/
 
 #workout_left_column {
 	text-align: left;
@@ -1113,7 +1076,7 @@ p.comp_activity {
 }
 
 
-/*---- Overlap ----*/
+/*---- Workout Overlap ----*/
 
 #overlap {
 	text-align: left;
