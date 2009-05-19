@@ -7,10 +7,10 @@ class WorkoutsController < ApplicationController
 	before_filter :find_workout, :only => [:edit, :update, :destroy, :merge]
 	before_filter :find_and_bounce, :only => [:show]
 	before_filter :find_user_and_require_shared, :only => [:index]
+	before_filter :upload_if_no_workouts, :only => [:index]
 	
 	def index
 
-		# Personal leaderboards.  
 		# TODO: DRY
 		if my_workouts?
 			if params[:tag]
@@ -18,11 +18,7 @@ class WorkoutsController < ApplicationController
 			else
 				@workouts = @user.workouts.find(:all, :order => "start_time DESC")
 			end
-			@farthest = @user.workouts.find(:all, :conditions => "distance > 0", :order => "distance DESC", :limit => 5)
-			@longest = @user.workouts.find(:all, :order => "duration DESC", :limit => 5)
-			@climbers = @user.workouts.find(:all, :conditions => "elevation > 0", :order => "elevation DESC", :limit => 5)
-			@fastest = @user.workouts.find(:all, :conditions => "speed > 0", :order => "speed DESC", :limit => 5)
-			@heart_pumping = @user.workouts.find(:all, :conditions => "hr > 0", :order => "hr DESC", :limit => 5)
+			  	  
 		else
 			if params[:tag]
 				@workouts = @user.workouts.find_tagged_with(params[:tag])
@@ -30,11 +26,6 @@ class WorkoutsController < ApplicationController
 				@workouts = @user.workouts.find_all_by_shared(true, :order => "start_time DESC")
 			end
 
-			@farthest = @user.workouts.find_all_by_shared(true, :conditions => "distance > 0", :order => "distance DESC", :limit => 5)
-			@longest = @user.workouts.find_all_by_shared(true, :order => "duration DESC", :limit => 5)
-			@climbers = @user.workouts.find_all_by_shared(true, :conditions => "elevation > 0", :order => "elevation DESC", :limit => 5)
-			@fastest = @user.workouts.find_all_by_shared(true, :conditions => "speed > 0", :order => "speed DESC", :limit => 5)
-			@heart_pumping = @user.workouts.find_all_by_shared(true, :conditions => "hr > 0", :order => "hr DESC", :limit => 5)
 		end
 
 		respond_to do |format|
@@ -164,4 +155,9 @@ class WorkoutsController < ApplicationController
 			return false
 		end
 	end
+  
+  def upload_if_no_workouts
+    redirect_to new_user_workout_path(current_user) if current_user.workouts.size == 0 
+  end
+
 end

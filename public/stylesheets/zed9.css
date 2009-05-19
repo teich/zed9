@@ -114,6 +114,11 @@ h1 {
 	padding: 0px;
 }
 
+h1 .by {
+	font-size: 18px;
+	font-weight: 100;
+}
+
 h2 {
 	font-size: 24px;
 	font-weight: 500;
@@ -168,6 +173,19 @@ thead, th, td {
 .unit {
 	font-weight: 100;
 	font-size: 12px;
+}
+
+.usage_tip {
+	background: #f7fdff;
+  border: 1px solid #d9d9d9;
+  padding: 24px;
+	font-size: 18px;
+	font-weight: 100;
+	text-align: left;
+  opacity: .9;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;	
 }
 
 /*---- General use to display columns ----*/
@@ -659,7 +677,7 @@ table.newsfeed {
 .leaderboard {
 	width: auto;
 	padding: 12px;
-	background: #f0f0f0 url(/images/closed.png) no-repeat 442px 14px;
+	background: #f7fdff url(/images/closed.png) no-repeat 442px 14px; /*	light gray #f0f0f0*/
 	opacity: .9;
   border: 1px solid #d9d9d9;
 	-moz-border-radius: 8px;
@@ -694,7 +712,7 @@ table.newsfeed {
 }
 
 .open {
-	background: #f0f0f0 url(/images/open.png) no-repeat 442px 14px;
+	background: #f7fdff url(/images/open.png) no-repeat 442px 14px;
 }
 
 .leaderboards .more {
