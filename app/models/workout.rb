@@ -94,7 +94,7 @@ class Workout < ActiveRecord::Base
 				
 				# TODOL Converting to speed inline right now.  Ick.
 				# Converting to milliseconds for flot
-				[(c*multiplier).to_i, d*2.236936] 
+				[(c*multiplier).to_i, d] 
 			end
 			return vc
 		else
@@ -194,13 +194,13 @@ class Workout < ActiveRecord::Base
 		mycomps["elevation"] = (mc.map {|c| c.elevation}).compact.aaverage
 
 		ac = Workout.find_all_by_activity_id(activity.id)
-		distance = (ac.map {|c| c.distance}).compact.aaverage
-		speed = (ac.map {|c| c.speed}).compact.aaverage
+		distance2 = (ac.map {|c| c.distance}).compact.aaverage
+		speed2 = (ac.map {|c| c.speed}).compact.aaverage
 
 		allcomps["hr"] = (ac.map { |c| c.hr  }).compact.aaverage
 		allcomps["duration"] = (ac.map {|c| c.duration}).compact.aaverage
-		allcomps["distance"]  = distance.round(1) if !distance.nil?
-		allcomps["speed"] = speed.round(1) if !speed.nil?
+		allcomps["distance"]  = distance2.round(1) if !distance2.nil?
+		allcomps["speed"] = speed2.round(1) if !speed2.nil?
 		allcomps["elevation"] = (ac.map {|c| c.elevation}).compact.aaverage
 
 

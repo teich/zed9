@@ -75,7 +75,7 @@
 			<tr class="stat" unit="mph" id="speed">
 				<th class="spark_line_title">Speed</th>
 				<td id="spark_line"><div id="speed" class="sparkline"></div></td>
-				<td class="number spark_line_title"><span class="value"><%= h @workout.avg_speed_in_mph %></span>mph</td>
+				<td class="number spark_line_title"><span class="value"><%= h speed_to_pace(@workout) %></span><%=h units(@workout,:speed) %></td>
 			</tr>
 			<% end -%>
 			

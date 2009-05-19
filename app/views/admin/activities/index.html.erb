@@ -22,7 +22,10 @@
 				<% for icon in @icons %>
 				<option value="<%= icon %>"><%= icon %></option>
 				<% end %>
-			<%= f.submit "Save Icon", :disable_with => 'Submiting...' %>
+			</select>
+			<%= f.label :pace, "Pace" %>
+			<%= f.check_box :pace %>
+			<%= f.submit "Save Icon & Pace", :disable_with => 'Submiting...' %>
 			<% end %>
 			</select>
 			<%= link_to 'Delete', activity, :method => :delete %></td>
@@ -32,12 +35,20 @@
 	<tr>
 		<td>&nbsp;</td>
 		<td><%= child.name %></td>
-		<td><%= link_to 'Delete', child, :method => :delete %></td>
+		<td>&nbsp;</td>
+		<td><%= link_to 'Delete', child, :method => :delete %>
+		<% form_for child do |f| %>
+			<%= f.label :pace, "Pace" %>
+			<%= f.check_box :pace %>
+			<%= f.submit "Save Pace", :disable_with => 'Saveing Pace...' %>
+			<% end %>
+		</td>
 	</tr>
 	<% end %>
 	<% end %>
 </table>
-
+<BR><BR><BR><BR>
+	<h2>Create a new activity:</h2>
 <% form_for @activity do |f| %>
 <%= f.label :name %>
 <%= f.text_field :name %>
