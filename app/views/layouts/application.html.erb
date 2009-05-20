@@ -37,11 +37,11 @@
 
 		</div>
 
-		<div id="flash">
-			<% if flash[:notice] %>
+		<% if flash[:notice] %>
+			<div id="flash">
 				<span class="flash_notice"><%= flash[:notice] %></span>
-			<% end %>
-		</div>
+			</div>
+		<% end %>
 
 		<div id="main">
 			<%= yield  %>

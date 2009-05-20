@@ -11,12 +11,6 @@ var jsURL = document.location.href + ".js";
 var previousPoint = null;
 // END GLOBAL VARIABLES
 
-
-// // Dismissable alert handling
-// 
-// $('#flash').slideUp('medium');
-// 
-
 // Dismiss flash message
 
 $(document).ready(function() {
