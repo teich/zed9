@@ -7,7 +7,7 @@ class WorkoutsController < ApplicationController
 	before_filter :find_workout, :only => [:edit, :update, :destroy, :merge]
 	before_filter :find_and_bounce, :only => [:show]
 	before_filter :find_user_and_require_shared, :only => [:index]
-	after_filter  :check_achievements, :only => [:show]
+	after_filter  :check_achievements
 	
 	def index
 
@@ -169,11 +169,12 @@ class WorkoutsController < ApplicationController
 	
 	def check_achievements
 		achievements = Achievement.find(:all, :conditions => ['controller = ? AND action = ?', params[:controller], params[:action]])
-		logger.debug "\n\n\n\n\n\n Found #{achievements.size} things to look at\n\n\n\n\n\n"
 		achievements.each do |a|
+			logger.debug("\n\n\n\nEvaling #{a.logic}")
 			if eval a.logic 
 				@workout.user.achievements << a
-				logger.debug "\n\n\n\n FOUND ONE BABY!\n\n\n\n "
+				logger.debug("\n\n\n DUMB DUMB \n\n\n")
+				flash[:notice] = "Congratulations!  You've just recieved a new achievement - #{a.name}"
 			end
 		end
 	end
