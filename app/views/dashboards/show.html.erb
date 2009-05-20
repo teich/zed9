@@ -27,7 +27,7 @@
 
 			<% if @farthest.size > 0 %>		
 			<div class="leaderboard">
-				<div class="activity_headline" onMouseOver="show_bests('')" onMouseOut="hide_bests('')">
+				<div class="activity_headline">
 					<h3><img src="../images/road.png" class="icon">
 						Farthest: <span class="number_top"><%=h @farthest.first.distance_in_miles %></span><span class="unit">miles</span></h3>
 				</div>
@@ -47,7 +47,7 @@
 			
 			<% if @fastest.size > 0 %>		
 			<div class="leaderboard">
-				<div class="activity_headline" onMouseOver="show_bests('')" onMouseOut="hide_bests('')">
+				<div class="activity_headline">
 					<h3><img src="../images/flag.png" class="icon">
 						Fastest: <span class="number_top"><%=h @fastest.first.avg_speed_in_mph %></span><span class="unit">mph</span></h3>
 				</div>
@@ -67,7 +67,7 @@
 			
 			<% if @longest.size > 0 %>		
 			<div class="leaderboard">
-				<div class="activity_headline" onMouseOver="show_bests('')" onMouseOut="hide_bests('')">
+				<div class="activity_headline">
 					<h3><img src="../images/clock.png" class="icon">
 						Longest: <span class="number_top"><%=h number_to_short_time(@longest.first.duration) %></span><span class="unit">h</span></h3>
 				</div>
@@ -87,7 +87,7 @@
 			
 			<% if @climbers.size > 0 %>		
 			<div class="leaderboard">
-				<div class="activity_headline" onMouseOver="show_bests('')" onMouseOut="hide_bests('')">
+				<div class="activity_headline">
 					<h3><img src="../images/peaks.png" class="icon">
 						Elevation Gain: <span class="number_top"><%=h @climbers.first.elevation_in_feet %></span><span class="unit">ft</span></h3>
 				</div>
@@ -107,7 +107,7 @@
 			
 			<% if @heart_pumping.size > 0 %>		
 			<div class="leaderboard">
-				<div class="activity_headline" onMouseOver="show_bests('')" onMouseOut="hide_bests('')">
+				<div class="activity_headline">
 					<h3><img src="../images/heart.png" class="icon">
 						Heart-pumping: <span class="number_top"><%=h @heart_pumping.first.hr %></span><span class="unit">bpm</span></h3>
 				</div>

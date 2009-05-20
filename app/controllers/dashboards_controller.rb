@@ -12,7 +12,6 @@ class DashboardsController < ApplicationController
 		@longest = current_user.workouts.find(:all, :conditions => ['duration > ?', 0], :order => "duration DESC", :limit => 5)
 		@climbers = current_user.workouts.find(:all, :conditions => ['elevation > ?', 0], :order => "elevation DESC", :limit => 5)
 		@heart_pumping = current_user.workouts.find(:all, :conditions => ['hr > ?', 0], :order => "hr DESC", :limit => 5)
-		
 
 		durations = @workouts.map { |w| w.duration }
 		if durations.nil?

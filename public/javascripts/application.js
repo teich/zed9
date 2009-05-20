@@ -317,10 +317,10 @@ function draw_dashboard_graph(data) {
 					tip += '</span>' + unit + ' for this workout</p>';
 					tip += '<p class="comp_my_activity"><span class="value">';
 					tip += data2 + '</span>';
-					tip += unit + ' for your ' + workout.activity.name + '</p>';
+					tip += unit + ' for your ' + workout.activity.name.toLowerCase() + '</p>';
 					tip += '<p class="comp_activity"><span class="value">';
 					tip += data3 + '</span>';
-					tip += unit + ' for ZED9 ' + workout.activity.name + '</p></div >';
+					tip += unit + ' for ZED9 ' + workout.activity.name.toLowerCase() + '</p></div >';
 
 					$(this).qtip({
 						content: tip,
