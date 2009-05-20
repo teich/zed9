@@ -2,7 +2,6 @@ ActionController::Routing::Routes.draw do |map|
 
 	map.resource  :user_session
 	map.resource  :dashboard, :only => [:show] 
-	map.resource  :account, :controller => "users"
 	map.resources :activities
 	map.resources :invitations
 
@@ -12,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
 		admin.resources :achievements
 	end
 
-	map.resources :users, :only => [:show], :shallow => true do |user|
+	map.resources :users, :shallow => true do |user|
 		user.resources :workouts do |workout|
 			workout.resources :overlaps, :shallow => false, :only => [:index, :destroy]
 			workout.resources :taggings, :shallow => false, :only => [:destroy, :create]

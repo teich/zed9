@@ -1,5 +1,5 @@
 <div class="content_header">
-	<h1>Profile <span class="action"><%= link_to 'edit', edit_account_path %></span></h1>
+	<h1>Profile <span class="action"><%= link_to 'edit', edit_user_path(current_user) %></span></h1>
 </div>
 
 <div class="content">
@@ -32,5 +32,12 @@
 			<th>Workouts public:</th>
 			<td><%= h @user.shared %></td>
 		</tr>
+		</table>
+		
+		<h2>Achievements!</h2>
+		<% @user.accomplishments.each do |a| %>
+	
+		"<%=h a.achievement.name %>" obtained on <%=h a.created_at %><br>
+		<% end %>
 	</table>
 </div>
