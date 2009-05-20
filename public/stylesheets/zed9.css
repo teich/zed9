@@ -188,6 +188,28 @@ thead, th, td {
 	border-radius: 6px;	
 }
 
+
+/*---- Table Sorter styling ----*/
+
+.sortable th.headerSortUp {
+	background: url(/images/dn.png) no-repeat center right;
+	font-weight: 500;
+	color: #545454;
+	cursor: pointer;
+}
+
+.sortable th.headerSortDown {
+	background: url(/images/up.png) no-repeat center right;
+	font-weight: 500;
+	color: #545454;
+	cursor: pointer;
+}
+
+.sortable th:hover {
+	color: #25a1d6;
+	cursor: pointer;
+}
+
 /*---- General use to display columns ----*/
 
 .left_column {
@@ -426,6 +448,21 @@ thead, th, td {
 	color: #3dc10b;
 	text-align: center;	
 	clear: both;
+}
+
+.flash_notice {
+	background: #fffac2;
+  border: 1px solid #d9d9d9;
+  padding: 24px;
+	font-size: 14px;
+	font-weight: 100;
+	text-align: center;
+  opacity: .9;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 8px;	
+	width: auto;
+	height: auto;
 }
 
 .errorExplanation {

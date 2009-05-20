@@ -11,6 +11,12 @@ var jsURL = document.location.href + ".js";
 var previousPoint = null;
 // END GLOBAL VARIABLES
 
+
+// // Dismissable alert handling
+// 
+// $('#flash').slideUp('medium');
+// 
+
 // Toggle view of bests on leaderboards
 
 $(document).ready(function() {
@@ -31,6 +37,14 @@ $(document).ready(function() {
 		$(this).children().removeClass("highlight");
 	}	);
 });
+
+// Sortable workouts index table
+
+$(document).ready(function() 
+    { 
+        $("#workouts_index").tablesorter( {sortList: [[2,1]]} ); 
+    } 
+);
 
 // Define global graph options
 var options = {
