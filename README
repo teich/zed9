@@ -20,6 +20,7 @@ Install necessary gems:
 	
 Setup S3 credentials:
 	Edit ~/.profile and make sure you have:
+	or leave blank to use local filesystem
 	export S3_BUCKET=YOUR TESTING BUCKET
 	export S3_KEY=YOUR KEY 
 	export S3_SECRET=YOUR SECRET
