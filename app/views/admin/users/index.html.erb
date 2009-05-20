@@ -12,6 +12,7 @@
 				<th class="first_column">User name</th>
 				<th class="centered">Last login</th>
 				<th class="centered">Login count</th>
+				<th class="centered">Workouts</th>
 				<th class="last_column">Email</th>
 			</tr>
 			<% for user in @users %>
@@ -19,6 +20,7 @@
 				<td class="first_column name"><%= h user.login %></td>
 				<td class="centered"><%= h user.last_login_at %></td>
 				<td class="centered"><%= h user.login_count %></td>
+				<td class="centered"><%= h user.workouts.size %></td>
 				<td class="last_column"><%= h user.email %></td>
 			</tr>
 			<% end %>
