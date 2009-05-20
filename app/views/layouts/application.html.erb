@@ -38,7 +38,9 @@
 		</div>
 
 		<div id="flash">
-			<%= flash[:notice] %>
+			<% if flash[:notice] %>
+				<span class="flash_notice"><%= flash[:notice] %></span>
+			<% end %>
 		</div>
 
 		<div id="main">

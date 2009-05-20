@@ -48,6 +48,7 @@ body {
 
 .content_header {
 	display: block;
+	padding-top: 24px;
 	padding-bottom: 24px;
 	text-align: left;
 	clear: both;
@@ -373,96 +374,25 @@ thead, th, td {
 	height: 360px;
 }
 
-/*---- Get Satisfaction Topics Widget*/
-/*
-#gsfn_list_widget img { 
-	border: none; 
-}
-
-#gsfn_list_widget { 
-	font-size: 12px; 
-	width: 280px; 
-  border: 1px solid #d9d9d9;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
-	padding: 12px; 
-	position: absolute;
-	right: 0px;
-	top: 139px;
-}
-
-#gsfn_list_widget a.widget_title { 
-	color: #545454; 
-	display: block; 
-	margin-bottom: 12px; 
-	font-weight: 500;
-	font-size: 18px; 
-}
-
-#gsfn_list_widget .powered_by { 
-	padding-top: 12px; 
-	border-top: 1px solid #d9d9d9; 
-}
-
-#gsfn_list_widget .powered_by a { 
-	color: #9f9f9f; 
-	font-size: 11px; 
-}
-
-#gsfn_list_widget div#gsfn_content { 
-	padding-bottom: 12px;
-}
-
-#gsfn_list_widget div#gsfn_content ul { 
-	margin-left: 0px;
-	padding-left: 0px;
-	list-style: none;
-}
-
-#gsfn_list_widget div#gsfn_content li { 
-	text-align:left; 
-	padding-bottom:6px;
-}
-
-#gsfn_list_widget div#gsfn_content a.gsfn_link { 
-	line-height: 1; 
-}
-
-#gsfn_list_widget div#gsfn_content span.time { 
-	font-size: 11px; 
-	padding-left: 3px; 
-}
-
-#gsfn_list_widget div#gsfn_content p.gsfn_summary { 
-	padding-top: 4px 
-}
-*/
 /*---- Action result messages and alerts ----*/
 
 #flash {
-	padding-top: 12px;
-	padding-bottom: 24px;
-	font-size: 22px;
+	padding-top: 24px;
+/*	padding-bottom: 24px;*/
+	font-size: 18px;
 	font-weight: 500;
-	color: #3dc10b;
-	text-align: center;	
 	clear: both;
 }
 
 .flash_notice {
-	background: #fffac2;
+	background: #ffffd5 url(/images/x.png) no-repeat top right;
   border: 1px solid #d9d9d9;
-  padding: 24px;
-	font-size: 14px;
-	font-weight: 100;
+  padding: 12px 38px 12px 18px;
 	text-align: center;
-  opacity: .9;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
+  opacity: 1;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
 	border-radius: 8px;	
-	width: auto;
-	height: auto;
 }
 
 .errorExplanation {
@@ -643,6 +573,7 @@ table.newsfeed {
 	font-weight: 100;
 	color: #9f9f9f;
 	border: none;
+	padding: 6px 8px;	
 }
 
 .newsfeed .first_column {
@@ -786,6 +717,10 @@ table.newsfeed {
 }
 
 /*---- Dashboard content layout ----*/
+
+#dashboard {
+	padding-top: 36px;
+}
 
 #content_left_column {
 	width: 468px;

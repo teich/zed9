@@ -17,6 +17,14 @@ var previousPoint = null;
 // $('#flash').slideUp('medium');
 // 
 
+// Dismiss flash message
+
+$(document).ready(function() {
+	$('#flash').click(function() { 
+		$(this).slideToggle('medium');
+	});
+});
+
 // Toggle view of bests on leaderboards
 
 $(document).ready(function() {
