@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
 	map.namespace :admin do |admin|
 		admin.resources :users
 		admin.resources :activities
+		admin.resources :achievements
 	end
 
 	map.resources :users, :only => [:show], :shallow => true do |user|
