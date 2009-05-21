@@ -157,7 +157,7 @@ class WorkoutsController < ApplicationController
 	end
   
   def upload_if_no_workouts
-    redirect_to new_user_workout_path(current_user) if current_user.workouts.size == 0 
+    redirect_to new_user_workout_path(current_user) if my_workouts? && current_user.workouts.size == 0 
   end
 
 end
