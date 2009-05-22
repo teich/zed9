@@ -291,7 +291,6 @@ function draw_dashboard_graph(data) {
 			$(".big_visualization").each(function(){ 
 				var graph_data = [];
 				if (this.id == "json_speed_big") {
-					console.log("I'm here, this is good");
 					var temp = workout[this.id];
 					for (var i = 0; i < temp.length; i++) {
 						var x = temp[i][0];
@@ -301,7 +300,6 @@ function draw_dashboard_graph(data) {
 							y = MIN_TO_MILLISEC/y;
 						}
 						graph_data[i] = [x, y];
-						console.log("Stored " + graph_data[i]);
 					}
 				} else {
 					graph_data = workout[this.id];
