@@ -14,7 +14,7 @@
 
 		<% if (params[:tag])%>
 			<p class="filtered">Filtered by: <%= h params[:tag] %>&nbsp;
-			<%= link_to 'x', user_workouts_path(current_user) %> </p>
+			<%= link_to 'x', user_workouts_path(@user) %> </p>
 		<% end %>
 
 		<table id="workouts_index" class="newsfeed sortable">
