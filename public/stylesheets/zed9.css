@@ -717,7 +717,7 @@ table.newsfeed {
 
 /*---- Dashboard content layout ----*/
 
-#dashboard {
+#dashboard, #root {
 	padding-top: 30px;
 }
 
@@ -976,7 +976,8 @@ a.delete-x {
 #workout_stats th {
 	font-size:18px;			
 	text-align: right;
-	padding-left: 12px;
+/*	padding-left: 12px; swap this in when enabling big graph selection*/
+	padding-left: 0px;
 }
 
 #workout_stats td.number {

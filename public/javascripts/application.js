@@ -102,7 +102,7 @@ function id_to_unit(id, pace) {
 }
 
 var full_size_options = {
-	grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 48, markings: axes },
+	grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 36, markings: axes },
 	// crosshair: { mode: "x", color: '#d9d9d9' },
 	colors: ["#25a1d6", "#3dc10b", "#545454"],
 	shadowSize: 1,
