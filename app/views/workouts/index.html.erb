@@ -41,7 +41,7 @@
 					<td class="duration"><% if !workout.duration.nil? %><%= h number_to_short_time(workout.duration) %><span class="unit">h</span><% end %><br></td>
 					<td class="distance"><% if !workout.distance_in_miles.nil? %><%=h workout.distance_in_miles %><span class="unit">miles</span><% end %><br></td>
 					<td class="speed"><% if !workout.avg_speed_in_mph.nil? %><%=h workout.avg_speed_in_mph %><span class="unit">mph</span><% end %><br></td>				
-					<td class="elevation"><% if !workout.elevation.nil? %><%=h workout.elevation.round(0).to_i %><span class="unit">ft</span><% end %><br></td>
+					<td class="elevation"><% if !workout.elevation.nil? %><%=h workout.elevation_in_feet.round(0).to_i %><span class="unit">ft</span><% end %><br></td>
 					<td class="hr"><% if !workout.hr.nil? %><%=h workout.hr %><span class="unit">bpm</span><% end %><br></td>
 					<td class="tags"><% for tag in workout.tag_list %>
 						<%= link_to tag, user_workouts_path(@user, :tag => tag) %>
