@@ -50,29 +50,20 @@ $(document).ready(function() {
 
 $(document).ready(function() 
     { 
-        $("#workouts_index").tablesorter( {sortList: [[2,1]]} ); 
+        $("#workouts_index").tablesorter( {sortList: [[2, 1]]} ); 
     } 
 );
 
-// Define global graph options
-var options = {
-	grid: { borderWidth: 0, tickColor: "white" },
-	xaxis: { ticks: [] },
-	yaxis: { ticks: [] },
-	y2axis: { ticks: [], autoscaleMargin: .2 },
-	colors: ["#25a1d6", "#3dc10b", "#545454"],
-	shadowSize: 1
-};
 
 function hms(secs) {
-	var t = new Date(1970,0,1);
+	var t = new Date(1970, 0, 1);
 	t.setSeconds(secs);
-	return t.toTimeString().substr(0,8);
+	return t.toTimeString().substr(0, 8);
 }
 
 function speed_to_pace(speed) {
 	var pace = 60/speed;
-	var min = parseInt(pace);
+	var min = parseInt(pace, 10);
 	var sec = ((pace % 1) * 60).toFixed(0);
 	if (sec < 10) {
 		sec = "0" + sec;
@@ -84,15 +75,15 @@ function formatted_speed(mps, pace, metric) {
 	// TODO: METRIC CHECKING
 	if (!metric) {
 		speed = mps * MPS_TO_MPH;
-	};
+	}
 
 	if (pace) {
 		return speed_to_pace(speed);
 	} else {
 		return speed.toFixed(1);
-	};
+	}
 
-};
+}
 
 function id_to_unit(id, pace) {
 	var unit = "";
@@ -107,6 +98,39 @@ function id_to_unit(id, pace) {
 	return unit;
 }
 
+
+
+
+// END MAP STUFF
+
+// HELPER FUNCTIONS
+// Define global graph options
+var options = {
+	grid: { borderWidth: 0, tickColor: "white" },
+	xaxis: { ticks: [] },
+	yaxis: { ticks: [] },
+	y2axis: { ticks: [], autoscaleMargin: 0.2 },
+	colors: ["#25a1d6", "#3dc10b", "#545454"],
+	shadowSize: 1
+};
+
+function axes(value) {
+	var markings = [];
+	var y = value.yaxis.min;
+	var x = value.xaxis.min;
+	markings.push({ yaxis: { from: y, to: y }, color: "#d9d9d9", lineWidth: 1 }, { xaxis: { from: x, to: x }, color: "#d9d9d9", lineWidth: 1 } );
+	return markings;
+}
+
+function xAxis(axes) {
+	var markings = [];
+	var y = axes.yaxis.min;
+	markings.push({ yaxis: { from: y, to: y }, color: "#d9d9d9", lineWidth: 1 });
+	return markings;
+}
+
+
+// END HELPER FUNCTIONS
 var full_size_options = {
 	grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 48, markings: axes },
 	// crosshair: { mode: "x", color: '#d9d9d9' },
@@ -128,30 +152,10 @@ var tooltip_style = {
 		radius: 8,
 		color: '#f0f0f0' 
 	}
-}
-// END GRAPH OPTIONS
+};
 
 
-// END MAP STUFF
 
-// HELPER FUNCTIONS
-function axes(axes) {
-	var markings = [];
-	var y = axes.yaxis.min;
-	var x = axes.xaxis.min;
-	markings.push({ yaxis: { from: y, to: y }, color: "#d9d9d9", lineWidth: 1 }, { xaxis: { from: x, to: x }, color: "#d9d9d9", lineWidth: 1 } );
-	return markings;
-}
-
-function xAxis(axes) {
-	var markings = [];
-	var y = axes.yaxis.min;
-	markings.push({ yaxis: { from: y, to: y }, color: "#d9d9d9", lineWidth: 1 });
-	return markings;
-}
-
-
-// END HELPER FUNCTIONS
 
 // Pass in a JSON object, and draw based on that data.
 function draw_dashboard_graph(data) {
@@ -165,9 +169,9 @@ function draw_dashboard_graph(data) {
 				var x = item.datapoint[0].toFixed(0);
 				var y = item.datapoint[1].toFixed(0);
 				var d = new Date(data[x].workout.json_date * 1000);
-				var m_names = new Array("", "January", "February", "March",
+				var m_names = ["", "January", "February", "March",
 				"April", "May", "June", "July", "August", "September",
-				"October", "November", "December");
+				"October", "November", "December"];
 				var display_date = m_names[d.getMonth() + 1] + " " + d.getDate() + ", " + d.getFullYear();
 				var name = data[x].workout.name;
 				var activity_name = data[x].workout.activity_name;
@@ -209,7 +213,7 @@ function draw_dashboard_graph(data) {
 
 		$.plot($('#recent_workouts_chart'), [{
 			data: duration,
-			bars: { show: true, barWidth: .9, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } }
+			bars: { show: true, barWidth: 0.9, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } }
 			}], dashboard_options
 		);
 
@@ -244,7 +248,7 @@ function draw_dashboard_graph(data) {
 					previousPoint = null;            
 				}
 			}
-			var workout = data.workout
+			var workout = data.workout;
 			var all_comps = workout.json_comps.all_comps;
 			var my_comps = workout.json_comps.my_comps;
 
@@ -272,7 +276,7 @@ function draw_dashboard_graph(data) {
 				{ data: [[22, workout[this.id]]], yaxis: 2, bars: end_bar_options },
 				{ data: [[24, my_comps[this.id]]], yaxis: 2, bars: end_bar_options },
 				{ data: [[26, all_comps[this.id]]], yaxis: 2, bars: end_bar_options }
-				], options)
+				], options);
 			});
 
 			$(".sparkbar").each(function(i) {
@@ -282,8 +286,8 @@ function draw_dashboard_graph(data) {
 				other_bar_options.barWidth = 0.2;
 
 				$.plot($(this), [
-				{ data: [[workout[this.id], .8]], bars: first_bar_options },
-				{ data: [[my_comps[this.id], .4]], bars: other_bar_options },
+				{ data: [[workout[this.id], 0.8]], bars: first_bar_options },
+				{ data: [[my_comps[this.id], 0.4]], bars: other_bar_options },
 				{ data: [[all_comps[this.id], 0.0]], bars: other_bar_options }
 				], sparkbar_options);
 			});
@@ -315,21 +319,22 @@ function draw_dashboard_graph(data) {
 
 				$(".stat").each(function() {
 					var tip = '<div class="stat">';
+					var unit = 0;
 					if (this.id == "duration") {
 						data1 = hms(workout[this.id]);
 						data2 = hms(my_comps[this.id]);
 						data3 = hms(all_comps[this.id]);
-						var unit = id_to_unit(this.id);
+						unit = id_to_unit(this.id);
 					} else if (this.id == 'speed') {
 						data1 = formatted_speed(workout[this.id], workout.activity.pace, false);
 						data2 = formatted_speed(my_comps[this.id], workout.activity.pace, false);
 						data3 = formatted_speed(all_comps[this.id], workout.activity.pace, false);
-						var unit = id_to_unit(this.id, workout.activity.pace);
+						unit = id_to_unit(this.id, workout.activity.pace);
 					} else {
 						data1 = workout[this.id].toFixed(1);
 						data2 = my_comps[this.id].toFixed(1);
 						data3 = all_comps[this.id].toFixed(1);
-						var unit = id_to_unit(this.id);
+						unit = id_to_unit(this.id);
 					}
 
 					tip += '<p class="comp_this_workout"><span class="value">';
