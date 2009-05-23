@@ -409,7 +409,7 @@ thead, th, td {
 	position: fixed;
 	top: 16px;
 	right: 60px;
-	width: 240px;
+	width: 280px;
 	z-index: 9999;
 }
 
@@ -425,8 +425,9 @@ thead, th, td {
 	-webkit-border-radius: 8px;
 	border-radius: 8px;
 	color: white;
-	padding: 12px;
+	padding: 12px 12px 12px 48px;
 	font-size: 14px;
+	text-align: left;
 	font-weight: 300;
 	display: block;
 	position: relative;
@@ -436,19 +437,21 @@ thead, th, td {
 
 .alert {
 	display: none;
-	background: red;	
+	background: #333 url(/images/alert_icon.png) no-repeat 6px center;	
 }
 
 .warning {
 	display: none;	
-	background: orange;	
+	background: #333 url(/images/warning_icon.png) no-repeat 6px center;	
 }
 
+/*Positive*/
 .notice {
 	display: none;
 }
 
-.info {
+/*Neutral*/
+.message {
 	display: none;
 }
 
@@ -456,13 +459,18 @@ thead, th, td {
 	position: absolute;
 	float: right;
 	font-size: 10px;
-	padding: 2px 6px 0px 0px;
+	top: 2px;
+	right: 6px;
 	color: #9f9f9f;
 	cursor: pointer;
 	width: 100%;
 	height: 100%;
 	text-align: right;
 	vertical-align: top;
+}
+
+.notice-item-close:hover {
+	color: white;
 }
 
 /*---- General use form styles ----*/
