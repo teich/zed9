@@ -164,7 +164,8 @@ class Workout < ActiveRecord::Base
 	end
 
 	def number_to_short_time(seconds)
-		Time.at(seconds).utc.strftime("%H:%M:%S")
+		return "0:00:00 " if seconds.nil?
+	Time.at(seconds).utc.strftime("%H:%M:%S")
 	end
 
 	def distance_in_miles

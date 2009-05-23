@@ -1,0 +1,21 @@
+<table>
+<% form_for achievement, :url => admin_achievement_path(achievement) do |f| %>
+<tr>
+	<td><%= f.label :name, "Name" %>
+	    <%= f.text_field :name %><BR>
+		
+		<%= f.label :description, "Description" %>
+	    <%= f.text_field :description %><BR>
+				
+		<%= f.label :controller, "Controller" %>
+	    <%= f.text_field :controller %><BR>
+
+		<%= f.label :action, "Action" %>
+		<%= f.text_field :action %></td>
+	<td><%= f.label :logic, "Logic" %></td>
+	<td><%= f.text_area :logic %></td><td>	<%= f.submit "Submit", :disable_with => 'Submiting...' %>  <%= link_to 'Delete', admin_achievement_path(achievement), :method => :delete %></td>
+	</td>
+
+</tr>
+<% end %>
+</table>

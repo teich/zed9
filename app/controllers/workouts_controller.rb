@@ -8,6 +8,7 @@ class WorkoutsController < ApplicationController
 	before_filter :find_and_bounce, :only => [:show]
 	before_filter :find_user_and_require_shared, :only => [:index]
 	before_filter :upload_if_no_workouts, :only => [:index]
+	after_filter  :check_achievements
 	
 	def index
 
@@ -48,6 +49,7 @@ class WorkoutsController < ApplicationController
 
 	def new
 		@workout = current_user.workouts.build
+		@workout.activity = Activity.find_by_name("Uncategorized")
 
 		# Set the workout shared state to the user default
 		@workout.shared = current_user.shared
@@ -59,19 +61,19 @@ class WorkoutsController < ApplicationController
 	end
 
 	def create
-			@workout = current_user.workouts.create(params[:workout])
+			@workout = current_user.workouts.create!(params[:workout])
 			if @workout.devices.first.nil?
 				@workout.destroy
 				flash[:notice] = "Select a file to upload"
 				redirect_to :action => "new", :device_type => params[:device_type]
 			else
-				uploaded_data = ensure_string(@workout.devices.first.source.to_file.data)
+				# This line may need to be changed for S3...
+				uploaded_data = ensure_string(@workout.devices.first.source.to_file)
 		
 				importer = Importer::Garmin.new(:data => uploaded_data) if params[:device_type] == "garmin"
 				importer = Importer::Polar.new(:data => uploaded_data, :time_zone => current_user.time_zone) if params[:device_type] == "polar"
 				importer = Importer::Suunto.new(:data => uploaded_data, :time_zone => current_user.time_zone) if params[:device_type] == "suunto"
 				importer = Importer::GPX.new(:data => uploaded_data) if params[:device_type] == "gpx"
-
 
 				iw = importer.restore
 				@workout.build_from_imported!(iw)
@@ -128,7 +130,7 @@ class WorkoutsController < ApplicationController
 	end
 
 	def ensure_string(uploaded_file)
-		(uploaded_file.is_a?(String)) ? uploaded_file : uploaded_file.read
+		uploaded_file.is_a?(String) ? uploaded_file : uploaded_file.read
 	end
 
 	def find_user_and_require_shared
@@ -160,4 +162,14 @@ class WorkoutsController < ApplicationController
     redirect_to new_user_workout_path(current_user) if my_workouts? && current_user.workouts.size == 0 
   end
 
+	
+	def check_achievements
+		achievements = Achievement.find(:all, :conditions => ['controller = ? AND action = ?', params[:controller], params[:action]])
+		achievements.each do |a|
+			if eval a.logic and !@workout.user.awarded?(a)
+				@workout.user.award(a)
+				flash[:notice] << "Congratulations!  You've just recieved a new achievement - #{a.name}"
+			end
+		end
+	end
 end
