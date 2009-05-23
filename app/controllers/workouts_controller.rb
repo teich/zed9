@@ -128,9 +128,17 @@ class WorkoutsController < ApplicationController
 		end
 	end
 
-	def ensure_string(uploaded_file)
-		uploaded_file.is_a?(String) ? uploaded_file : uploaded_file.read
-	end
+  	def ensure_string(uploaded_file)
+  	  logger.debug "\n\n\n\n\nTHIS FILE IS A #{uploaded_file.class}\n\n\n\n\n"
+  		if uploaded_file.is_a?(String) 
+  		  return uploaded_file
+  	  elsif uploaded_file.is_a?(File)
+  		  return uploaded_file.read
+		  elsif uploaded_file.is_a?(RightAws::S3::Key)
+		    return uploaded_file.data
+  	  end
+  	end
+
 
 	def find_user_and_require_shared
 		@user = User.find_by_login(params[:user_id])
