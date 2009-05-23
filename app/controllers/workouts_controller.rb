@@ -1,7 +1,7 @@
 require 'hpricot'
 
 class WorkoutsController < ApplicationController
-	helper_method :my_workout?, :my_workouts?
+	helper_method :my_page?
 	before_filter :require_user, :except => [:show, :index]
 
 	before_filter :find_workout, :only => [:edit, :update, :destroy, :merge]
@@ -13,7 +13,7 @@ class WorkoutsController < ApplicationController
 	def index
 
 		# TODO: DRY
-		if my_workouts?
+		if my_page?
 			if params[:tag]
 				@workouts = @user.workouts.find_tagged_with(params[:tag])
 			else
@@ -142,24 +142,24 @@ class WorkoutsController < ApplicationController
 		end
 	end
 
-	def my_workout?
+	def my_page?
 		if logged_in? 
-			return (@workout.user_id == current_user.id)
+			return (@user == current_user)
 		else 
 			return false
 		end
 	end
 
-	def my_workouts?
-		if logged_in?
-			return @user == current_user
-		else
-			return false
-		end
-	end
+  # def my_workouts?
+  #   if logged_in?
+  #     return @user == current_user
+  #   else
+  #     return false
+  #   end
+  # end
   
   def upload_if_no_workouts
-    redirect_to new_user_workout_path(current_user) if my_workouts? && current_user.workouts.size == 0 
+    redirect_to new_user_workout_path(current_user) if my_page? && current_user.workouts.size == 0 
   end
 
 	
