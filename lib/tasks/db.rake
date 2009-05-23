@@ -1,14 +1,20 @@
 namespace :db do
-  desc "This loads the development data."
-  task :seed => :environment do
-    require 'active_record/fixtures'
-    Dir.glob(RAILS_ROOT + '/db/fixtures/*.yml').each do |file|
-      base_name = File.basename(file, '.*')
-      print "Loading #{base_name}..."
-      Fixtures.create_fixtures('db/fixtures', base_name)
-    end
-  end
+  # desc "This loads the development data."
+  # task :seed => :environment do
+  #   require 'active_record/fixtures'
+  #   Dir.glob(RAILS_ROOT + '/db/fixtures/*.yml').each do |file|
+  #     base_name = File.basename(file, '.*')
+  #     print "Loading #{base_name}..."
+  #     Fixtures.create_fixtures('db/fixtures', base_name)
+  #   end
+  # end
 
+  desc 'Load the seed data from db/seeds.rb'
+  task :seed => :environment do
+    seed_file = File.join(Rails.root, 'db', 'seeds.rb')
+    load(seed_file) if File.exist?(seed_file)
+  end
+  
   desc "Purges the tables of a postgres DB" 
   task :purge do
     load 'config/environment.rb'

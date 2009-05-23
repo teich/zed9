@@ -3,24 +3,3 @@
 uncategorized:
     id: 0
     name: Uncategorized
-    
-street_running:
-  name: Street Running
-  
-track_running:
-    name: Track Running
-    
-trail_running:
-    name: Trail Running
-    
-treadmill_running:
-    name: Treadmill
-    
-road_biking:
-    name: Road Biking
-
-p90x:
-    name: P90X
-    
-hiking:
-    name: Hiking
