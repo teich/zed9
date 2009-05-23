@@ -354,4 +354,23 @@ function workout_page_graphs(data) {
 				$(this).children().removeClass("highlight");
 			});
 
+			// Notices
+			$('.sticky').each(function() {
+				jQuery.noticeAdd({
+					text: $(this).find('div.notice').html(),
+					stay: true
+				});
+			});
+
+			$('.timed').each(function() {
+				jQuery.noticeAdd({
+					text: $(".notice").html(),
+					stay: false
+				});
+			});
+
+			$('.notice').click(function() {
+				jQuery.noticeRemove($('.notice-item-wrapper'), 600);
+			});
+		
 		});
