@@ -65,7 +65,6 @@ class WorkoutsController < ApplicationController
 			if @workout.devices.first.nil?
 				@workout.destroy
 				add_flash(:alert, "Please select a file to upload")
-				add_flash(:alert, "Testing an alert")
 				redirect_to :action => "new", :device_type => params[:device_type]
 			else
 				# This line may need to be changed for S3...
@@ -90,7 +89,7 @@ class WorkoutsController < ApplicationController
 						redirect_to @workout
 					end
 				else
-					add_flash(:notice, "Unable to save workout for some lame reason.")
+					add_flash(:alert, "Unable to save workout for some lame reason")
 					render :action => "new"
 				end
 			end
@@ -99,7 +98,7 @@ class WorkoutsController < ApplicationController
 
 	def update
 		if @workout.update_attributes(params[:workout])
-			add_flash(:notice, 'Workout updated.')
+			add_flash(:notice, 'Workout updated')
 			redirect_to @workout
 		else
 			render :action => "edit"
@@ -125,7 +124,7 @@ class WorkoutsController < ApplicationController
 		@workout = Workout.find(params[:id])
 
 		if (!@workout.shared && !current_user.nil? && (@workout.user_id != current_user.id))
-			add_flash(:notice, "This workout is private")
+			add_flash(:alert, "This workout is private")
 			redirect_to root_path 
 		end
 	end
@@ -138,7 +137,7 @@ class WorkoutsController < ApplicationController
 		@user = User.find_by_login(params[:user_id])
 
 		if !(!current_user.nil? && current_user.id == @user.id) && !@user.shared
-		  add_flash(:notice, "This page is private")
+		  add_flash(:alert, "This page is private")
 			redirect_to root_path
 		end
 	end
@@ -169,7 +168,7 @@ class WorkoutsController < ApplicationController
 		achievements.each do |a|
 			if eval a.logic and !@workout.user.awarded?(a)
 				@workout.user.award(a)
-				add_flash(:notice, "Congratulations!  You've just recieved a new achievement - #{a.name}")
+				add_flash(:achievement, "You've earned a new achievement: #{a.name}")
 			end
 		end
 	end
