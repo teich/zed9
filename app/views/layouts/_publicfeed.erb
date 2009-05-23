@@ -6,8 +6,8 @@
 			<td class="icon_col"><%= link_to image_tag(sw.activity.root.icon_path, :class => "activity_icon_small", :alt => sw.activity.name, :title => sw.activity.name ), activity_path(sw.activity) %></td>
 			<!-- <td class="activity_name"><%= link_to sw.activity.name, activity_path(sw.activity) %></td> -->
 			<td class="name"><%= link_to sw.name, workout_path(sw) %></td>
-			<td><%= h number_to_short_time(sw.duration) %><span class="unit">h</span></td>
-			<td class="last_column"> <%= link_to sw.user.display_name, user_workouts_path(sw.user) %></td>
+			<td class="no_wrap"><%= h number_to_short_time(sw.duration) %><span class="unit">h</span></td>
+			<td class="last_column no_wrap"> <%= link_to sw.user.display_name, user_workouts_path(sw.user) %></td>
 		</tr>
 	<% end %>
 	</table>
