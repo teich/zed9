@@ -355,22 +355,12 @@ function workout_page_graphs(data) {
 			});
 
 			// Notices
-			$('.sticky').each(function() {
+			$('.notice').each(function() {
 				jQuery.noticeAdd({
-					text: $(this).find('div.notice').html(),
-					stay: true
+					text: $(this).append().html(),
+					stay: $(this).attr("sticky"),
+					type: $(this).attr("type")
 				});
 			});
 
-			$('.timed').each(function() {
-				jQuery.noticeAdd({
-					text: $(".notice").html(),
-					stay: false
-				});
-			});
-
-			$('.notice').click(function() {
-				jQuery.noticeRemove($('.notice-item-wrapper'), 600);
-			});
-		
 		});

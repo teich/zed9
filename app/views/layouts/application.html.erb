@@ -40,29 +40,35 @@
 		<!-- Flash notices -->
 
 		<% if flash[:alert] %>
-		<% for f in flash[:alert] do %>
-			<div class="sticky notice">
-				<%=h f %>
-			</div>
-		<% end %>
+			<% for f in flash[:alert] do %>
+				<div class="notice" sticky="true" type="alert">
+					<%=h f %>
+				</div>
+			<% end %>
 		<% end %>
 
 		<% if flash[:warning] %>
-			<div class="sticky notice">
-				<%= flash[:warning] %>
-			</div>
+			<% for f in flash[:warning] do %>
+				<div class="fixed notice warning">
+					<%= h f %>
+				</div>
+			<% end %>
 		<% end %>
 
 		<% if flash[:notice] %>
+			<% for f in flash[:notice] do %>
 			<div class="timed notice">
-				<%= flash[:notice] %>
+				<%= h f %>
 			</div>
+			<% end %>
 		<% end %>
-
+		
 		<% if flash[:info] %>
-			<div class="timed notice">
-				<%= flash[:info] %>
+			<% for f in flash[:info] do %>
+			<div class="timed notice info">
+				<%= h f %>
 			</div>
+			<% end %>
 		<% end %>
 
 		<!-- End flash notices -->

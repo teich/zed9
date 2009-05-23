@@ -405,11 +405,6 @@ thead, th, td {
 
 /* jQuery Growl-typ notice styles*/
 
-.notice {
-	display: none;
-	cursor: pointer;
-}
-
 .notice-wrap {
 	position: fixed;
 	top: 16px;
@@ -436,15 +431,38 @@ thead, th, td {
 	display: block;
 	position: relative;
 	margin: 0 0 12px 0;
+	cursor: pointer;
+}
+
+.alert {
+	display: none;
+	background: red;	
+}
+
+.warning {
+	display: none;	
+	background: orange;	
+}
+
+.notice {
+	display: none;
+}
+
+.info {
+	display: none;
 }
 
 .notice-item-close {
 	position: absolute;
+	float: right;
 	font-size: 10px;
-	top: 2px;
-	right: 6px;
+	padding: 2px 6px 0px 0px;
 	color: #9f9f9f;
 	cursor: pointer;
+	width: 100%;
+	height: 100%;
+	text-align: right;
+	vertical-align: top;
 }
 
 /*---- General use form styles ----*/
