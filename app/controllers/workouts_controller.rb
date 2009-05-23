@@ -1,7 +1,6 @@
 require 'hpricot'
 
 class WorkoutsController < ApplicationController
-	helper_method :my_page?
 	before_filter :require_user, :except => [:show, :index]
 
 	before_filter :find_workout, :only => [:edit, :update, :destroy, :merge]
@@ -139,14 +138,6 @@ class WorkoutsController < ApplicationController
 		if !(!current_user.nil? && current_user.id == @user.id) && !@user.shared
 		  add_flash(:alert, "This page is private")
 			redirect_to root_path
-		end
-	end
-
-	def my_page?
-		if logged_in? 
-			return (@user == current_user)
-		else 
-			return false
 		end
 	end
 

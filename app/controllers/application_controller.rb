@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
 	include ArrayMath
 
 	filter_parameter_logging :password, :password_confirmation
-	helper_method :current_user_session, :current_user
+	helper_method :current_user_session, :current_user, :my_page?
+	
 
 	before_filter :create_user_session
 	before_filter :set_user_time_zone
@@ -56,6 +57,14 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	def my_page?
+		if logged_in? 
+			return (@user == current_user)
+		else 
+			return false
+		end
+	end
+	
 	def store_location
 		session[:return_to] = request.request_uri
 	end
