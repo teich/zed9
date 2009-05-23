@@ -10,14 +10,10 @@ class User < ActiveRecord::Base
 
 	belongs_to :invitation  
 	has_many :accomplishments
-	has_many :achievements, :through => :accomplishments, :uniq => true
+	has_many :achievements, :through => :accomplishments, :uniq => true, :dependent => :destroy
 	has_many :hr_zones, :dependent => :destroy
 	has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
-	has_many :workouts, :dependent => :destroy do
-		def by_activity(activity_id)
-			find :all, :conditions => ['activity_id = ?', activity_id]
-		end
-	end
+	has_many :workouts, :dependent => :destroy
 
 	before_create :set_invitation_limit
 
@@ -51,12 +47,23 @@ class User < ActiveRecord::Base
 			return displayname
 		end
 	end
+	
+	def award(achievement)
+     achievements << achievement
+  end
+   
+	def awarded?(achievement)
+	  self.achievements.count(:conditions => { :id => achievement.id }) > 0
+  end
+	
 	private
 
 	# How many invitations does a user get?
 	def set_invitation_limit
 		self.invitation_limit = 10
 	end
+	
+
 
 
 end

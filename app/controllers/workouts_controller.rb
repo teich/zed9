@@ -170,11 +170,9 @@ class WorkoutsController < ApplicationController
 	def check_achievements
 		achievements = Achievement.find(:all, :conditions => ['controller = ? AND action = ?', params[:controller], params[:action]])
 		achievements.each do |a|
-			logger.debug("\n\n\n\nEvaling #{a.logic}")
-			if eval a.logic 
-				@workout.user.achievements << a
-				logger.debug("\n\n\n DUMB DUMB \n\n\n")
-				flash[:notice] = "Congratulations!  You've just recieved a new achievement - #{a.name}"
+			if eval a.logic and !@workout.user.awarded?(a)
+				@workout.user.award(a)
+				flash[:notice] << "Congratulations!  You've just recieved a new achievement - #{a.name}"
 			end
 		end
 	end

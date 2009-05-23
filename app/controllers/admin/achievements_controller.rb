@@ -1,9 +1,13 @@
 class Admin::AchievementsController < ApplicationController
+  before_filter :require_admin
 	before_filter :find_achievements, :only => [:update, :edit, :show, :destroy]
 	
 	def index
 		@achievements = Achievement.find(:all)
 	end
+	
+	def edit
+  end
 	
 	def create
 		@achievement = Achievement.new(params[:achievement])
@@ -22,6 +26,10 @@ class Admin::AchievementsController < ApplicationController
 			render :action => "edit"
 		end	
 	end
+	
+	def new
+	  @achievement = Achievement.create
+  end
 	
 	def destroy
 		@achievement.destroy

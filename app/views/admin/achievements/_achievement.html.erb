@@ -1,0 +1,8 @@
+<tr>
+	<td><%=h achievement.name %></td>
+	<td><%=h achievement.controller %></td>
+	<td><%=h achievement.action %></td>
+	<td> <%=h achievement.logic %></td>
+	
+	<td> <%= link_to 'Delete', admin_achievement_path(achievement), :method => :delete %> | <%= link_to 'Edit', edit_admin_achievement_path(achievement) %></td>
+</tr>
