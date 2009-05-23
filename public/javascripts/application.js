@@ -93,7 +93,7 @@ var full_size_options = {
 };
 
 var tooltip_style = {
-	width: 264,
+	width: 336,
 	padding: 4,
 	background: '#f0f0f0',
 	color: '#545454',
@@ -294,10 +294,10 @@ function workout_page_graphs(data) {
 				tip += '</span>' + unit + ' for this workout</p>';
 				tip += '<p class="comp_my_activity"><span class="value">';
 				tip += data2 + '</span>';
-				tip += unit + ' for your ' + workout.activity.name.toLowerCase() + '</p>';
+				tip += unit + ' average for your ' + workout.activity.name.toLowerCase() + '</p>';
 				tip += '<p class="comp_activity"><span class="value">';
 				tip += data3 + '</span>';
-				tip += unit + ' for ZED9 ' + workout.activity.name.toLowerCase() + '</p></div >';
+				tip += unit + ' average for ZED9 ' + workout.activity.name.toLowerCase() + '</p></div >';
 
 				$(this).qtip({
 					content: tip,
