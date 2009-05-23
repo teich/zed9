@@ -435,9 +435,14 @@ thead, th, td {
 	cursor: pointer;
 }
 
+.notice {
+	display: none;
+	padding: 12px;
+}
+
 .alert {
 	display: none;
-	background: #333 url(/images/alert_icon.png) no-repeat 6px center;	
+	background: #333 url(/images/error_icon.png) no-repeat 6px center;	
 }
 
 .warning {
@@ -445,14 +450,14 @@ thead, th, td {
 	background: #333 url(/images/warning_icon.png) no-repeat 6px center;	
 }
 
-/*Positive*/
-.notice {
-	display: none;
+.achievement {
+	display: none;	
+	background: #333 url(/images/achievement_icon.png) no-repeat 6px center;	
 }
 
-/*Neutral*/
-.message {
+.info {
 	display: none;
+	background: #333 url(/images/info_icon.png) no-repeat 6px center;	
 }
 
 .notice-item-close {

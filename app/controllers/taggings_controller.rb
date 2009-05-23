@@ -4,14 +4,14 @@ class TaggingsController < ApplicationController
 	def destroy
 		tag = @workout.taggings.find(:first, :conditions => "tag_id = #{params[:id]}")
 		tag.destroy
-		flash[:notice] = 'Destroyed keyword.  Mwuhahaha.'
+		add_flash(:warning, 'Destroyed keyword. Mwahahaha.')
 		redirect_to @workout
 	end
 
 	def create
 		@workout.tag_list << params[:name]
 		@workout.save
-		flash[:notice] = "Added tag: #{params[:name]}"
+		add_flash(:notice, "Added tag #{params[:name]}")
 		redirect_to @workout
 	end
 

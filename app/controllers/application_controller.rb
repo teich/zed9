@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
 	def require_user
 		unless current_user
 			store_location
-			flash[:notice] = "You must be logged in to access this page"
+			add_flash(:alert, "You must be logged in to access this page")
 			redirect_to new_user_session_url
 			return false
 		end
@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
 	def require_no_user
 		if current_user
 			store_location
-			flash[:notice] = "You must be logged out to access this page"
+			add_flash(:alert, "You must be logged out to access this page")
 			redirect_to root_url
 			return false
 		end
@@ -73,14 +73,14 @@ class ApplicationController < ActionController::Base
 
 	def require_admin
 		unless current_user && current_user.admin_user?
-			flash[:notice]= "You don't have permission to view this page"
+			add_flash(:alert, "You don't have permission to view this page")
 			redirect_to root_url
 			return false
 		end
 	end
 	
 	def record_not_found
-		flash[:notice] = "Sorry, that page wasn't found. It may have moved or been deleted."
+		add_flash(:alert, "Sorry, that page cannot be found. It may have been deleted or made private."
 		redirect_to root_path
 	end
 	

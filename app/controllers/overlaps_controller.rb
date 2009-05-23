@@ -31,7 +31,7 @@ class OverlapsController < ApplicationController
 		@workout.devices += dup.devices
 
 		@workout.save && dup.destroy
-		flash[:notice] = 'Workouts successfully merged'
+		add_flash(:notice, 'Workouts successfully merged')
 		redirect_to @workout
 
 	end

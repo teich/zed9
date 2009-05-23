@@ -355,11 +355,20 @@ function workout_page_graphs(data) {
 			});
 
 			// Notices
-			$('.notice').each(function() {
+			$('.timed').each(function() {
 				jQuery.noticeAdd({
 					text: $(this).append().html(),
-					stay: $(this).attr("sticky"),
-					type: $(this).attr("type")
+					stay: false,
+					type: $(this).attr("type"),
+					stayTime: 5000
+				});
+			});
+
+			$('.sticky').each(function() {
+				jQuery.noticeAdd({
+					text: $(this).append().html(),
+					stay: true,
+					type: $(this).attr("type"),
 				});
 			});
 

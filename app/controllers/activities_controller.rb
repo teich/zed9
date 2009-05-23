@@ -26,7 +26,7 @@ class ActivitiesController < ApplicationController
 		@activity = Activity.new(params[:activity])
 		logger.debug(" #{params[:activity]}")
 		if @activity.save
-		  flash[:notice] = "Created new activity #{params[:activity][:name]}"
+		  add_flash(:notice, "Created new activity #{params[:activity][:name]}")
 			redirect_to admin_activities_path
 		else
 			render :action => :new
@@ -35,7 +35,7 @@ class ActivitiesController < ApplicationController
 
 	def update
 		if @activity.update_attributes(params[:activity])
-			flash[:notice] = 'Activity updated.'
+			add_flash(:notice, 'Activity updated')
 			redirect_to admin_activities_path
 		else
 			render :action => "edit"
@@ -44,7 +44,7 @@ class ActivitiesController < ApplicationController
 
 	def destroy
 		@activity.destroy
-		flash[:notice] = 'Destroyed activity.  Mwahahaha.'
+		add_flash(:warning, 'Destroyed activity. Mwahahaha.')
 		redirect_to admin_activities_path
 	end
 
