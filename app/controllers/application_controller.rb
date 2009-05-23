@@ -80,7 +80,7 @@ class ApplicationController < ActionController::Base
 	end
 	
 	def record_not_found
-		add_flash(:alert, "Sorry, that page cannot be found. It may have been deleted or made private."
+		add_flash(:alert, "Sorry, that page cannot be found. It may have been deleted or made private.")
 		redirect_to root_path
 	end
 	
