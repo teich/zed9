@@ -3,6 +3,6 @@ class Activity < ActiveRecord::Base
   
 	has_many :workouts
 	
-	attr_accessible :pace, :icon, :parent 
+	attr_accessible :pace, :icon_path, :parent, :name, :parent_id
 
 end

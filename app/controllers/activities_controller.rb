@@ -24,7 +24,9 @@ class ActivitiesController < ApplicationController
 
 	def create
 		@activity = Activity.new(params[:activity])
+		logger.debug(" #{params[:activity]}")
 		if @activity.save
+		  flash[:notice] = "Created new activity #{params[:activity][:name]}"
 			redirect_to admin_activities_path
 		else
 			render :action => :new
