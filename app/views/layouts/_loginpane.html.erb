@@ -16,7 +16,7 @@
 
 	<div id="logged_in">
 		<ul>
-			<li>Welcome, <%= link_to current_user.login, account_path %></li>
+			<li>Welcome, <%= link_to current_user.login, current_user %></li>
 			<% if current_user.invitation_limit > 0 %>
 			<li><%= link_to "Invite friends", new_invitation_path %> (<%= current_user.invitation_limit %> remaining)</li>
 			<% end %>

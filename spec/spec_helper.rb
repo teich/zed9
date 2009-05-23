@@ -6,6 +6,7 @@ require 'spec/autorun'
 require 'spec/rails'
 
 require 'webrat'
+require 'blueprint'
 
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
@@ -16,6 +17,8 @@ Spec::Runner.configure do |config|
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 
   config.include Webrat::Matchers, :type => :views
+
+  config.before(:each) { Sham.reset }
   # == Fixtures
   #
   # You can declare fixtures for each example_group like this:
