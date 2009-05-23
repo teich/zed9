@@ -64,8 +64,8 @@ class WorkoutsController < ApplicationController
 			@workout = current_user.workouts.create!(params[:workout])
 			if @workout.devices.first.nil?
 				@workout.destroy
-				flash[:alert] = ["Please select a file to upload"]
-				flash[:alert] << "Testing an alert"
+				add_flash(:alert, "Please select a file to upload")
+				add_flash(:alert, "Testing an alert")
 				redirect_to :action => "new", :device_type => params[:device_type]
 			else
 				# This line may need to be changed for S3...
@@ -83,14 +83,14 @@ class WorkoutsController < ApplicationController
 				overlap = @workout.overlap?(current_user)
 
 				if @workout.save
-					flash[:notice] = 'Workout added!'
+					add_flash(:notice, 'Workout added!')
 					if overlap.size > 0
 						redirect_to workout_overlaps_path(@workout)
 					else
 						redirect_to @workout
 					end
 				else
-					flash[:notice] = "Unable to save workout for some lame reason."
+					add_flash(:notice, "Unable to save workout for some lame reason.")
 					render :action => "new"
 				end
 			end
@@ -99,7 +99,7 @@ class WorkoutsController < ApplicationController
 
 	def update
 		if @workout.update_attributes(params[:workout])
-			flash[:notice] = 'Workout updated.'
+			add_flash(:notice, 'Workout updated.')
 			redirect_to @workout
 		else
 			render :action => "edit"
@@ -125,7 +125,7 @@ class WorkoutsController < ApplicationController
 		@workout = Workout.find(params[:id])
 
 		if (!@workout.shared && !current_user.nil? && (@workout.user_id != current_user.id))
-			flash[:notice] = "This workout is private"
+			add_flash(:notice, "This workout is private")
 			redirect_to root_path 
 		end
 	end
@@ -138,7 +138,7 @@ class WorkoutsController < ApplicationController
 		@user = User.find_by_login(params[:user_id])
 
 		if !(!current_user.nil? && current_user.id == @user.id) && !@user.shared
-			flash[:notice] = "This page is private"
+		  add_flash(:notice, "This page is private")
 			redirect_to root_path
 		end
 	end
@@ -169,7 +169,7 @@ class WorkoutsController < ApplicationController
 		achievements.each do |a|
 			if eval a.logic and !@workout.user.awarded?(a)
 				@workout.user.award(a)
-				flash[:notice] << "Congratulations!  You've just recieved a new achievement - #{a.name}"
+				add_flash(:notice, "Congratulations!  You've just recieved a new achievement - #{a.name}")
 			end
 		end
 	end

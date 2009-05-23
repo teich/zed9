@@ -83,4 +83,11 @@ class ApplicationController < ActionController::Base
 		flash[:notice] = "Sorry, that page wasn't found. It may have moved or been deleted."
 		redirect_to root_path
 	end
+	
+  def add_flash(type, message)
+    if flash[type].nil?
+      flash[type] = [] 
+    end
+    flash[type] << message  
+  end
 end
