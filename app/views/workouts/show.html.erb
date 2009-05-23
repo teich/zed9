@@ -102,9 +102,9 @@
 		
 	<div id="workout_right_column" class="right_column">
 		<div id="map">
-			<div id="map_div" style="width:536px;height:296px" ></div>
+			<div id="map_div" style="width:524px;height:296px" ></div>
 	        
-	        <% if false %> <%= @z9map.div(:width => 536, :height => 296 ) %> <% end %>
+	        <% if false %> <%= @z9map.div(:width => 524, :height => 296 ) %> <% end %>
 		</div>
 
 	</div>
@@ -112,11 +112,11 @@
 	
 	<div id="fullsize_chart_area">
 		<% if @workout.hr %>
-		<h2>Heart Rate</h2>
-		<div id="json_heartrate_big" class="big_visualization"></div>
+			<h2>Heart Rate</h2>
+			<div id="json_heartrate_big" class="big_visualization"></div>
 		<% else %>
-		<h2>Speed</h2>
-		<div id="json_speed_big" class="big_visualization"></div>
+			<h2>Speed</h2>
+			<div id="json_speed_big" class="big_visualization"></div>
 		<% end %>
 	</div>
 	

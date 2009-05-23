@@ -48,7 +48,7 @@ body {
 
 .content_header {
 	display: block;
-	padding-top: 24px;
+	padding-top: 18px;
 	padding-bottom: 24px;
 	text-align: left;
 	clear: both;
@@ -377,8 +377,7 @@ thead, th, td {
 /*---- Action result messages and alerts ----*/
 
 #flash {
-	padding-top: 24px;
-/*	padding-bottom: 24px;*/
+	padding: 24px 0px 6px 0px;
 	font-size: 18px;
 	font-weight: 500;
 	clear: both;
@@ -718,8 +717,8 @@ table.newsfeed {
 
 /*---- Dashboard content layout ----*/
 
-#dashboard {
-	padding-top: 36px;
+#dashboard, #root {
+	padding-top: 30px;
 }
 
 #content_left_column {
@@ -977,6 +976,7 @@ a.delete-x {
 #workout_stats th {
 	font-size:18px;			
 	text-align: right;
+/*	padding-left: 12px; swap this in when enabling big graph selection*/
 	padding-left: 0px;
 }
 
@@ -984,6 +984,20 @@ a.delete-x {
 	text-align: left;
 	color:#25a1d6;
 }
+
+/*These styles add hovering and an arrow to the left of the sparklines/bars for selection*/
+/*#workout_stats .graphed {
+	background: url(/images/closed.png) no-repeat left 14px;
+}
+
+#workout_stats tr:hover {
+	background: url(/images/closed.png) no-repeat left 14px;
+	color:#25a1d6;
+}
+
+#workout_stats tr.graphed:hover {
+	color: #545454;
+}*/
 
 .stat, .number {
 	font-size: 14px;

@@ -1952,7 +1952,7 @@
 
                 octx.beginPath();
                 if (mode.indexOf("x") != -1) {
-                    octx.moveTo(pos.x, 0);
+                    octx.moveTo(pos.x, "0");
                     octx.lineTo(pos.x, plotHeight);
                 }
                 if (mode.indexOf("y") != -1) {
