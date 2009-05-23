@@ -25,7 +25,7 @@
 		<h2>Achievements (<%= @user.accomplishments.size * 10 %> points)</h2>
 
 		<% @user.accomplishments.each do |a| %>
-			<%=h a.achievement.name %> (<%=h time_as_date(a.created_at) %>)<br>
+			<span class="achievement_name"><%=h a.achievement.name %> (<%=h time_as_date(a.created_at) %>)<br>
 		<% end %>
 	</div>
 
