@@ -11,7 +11,8 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(params[:user])
 		if @user.save
-			flash[:notice] = "Thanks for setting up your account!<br>Next step: upload a workout."
+			add_flash(:notice, "Thanks for setting up your account!")
+			add_flash(:info, "Upload your first workout today to move up to Novice!")
 			redirect_to new_user_workout_path(@user)
 		else
 			render :action => :new
@@ -29,7 +30,7 @@ class UsersController < ApplicationController
 	def update
 		@user = @current_user # makes our views "cleaner" and more consistent
 		if @user.update_attributes(params[:user])
-			flash[:notice] = "Account updated!"
+			add_flash(:notice, "Account updated")
 			redirect_to @user
 		else
 			render :action => :edit
