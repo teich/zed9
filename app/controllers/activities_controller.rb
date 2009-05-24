@@ -11,7 +11,7 @@ class ActivitiesController < ApplicationController
 		@heart_pumping = @activity.workouts.find_all_by_shared(true, :conditions => ['hr > ? AND start_time > ?', 0, 7.days.ago], :order => "hr DESC", :limit => 5)
 
     # list of most recent public workouts
-    @shared = @activity.workouts.find_all_by_shared(true, :limit=>12, :order => "updated_at DESC")
+    @workouts = @activity.workouts.find_all_by_shared(true, :limit=>12, :order => "updated_at DESC")
 
 	end
 

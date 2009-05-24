@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-	before_filter :require_no_user, :only => [:new, :create]
-	before_filter :require_user, :only => [:show, :edit, :update]
+	before_filter :require_no_user, :only => [:new, :show, :create]
+	before_filter :require_user, :only => [:edit, :update]
 
 	def new
 		@user = User.new(:invitation_token => params[:invitation_token])
@@ -21,6 +21,29 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find_by_login(params[:id])
+
+		# list of most recent workouts
+		if my_page?
+		  @workouts = @user.workouts.find(:all, :limit =>20, :order => "updated_at DESC")
+	  else
+		  @workouts = @user.workouts.find_all_by_shared(true, :limit=>20, :order => "updated_at DESC")
+	  end
+
+    @accomplishments = Accomplishment.find_all_by_user_id(@user)
+
+		durations = @workouts.map { |w| w.duration }
+		if durations.nil?
+			@total_time = 0
+		else
+			@total_time = durations.compact.asum
+		end
+
+		@farthest = @user.workouts.find(:all, :conditions => ['distance > ?', 0], :order => "distance DESC", :limit => 5)
+		@fastest = @user.workouts.find(:all, :conditions => ['speed > ?', 0], :order => "speed DESC", :limit => 5)
+		@longest = @user.workouts.find(:all, :conditions => ['duration > ?', 0], :order => "duration DESC", :limit => 5)
+		@climbers = @user.workouts.find(:all, :conditions => ['elevation > ?', 0], :order => "elevation DESC", :limit => 5)
+		@heart_pumping = @user.workouts.find(:all, :conditions => ['hr > ?', 0], :order => "hr DESC", :limit => 5)
+
 	end
 
 	def edit

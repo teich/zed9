@@ -1,21 +1,28 @@
 <table>
-<% form_for achievement, :url => admin_achievement_path(achievement) do |f| %>
-<tr>
-	<td><%= f.label :name, "Name" %>
-	    <%= f.text_field :name %><BR>
-		
-		<%= f.label :description, "Description" %>
-	    <%= f.text_field :description %><BR>
-				
-		<%= f.label :controller, "Controller" %>
-	    <%= f.text_field :controller %><BR>
-
-		<%= f.label :action, "Action" %>
-		<%= f.text_field :action %></td>
-	<td><%= f.label :logic, "Logic" %></td>
-	<td><%= f.text_area :logic %></td><td>	<%= f.submit "Submit", :disable_with => 'Submiting...' %>  <%= link_to 'Delete', admin_achievement_path(achievement), :method => :delete %></td>
-	</td>
-
-</tr>
-<% end %>
+	<% form_for achievement, :url => admin_achievement_path(achievement) do |f| %>
+	<tr>
+		<th><%= f.label :name, "Name" %></th>
+		<td><%= f.text_field :name %></td>
+	</tr>
+	<tr>	
+		<th><%= f.label :description, "Description" %></th>
+		<td><%= f.text_field :description %></td >
+	</tr>
+	<tr>	
+		<th><%= f.label :controller, "Controller" %></th>
+		<td><%= f.text_field :controller %></td>
+	</tr>
+	<tr>
+		<th><%= f.label :action, "Action" %></th>
+		<td>><%= f.text_field :action %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :logic, "Logic" %></td>
+		<td><%= f.text_area :logic %></td>
+	</tr>
+	<tr>
+		<th><%= link_to 'Delete', admin_achievement_path(achievement), :method => :delete %></th>
+		<td><%= f.submit "Submit", :disable_with => 'Submiting...' %> </td>
+	</tr>
+	<% end %>
 </table>

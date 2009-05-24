@@ -1,0 +1,5 @@
+<li>
+	<span class="achievement_name"><%=h accomplishment.achievement.name %></span> 
+	<span class="achievement_description"><%=h accomplishment.achievement.description %></span> 
+	<% if date %><span class="achievement_date">(<%=h time_as_date(accomplishment.created_at) %>)</span><% end -%>
+</li>

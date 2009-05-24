@@ -1,4 +1,5 @@
 module ApplicationHelper
+  
 	def number_to_time(seconds)
 		return nil if seconds.nil?
 		Time.at(seconds).utc.strftime("%H:%M:%S")
@@ -79,5 +80,9 @@ module ApplicationHelper
 			workout.user.metric ? "km" : "miles"
 		end
 	end
-
+  
+  def no_leaders?
+    @farthest.size == 0 && @fastest.size == 0 && @longest.size == 0 && @climbers.size == 0 && @heart_pumping.size == 0
+  end
+  
 end

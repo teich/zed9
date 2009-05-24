@@ -1,32 +1,157 @@
 <div class="content_header">
 	<h1>
-		<%=h @user.displayname %> (<%= @user.accomplishments.size * 10 %> points) 
+		<%=h @user.display_name %> <span class="points">(<%= @user.points %> points)</span>
 		<% if my_page? %>
 			<span class="action"><%= link_to 'edit profile', edit_user_path(current_user) %></span>
 		<% end %>
 	</h1>
 </div>
 
-<div class="content">
-	<div id="bio">
+<div class="content" id="profile">
+
+	<!-- <div id="bio">
 		<table class="form">
 			<tr>
-				<th>Login:</th>
-				<td><%= h @user.login %></td>
-			</tr>
-			<tr>
-				<th>Display name:</th>
-				<td><%= h @user.displayname %></td>
+				<th>Name:</th>
+				<td><%= h @user.display_name %></td>
 			</tr>
 		</table>
-	</div>
+	</div> -->
 	
-	<div id="achievements">
-		<h2>Achievements (<%= @user.accomplishments.size * 10 %> points)</h2>
+	<div class="left_column">
+	
+		<div id="profile_stats">
+			<% if @workouts.size > 0 %>
+				<p><% if my_page? %>You've<% else %><%=h @user.display_name %> has<% end %> logged <span class="your_number"><%= link_to number_to_short_time(@total_time), user_workouts_path(@user) %></span><span class="title_unit">h</span> across <span class="your_number"><%= link_to @workouts.size, user_workouts_path(@user) %></span> workout<% if !(@workouts.size == 1) %>s<% end %>.</p>
+			<% end %>
+		</div>
 
-		<% @user.accomplishments.each do |a| %>
-			<span class="achievement_name"><%=h a.achievement.name %> (<%=h time_as_date(a.created_at) %>)<br>
+		<div id="achievements" class="achievements">
+			<h2>Achievements <!-- <span class="points">(<%= @user.accomplishments.size * 10 %> points)</span> --></h2>
+			<ul>
+				<%= render :partial => @accomplishments, :locals => { :date => true } %>
+			</ul>
+		</div>
+
+		<div id="leaderboards">
+			<% if @workouts.size > 0 %>
+			<h2>Personal bests</h2>
+
+			<% if @farthest.size > 0 %>		
+			<div class="leaderboard">
+				<div class="activity_headline">
+					<h3><img src="../images/road.png" class="icon">
+						Farthest: <span class="number_top"><%=h @farthest.first.distance_in_miles %></span><span class="unit">miles</span></h3>
+				</div>
+				<div class="more">
+					<div class="bests">
+						<ol>
+							<% for workout in @farthest %> 
+								<li><span class="number"><%=h workout.distance_in_miles %></span><span class="unit">miles</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="spacer">&nbsp;</div>
+			<% end -%>	
+			
+			<% if @fastest.size > 0 %>		
+			<div class="leaderboard">
+				<div class="activity_headline">
+					<h3><img src="../images/flag.png" class="icon">
+						Fastest: <span class="number_top"><%=h @fastest.first.avg_speed_in_mph %></span><span class="unit">mph</span></h3>
+				</div>
+				<div class="more">
+					<div class="bests">
+						<ol>
+							<% for workout in @fastest %> 
+								<li><span class="number"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="spacer">&nbsp;</div>
+			<% end -%>	
+			
+			<% if @longest.size > 0 %>		
+			<div class="leaderboard">
+				<div class="activity_headline">
+					<h3><img src="../images/clock.png" class="icon">
+						Longest: <span class="number_top"><%=h number_to_short_time(@longest.first.duration) %></span><span class="unit">h</span></h3>
+				</div>
+				<div class="more">
+					<div class="bests">
+						<ol>
+							<% for workout in @longest %> 
+								<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="spacer">&nbsp;</div>
+			<% end -%>	
+			
+			<% if @climbers.size > 0 %>		
+			<div class="leaderboard">
+				<div class="activity_headline">
+					<h3><img src="../images/peaks.png" class="icon">
+						Elevation Gain: <span class="number_top"><%=h @climbers.first.elevation_in_feet %></span><span class="unit">ft</span></h3>
+				</div>
+				<div class="more">
+					<div class="bests">
+						<ol>
+							<% for workout in @climbers %> 
+								<li><span class="number"><%=h workout.elevation_in_feet %></span><span class="unit">ft</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="spacer">&nbsp;</div>
+			<% end -%>	
+			
+			<% if @heart_pumping.size > 0 %>		
+			<div class="leaderboard">
+				<div class="activity_headline">
+					<h3><img src="../images/heart.png" class="icon">
+						Heart-pumping: <span class="number_top"><%=h @heart_pumping.first.hr %></span><span class="unit">bpm</span></h3>
+				</div>
+				<div class="more">
+					<div class="bests">
+						<ol>
+							<% for workout in @heart_pumping %> 
+								<li><span class="number"><%=h workout.hr %></span><span class="unit">bpm</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+							<% end %>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<% end %>	
+		<% else %>
+		
+		<% if my_page? %>
+			<div class="usage_tip"><%= link_to "Upload a workout", new_user_workout_path(current_user) %> to start tracking your recent activities and personal bests here.</div>
 		<% end %>
+		
+		<% end %>
+
+		</div>
+
+	</div>
+
+	<div id="content_right_column" class="right_column">
+
+		<div id="workouts_feed">
+			<h2>Recent workouts</h2>
+			<table class="newsfeed">
+				<%= render :partial => @workouts, :locals => { :icon => true, :name => true, :date => true, :duration => false, :user => false } %>
+			</table>
+			<p class="more_news"><%= link_to "See all", user_workouts_path(@user) %></p>
+		</div>
+		
 	</div>
 
 </div>

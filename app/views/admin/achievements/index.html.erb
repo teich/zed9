@@ -1,3 +1,7 @@
+<div class="content_header">
+	<h1>Achievements <span class="action"><%= link_to "create achievement", new_admin_achievement_path %></span</h1>
+</div>
+
 <div class="content">
 	<table>
 		<tr>
@@ -7,9 +11,7 @@
 			<th>action</th>
 			<th>logic</th>
 		</tr>
-<%= render :partial => @achievements %>
-</table>
-
-<%= link_to "New achievement", new_admin_achievement_path %>
+		<%= render :partial => @achievements %>
+	</table>
 
 </div>

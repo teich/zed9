@@ -26,10 +26,9 @@
 					</div>
 				</div>
 			</div>
-			<% end %>	
+			<div class="spacer">&nbsp;</div>
+			<% end -%>	
 
-			<br>
-			
 			<% if @fastest.size > 0 %>		
 			<div class="leaderboard">
 				<div class="activity_headline">
@@ -46,9 +45,8 @@
 					</div>
 				</div>
 			</div>
-			<% end %>	
-
-			<br>
+			<div class="spacer">&nbsp;</div>
+			<% end -%>	
 
 			<% if @longest.size > 0 %>		
 			<div class="leaderboard">
@@ -66,9 +64,8 @@
 					</div>
 				</div>
 			</div>
-			<% end %>	
-
-			<br>
+			<div class="spacer">&nbsp;</div>
+			<% end -%>	
 
 			<% if @climbers.size > 0 %>		
 			<div class="leaderboard">
@@ -86,9 +83,8 @@
 					</div>
 				</div>
 			</div>
-			<% end %>	
-
-			<br>
+			<div class="spacer">&nbsp;</div>
+			<% end -%>	
 
 			<% if @heart_pumping.size > 0 %>		
 			<div class="leaderboard">
@@ -106,8 +102,13 @@
 					</div>
 				</div>
 			</div>
-			<% end %>	
+			<div class="spacer">&nbsp;</div>
+			<% end -%>	
 
+			<% if no_leaders? %>
+				<div id="no_leaders" class="usage_tip">No one has placed on the leader boards in the last 7 days. <%= link_to "Upload a " + @activity.name + " workout", new_user_workout_path(current_user) %> to get your name on the board and earn achievement points!</div>
+			<% end %>
+			
 		</div>
 
 		<!-- Additional leaderboards to implement:
@@ -127,17 +128,10 @@
 		</div>
 		-->
 
-		<div id="public_newsfeed">
+		<div id="workouts_feed">
 			<h2>Recent public workouts</h2>
 			<table class="newsfeed">
-				<% @shared.each do |sw| %>
-				<tr>
-					<td class="first_column"><%= link_to sw.name, workout_path(sw) %></td>
-					<td class="duration"><% if !sw.duration.nil? %><%= h number_to_short_time(sw.duration) %><span class="unit">h</span><% end %><br></td>
-					<td class="distance"><% if !sw.distance_in_miles.nil? %><%=h sw.distance_in_miles %><span class="unit">miles</span><% end %><br></td>
-					<td class="last_column"><%= link_to sw.user.display_name, user_workouts_path(sw.user) %> </td>
-				</tr>
-				<% end %>
+				<%= render :partial => @workouts, :locals => { :icon => true, :name => true, :date => false, :duration => true, :user => true } %>
 			</table>
 		</div>
 

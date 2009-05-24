@@ -56,6 +56,10 @@ class User < ActiveRecord::Base
 	  self.achievements.count(:conditions => { :id => achievement.id }) > 0
   end
 	
+	def points()
+    self.accomplishments.size * 10
+  end
+  
 	private
 
 	# How many invitations does a user get?

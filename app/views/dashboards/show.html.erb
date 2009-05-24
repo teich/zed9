@@ -4,7 +4,7 @@
 
 <div class="content" id="dashboard">
 
-	<div id="content_left_column" class="left_column">
+	<div class="left_column">
 
 		<div id="dashboard_stats">
 			<h2>You've logged <span class="your_number"><%= link_to number_to_short_time(@total_time), user_workouts_path(current_user) %></span><span class="title_unit">h</span> across <span class="your_number"><%= link_to @workouts.size, user_workouts_path(current_user) %></span> workouts</h2>
@@ -18,6 +18,13 @@
 			<h2><%= link_to "Your recent workouts", user_workouts_path(current_user) %></h2>
 			<div id="recent_workouts_chart"></div>
 			<% end %>
+		</div>
+
+		<div id="recent_achievements" class="achievements">
+			<h2>You've earned <%=h @accomplishments.size %> achievements this week</h2>
+			<ul>
+				<%= render :partial => @accomplishments, :locals => { :date => false} %>
+			</ul>
 		</div>
 
 		<div id="leaderboards">
@@ -40,9 +47,8 @@
 					</div>
 				</div>
 			</div>
-			<% end %>	
-
-			<br>
+			<div class="spacer">&nbsp;</div>
+			<% end -%>	
 			
 			<% if @fastest.size > 0 %>		
 			<div class="leaderboard">
@@ -60,9 +66,8 @@
 					</div>
 				</div>
 			</div>
-			<% end %>	
-
-			<br>
+			<div class="spacer">&nbsp;</div>
+			<% end -%>	
 			
 			<% if @longest.size > 0 %>		
 			<div class="leaderboard">
@@ -80,9 +85,8 @@
 					</div>
 				</div>
 			</div>
-			<% end %>	
-
-			<br>
+			<div class="spacer">&nbsp;</div>
+			<% end -%>	
 			
 			<% if @climbers.size > 0 %>		
 			<div class="leaderboard">
@@ -100,9 +104,8 @@
 					</div>
 				</div>
 			</div>
-			<% end %>	
-
-			<br>
+			<div class="spacer">&nbsp;</div>
+			<% end -%>	
 			
 			<% if @heart_pumping.size > 0 %>		
 			<div class="leaderboard">
@@ -132,7 +135,12 @@
 
 	<div id="content_right_column" class="right_column">
 
-		<%= render :partial => "layouts/publicfeed" %>
+		<div id="workouts_feed">
+			<h2>Recent public workouts</h2>
+			<table class="newsfeed">
+				<%= render :partial => @workouts, :locals => { :icon => true, :name => true, :date => false, :duration => true, :user => true } %>
+			</table>
+		</div>
 		
 	</div>
 

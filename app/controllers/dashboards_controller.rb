@@ -5,8 +5,11 @@ class DashboardsController < ApplicationController
 		@workouts = current_user.workouts.find(:all, :order => "start_time")
 
 		# list of most recent public workouts
-		@shared = Workout.find_all_by_shared(true, :limit=>20, :order => "updated_at DESC")
+		@workouts = Workout.find_all_by_shared(true, :limit=>20, :order => "updated_at DESC")
 
+    # recent achievements
+    @accomplishments = Accomplishment.find_all_by_user_id(current_user, :conditions => ['created_at > ?', 7.days.ago])
+    
 		@farthest = current_user.workouts.find(:all, :conditions => ['distance > ?', 0], :order => "distance DESC", :limit => 5)
 		@fastest = current_user.workouts.find(:all, :conditions => ['speed > ?', 0], :order => "speed DESC", :limit => 5)
 		@longest = current_user.workouts.find(:all, :conditions => ['duration > ?', 0], :order => "duration DESC", :limit => 5)
