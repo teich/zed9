@@ -21,20 +21,25 @@
 	<div class="left_column">
 	
 		<div id="profile_stats">
-			<% if @workouts.size > 0 %>
-				<p><% if my_page? %>You've<% else %><%=h @user.display_name %> has<% end %> logged <span class="your_number"><%= link_to number_to_short_time(@total_time), user_workouts_path(@user) %></span><span class="title_unit">h</span> across <span class="your_number"><%= link_to @workouts.size, user_workouts_path(@user) %></span> workout<% if !(@workouts.size == 1) %>s<% end %>.</p>
-			<% end %>
+			<p><% if my_page? %>You've<% else %><%=h @user.display_name %> has<% end %> logged <span class="your_number"><%= link_to number_to_short_time(@total_time), user_workouts_path(@user) %></span><span class="title_unit">h</span> across <span class="your_number"><%= link_to @workouts.size, user_workouts_path(@user) %></span> workout<% if !(@workouts.size == 1) %>s<% end %>.</p>
 		</div>
 
 		<div id="achievements" class="achievements">
-			<h2>Achievements <!-- <span class="points">(<%= @user.accomplishments.size * 10 %> points)</span> --></h2>
+			<h2>Achievements</h2>
+			<% if my_page? && @accomplishments.size == 0 && @workouts.size == 0 %>
+			<div class="usage_tip">You have not earned any achievements yet. <%= link_to "Upload your first workout", user_workouts_path(@user) %> to earn points and move up to Novice.</div>
+			<% elsif my_page? && @accomplishments.size == 0 && @workouts.size > 0 %>
+			<div class="usage_tip">You have not earned any achievements. <%= link_to "Upload workouts", user_workouts_path(@user) %> to earn achievements and points.</div>
+			<% elsif @accomplishments.size == 0 %>
+			<p><%=h @user.display_name %> has not earned any achievements yet.</p>
+			<% else %>
 			<ul>
 				<%= render :partial => @accomplishments, :locals => { :date => true } %>
 			</ul>
+			<% end %>
 		</div>
 
 		<div id="leaderboards">
-			<% if @workouts.size > 0 %>
 			<h2>Personal bests</h2>
 
 			<% if @farthest.size > 0 %>		
@@ -130,14 +135,13 @@
 				</div>
 			</div>
 			<% end %>	
-		<% else %>
-		
-		<% if my_page? %>
-			<div class="usage_tip"><%= link_to "Upload a workout", new_user_workout_path(current_user) %> to start tracking your recent activities and personal bests here.</div>
-		<% end %>
-		
-		<% end %>
 
+		<% if my_page? && @workouts.size == 0 %>
+			<div class="usage_tip">You haven't recorded any personal bests yet. How sad... <%= link_to "Upload a workout", new_user_workout_path(current_user) %> to fix that!</div>
+		<% elsif @workouts.size == 0 %>
+			<p><%=h @user.display_name %> hasn't recorded any bests yet. How sad... Check back soon.</p>
+		<% end %>
+		
 		</div>
 
 	</div>
@@ -149,7 +153,13 @@
 			<table class="newsfeed">
 				<%= render :partial => @workouts, :locals => { :icon => true, :name => true, :date => true, :duration => false, :user => false } %>
 			</table>
-			<p class="more_news"><%= link_to "See all", user_workouts_path(@user) %></p>
+			<% if my_page? && @workouts.size == 0 %>
+				<p>None yet... Better get moving!</p>
+			<% elsif @workouts.size == 0 %>
+				<p>None yet... Check back soon.</p>
+			<% else %>
+				<p class="more_news"><%= link_to "See all", user_workouts_path(@user) %></p>
+			<% end %>
 		</div>
 		
 	</div>

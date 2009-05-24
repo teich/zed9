@@ -13,7 +13,7 @@
 		<% end %>
 
 		<h1><!-- <img class="activity_icon" src="/images/running.jpg" width="37" height="40"> -->
-			<%= link_to image_tag(@workout.activity.root.icon_path, :class => "activity_icon"), activity_path(@workout.activity) %><%=h @workout.name %>  <% if my_page? %><span class="action"><%= link_to 'edit', edit_workout_path(@workout) %></span><% else %><span class="by">by</span> <%= link_to @workout.user.display_name, user_path(@workout.user) %> <% end %></h1>
+			<%= link_to image_tag(@workout.activity.root.icon_path, :class => "activity_icon"), activity_path(@workout.activity) %><%=h @workout.name %>  <% if my_page? %><span class="action"><%= link_to 'edit', edit_workout_path(@workout) %></span><% else %><span class="by">by</span> <%= link_to @workout.user.display_name, user_path(@workout.user) %> <span class="points">(<%=h @workout.user.points %> points)</span> <% end %></h1>
 			
 			<p id="workout_description"><span class="click"><%= link_to @workout.activity.name, activity_path(@workout.activity) %>	</span> on <span class="click"><%=h activity_timestamp(@workout.start_time) %></span></p>
 
