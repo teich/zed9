@@ -18,6 +18,7 @@ function hms(secs) {
 }
 
 function speed_to_pace(speed) {
+	if (speed < 0.1) return "00:00";
 	var pace = 60/speed;
 	var min = parseInt(pace, 10);
 	var sec = ((pace % 1) * 60).toFixed(0);
@@ -80,15 +81,6 @@ var options = {
 	y2axis: { ticks: [], autoscaleMargin: 0.2 },
 	colors: ["#25a1d6", "#3dc10b", "#545454"],
 	shadowSize: 1
-};
-
-var full_size_options = {
-	grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 36, markings: axes },
-	// crosshair: { mode: "x", color: '#d9d9d9' },
-	colors: ["#25a1d6", "#3dc10b", "#545454"],
-	shadowSize: 1,
-	xaxis: { mode: "time", timeformat: "%h:%M", minTickSize: [10, "minute"] },
-	selection: { mode: "xy" }
 };
 
 var tooltip_style = {
@@ -186,7 +178,11 @@ function workout_page_graphs(data) {
 				}
 				key = (x / 10000).toFixed(0);
 				point = z9map.pointsByRoundedTime[key];
-				setCurrLoc(z9map, point.y, point.x);
+				
+				// Only try and update map, if we have a map!
+				if (z9map.gmap) { 
+					setCurrLoc(z9map, point.y, point.x); 
+				}
 				$('<div id="fullsize_tooltip" class="tooltip">' + y + '</div>').css( {
 					top: item.pageY - 41,
 					left: item.pageX + 1
@@ -243,140 +239,204 @@ function workout_page_graphs(data) {
 			], sparkbar_options);
 		});
 
-		$(".big_visualization").each(function(){ 
+	$(".big_visualization").each(function() { 
+		function formatData(id) {
 			var graph_data = [];
-			if (this.id == "json_speed_big") {
-				var temp = workout[this.id];
+			
+			if (id == "json_speed_big") {
+				var temp = workout[id];
 				for (var i = 0; i < temp.length; i++) {
 					var x = temp[i][0];
 					// TODO: metric/imperical support goes here
 					var y = temp[i][1] * MPS_TO_MPH;
 					if (workout.activity.pace) {
-						y = MIN_TO_MILLISEC/y;
-						full_size_options.yaxis = { mode: "time", timeformat: "%M:%S" };
-
+						// Special case the stopped situation.
+						y = y < 1 ? null : MIN_TO_MILLISEC / y;
 					}
 					graph_data[i] = [x, y];
 				}
 			} else {
-				graph_data = workout[this.id];
+				graph_data = workout[id];
 			}
-			$.plot($('.big_visualization'), [{
-				data: graph_data,
-				lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } }
+			return graph_data;
+		}
+		
+		function getFullSizeOptions(id1, id2) {
+			var base_options = {
+				grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 36, markings: axes },
+				// crosshair: { mode: "x", color: '#d9d9d9' },
+				colors: ["#25a1d6", "#3dc10b", "#545454"],
+				shadowSize: 1,
+				xaxis: { mode: "time", timeformat: "%h:%M", minTickSize: [10, "minute"] },
+				selection: { mode: "xy" }
+			};
+			// Manual check right now for the only thing that requires a different axis
+			if (id1 == "json_speed_big" && workout.activity.pace) {
+				base_options.yaxis = { mode: "time", timeformat: "%M:%S" };
+			}
+			if (id2) {
+				base_options.y2axis = {};
+			}
+			if (id2 == "json_speed_big" && workout.activity.pace) {
+				base_options.y2axis = { mode: "time", timeformat: "%M:%S" };
+			}
+			return base_options
+		}
+		
+		function plotGraphSelected() {
+			var graph_data = [];
+			var graph_data2 = [];
+			var full_size_options = {};
+			var leftkey;
+			var rightkey;
+			var dataHash = {};
+			$("#choices").find("input:checked").each(function () {
+				leftkey = $(this).attr("value");
+			});
+			$("#choices2").find("input:checked").each(function () {
+				rightkey = $(this).attr("value");
+			});
+			if (leftkey && workout[leftkey]) {
+				graph_data = formatData(leftkey);
+			}
+			if (rightkey && workout[rightkey]) {
+				graph_data2 = formatData(rightkey);
+			}
+			full_size_options = getFullSizeOptions(leftkey, rightkey);
+			if (graph_data2.length > 1) {
+				$.plot($('.big_visualization'), [
+				{ data: graph_data, lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } }},
+				{ data: graph_data2, lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } }, yaxis: 2}], 
+				full_size_options);
+			} else {
+				$.plot($('.big_visualization'), [{ 
+					data: graph_data, 
+					lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } } 
 				}],
 				full_size_options);
-
-				$(".big_visualization").bind("plothover", full_tooltip);
-			});
-
-			$(".stat").each(function() {
-				var tip = '<div class="stat">';
-				var unit = 0;
-				if (this.id == "duration") {
-					data1 = hms(workout[this.id]);
-					data2 = hms(my_comps[this.id]);
-					data3 = hms(all_comps[this.id]);
-					unit = id_to_unit(this.id);
-				} else if (this.id == 'speed') {
-					data1 = formatted_speed(workout[this.id], workout.activity.pace, false);
-					data2 = formatted_speed(my_comps[this.id], workout.activity.pace, false);
-					data3 = formatted_speed(all_comps[this.id], workout.activity.pace, false);
-					unit = id_to_unit(this.id, workout.activity.pace);
-				} else {
-					data1 = workout[this.id].toFixed(1);
-					data2 = my_comps[this.id].toFixed(1);
-					data3 = all_comps[this.id].toFixed(1);
-					unit = id_to_unit(this.id);
-				}
-
-				tip += '<p class="comp_this_workout"><span class="value">';
-				tip += data1;
-				tip += '</span>' + unit + ' for this workout</p>';
-				tip += '<p class="comp_my_activity"><span class="value">';
-				tip += data2 + '</span>';
-				tip += unit + ' average for your ' + workout.activity.name.toLowerCase() + '</p>';
-				tip += '<p class="comp_activity"><span class="value">';
-				tip += data3 + '</span>';
-				tip += unit + ' average for ZED9 ' + workout.activity.name.toLowerCase() + '</p></div >';
-
-				$(this).qtip({
-					content: tip,
-					show: 'mouseover',
-					hide: { when: 'mouseout', fixed: true },
-					position: { target: $(this).children(':last'), corner: { tooltip: 'topLeft', target: 'topLeft' }, adjust: { x: 0, y: -5 } },
-					style: tooltip_style
-				});
-			});
-
-			google.setOnLoadCallback(z9MapInit(data.workout.gis));
-
+			}
+			
 
 		}
+			
+		$("#choices").find("input").click(plotGraphSelected);
+		$("#choices2").find("input").click(plotGraphSelected);
+		
+				
 
+		plotGraphSelected();
+		$(".big_visualization").bind("plothover", full_tooltip);
 
-		// THIS IS THE MAIN AREA.  CALLED ON PAGE LOAD
-		$(document).ready(function() {
+	});
 
+		$(".stat").each(function() {
+			var tip = '<div class="stat">';
+			var unit = 0;
+			if (this.id == "duration") {
+				data1 = hms(workout[this.id]);
+				data2 = hms(my_comps[this.id]);
+				data3 = hms(all_comps[this.id]);
+				unit = id_to_unit(this.id);
+			} else if (this.id == 'speed') {
+				data1 = formatted_speed(workout[this.id], workout.activity.pace, false);
+				data2 = formatted_speed(my_comps[this.id], workout.activity.pace, false);
+				data3 = formatted_speed(all_comps[this.id], workout.activity.pace, false);
+				unit = id_to_unit(this.id, workout.activity.pace);
+			} else {
+				data1 = workout[this.id].toFixed(1);
+				data2 = my_comps[this.id].toFixed(1);
+				data3 = all_comps[this.id].toFixed(1);
+				unit = id_to_unit(this.id);
+			}
 
-			// I'm using the .each selector really as a page identifier.  
-			// TODO: be more overt in the naming.  i.e. #workout_page, #dashboard_page
+			tip += '<p class="comp_this_workout"><span class="value">';
+			tip += data1;
+			tip += '</span>' + unit + ' for this workout</p>';
+			tip += '<p class="comp_my_activity"><span class="value">';
+			tip += data2 + '</span>';
+			tip += unit + ' average for your ' + workout.activity.name.toLowerCase() + '</p>';
+			tip += '<p class="comp_activity"><span class="value">';
+			tip += data3 + '</span>';
+			tip += unit + ' average for ZED9 ' + workout.activity.name.toLowerCase() + '</p></div >';
 
-			// Dashboard page graphs
-			$('#recent_workouts_chart').each(function() {
-				$.getJSON(jsURL, draw_dashboard_graph);
+			$(this).qtip({
+				content: tip,
+				show: 'mouseover',
+				hide: { when: 'mouseout', fixed: true },
+				position: { target: $(this).children(':last'), corner: { tooltip: 'topLeft', target: 'topLeft' }, adjust: { x: 0, y: -5 } },
+				style: tooltip_style
 			});
-
-			// Workout page graphs
-			$('#workout_stats').each(function() {
-				$.getJSON(jsURL, workout_page_graphs);
-			});
-
-			// Workouts index table sorting, default to descending on date
-			$("#workouts_index").tablesorter({
-				sortList: [[2, 1]],
-				headers: { 
-					0: { sorter: false },
-					9: { sorter: false }
-				}
-			}); 
-
-			// Dismiss flash message
-			$('#flash').click(function() { 
-				$(this).slideToggle('medium');
-			});
-
-			// Toggle view of bests on leaderboards
-			$('div.more').hide();  
-			$('div.leaderboard').click(function() { 
-				$(this).children('.more').slideToggle('fast');
-				$(this).toggleClass('open');
-			});
-
-			// Workouts index row highlight on hover
-			$('tr.newsfeed_workout_summary').hover(function() {
-				$(this).children().addClass("highlight");
-			},
-			function() {
-				$(this).children().removeClass("highlight");
-			});
-
-			// Notices
-			$('.timed').each(function() {
-				jQuery.noticeAdd({
-					text: $(this).append().html(),
-					stay: false,
-					type: $(this).attr("type"),
-					stayTime: 5000
-				});
-			});
-
-			$('.sticky').each(function() {
-				jQuery.noticeAdd({
-					text: $(this).append().html(),
-					stay: true,
-					type: $(this).attr("type"),
-				});
-			});
-
 		});
+
+		
+		google.setOnLoadCallback(z9MapInit(data.workout.gis));
+
+
+	}
+
+
+	// THIS IS THE MAIN AREA.  CALLED ON PAGE LOAD
+	$(document).ready(function() {
+
+
+		// I'm using the .each selector really as a page identifier.  
+		// TODO: be more overt in the naming.  i.e. #workout_page, #dashboard_page
+
+		// Dashboard page graphs
+		$('#recent_workouts_chart').each(function() {
+			$.getJSON(jsURL, draw_dashboard_graph);
+		});
+
+		// Workout page graphs
+		$('#workout_stats').each(function() {
+			$.getJSON(jsURL, workout_page_graphs);
+		});
+
+		// Workouts index table sorting, default to descending on date
+		$("#workouts_index").tablesorter({
+			sortList: [[2, 1]],
+			headers: { 
+				0: { sorter: false },
+				9: { sorter: false }
+			}
+		}); 
+
+		// Dismiss flash message
+		$('#flash').click(function() { 
+			$(this).slideToggle('medium');
+		});
+
+		// Toggle view of bests on leaderboards
+		$('div.more').hide();  
+		$('div.leaderboard').click(function() { 
+			$(this).children('.more').slideToggle('fast');
+			$(this).toggleClass('open');
+		});
+
+		// Workouts index row highlight on hover
+		$('tr.newsfeed_workout_summary').hover(function() {
+			$(this).children().addClass("highlight");
+		},
+		function() {
+			$(this).children().removeClass("highlight");
+		});
+
+		// Notices
+		$('.timed').each(function() {
+			jQuery.noticeAdd({
+				text: $(this).append().html(),
+				stay: false,
+				type: $(this).attr("type"),
+				stayTime: 5000
+			});
+		});
+
+		$('.sticky').each(function() {
+			jQuery.noticeAdd({
+				text: $(this).append().html(),
+				stay: true,
+				type: $(this).attr("type"),
+			});
+		});
+
+	});
