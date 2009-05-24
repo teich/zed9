@@ -88,7 +88,6 @@ var full_size_options = {
 	colors: ["#25a1d6", "#3dc10b", "#545454"],
 	shadowSize: 1,
 	xaxis: { mode: "time", timeformat: "%h:%M", minTickSize: [10, "minute"] },
-	yaxis: { mode: "time", timeformat: "%M:%S" },
 	selection: { mode: "xy" }
 };
 
@@ -254,6 +253,8 @@ function workout_page_graphs(data) {
 					var y = temp[i][1] * MPS_TO_MPH;
 					if (workout.activity.pace) {
 						y = MIN_TO_MILLISEC/y;
+						full_size_options.yaxis = { mode: "time", timeformat: "%M:%S" };
+
 					}
 					graph_data[i] = [x, y];
 				}
@@ -332,7 +333,13 @@ function workout_page_graphs(data) {
 			});
 
 			// Workouts index table sorting, default to descending on date
-			$("#workouts_index").tablesorter( {sortList: [[2, 1]]} ); 
+			$("#workouts_index").tablesorter({
+				sortList: [[2, 1]],
+				headers: { 
+					0: { sorter: false },
+					9: { sorter: false }
+				}
+			}); 
 
 			// Dismiss flash message
 			$('#flash').click(function() { 

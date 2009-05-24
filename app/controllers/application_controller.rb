@@ -59,7 +59,8 @@ class ApplicationController < ActionController::Base
 
 	def my_page?
 		if logged_in? 
-			return (@user == current_user)
+		  comp =  @user.nil? ? @workout.user : @user
+			return (comp == current_user)
 		else 
 			return false
 		end
