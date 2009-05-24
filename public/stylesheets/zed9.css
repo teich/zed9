@@ -407,8 +407,8 @@ thead, th, td {
 
 .notice-wrap {
 	position: fixed;
-	top: 16px;
-	right: 60px;
+	bottom: 0px;
+	right: 12px;
 	width: 280px;
 	z-index: 9999;
 }

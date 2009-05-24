@@ -367,7 +367,7 @@ function workout_page_graphs(data) {
 					text: $(this).append().html(),
 					stay: false,
 					type: $(this).attr("type"),
-					stayTime: 5000
+					stayTime: 6000
 				});
 			});
 
