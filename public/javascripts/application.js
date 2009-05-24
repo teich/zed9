@@ -297,9 +297,11 @@ function workout_page_graphs(data) {
 				rightkey = $(this).attr("value");
 			});
 			if (leftkey && workout[leftkey]) {
+				$("#left_axis_label").html($(this).attr("display"));
 				graph_data = formatData(leftkey);
 			}
 			if (rightkey && workout[rightkey]) {
+				$("#right_axis_label").html($(this).attr("display"));
 				graph_data2 = formatData(rightkey);
 			}
 			full_size_options = getFullSizeOptions(leftkey, rightkey);
@@ -326,6 +328,7 @@ function workout_page_graphs(data) {
 
 		plotGraphSelected();
 		$(".big_visualization").bind("plothover", full_tooltip);
+		
 
 	});
 

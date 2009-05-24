@@ -110,26 +110,28 @@
 	<% end %>
 	
 	<div id="fullsize_chart_area">
+		<h2 id="right_axis_label" style="float:right">&nbsp;</h2>
 		<% if @workout.hr %>
-			<h2>Heart Rate</h2>
+			<h2 id="left_axis_label">Heart Rate</h2>
 			<div id="json_heartrate_big" class="big_visualization"></div>
 		<% else %>
-			<h2>Speed</h2>
+			<h2 id="left_axis_label">Speed</h2>
 			<div id="json_speed_big" class="big_visualization"></div>
 		<% end %>
-<BR><BR>
-	<div id="choices">
-			<input type="radio" checked="checked" name="g1" value="json_heartrate_big"/>Heart Rate
-			<input type="radio" name="g1" value="json_speed_big"/>Speed
-			<input type="radio" name="g1" value="json_elevation_big"/>Elevation
-			</div>
+		
+		<BR><BR>
+		<div id="choices">
+		<% @workout.graph_fields.each_with_index do |value, i| %>
+			<input type="radio" display="<%= value[1] %>" name="g1" <% if i==0 %>checked="checked" <% end %>value="json_<%=h value[0] %>_big"/><%= value[1] %>
+		<% end %>
+		</div>
 
 			<div id="choices2" style="float:right">
-					<input type="radio" name="g2" value="" checked="checked"/>None
-					<input type="radio" name="g2" value="json_heartrate_big"/>Heart Rate
-					<input type="radio" name="g2" value="json_speed_big"/>Speed
-					<input type="radio" name="g2" value="json_elevation_big"/>Elevation
-					</div>
+			<input type="radio" name="g2" value="" checked="checked"/>None
+			<% for field in @workout.graph_fields do %>
+				<input type="radio" display="<%= field[1] %>" name="g2" value="json_<%=h field[0] %>_big"/><%=h field[1] %>
+			<% end %>
+			</div>
 	</div>
 	
 </div>
