@@ -421,14 +421,13 @@ function workout_page_graphs(data) {
 			$(this).children().removeClass("highlight");
 		});
 
-			// Notices
-			$('.timed').each(function() {
-				jQuery.noticeAdd({
-					text: $(this).append().html(),
-					stay: false,
-					type: $(this).attr("type"),
-					stayTime: 6000
-				});
+		// Notices
+		$('.timed').each(function() {
+			jQuery.noticeAdd({
+				text: $(this).append().html(),
+				stay: false,
+				type: $(this).attr("type"),
+				stayTime: 6000
 			});
 		});
 
