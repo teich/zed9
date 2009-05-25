@@ -1278,8 +1278,8 @@ p.comp_activity {
 	border-radius: 8px;
 	border-top-left-radius: 0px;
 	z-index: 900;
-	height: 132px;
-	width: 228px;
+	height: auto;
+	width: 144px;
 	display: none;
 	position: absolute;
 }
