@@ -360,5 +360,6 @@ class Workout < ActiveRecord::Base
     if !self.elevation.nil? && self.elevation > 0
       fields << ["elevation", "Elevation"]
     end
+    return fields
   end
 end
