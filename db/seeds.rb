@@ -103,7 +103,7 @@ if !ach
                       :description => "Climbed the height of Minnesota's Eagle Mountain in one workout",
                       :controller => "workouts",
                       :action => "create",
-                      :logic => "@workout.elevation > 701"
+                      :logic => "!@workout.elevation.nil? and @workout.elevation > 701"
                     )
 end
 
@@ -113,7 +113,7 @@ if !ach
                       :description => "Climbed the height of Kansas' Mount Sunflower in one workout",
                       :controller => "workouts",
                       :action => "create",
-                      :logic => "@workout.elevation > 1231"
+                      :logic => "!@workout.elevation.nil? and @workout.elevation > 1231"
                     )
 end
 
@@ -123,7 +123,7 @@ if !ach
                       :description => "Climbed the height of Texas' Guadalupe Peak in one workout",
                       :controller => "workouts",
                       :action => "create",
-                      :logic => "@workout.elevation > 2667"
+                      :logic => "!@workout.elevation.nil? and @workout.elevation > 2667"
                     )
 end
 
@@ -133,7 +133,7 @@ if !ach
                       :description => "Climbed the height of California's Mount Whitney in one workout",
                       :controller => "workouts",
                       :action => "create",
-                      :logic => "@workout.elevation > 4418"
+                      :logic => "!@workout.elevation.nil? and @workout.elevation > 4418"
                     )
 end
 
@@ -143,6 +143,6 @@ if !ach
                       :description => "Climbed the height of Nepal's Mount Everest in one workout",
                       :controller => "workouts",
                       :action => "create",
-                      :logic => "@workout.elevation > 8848"
+                      :logic => "!@workout.elevation.nil? and @workout.elevation > 8848"
                     )
 end
