@@ -57,17 +57,30 @@ function id_to_unit(id, pace) {
 
 // HELPER FUNCTIONS
 // Define global graph options
+
+// x and y1 axes
 function axes(value) {
 	var markings = [];
 	var y = value.yaxis.min;
 	var x = value.xaxis.min;
-	markings.push({ yaxis: { from: y, to: y }, color: "#d9d9d9", lineWidth: 1 }, { xaxis: { from: x, to: x }, color: "#d9d9d9", lineWidth: 1 } );
+	var x2 = value.xaxis.max;
+	markings.push({ yaxis: { from: y, to: y }, color: "#d9d9d9", lineWidth: 1 }, { xaxis: { from: x, to: x }, color: "#25a1d6", lineWidth: 1 } );
 	return markings;
 }
 
-function xAxis(axes) {
+// x, y1, and y2 axes
+function axes2(value) {
 	var markings = [];
-	var y = axes.yaxis.min;
+	var y = value.yaxis.min;
+	var x = value.xaxis.min;
+	var x2 = value.xaxis.max;
+	markings.push({ yaxis: { from: y, to: y }, color: "#d9d9d9", lineWidth: 1 }, { xaxis: { from: x, to: x }, color: "#25a1d6", lineWidth: 1 }, { xaxis: { from: x2, to: x2 }, color: "#ffa200", lineWidth: 1 } );
+	return markings;
+}
+
+function xAxis(value) {
+	var markings = [];
+	var y = value.yaxis.min;
 	markings.push({ yaxis: { from: y, to: y }, color: "#d9d9d9", lineWidth: 1 });
 	return markings;
 }
@@ -276,6 +289,7 @@ function workout_page_graphs(data) {
 			}
 			if (id2) {
 				base_options.y2axis = {};
+				base_options.grid = { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 36, markings: axes2 };
 			}
 			if (id2 == "json_speed_big" && workout.activity.pace) {
 				base_options.y2axis = { mode: "time", timeformat: "%M:%S" };
@@ -376,9 +390,7 @@ function workout_page_graphs(data) {
 			});
 		});
 
-		
 		google.setOnLoadCallback(z9MapInit(data.workout.gis));
-
 
 	}
 
