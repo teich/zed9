@@ -265,7 +265,7 @@ function workout_page_graphs(data) {
 			var base_options = {
 				grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 36, markings: axes },
 				// crosshair: { mode: "x", color: '#d9d9d9' },
-				colors: ["#25a1d6", "#3dc10b", "#545454"],
+				colors: ["#25a1d6", "#ffa200", "#545454"],
 				shadowSize: 1,
 				xaxis: { mode: "time", timeformat: "%h:%M", minTickSize: [10, "minute"] },
 				selection: { mode: "xy" }
@@ -290,20 +290,29 @@ function workout_page_graphs(data) {
 			var leftkey;
 			var rightkey;
 			var dataHash = {};
-			$("#choices").find("input:checked").each(function () {
+			$("#y1_axis_options").find("input:checked").each(function () {
 				leftkey = $(this).attr("value");
 			});
-			$("#choices2").find("input:checked").each(function () {
+			$("#y2_axis_options").find("input:checked").each(function () {
 				rightkey = $(this).attr("value");
 			});
 			if (leftkey && workout[leftkey]) {
-				$("#left_axis_label").html($(this).attr("display"));
+				$("#y1_axis_label").html($(this).attr("display_y1"));
 				graph_data = formatData(leftkey);
 			}
 			if (rightkey && workout[rightkey]) {
-				$("#right_axis_label").html($(this).attr("display"));
+				$("#y2_axis_label").html($(this).attr("display_y2"));
 				graph_data2 = formatData(rightkey);
 			}
+
+			$('.none').click(function() {
+				$("#y2_axis_label").hide();
+			})
+				
+			$('.label').click(function() {
+				$("#y2_axis_label").show();
+			})
+
 			full_size_options = getFullSizeOptions(leftkey, rightkey);
 			if (graph_data2.length > 1) {
 				$.plot($('.big_visualization'), [
@@ -317,18 +326,14 @@ function workout_page_graphs(data) {
 				}],
 				full_size_options);
 			}
-			
 
 		}
 			
-		$("#choices").find("input").click(plotGraphSelected);
-		$("#choices2").find("input").click(plotGraphSelected);
-		
-				
+		$("#y1_axis_options").find("input").click(plotGraphSelected);
+		$("#y2_axis_options").find("input").click(plotGraphSelected);
 
 		plotGraphSelected();
 		$(".big_visualization").bind("plothover", full_tooltip);
-		
 
 	});
 
@@ -357,7 +362,7 @@ function workout_page_graphs(data) {
 			tip += '</span>' + unit + ' for this workout</p>';
 			tip += '<p class="comp_my_activity"><span class="value">';
 			tip += data2 + '</span>';
-			tip += unit + ' average for your ' + workout.activity.name.toLowerCase() + '</p>';
+			tip += unit + ' average for ' + workout.activity.name.toLowerCase() + '</p>';
 			tip += '<p class="comp_activity"><span class="value">';
 			tip += data3 + '</span>';
 			tip += unit + ' average for ZED9 ' + workout.activity.name.toLowerCase() + '</p></div >';
@@ -407,6 +412,18 @@ function workout_page_graphs(data) {
 		// Dismiss flash message
 		$('#flash').click(function() { 
 			$(this).slideToggle('medium');
+		});
+
+		// Graph options
+		$('#select_axes').hide();  
+		$('#options_link').bind("click", function() {
+			$('#select_axes').slideToggle('fast');
+			$(this).toggleClass('show_options');	
+		});
+		
+		$('#select_axes .close').click(function() {
+			$('#select_axes').slideToggle('fast');
+			$('#options_link').toggleClass('show_options');	
 		});
 
 		// Toggle view of bests on leaderboards
