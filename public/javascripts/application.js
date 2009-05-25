@@ -18,8 +18,10 @@ function hms(secs) {
 }
 
 function speed_to_pace(speed) {
-	if (speed < 0.1) return "00:00";
-	var pace = 60/speed;
+	if (speed < 0.1) {
+		return "00:00";
+	}
+	var pace = 60 / speed;
 	var min = parseInt(pace, 10);
 	var sec = ((pace % 1) * 60).toFixed(0);
 	if (sec < 10) {
@@ -294,7 +296,7 @@ function workout_page_graphs(data) {
 			if (id2 == "json_speed_big" && workout.activity.pace) {
 				base_options.y2axis = { mode: "time", timeformat: "%M:%S" };
 			}
-			return base_options
+			return base_options;
 		}
 		
 		function plotGraphSelected() {
@@ -321,11 +323,11 @@ function workout_page_graphs(data) {
 
 			$('.none').click(function() {
 				$("#y2_axis_label").hide();
-			})
+			});
 				
 			$('.label').click(function() {
 				$("#y2_axis_label").show();
-			})
+			});
 
 			full_size_options = getFullSizeOptions(leftkey, rightkey);
 			if (graph_data2.length > 1) {
@@ -441,12 +443,11 @@ function workout_page_graphs(data) {
 
 		// Close graph options if click anywhere outside selection window
 		$(window).bind('click', function(ev) {
-		  if ($(ev.target).is('#graph_options_wrapper') || $(ev.target).parents('#graph_options_wrapper').length )
-		    return;
-		  else
+		  if (!($(ev.target).is('#graph_options_wrapper') || $(ev.target).parents('#graph_options_wrapper').length )) {
 				$('#select_axes').slideToggle('fast');
 				$('#options_link').toggleClass('show_options');	
-		})
+			}
+		});
 		
 		// Toggle view of bests on leaderboards
 		$('div.more').hide();  
@@ -477,7 +478,7 @@ function workout_page_graphs(data) {
 			jQuery.noticeAdd({
 				text: $(this).append().html(),
 				stay: true,
-				type: $(this).attr("type"),
+				type: $(this).attr("type")
 			});
 		});
 
