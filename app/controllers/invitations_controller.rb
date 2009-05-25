@@ -1,4 +1,6 @@
 class InvitationsController < ApplicationController
+  after_filter :check_achievements, :only => [:create]
+  
 	def new
 		@invitation = Invitation.new
 	end
@@ -19,4 +21,17 @@ class InvitationsController < ApplicationController
 			render :action => 'new'
 		end
 	end
+	
+	
+  def check_achievements
+    if logged_in?
+    	achievements = Achievement.find(:all, :conditions => ['controller = ? AND action = ?', params[:controller], params[:action]])
+    	achievements.each do |a|
+    		if eval a.logic and !current_user.awarded?(a)
+    			current_user.award(a)
+    			add_flash(:achievement, "You've earned a new achievement: #{a.name}")
+    		end
+    	end
+    end
+  end
 end
