@@ -1236,12 +1236,11 @@ p.comp_activity {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
-/*  border: 1px solid #d9d9d9;*/
 	background: white url(/images/closed.png) no-repeat right;	
 }
 
 #graph_options_wrapper .show_options {
-	padding: 4px 14px 4px 8px;
+	padding: 4px 14px 0px 8px;
 	-moz-border-radius-topleft: 4px;
 	-moz-border-radius-topright: 4px;
 	-moz-border-radius-bottomleft: 0px;
@@ -1256,24 +1255,29 @@ p.comp_activity {
 	border-bottom-right-radius: none;
   border: 1px solid #d9d9d9;
 	border-bottom: none;
+	border-top: none;
+	border-left: none;
 	background: #f0f0f0 url(/images/open.png) no-repeat right;	
+  opacity: .8;
+	z-index: 999;
 }
 
 #select_axes {
   border: 1px solid #d9d9d9;
 	border-top: none;
+	border-left: none;
   padding: 8px;
 	font-size: 14px;
 	text-align: left;
   background: #f0f0f0;
-  opacity: .9;
+  opacity: .8;
 	-moz-border-radius: 8px;
 	-moz-border-radius-topleft: 0px;
 	-webkit-border-radius: 8px;
 	-webkit-border-top-left-radius: 8px;
 	border-radius: 8px;
 	border-top-left-radius: 0px;
-	z-index: 1000;
+	z-index: 900;
 	height: 132px;
 	width: 228px;
 	display: none;
