@@ -578,7 +578,7 @@ thead, th, td {
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
-	z-index: 1000;
+	z-index: 500;
 }
 
 .tooltip_extra_info {
