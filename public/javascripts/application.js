@@ -433,11 +433,21 @@ function workout_page_graphs(data) {
 			$(this).toggleClass('show_options');	
 		});
 		
+		// Close graph options if click on x in corner
 		$('#select_axes .close').click(function() {
 			$('#select_axes').slideToggle('fast');
 			$('#options_link').toggleClass('show_options');	
 		});
 
+		// Close graph options if click anywhere outside selection window
+		$(window).bind('click', function(ev) {
+		  if ($(ev.target).is('#graph_options_wrapper') || $(ev.target).parents('#graph_options_wrapper').length )
+		    return;
+		  else
+				$('#select_axes').slideToggle('fast');
+				$('#options_link').toggleClass('show_options');	
+		})
+		
 		// Toggle view of bests on leaderboards
 		$('div.more').hide();  
 		$('div.leaderboard').click(function() { 
