@@ -152,8 +152,7 @@ thead, th, td {
 	text-align: left;
 }
 
-.content ul {
-	list-style-type: disc;
+.content ul, ol {
 	padding-left: 1em;
 	margin-left: 2em;
 	list-style-position: outside;
@@ -205,7 +204,21 @@ thead, th, td {
 	cursor: pointer;
 }
 
-.sortable th:hover {
+.sortable2 th.headerSortUp {
+	background: #f7fdff url(/images/dn.png) no-repeat center right;
+	font-weight: 500;
+	color: #545454;
+	cursor: pointer;
+}
+
+.sortable2 th.headerSortDown {
+	background: #f7fdff url(/images/up.png) no-repeat center right;
+	font-weight: 500;
+	color: #545454;
+	cursor: pointer;
+}
+
+.sortable th:hover, .sortable2 th:hover {
 	color: #25a1d6;
 	cursor: pointer;
 }
@@ -365,6 +378,133 @@ thead, th, td {
 	padding-top: 6px; /*Position adjustment to align text with left column*/
 }
 
+/*---- Device Comparison Guide ----*/
+
+#device_comparison .explanation {
+	display: none;
+}
+
+#device_comparison table {
+	width: 100%;
+	padding: 24px 0px 36px 0px;
+}
+
+#device_comparison th, #device_comparison td {
+	font-size: 12px;
+	font-weight: 100;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom:1px dotted #d9d9d9;	
+}
+
+#device_comparison th, #device_comparison td.category {
+	border-right: 1px dotted #d9d9d9;	
+	border-top: 1px dotted #d9d9d9;	
+	border-collapse: collapse;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	-moz-border-radius-bottomleft: 0px;
+	-moz-border-radius-bottomright: 0px;
+	-webkit-border-top-right-radius: 4px;
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-bottom-left-radius: none;
+	-webkit-border-bottom-right-radius: none;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: none;
+	border-bottom-right-radius: none;
+}
+
+#device_comparison th {
+	letter-spacing: 0px;
+	font-size: 12px;
+	padding: 4px 8px;
+}
+
+#device_comparison td {
+	border-right:1px dotted #d9d9d9;	
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomleft: 4px;
+	-moz-border-radius-bottomright: 0px;
+	-webkit-border-top-right-radius: 0px;
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-bottom-left-radius: 4px;
+	-webkit-border-bottom-right-radius: none;
+	border-top-right-radius: 0px;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: none;
+	font-weight: 100;
+}
+
+#device_comparison th.first, #device_comparison td.first {
+	text-align: left;
+	font-weight: 500;
+	border-left: 1px dotted #d9d9d9;	
+	border-right: none;	
+	padding-left: 8px;
+	-moz-border-radius-bottomleft: 4px;
+	-webkit-border-bottom-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+#device_comparison th.second, #device_comparison td.second {
+	border-left: 1px dotted #d9d9d9;	
+}
+
+#device_comparison td.category {
+	font-size: 11px;
+	text-transform: uppercase;
+	color: #9f9f9f;
+	letter-spacing: 2px;
+	border-bottom: none;
+}
+
+#device_comparison td.category.first {
+	border-top: none;
+}
+
+#device_comparison td.noleftborder {
+	border-left: none;
+}
+
+#device_comparison th.model {
+	text-align: center;
+}
+
+#device_comparison img.category_info {
+	height: 12px;
+}
+
+#device_comparison td.looks img {
+ 	width: 36px;
+	display: block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#device_comparison .description {
+	font-size: 12px;
+	display: none;
+}
+
+#device_comparison .pros, #device_comparison .cons {
+	width: 144px;
+}
+	
+#device_comparison p {
+	padding: 0px 0px 12px 0px;
+}
+
+#device_comparison .recommendation {
+	font-weight: 500;
+}
+
+#device_comparison h4 {
+	padding: 24px 0px 12px 0px;
+}
 
 /*---- Get Satisfaction Contact Widget*/
 
@@ -629,6 +769,7 @@ table.newsfeed {
 	color: #9f9f9f;
 	border: none;
 	padding: 6px 8px;	
+	vertical-align: middle;
 }
 
 .newsfeed .first_column {

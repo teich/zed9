@@ -396,7 +396,7 @@ function workout_page_graphs(data) {
 
 	}
 
-
+	
 	// THIS IS THE MAIN AREA.  CALLED ON PAGE LOAD
 	$(document).ready(function() {
 
@@ -420,6 +420,14 @@ function workout_page_graphs(data) {
 			headers: { 
 				0: { sorter: false },
 				9: { sorter: false }
+			}
+		}); 
+
+		// Device comparison table sorting 
+		$("#device_grid").tablesorter({
+			sortList: [[12, 1]],
+			headers: { 
+				1: { sorter: false }
 			}
 		}); 
 
