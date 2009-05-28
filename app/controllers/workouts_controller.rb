@@ -78,21 +78,22 @@ class WorkoutsController < ApplicationController
 				@workout.build_from_imported!(iw)
 
 
-				overlap = @workout.overlap?(current_user)
-
-				if @workout.save
-					add_flash(:notice, 'Workout added!')
-					if overlap.size > 0
-						redirect_to workout_overlaps_path(@workout)
-					else
-						redirect_to @workout
-					end
-				else
-					add_flash(:alert, "Unable to save workout for some lame reason")
-					render :action => "new"
-				end
-			end
-	end
+        overlap = @workout.overlap?(current_user)
+        transaction do
+          if @workout.save
+            add_flash(:notice, 'Workout added!')
+            if overlap.size > 0
+              redirect_to workout_overlaps_path(@workout)
+            else
+              redirect_to @workout
+            end
+          else
+            add_flash(:alert, "Unable to save workout for some lame reason")
+            render :action => "new"
+          end
+        end
+      end
+    end
 
 
 	def update
