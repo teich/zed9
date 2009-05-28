@@ -59,41 +59,24 @@ class WorkoutsController < ApplicationController
 	def edit
 	end
 
-	def create
-			@workout = current_user.workouts.create!(params[:workout])
-			if @workout.devices.first.nil?
-				@workout.destroy
-				add_flash(:alert, "Please select a file to upload")
-				redirect_to :action => "new", :device_type => params[:device_type]
-			else
-				# This line may need to be changed for S3...
-				uploaded_data = ensure_string(@workout.devices.first.source.to_file)
-		
-				importer = Importer::Garmin.new(:data => uploaded_data) if params[:device_type] == "garmin"
-				importer = Importer::Polar.new(:data => uploaded_data, :time_zone => current_user.time_zone) if params[:device_type] == "polar"
-				importer = Importer::Suunto.new(:data => uploaded_data, :time_zone => current_user.time_zone) if params[:device_type] == "suunto"
-				importer = Importer::GPX.new(:data => uploaded_data) if params[:device_type] == "gpx"
-
-				iw = importer.restore
-				@workout.build_from_imported!(iw)
-
-
-        overlap = @workout.overlap?(current_user)
-        transaction do
-          if @workout.save
-            add_flash(:notice, 'Workout added!')
-            if overlap.size > 0
-              redirect_to workout_overlaps_path(@workout)
-            else
-              redirect_to @workout
-            end
-          else
-            add_flash(:alert, "Unable to save workout for some lame reason")
-            render :action => "new"
-          end
-        end
+  def create
+    @workout = current_user.workouts.create(params[:workout])
+    @workout.importing = true
+    if @workout.devices.first.nil?
+      @workout.destroy
+      add_flash(:alert, "Please select a file to upload")
+      redirect_to :action => "new", :device_type => params[:device_type]
+    else
+      if @workout.save
+        Delayed::Job.enqueue @workout
+        add_flash(:notice, 'Workout now processing.  This may take up to 1 minute')
+        redirect_to user_workouts_path(current_user)
+      else
+        add_flash(:alert, "Unable to save workout for some lame reason")
+        render :action => "new"
       end
     end
+  end
 
 
 	def update
@@ -128,18 +111,6 @@ class WorkoutsController < ApplicationController
 			redirect_to root_path 
 		end
 	end
-
-  	def ensure_string(uploaded_file)
-  	  logger.debug "\n\n\n\n\nTHIS FILE IS A #{uploaded_file.class}\n\n\n\n\n"
-  		if uploaded_file.is_a?(String) 
-  		  return uploaded_file
-  	  elsif uploaded_file.is_a?(File)
-  		  return uploaded_file.read
-		  elsif uploaded_file.is_a?(RightAws::S3::Key)
-		    return uploaded_file.data
-  	  end
-  	end
-
 
 	def find_user_and_require_shared
 		@user = User.find_by_login(params[:user_id])

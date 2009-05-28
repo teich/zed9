@@ -15,6 +15,38 @@ class Workout < ActiveRecord::Base
 
 	acts_as_taggable_on   :tags
 
+	
+  def perform
+    uploaded_data = ensure_string(self.devices.first.source.to_file)
+    type = Importer.file_type(self.devices.first.source_file_name)
+    case type
+    when "GARMIN_XML"
+      importer = Importer::Garmin.new(:data => uploaded_data)
+    when "POLAR_HRM"
+      importer = Importer::Polar.new(:data => uploaded_data, :time_zone => self.user.time_zone)
+    when "SUUNTO"
+      importer = Importer::Suunto.new(:data => uploaded_data, :time_zone => self.user.time_zone)
+    when "GPX"
+      importer = Importer::GPX.new(:data => uploaded_data)
+    end
+
+    iw = importer.restore
+    self.build_from_imported!(iw)
+    self.importing = false
+    self.save
+  end
+
+	def ensure_string(uploaded_file)
+		if uploaded_file.is_a?(String) 
+		  return uploaded_file
+	  elsif uploaded_file.is_a?(File)
+		  return uploaded_file.read
+	  elsif uploaded_file.is_a?(RightAws::S3::Key)
+	    return uploaded_file.data
+	  end
+	end
+	
+	
 	def get_hr
 		trackpoints.map {|a|a.heart_rate}
 	end
