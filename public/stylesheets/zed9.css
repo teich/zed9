@@ -152,7 +152,7 @@ thead, th, td {
 	text-align: left;
 }
 
-.content ul, ol {
+.content ul {
 	padding-left: 1em;
 	margin-left: 2em;
 	list-style-position: outside;
@@ -504,6 +504,13 @@ thead, th, td {
 
 #device_comparison h4 {
 	padding: 24px 0px 12px 0px;
+}
+
+ol {
+	padding-left: 1em;
+	margin-left: 2em;
+	list-style-position: outside;
+	padding-bottom: 12px;
 }
 
 /*---- Get Satisfaction Contact Widget*/
