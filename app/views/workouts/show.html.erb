@@ -19,6 +19,8 @@
 
 			<p id="workout_notes"><%= h @workout.notes %></p>
 
+			<!-- Condition to only display Tags field when there are tags, or prompt owner to tag -->
+			<% if @workout.tags.size > 0 %>
 			<div id="tag_set">
 				<span id="tags_header">Tags:<% if my_page? %><% end %></span>
 				<span id="tags_list">
@@ -38,7 +40,10 @@
 				<% end %>
 				</span>
 			</div>	
-
+			<% elsif my_page? && @workout.tags.size == 0 %>
+			<span class="action"><%= link_to 'Tag this workout', edit_workout_path(@workout) %></span>
+			<% end %>
+			
 	</div>	
 	
 </div>
@@ -153,6 +158,6 @@
 		<% end %>
 
 	</div>
-	
+
 </div>
 

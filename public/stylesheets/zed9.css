@@ -1009,6 +1009,15 @@ table.newsfeed {
 	width: 220px;
 }
 
+#recent_comments {
+	
+}
+
+.powered_by {
+	font-size: 11px;
+	color: #9f9f9f;
+}
+
 /*---- Invite ----*/
 
 #send_invite th {
@@ -1121,6 +1130,10 @@ td .points {
 	background-color: #f7fdff;
 }
 
+.importing {
+	color: #9f9f9f;
+}
+
 /*---- Add Workout ----*/
 
 /*Content div id */
@@ -1200,7 +1213,7 @@ td .points {
 }
 
 #workout_notes {
-	font-style: italic;
+	font-style: oblique;
 }
 
 #tag_set {

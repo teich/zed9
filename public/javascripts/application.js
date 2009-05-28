@@ -381,7 +381,7 @@ function workout_page_graphs(data) {
 			tip += unit + ' average for ' + workout.activity.name.toLowerCase() + '</p>';
 			tip += '<p class="comp_activity"><span class="value">';
 			tip += data3 + '</span>';
-			tip += unit + ' average for ZED9 ' + workout.activity.name.toLowerCase() + '</p></div >';
+			tip += unit + ' ZED9 average for ' + workout.activity.name.toLowerCase() + '</p></div >';
 
 			$(this).qtip({
 				content: tip,
@@ -467,6 +467,14 @@ function workout_page_graphs(data) {
 
 		// Workouts index row highlight on hover
 		$('tr.newsfeed_workout_summary').hover(function() {
+			$(this).children().addClass("highlight");
+		},
+		function() {
+			$(this).children().removeClass("highlight");
+		});
+
+		// Guide row highlight on hover
+		$('tr.model_details').hover(function() {
 			$(this).children().addClass("highlight");
 		},
 		function() {

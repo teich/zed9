@@ -362,4 +362,5 @@ class Workout < ActiveRecord::Base
     end
     return fields
   end
+
 end
