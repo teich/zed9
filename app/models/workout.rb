@@ -2,7 +2,7 @@ class Workout < ActiveRecord::Base
 	belongs_to  :user
 	belongs_to  :activity
 	has_many    :trackpoints
-	has_many	:devices
+	has_many    :devices
 	
 	accepts_nested_attributes_for :devices
 
@@ -29,7 +29,6 @@ class Workout < ActiveRecord::Base
     when "GPX"
       importer = Importer::GPX.new(:data => uploaded_data)
     end
-
     iw = importer.restore
     self.build_from_imported!(iw)
     self.importing = false

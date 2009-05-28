@@ -68,7 +68,7 @@ class WorkoutsController < ApplicationController
       redirect_to :action => "new", :device_type => params[:device_type]
     else
       if @workout.save
-        Delayed::Job.enqueue @workout
+        Delayed::Job.enqueue WorkoutJob.new(@workout.id)
         add_flash(:notice, 'Workout now processing.  This may take up to 1 minute')
         redirect_to user_workouts_path(current_user)
       else
