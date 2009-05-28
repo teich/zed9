@@ -1,18 +1,14 @@
 class Workout < ActiveRecord::Base
-  # this just makes sure we have the trackpoint object so the deserialization works.
-  Trackpoint
-  
 	belongs_to  :user
 	belongs_to  :activity
- 	has_many    :devices
+	has_many    :trackpoints
+	has_many	:devices
 	
 	accepts_nested_attributes_for :devices
 
 	validates_presence_of	:name
 	validates_length_of 	:name,		:maximum => 100
 	validates_length_of		:notes,		:maximum => 600
-	
-	serialize :trackpoints
 	
 
 	validates_presence_of :user_id
@@ -302,7 +298,6 @@ class Workout < ActiveRecord::Base
 	end
 
 	def build_from_imported!(iw)
-	  self.trackpoints = []
 		self.hr = iw.average_hr
 		self.speed = iw.average_speed
 		self.distance = iw.distance
@@ -311,7 +306,7 @@ class Workout < ActiveRecord::Base
 		self.elevation = iw.altitude_gain
 
 		iw.trackpoints.each do |tp|
-			wtp = Trackpoint.new
+			wtp = trackpoints.build()
 
 			wtp.altitude = tp.altitude
 			wtp.distance = tp.distance
