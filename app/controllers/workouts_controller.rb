@@ -79,18 +79,16 @@ class WorkoutsController < ApplicationController
 
 
         overlap = @workout.overlap?(current_user)
-        transaction do
-          if @workout.save
-            add_flash(:notice, 'Workout added!')
-            if overlap.size > 0
-              redirect_to workout_overlaps_path(@workout)
-            else
-              redirect_to @workout
-            end
+        if @workout.save
+          add_flash(:notice, 'Workout added!')
+          if overlap.size > 0
+            redirect_to workout_overlaps_path(@workout)
           else
-            add_flash(:alert, "Unable to save workout for some lame reason")
-            render :action => "new"
+            redirect_to @workout
           end
+        else
+          add_flash(:alert, "Unable to save workout for some lame reason")
+          render :action => "new"
         end
       end
     end
