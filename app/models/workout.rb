@@ -32,9 +32,28 @@ class Workout < ActiveRecord::Base
     iw = importer.restore
     self.build_from_imported!(iw)
     self.importing = false
-    self.save
+    if self.save
+      self.check_achievements
+      return true
+    else
+      puts "something went wrong"
+      return false
+    end
+    
   end
 
+  def check_achievements
+    achievements = Achievement.find(:all, :conditions => ['controller = ? AND action = ?', "workouts", "create"])
+    @workout = self
+    current_user = self.user
+    achievements.each do |a|
+      if eval a.logic and !self.user.awarded?(a)
+        self.user.award(a)
+        #add_flash(:achievement, "You've earned a new achievement: #{a.name}")
+      end
+    end
+  end
+  
 	def ensure_string(uploaded_file)
 		if uploaded_file.is_a?(String) 
 		  return uploaded_file
