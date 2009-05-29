@@ -344,7 +344,7 @@ class Workout < ActiveRecord::Base
 
 	def overlaps?
 		overlapping = self.user.workouts.find(:all, :conditions => ['start_time <= ? AND end_time >= ?', self.end_time, self.start_time])
-		overlapping.map { |o| o.id }
+		overlapping.size > 1
 	end
 
 	def build_from_imported!(iw)
