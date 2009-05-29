@@ -11,7 +11,7 @@
 	<p>Would you like to merge this workout with the following?</p>
 	<ul>
 		<% for item in @overlap %>
-		<li><span class="name"><%= h item.name %>,</span> last edited on <%= h activity_timestamp(item.updated_at) %> &mdash; <%= link_to 'merge', workout_overlap_path(@workout, item), :method => :delete %></li>
+		<li><span class="name"><%= link_to item.name, item %>,</span> last edited on <%= h activity_timestamp(item.updated_at) %> &mdash; <%= link_to 'merge', workout_overlap_path(@workout, item), :method => :delete %></li>
 		<% end %>
 	</ul>
 	<p>Keep the data for this workout separate &mdash; <%= link_to "do not merge", @workout %></p>
