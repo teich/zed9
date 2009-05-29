@@ -1132,6 +1132,7 @@ td .points {
 
 .importing {
 	color: #9f9f9f;
+	text-align: left;
 }
 
 /*---- Add Workout ----*/
@@ -1220,98 +1221,6 @@ td .points {
 	font-size: 12px;
 }
 
-
-/*.device_name {
-	font-weight: 500;
-}
-
-#locating_files {
-	float: right;
-	right: 0px;
-	z-index: -100;
-	text-align: left;
-	width: 424px;
-	padding-top: 18px;
-	font-size: 12px;
-}
-
-
-#locating_files ol {
-	margin-left: 8px;
-	padding-left: 1em;
-	padding-bottom: 0px;
-}
-
-#locating_files li {
-	font-size: 12px;
-}
-
-#locating_files .tab {
-	position: relative;
-	top: 1px;
-	background: #f0f0f0;
-  border: 1px solid #d9d9d9;
-	border-bottom: 0px;
-  padding: 4px 12px;
-	font-size: 14px;	
-	text-align: center;
-	-moz-border-radius-topleft: 8px;
-	-moz-border-radius-topright: 8px;
-	-moz-border-radius-bottomleft: 0px;
-	-moz-border-radius-bottomright: 0px;
-	-webkit-border-top-right-radius: 8px;
-	-webkit-border-top-left-radius: 8px;
-	-webkit-border-bottom-left-radius: none;
-	-webkit-border-bottom-right-radius: none;
-	border-top-right-radius: 8px;
-	border-top-left-radius: 8px;
-	border-bottom-left-radius: none;
-	border-bottom-right-radius: none;
-	width: auto;
-	display: inline-block;
-	z-index: 100;
-}
-
-#locating_files .locating_details {
-	background: #f0f0f0;
-  border: 1px solid #d9d9d9;
-  padding: 12px;
-	font-size: 12px;
-	font-weight: 100;
-	text-align: left;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;	
-	-moz-border-radius-topLeft: 0px;
-	-webkit-border-top-left-radius: 0px;
-	border-radius: 8px;	
-	border-top-left-radius: 0px;	
-	clear: both;
-}
-
-#locating_files .notselected {
-	background: #ffffff;
-	z-index: -100;
-}
-
-#locating_files #pc {
-}
-
-#locating_files #macos {
-	display: none;
-}
-
-
-#locating_files .wrapper {
-	border-bottom: 1px solid #d9d9d9;
-	background:#f0f0f0 url(/images/closed.png) no-repeat scroll right 14px;
-}
-
-#locating_files .open {
-	padding-bottom: 12px;
-	background:#f0f0f0 url(/images/open.png) no-repeat scroll right 14px;
-}
-*/
 /*Span style for examples of supported devices*/
 .device_details {
 	font-size: 12px;
@@ -1421,7 +1330,6 @@ a.delete-x {
 #workout_stats th {
 	font-size:18px;			
 	text-align: right;
-/*	padding-left: 12px; swap this in when enabling big graph selection*/
 	padding-left: 0px;
 }
 
@@ -1429,20 +1337,6 @@ a.delete-x {
 	text-align: left;
 	color:#25a1d6;
 }
-
-/*These styles add hovering and an arrow to the left of the sparklines/bars for selection*/
-/*#workout_stats .graphed {
-	background: url(/images/closed.png) no-repeat left 14px;
-}
-
-#workout_stats tr:hover {
-	background: url(/images/closed.png) no-repeat left 14px;
-	color:#25a1d6;
-}
-
-#workout_stats tr.graphed:hover {
-	color: #545454;
-}*/
 
 .stat, .number {
 	font-size: 14px;
@@ -1648,6 +1542,18 @@ p.comp_activity {
 
 
 /*---- Workout Overlap ----*/
+
+#overlaps {
+	float: right;
+	width: auto;
+	font-weight: 500;
+	text-align: center;
+	font-size: 14px;
+	top: 12px;
+	position: relative;
+	padding-left: 40px;
+	background: url(/images/info_icon.png) no-repeat left;
+}
 
 #overlap {
 	text-align: left;
