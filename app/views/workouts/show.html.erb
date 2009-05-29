@@ -14,7 +14,8 @@
 		
 		<% if my_page? && @workout.overlaps? %>
 		<div id="overlaps">
-			This workout overlaps with one or more workouts.  <%= link_to 'Click here to merge them together', workout_overlaps_path(@workout) %>
+			This overlaps with another workout.<br>
+			<%= link_to 'Check out your merging options.', workout_overlaps_path(@workout) %>
 		</div>
 		<% end %>
 
