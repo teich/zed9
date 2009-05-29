@@ -37,6 +37,9 @@ class WorkoutsController < ApplicationController
 	def show
 		# need for creating new tags.  
 		@tagging = Tagging.new
+		if @workout.overlaps?
+		  add_flash(:alert, "This workout can be <a href=\"\">merged with a previous</a> workout")
+	  end
 
 		respond_to do |format|
 			format.html
