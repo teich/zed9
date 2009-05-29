@@ -32,6 +32,7 @@ Rails::Initializer.run do |config|
   config.gem "newrelic_rpm" 
   config.gem "teich-hrmparser", :lib => "hrmparser", :version => "0.4.8", :source => "http://gems.github.com"
   config.gem "thoughtbot-paperclip", :lib => "paperclip"
+  config.gem "disqus"
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
