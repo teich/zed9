@@ -18,10 +18,3 @@ config.action_mailer.raise_delivery_errors = false
 
 #config.gem "josevalim-rails-footnotes",  :lib => "rails-footnotes", :source => "http://gems.github.com"
 
-# # Disqus comments
-# config.after_initialize do
-#   Disqus::defaults[:account] = "ZED9"
-# end
-# 
-# # Loads the commenting system
-# disqus_thread = true

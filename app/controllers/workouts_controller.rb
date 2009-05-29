@@ -35,6 +35,7 @@ class WorkoutsController < ApplicationController
 	end
 
 	def show
+  	
 		# need for creating new tags.  
 		@tagging = Tagging.new
 
