@@ -11,6 +11,12 @@
 				<a href="../">Join ZED9 to track your workouts and see how you measure up</a>
 			</div>
 		<% end %>
+		
+		<% if my_page? && @workout.overlaps? %>
+		<div id="overlaps">
+			This workout overlaps with one or more workouts.  <%= link_to 'Click here to merge them together', workout_overlaps_path(@workout) %>
+		</div>
+		<% end %>
 
 		<h1><!-- <img class="activity_icon" src="/images/running.jpg" width="37" height="40"> -->
 			<%= link_to image_tag(@workout.activity.root.icon_path, :class => "activity_icon"), activity_path(@workout.activity) %><%=h @workout.name %>  <% if my_page? %><span class="action"><%= link_to 'edit', edit_workout_path(@workout) %></span><% else %><span class="by">by</span> <%= link_to @workout.user.display_name, user_path(@workout.user) %> <span class="points">(<%=h @workout.user.points %> points)</span> <% end %></h1>
