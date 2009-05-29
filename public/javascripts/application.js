@@ -467,7 +467,7 @@ function workout_page_graphs(data) {
 
 
 		// Accordion on new workout
-    $("#locating").accordion({ autoHeight: false }, { header: 'h5' }, { collapsible: true }, { active: false });
+    $("#locating").accordion({ autoHeight: false }, { header: 'h4' }, { collapsible: true }, { active: false });
 		
 		$('.accordion_header').click(function() {
 			$('.accordion_header_active').next('.accordion_content_active').removeClass('accordion_content_active');
