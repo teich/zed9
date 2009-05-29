@@ -22,7 +22,7 @@ ActionController::Routing::Routes.draw do |map|
 	map.login '/login', :controller => 'user_sessions', :action => 'new' 
 
 
-	map.home ':page', :controller => 'home', :action => 'show', :page => /about|contact|devices/
+	map.home ':page', :controller => 'home', :action => 'show', :page => /about|contact|devices|guide/
 	map.root :controller => "root", :action => "index"
 	map.connect '*path' , :controller => 'four_oh_fours'
 

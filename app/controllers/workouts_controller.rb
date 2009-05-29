@@ -7,7 +7,6 @@ class WorkoutsController < ApplicationController
 	before_filter :find_and_bounce, :only => [:show]
 	before_filter :find_user_and_require_shared, :only => [:index]
 	before_filter :upload_if_no_workouts, :only => [:index]
-	after_filter  :check_achievements, :only => [:create]
 	
 	def index
 
@@ -38,6 +37,9 @@ class WorkoutsController < ApplicationController
 	def show
 		# need for creating new tags.  
 		@tagging = Tagging.new
+		if @workout.overlaps?
+		  add_flash(:alert, "This workout can be <a href=\"\">merged with a previous</a> workout")
+	  end
 
 		respond_to do |format|
 			format.html
@@ -69,7 +71,7 @@ class WorkoutsController < ApplicationController
     else
       if @workout.save
         Delayed::Job.enqueue WorkoutJob.new(@workout.id)
-        add_flash(:notice, 'Workout now processing.  This may take up to 1 minute')
+        add_flash(:notice, 'Now processing your workout data... This may take up to a minute.')
         redirect_to user_workouts_path(current_user)
       else
         add_flash(:alert, "Unable to save workout for some lame reason")
@@ -133,13 +135,4 @@ class WorkoutsController < ApplicationController
     redirect_to new_user_workout_path(current_user) if my_page? && current_user.workouts.size == 0 
   end
   
-  def check_achievements
-  	achievements = Achievement.find(:all, :conditions => ['controller = ? AND action = ?', params[:controller], params[:action]])
-  	achievements.each do |a|
-  		if eval a.logic and !current_user.awarded?(a)
-  			current_user.award(a)
-  			add_flash(:achievement, "You've earned a new achievement: #{a.name}")
-  		end
-  	end
-  end
 end
