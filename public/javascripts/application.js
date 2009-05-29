@@ -419,7 +419,7 @@ function workout_page_graphs(data) {
 			sortList: [[2, 1]],
 			headers: { 
 				0: { sorter: false },
-				9: { sorter: false }
+				9: { sorter: false },
 			}
 		}); 
 
@@ -465,6 +465,17 @@ function workout_page_graphs(data) {
 			$(this).toggleClass('open');
 		});
 
+
+		// Accordion on new workout
+    $("#locating").accordion({ autoHeight: false }, { header: 'h5' }, { collapsible: true }, { active: false });
+		
+		$('.accordion_header').click(function() {
+			$('.accordion_header_active').next('.accordion_content_active').removeClass('accordion_content_active');
+		  $('.accordion_header_active').removeClass('accordion_header_active');
+			$(this).next('.accordion_content').addClass('accordion_content_active');
+			$(this).addClass('accordion_header_active');
+		});
+		
 		// Workouts index row highlight on hover
 		$('tr.newsfeed_workout_summary').hover(function() {
 			$(this).children().addClass("highlight");

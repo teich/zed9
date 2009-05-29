@@ -1,74 +1,89 @@
-<% form_for @workout, :url => submit_url, :action => 'upload', :html => { :multipart => true } do |f| %>
-<%= f.error_messages %>
+<div class="left_column">
+	<% form_for @workout, :url => submit_url, :action => 'upload', :html => { :multipart => true } do |f| %>
+	<%= f.error_messages %>
 
-<!-- TODO Not the Rails Way -->
-<%= hidden_field_tag 'device_type', params[:device_type] %>
+	<!-- TODO Not the Rails Way -->
+	<%= hidden_field_tag 'device_type', params[:device_type] %>
 
-<table id="edit_workout" class="form">
-	<tr>
-		<th><%= f.label :name, "Workout name" %></th>
-		<td><%= f.text_field :name %></td>
-	</tr>
-	<tr>
-		<th><%= f.label :notes, "Notes" %></th>
-		<td><%= f.text_area :notes, :size => "41x4" %></td>
-	<tr>
-		<th class="annotated"><%= f.label :tag_list, "Tags" %></th>
-		<td class="annotated"><%= f.text_field :tag_list %></td>
-	</tr>
-	<tr>
-		<th></th>
-		<td class="field_note">Optional: tags give you another way to find and compare workouts in your own history and across ZED9. Separate tags with a comma.</td>
-	</tr>
-	<tr>
-		<th><%= f.label :activity, "Activity type" %></th>
-		<td><select id="workout_activity_id" name="workout[activity_id]">
-		<%= option_groups_from_collection_for_select(Activity.find_all_by_parent_id(nil), :children, :name, :id, :name, @workout.activity.id) %>
-		</select></td>
-	</tr>
-	<tr>
-		<% f.fields_for :devices do |d_f| %>
-		<th class="annotated"><%= d_f.label "File location" %></th>
-		<td class="annotated"><%= d_f.file_field :source, :size => 20 %></td>
-		<% end %>
-	</tr>
-	<tr>
-		<th>&nbsp;</th>
-		<td class="field_note">Select a .tcx, .hrm, .sdf, or .gpx file</td>
-	<tr>
-		<th><%= f.label :shared %></th>
-		<td><%= f.check_box :shared %></td>
-	</tr>
-	<tr>
-		<th><%= link_to 'Cancel', user_workouts_path(current_user), :class => "submit_no_button" %></th>
-		<td><%= f.submit "Save", :class => "submit", :disable_with => "Uploading... please wait" %></td>
-	</tr>
-</table>
+	<table id="edit_workout" class="form">
+		<tr>
+			<th><%= f.label :name, "Workout name" %></th>
+			<td><%= f.text_field :name %></td>
+		</tr>
+		<tr>
+			<th><%= f.label :notes, "Notes" %></th>
+			<td><%= f.text_area :notes, :size => "41x4" %></td>
+		<tr>
+			<th class="annotated"><%= f.label :tag_list, "Tags" %></th>
+			<td class="annotated"><%= f.text_field :tag_list %></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td class="field_note">Optional: tags give you another way to find and compare workouts in your own history and across ZED9. Separate tags with a comma.</td>
+		</tr>
+		<tr>
+			<th><%= f.label :activity, "Activity type" %></th>
+			<td><select id="workout_activity_id" name="workout[activity_id]">
+			<%= option_groups_from_collection_for_select(Activity.find_all_by_parent_id(nil), :children, :name, :id, :name, @workout.activity.id) %>
+			</select></td>
+		</tr>
+		<tr>
+			<% f.fields_for :devices do |d_f| %>
+			<th class="annotated"><%= d_f.label "File location" %></th>
+			<td class="annotated"><%= d_f.file_field :source, :size => 20 %></td>
+			<% end %>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td class="field_note">Select a .tcx, .hrm, .sdf, or .gpx file</td>
+		<tr>
+			<th><%= f.label :shared %></th>
+			<td><%= f.check_box :shared %></td>
+		</tr>
+		<tr>
+			<th><%= link_to 'Cancel', user_workouts_path(current_user), :class => "submit_no_button" %></th>
+			<td><%= f.submit "Save", :class => "submit", :disable_with => "Uploading... please wait" %></td>
+		</tr>
+	</table>
+</div>
 
-<div id="locating_files">
+<div id="locating_files" class="right_column">
 
 	<h3>Finding Your Workout Files</h3>
 
-	<div id="windows" class="tab">
-		Windows
-	</div>
-
-	<div id="pc" class="locating_details">
-
-		<div id="pc_garmin" class="instructions">
-			<object width="400" height="300" id="video"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=4279824&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=4279824&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="400" height="300"></embed></object><br><br>
+	<div id="locating">
+		
+		<h4 class="accordion_header accordion_header_active">
+			<a href="#">Garmin on Windows Vista</a>
+		</h4>
+		<div class="accordion_content accordion_content_active">
+			<object width="360" height="270" id="video"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=4279824&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=4279824&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="360" height="270"></embed></object><br><br>
 			<p>Your workout files are stored in the following directory:<br> 
 			C:\Documents and Settings\[YOUR ACCOUNT]\Application Data\GARMIN\Devices\[RANDOM NUMBER]\History\[WORKOUT FILE]</p> 
 		</div>
-		
-		<div id="pc_polar" class="instructions">
+
+		<h4 class="accordion_header">
+			<a href="#">Garmin on a Mac</a>
+		</h4>
+		<div class="accordion_content">
+			[USER NAME]/Library/Application Support/Garmin/Devices/3454050485/History</p>
+			<p>You can also export any workout from Garmin Training Center v3.2 or later.</p>
+		</div>
+
+		<h4 class="accordion_header">
+			<a href="#">Polar on Windows Vista</a>
+		</h4>
+		<div class="accordion_content">
 			Find your workout in:<br>
 			C:\Program Files\Polar\Polar ProTrainer\<USER NAME>\
 		</div>
-		
-		<div id="pc_suunto" class="instructions">
 
-			<object width="400" height="300"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=4579241&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=4579241&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="400" height="300"></embed></object><br><br>
+		<h4 class="accordion_header">
+			<a href="#">Suunto on Windows Vista</a>
+		</h4>
+		<div class="accordion_content">
+
+			<object width="360" height="270"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=4579241&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=4579241&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="360" height="270"></embed></object><br><br>
 
 			<p>To import your Suunto workout data:</p>
 			<ol>
@@ -78,32 +93,16 @@
 				<li>Choose where to save your .sdf file</li>
 				<li>Browse at left to select your .sdf file</li>
 			</ol>
-
 		</div>
 
-		<div id="pc_gps" class="instructions">
-		</div>
-
-	</div>
-
-	<div id="mac" class="tab">
-		Mac
-	</div>
-
-	<div id="macos" class="locating_details">
-		
-		<div id="mac_garmin" class="instructions">
-			[USER NAME]/Library/Application Support/Garmin/Devices/3454050485/History</p>
-			<p>You can also export any workout from Garmin Training Center v3.2 or later.</p>
-		</div>
-		
-		<div id="mac_gps" class="instructions">
+		<h4 class="accordion_header">
+			<a href="#">GPS</a>
+		</h4>
+		<div class="accordion_content">
 			For accurate workout duration calculation, each file should include only one track
 		</div>
-		
+	
 	</div>
-	
-	
 </div>
 
 <% end %>

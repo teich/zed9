@@ -1136,12 +1136,80 @@ td .points {
 
 /*---- Add Workout ----*/
 
-/*Content div id */
-#select_device {
-	
+#locating_files {
+	font-size: 12px;
+	padding-bottom: 24px;
 }
 
-.device_name {
+#locating_files h3 {
+	padding-bottom: 24px;
+}
+
+.accordion_header {
+	padding: 4px 12px;
+	font-size: 14px;
+	font-weight: 500;	
+	cursor: pointer; 
+	background: #f0f0f0 url(/images/rt.png) no-repeat left;
+  border: 1px solid #d9d9d9;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	margin-top: 1px;
+}
+
+.accordion_content {
+	padding: 6px 12px;
+	width: 360px;
+	border-top: 0px; 
+	top: -1px; 
+	position: relative; 
+	top: 1px;
+	overflow: auto; 
+	display: none;
+}
+
+.accordion_header_active {
+	border-bottom: 0px;
+	background: url(/images/dn.png) no-repeat left;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	-moz-border-radius-bottomleft: 0px;
+	-moz-border-radius-bottomright: 0px;
+	-webkit-border-top-right-radius: 4px;
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-bottom-left-radius: none;
+	-webkit-border-bottom-right-radius: none;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: none;
+	border-bottom-right-radius: none;
+}
+
+.accordion_header_active a {
+	color: #545454;
+}
+
+.accordion_content_active {
+	display: block;
+	border: 1px solid #d9d9d9;
+	border-top: none;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomleft: 4px;
+	-moz-border-radius-bottomright: 4px;
+	-webkit-border-top-right-radius: none;
+	-webkit-border-top-left-radius: none;
+	-webkit-border-bottom-left-radius: 4px;
+	-webkit-border-bottom-right-radius: 4px;
+	border-top-right-radius: none;
+	border-top-left-radius: none;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	top: -1px;
+}
+
+/*.device_name {
 	font-weight: 500;
 }
 
@@ -1150,18 +1218,16 @@ td .points {
 	right: 0px;
 	z-index: -100;
 	text-align: left;
-	width: 418px;
+	width: 424px;
 	padding-top: 18px;
 	font-size: 12px;
 }
 
-#locating_files h3 {
-	padding-bottom: 24px;
-}
 
 #locating_files ol {
 	margin-left: 8px;
 	padding-left: 1em;
+	padding-bottom: 0px;
 }
 
 #locating_files li {
@@ -1169,10 +1235,12 @@ td .points {
 }
 
 #locating_files .tab {
+	position: relative;
+	top: 1px;
 	background: #f0f0f0;
   border: 1px solid #d9d9d9;
 	border-bottom: 0px;
-  padding: 8px;
+  padding: 4px 12px;
 	font-size: 14px;	
 	text-align: center;
 	-moz-border-radius-topleft: 8px;
@@ -1187,13 +1255,15 @@ td .points {
 	border-top-left-radius: 8px;
 	border-bottom-left-radius: none;
 	border-bottom-right-radius: none;
-	width: 72px;
+	width: auto;
+	display: inline-block;
+	z-index: 100;
 }
 
-#locating_files #pc {
+#locating_files .locating_details {
 	background: #f0f0f0;
   border: 1px solid #d9d9d9;
-  padding: 8px;
+  padding: 12px;
 	font-size: 12px;
 	font-weight: 100;
 	text-align: left;
@@ -1204,12 +1274,32 @@ td .points {
 	-webkit-border-top-left-radius: 0px;
 	border-radius: 8px;	
 	border-top-left-radius: 0px;	
+	clear: both;
 }
 
-#locating_files #mac {
+#locating_files .notselected {
+	background: #ffffff;
+	z-index: -100;
+}
+
+#locating_files #pc {
+}
+
+#locating_files #macos {
 	display: none;
 }
 
+
+#locating_files .wrapper {
+	border-bottom: 1px solid #d9d9d9;
+	background:#f0f0f0 url(/images/closed.png) no-repeat scroll right 14px;
+}
+
+#locating_files .open {
+	padding-bottom: 12px;
+	background:#f0f0f0 url(/images/open.png) no-repeat scroll right 14px;
+}
+*/
 /*Span style for examples of supported devices*/
 .device_details {
 	font-size: 12px;
