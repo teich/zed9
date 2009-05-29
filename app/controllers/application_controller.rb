@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 	include ArrayMath
 
 	filter_parameter_logging :password, :password_confirmation
-	helper_method :current_user_session, :current_user, :my_page?
+	helper_method :current_user_session, :current_user, :my_page?, :any_private?
 	
 
 	before_filter :create_user_session
@@ -66,6 +66,10 @@ class ApplicationController < ActionController::Base
 		end
 	end
 	
+	def any_private?
+	  @user.workouts.count(:all, :conditions => ['shared = ?', false]) > 0
+	end
+	  
 	def store_location
 		session[:return_to] = request.request_uri
 	end

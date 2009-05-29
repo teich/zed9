@@ -29,6 +29,9 @@ class UsersController < ApplicationController
 		  @workouts = @user.workouts.find_all_by_shared(true, :limit=>20, :order => "updated_at DESC")
 	  end
 
+    
+      
+      
     @accomplishments = Accomplishment.find_all_by_user_id(@user)
 
 		durations = @workouts.map { |w| w.duration }
@@ -43,6 +46,12 @@ class UsersController < ApplicationController
 		@longest = @user.workouts.find(:all, :conditions => ['duration > ?', 0], :order => "duration DESC", :limit => 5)
 		@climbers = @user.workouts.find(:all, :conditions => ['elevation > ?', 0], :order => "elevation DESC", :limit => 5)
 		@heart_pumping = @user.workouts.find(:all, :conditions => ['hr > ?', 0], :order => "hr DESC", :limit => 5)
+
+		@farthest_public = @user.workouts.find_all_by_shared(true, :conditions => ['distance > ?', 0], :order => "distance DESC", :limit => 5)
+		@fastest_public = @user.workouts.find_all_by_shared(true, :conditions => ['speed > ?', 0], :order => "speed DESC", :limit => 5)
+		@longest_public = @user.workouts.find_all_by_shared(true, :conditions => ['duration > ?', 0], :order => "duration DESC", :limit => 5)
+		@climbers_public = @user.workouts.find_all_by_shared(true, :conditions => ['elevation > ?', 0], :order => "elevation DESC", :limit => 5)
+		@heart_pumping_public = @user.workouts.find_all_by_shared(true, :conditions => ['hr > ?', 0], :order => "hr DESC", :limit => 5)
 
 	end
 
