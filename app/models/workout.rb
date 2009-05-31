@@ -41,6 +41,12 @@ class Workout < ActiveRecord::Base
     end
     
   end
+  
+  def reprocess!
+    self.importing = true
+    self.save
+    Delayed::Job.enqueue WorkoutJob.new(self.id)
+  end
 
   def check_achievements
     achievements = Achievement.find(:all, :conditions => ['controller = ? AND action = ?', "workouts", "create"])
