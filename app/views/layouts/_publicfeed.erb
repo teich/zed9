@@ -1,7 +1,7 @@
 <div id="public_newsfeed">
 	<h2>Recent public workouts</h2>
 	<table class="newsfeed">
-		<% @shared.each do |sw| %>
+		<% @shared.each 3.times do |sw| %>
 		<tr>
 			<td class="icon_col"><%= link_to image_tag(sw.activity.root.icon_path, :class => "activity_icon_small", :alt => sw.activity.name, :title => sw.activity.name ), activity_path(sw.activity) %></td>
 			<!-- <td class="activity_name"><%= link_to sw.activity.name, activity_path(sw.activity) %></td> -->

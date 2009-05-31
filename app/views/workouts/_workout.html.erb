@@ -1,6 +1,6 @@
 <tr>
 	<% if icon %><td class="icon_col"><%= link_to image_tag(workout.activity.root.icon_path, :class => "activity_icon_small", :alt => workout.activity.name, :title => workout.activity.name ), activity_path(workout.activity) %></td><% end -%>
-	<% if name %><td class="name"><%= link_to workout.name, workout_path(workout) %><br></td><% end -%>
+	<% if name %><td class="name"><%= link_to workout.name, workout_path(workout) %> <span class="comment_count"><%= link_to "0", workout_path(workout, :anchor => "disqus_thread") %></span><br></td><% end -%>
 	<% if date %><td class="date no_wrap"><%=h time_as_date(workout.start_time) %><br></td><% end -%>
 	<% if duration %><td class="no_wrap"><%= h number_to_short_time(workout.duration) %><span class="unit">h</span><br></td><% end -%>
 	<% if user %><td class="last_column no_wrap"> <%= link_to workout.user.display_name, user_path(workout.user) %> <span class="points">(<%=h workout.user.points %>)</span><br></td><% end -%>

@@ -147,6 +147,10 @@
 				<%= render :partial => @public_workouts, :locals => { :icon => true, :name => true, :date => false, :duration => true, :user => true } %>
 			</table>
 		</div>
+		
+		<div id="recent_comments">
+			 <%= disqus_recent_comments (opts = { { :header => 'Recent comments'}, {:num_items => 10} } ) %>
+		</div>
 				
 	</div>
 
