@@ -17,6 +17,11 @@ class Workout < ActiveRecord::Base
 
 	
   def perform
+    
+    # Make sure there is no existing data
+    self.trackpoints.map { |tp| tp.destroy }
+    
+    # Import the data
     uploaded_data = ensure_string(self.devices.first.source.to_file)
     type = Importer.file_type(self.devices.first.source_file_name)
     case type
