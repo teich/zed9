@@ -1,7 +1,7 @@
 class Workout < ActiveRecord::Base
 	belongs_to  :user
 	belongs_to  :activity
-	has_many    :trackpoints
+	has_many    :trackpoints, :order => 'time ASC'
 	has_many    :devices
 	
 	accepts_nested_attributes_for :devices
