@@ -861,8 +861,11 @@ table.newsfeed {
 	text-align: center;
   background: #f7fdff;
 	-moz-border-radius: 4px !important;
+	-moz-border-radius-bottomLeft: 0px !important;
 	-webkit-border-radius: 4px !important;
+	-webkit-border-bottom-left-radius: none !important;
 	border-radius: 4px !important;
+	border-bottom-left-radius: none !important;
 }
 
 /*Recent comments widget on dashboard and home*/

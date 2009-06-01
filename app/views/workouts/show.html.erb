@@ -29,7 +29,7 @@
 				<span class="by">by</span> <%= link_to @workout.user.display_name, user_path(@workout.user) %> <span class="points">(<%=h @workout.user.points %> points)</span> 
 			<% end %></h1>
 			
-			<p id="workout_description"><%= link_to @workout.activity.name, activity_path(@workout.activity) %> on <%=h activity_timestamp(@workout.start_time) %>. <img class="comment_count_point" src="/images/speech_left.png"><span class="comment_count"><a href="#disqus_thread">comment</a></span></p>
+			<p id="workout_description"><%= link_to @workout.activity.name, activity_path(@workout.activity) %> on <%=h activity_timestamp(@workout.start_time) %>. <span class="comment_count"><a href="#disqus_thread">comment</a></span></p>
 
 			<p id="workout_notes"><%= h @workout.notes %></p>
 
