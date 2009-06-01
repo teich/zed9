@@ -836,54 +836,67 @@ table.newsfeed {
 
 /*---- Comments ----*/
 
+/*Comments container on workout page*/
+#comments {
+	clear: both;
+	padding-top: 60px;
+}
+
+/*Icon-style count of comments*/
+.comment_count_point {
+	position: relative;
+	right: -2px;
+	bottom: -1px;
+	z-index:100;
+	vertical-align: middle;
+}
+
 .comment_count {
   border: 1px solid #d9d9d9;
   padding: 0px 4px;
 	position: relative;
 	top: -1px;
-	font-size: 11px;
+	font-size: 10px;
 	font-weight: 500;
 	text-align: center;
   background: #f7fdff;
 	-moz-border-radius: 4px !important;
-	-moz-border-radius-bottomLeft: 0px !important;
 	-webkit-border-radius: 4px !important;
-	-webkit-border-bottom-left-radius: none !important;
 	border-radius: 4px !important;
-	border-bottom-left-radius: none !important;
 }
 
-#dsq-recentcomments {
-	padding-top: 24px;
-}
+/*Recent comments widget on dashboard and home*/
+	#dsq-recentcomments {
+		padding-top: 24px;
+	}
 
+	#dsq-recentcomments h2.dsq-widget-title {
+		padding: 0px 0px 12px 0px !important;
+	}
 
-#dsq-recentcomments h2.dsq-widget-title {
-	padding: 0px 0px 12px 0px !important;
-}
+	#dsq-recentcomments ul.dsq-widget-list {
+		border-top: 1px dotted #d9d9d9 !important;	
+		padding-bottom: 12px;
+	}
 
-#dsq-recentcomments ul.dsq-widget-list {
-	border-top: 1px dotted #d9d9d9 !important;	
-	padding-bottom: 12px;
-}
+	#dsq-recentcomments .dsq-widget-item {
+		border-bottom: 1px dotted #d9d9d9 !important;
+		padding: 8px 0px !important;
+	}
 
-#dsq-recentcomments .dsq-widget-item {
-	border-bottom: 1px dotted #d9d9d9 !important;
-	padding: 8px 0px !important;
-}
+	#dsq-recentcomments li.dsq-widget-item {
+		margin: 0px !important;
+	}
 
-#dsq-recentcomments li.dsq-widget-item {
-	margin: 0px !important;
-}
-
-#dsq-recentcomments p.dsq-widget-meta {
-	clear: none;
-}
+	#dsq-recentcomments p.dsq-widget-meta {
+		clear: none;
+	}
 	
 #dsq-content #dsq-comments .dsq-comment.special .dsq-comment-header {
 	background: none !important;
 }
 
+/*Some of these attributes in More menu are being ignored*/
 .dsq-menu {
   border: 1px solid #d9d9d9 !important; 
 	border-top: none !important;
@@ -937,34 +950,48 @@ img.dsq-widget-avatar {
 	font-size: 12px !important;
 }
 
+#dsq-content #dsq-comments .dsq-comment-options, .dsq-list-style {
+	float: none !important;
+	display: inline !important;
+}
+
 #dsq-options {
 	display: inline;	
 	font-size: 12px !important;
 	font-weight: 100 !important;
 }
 
-#dsq-content #dsq-comments .dsq-comment-footer li, #dsq-options span {
+#dsq-content #dsq-comments .dsq-comment-footer li, #dsq-options span.dsq-item-cp {
 	font-size: 12px !important;
 	background-image: none !important;
 	padding:0px 12px 0px 12px !important;
-	border-left:1px dotted #d9d9d9 !important;
+	border-right:1px dotted #d9d9d9 !important;
 	display: inline !important;
 	text-align: left !important;
 }
 
-#dsq-options span .dsq-item-sort, .dsq-list-first {
-	padding: 0px !important;	
-	border-left: none !important;
-}
-
-#dsq-content #dsq-comments .dsq-list-first .dsq-rate li {
-	border-left: none !important;
-	padding:0px 12px 0px 0px !important;
-}
-
-#dsq-content #dsq-comments .dsq-comment-options, .dsq-list-style {
-	float: none !important;
+#dsq-options {
 	display: inline !important;
+	text-align: center !important;	
+	font-size: 12px !important;
+	background-image: none !important;
+}
+
+#dsq-options span.dsq-item-sort {
+	padding-left: 0px !important;	
+}
+
+#dsq-options span.dsq-item-cp {
+	padding-left: 0px !important;	
+	border-left: none !important;
+}
+
+#dsq-options span.dsq-item-feed {
+	padding-left: 12px !important;		
+}
+
+#dsq-content #dsq-comments .dsq-comment-footer li.dsq-list-first, #dsq-options li.dsq-list-first {
+	padding-left:0px !important;
 }
 
 #dsq-content #dsq-auth {
@@ -1023,7 +1050,6 @@ input.submit {
 	font-size: 11px !important;
 	font-weight: 100 !important;
 }
-
 
 /*---- Leaderboards ----*/
 
