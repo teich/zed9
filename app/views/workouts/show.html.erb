@@ -103,6 +103,7 @@
 				<th class="spark_line_title">Speed</th>
 				<td id="spark_line"><div id="speed" class="sparkline"></div></td>
 				<td class="number spark_line_title"><span class="value"><%= h speed_to_pace(@workout) %></span><%=h units(@workout,:speed) %></td>
+				<td id="max_speed"><%= h mps_to_mph(@workout.max(:speed)) %></td>
 			</tr>
 			<% end -%>
 			
@@ -111,6 +112,8 @@
 				<th class="spark_line_title">Elevation</th>
 				<td id="spark_line"><div id="elevation" class="sparkline"></div></td>
 				<td class="number spark_line_title"><span class="value"><%=h @workout.elevation_in_feet %></span>ft</td>
+				<td id="max_elevation"><%= h meters_to_feet(@workout.max(:altitude)) %></td>
+				
 			</tr>
 			<% end -%>
 			
@@ -119,6 +122,8 @@
 				<th class="spark_line_title">Heart rate</th>
 				<td id="spark_line"><div id="hr" class="sparkline"></div></td>
 				<td class="number spark_line_title"><span class="value"><%=h @workout.hr %></span>bpm</td>
+				<td id="max_hr"><%= h @workout.max(:heart_rate) %></td>
+				
 			</tr>
 			<% end %>
 		</table>

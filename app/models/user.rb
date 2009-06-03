@@ -53,13 +53,20 @@ class User < ActiveRecord::Base
   end
    
 	def awarded?(achievement)
-	  self.achievements.count(:conditions => { :id => achievement.id }) > 0
+	  achievements.count(:conditions => { :id => achievement.id }) > 0
   end
 	
-	def points()
-    self.accomplishments.size * 10
+	def points
+    (accomplishments.size * 10) + self.workouts.size
   end
   
+  def workouts_per_week(weeks_ago)
+    workouts.count(:conditions => ['start_time < ? AND start_time > ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago])
+  end
+  
+  def hours_per_week(weeks_ago)
+    workouts.sum('duration', :conditions =>  ['start_time < ? AND start_time > ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago])
+  end
 	private
 
 	# How many invitations does a user get?
