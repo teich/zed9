@@ -56,8 +56,8 @@ class User < ActiveRecord::Base
 	  self.achievements.count(:conditions => { :id => achievement.id }) > 0
   end
 	
-	def points()
-    self.accomplishments.size * 10
+	def points
+    (self.accomplishments.size * 10) + self.workouts.size
   end
   
 	private
