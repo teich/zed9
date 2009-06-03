@@ -14,7 +14,7 @@ class RPE
   end
 
   def description(value)
-    if value.nil? 
+    if value.nil? || value == 0
       return ""
     end
     desc = OPTIONS.rassoc(value)[0] 
