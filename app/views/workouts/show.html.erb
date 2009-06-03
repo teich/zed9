@@ -9,7 +9,7 @@
 	<div id="workout_header">
 		
 		<% if !@workout.rpe.nil? %>
-		<div id="display_rpe" title="The Borg Rating of Perceived Exertion, or RPE, is a quantification of the intensity of a workout.">
+		<div id="display_rpe" class="tip" title="The Borg Rating of Perceived Exertion, or RPE, is a quantification of the intensity of a workout.">
 			<p class="rpe_label">RPE</p>
 			<p class="rpe_val"><%=h @workout.rpe %></p>
 			<p class="rpe_desc"><%=h @rpe.description(@workout.rpe) %></p>
@@ -30,7 +30,7 @@
 				<span class="by">by</span> <%= link_to @workout.user.display_name, user_path(@workout.user) %> <span class="points">(<%=h @workout.user.points %> points)</span> 
 			<% end -%></h1>
 			
-			<p id="workout_description"><%= link_to @workout.activity.name, activity_path(@workout.activity) %> on <%=h activity_timestamp_shorter(@workout.start_time) %>. Posted <%= h activity_timestamp_shorter(@workout.created_at) %>. <span class="comment_count"><a href="#disqus_thread">comment</a></span></p>
+			<p id="workout_description"><%= link_to @workout.activity.name, activity_path(@workout.activity) %> on <%=h activity_timestamp_shorter(@workout.start_time) %>. Posted <%= h activity_timestamp_shorter(@workout.created_at) %>. <span class="comment_count"><a href="#disqus_thread" class="tip" title="Comments on this workout">comment</a></span></p>
 
 			<% if !@workout.notes == "" %>
 				<p id="workout_notes"><%= h @workout.notes %></p>
@@ -79,14 +79,16 @@
 			<tr class="stat" unit="h" id="duration">
 				<th class="spark_bar_title">Duration</th>
 				<td id="spark_bar"><div id="duration" class="sparkbar"></div></td>
-				<td class="number"><span class="value"><%= h number_to_time(@workout.duration) %></span>h</td>
+				<td class="number"><span class="value"><%= h number_to_time(@workout.duration) %></span><span class="units">hours</span></td>
+				<td>&nbsp;</td>
 			</tr>
 			
 			<% if !@workout.distance.nil? %>
 			<tr class="stat" unit="miles" id="distance">
 				<th class="spark_bar_title">Distance</th>
 				<td id="spark_bar" id="distance"><div id="distance" class="sparkbar"></div></td>
-				<td class="number"><span class="value"><%= h @workout.distance_in_miles %></span>miles</td>
+				<td class="number"><span class="value"><%= h @workout.distance_in_miles %></span><span class="units">miles</span></td>
+				<td>&nbsp;</td>
 			</tr>
 			<% end -%>
 			
@@ -94,7 +96,8 @@
 			<tr class="stat" unit="kCal" id="calorie">
 				<th class="spark_bar_title">Calories</th>
 				<td id="spark_bar"><div id="calorie" class="sparkbar"></div></td>
-				<td class="number"><span class="value">N/A</span></td>
+				<td class="number"><span class="value">N/A</span><span class="units"></span></td>
+				<td>&nbsp;</td>
 			</tr>
 			<% end -%>
 			
@@ -102,8 +105,8 @@
 			<tr class="stat" unit="mph" id="speed">
 				<th class="spark_line_title">Speed</th>
 				<td id="spark_line"><div id="speed" class="sparkline"></div></td>
-				<td class="number spark_line_title"><span class="value"><%= h speed_to_pace(@workout) %></span><%=h units(@workout,:speed) %></td>
-				<td id="max_speed"><%= h mps_to_mph(@workout.max(:speed)) %></td>
+				<td class="number spark_line_title"><span class="value"><%= h speed_to_pace(@workout) %></span><span class="units"><%=h units(@workout,:speed) %></span></td>
+				<td class="max" id="max_speed"><%= h mps_to_mph(@workout.max(:speed)) %><span class="units">max</span></td>
 			</tr>
 			<% end -%>
 			
@@ -111,8 +114,8 @@
 			<tr class="stat" unit="ft" id="elevation">
 				<th class="spark_line_title">Elevation</th>
 				<td id="spark_line"><div id="elevation" class="sparkline"></div></td>
-				<td class="number spark_line_title"><span class="value"><%=h @workout.elevation_in_feet %></span>ft</td>
-				<td id="max_elevation"><%= h meters_to_feet(@workout.max(:altitude)) %></td>
+				<td class="number spark_line_title"><span class="value"><%=h @workout.elevation_in_feet %></span><span class="units">feet</span></td>
+				<td class="max" id="max_elevation"><span class="value"><%= h meters_to_feet(@workout.max(:altitude)) %></span><span class="units">max</span></td>
 				
 			</tr>
 			<% end -%>
@@ -121,9 +124,8 @@
 			<tr class="stat" unit="bpm" id="hr">
 				<th class="spark_line_title">Heart rate</th>
 				<td id="spark_line"><div id="hr" class="sparkline"></div></td>
-				<td class="number spark_line_title"><span class="value"><%=h @workout.hr %></span>bpm</td>
-				<td id="max_hr"><%= h @workout.max(:heart_rate) %></td>
-				
+				<td class="number spark_line_title"><span class="value"><%=h @workout.hr %></span><span class="units">bpm</span></td>
+				<td class="max" id="max_hr"><%= h @workout.max(:heart_rate) %><span class="units">max</span></td>
 			</tr>
 			<% end %>
 		</table>

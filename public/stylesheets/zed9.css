@@ -188,6 +188,16 @@ thead, th, td {
 	border-radius: 8px;	
 }
 
+/*---- qTips ----*/
+
+.qtip {
+	opacity: .9;
+}
+
+.qtip-content {
+	font-size: 12px;
+}
+
 /*---- Table Sorter styling ----*/
 
 .sortable th.headerSortUp {
@@ -1478,7 +1488,7 @@ td .points {
 	float: right;
 	width: auto;
 	position: relative;
-	margin-left: 24px;
+/*	margin-left: 24px;*/
   border: 1px solid #d9d9d9;
   padding: 4px;
   background: #f7fdff;
@@ -1622,22 +1632,38 @@ span.value {
 	font-size: 18px;
 }
 
+#workout_stats .units {
+	font-size: 12px;
+	display: block;
+	color: #9f9f9f;
+}
+
+#workout_stats .max {
+	font-size: 18px;
+	font-weight: 100;
+}
+
 /*Formatting for content in comparison tooltip*/
 
 p.comp_this_workout {
 	margin-top: 0px;
-	padding-top: 0px;
+	padding: 0px;
 	color: #25a1d6;
 }
 
 p.comp_my_activity {
-	padding-top: 4px;
+	padding: 0px;
 	color: #3dc10b;
 }
 
 p.comp_activity {
-	padding: 4px 0px 0px 0px;
+	padding: 0px;
 }
+
+#workout_left_column .unit {
+	font-size: 12px;
+}
+
 
 /*Formatting for full-size stat view*/
 

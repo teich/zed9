@@ -21,13 +21,15 @@
 			<thead> 
 				<tr>
 					<th><br></th>
-					<th>Workout Name</th>
+					<th>Workout name</th>
 					<th>Date <!-- <img src="/images/open.png" style="vertical-align:middle"> --></th>
 					<th>Duration</th>
 					<th>Distance</th>
 					<th>Speed</th>
+					<th class="no_wrap">Max speed</th>
 					<th>Elevation</th>
-					<th class="no_wrap">Heart Rate</th>
+					<th class="no_wrap">HR</th>
+					<th class="no_wrap">Max HR</th>
 					<th>Tags</th>
 					<th><br></th>
 				</tr>
@@ -56,8 +58,10 @@
 						<td class="duration no_wrap"><% if !workout.duration.nil? %><span class="sort_value"><%= h number_to_time(workout.duration) %></span><span class="unit">h</span><% end %><br></td>
 						<td class="distance no_wrap"><% if !workout.distance_in_miles.nil? %><span class="sort_value"><%=h workout.distance_in_miles %></span><span class="unit">miles</span><% end %><br></td>
 						<td class="speed no_wrap"><% if !workout.avg_speed_in_mph.nil? %><span class="sort_value"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span><% end %><br></td>				
+						<td class="speed no_wrap"><% if !workout.avg_speed_in_mph.nil? %><span class="sort_value"><%=h mps_to_mph(workout.max(:speed)) %></span><span class="unit">mph</span><% end %><br></td>				
 						<td class="elevation no_wrap"><% if !workout.elevation.nil? %><span class="sort_value"><%=h workout.elevation_in_feet.round(0).to_i %></span><span class="unit">ft</span><% end %><br></td>
 						<td class="hr no_wrap"><% if !workout.hr.nil? %><span class="sort_value"><%=h workout.hr %></span><span class="unit">bpm</span><% end %><br></td>
+						<td class="hr no_wrap"><% if !workout.hr.nil? %><span class="sort_value"><%=h workout.max(:heart_rate) %></span><span class="unit">bpm</span><% end %><br></td>
 						<td class="tags">
 							<% for tag in workout.tag_list %>
 								<%= link_to tag, user_workouts_path(@user, :tag => tag) %>

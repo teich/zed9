@@ -111,29 +111,6 @@ var tooltip_style = {
 	}
 };
 
-var base_tooltip_style = {
-	padding: 4,
-	background: '#f0f0f0',
-	color: '#545454',
-	textAlign: 'left',
-	border: {
-		width: 1,
-		radius: 8,
-		color: '#f0f0f0' 
-	},
-	style: {
-		name: 'dark',
-		tip: true, 
-	},
-	position: { 
-		corner: { 
-			tooltip: 'bottomLeft', 
-			target: 'topRight' 
-		} 
-	},
-  show: 'mouseover',
-	hide: { when: 'mouseout', fixed: true },
-};
 
 // Pass in a JSON object, and draw based on that data.
 function draw_dashboard_graph(data) {
@@ -398,19 +375,19 @@ function workout_page_graphs(data) {
 
 			tip += '<p class="comp_this_workout"><span class="value">';
 			tip += data1;
-			tip += '</span>' + unit + ' for this workout</p>';
+			tip += '</span><span class="unit">' + unit + '</span> for this workout</p>';
 			tip += '<p class="comp_my_activity"><span class="value">';
-			tip += data2 + '</span>';
-			tip += unit + ' average for ' + workout.activity.name.toLowerCase() + '</p>';
+			tip += data2 + '</span><span class="unit">';
+			tip += unit + '</span> average for ' + workout.activity.name.toLowerCase() + '</p>';
 			tip += '<p class="comp_activity"><span class="value">';
-			tip += data3 + '</span>';
-			tip += unit + ' ZED9 average for ' + workout.activity.name.toLowerCase() + '</p></div >';
+			tip += data3 + '</span><span class="unit">';
+			tip += unit + '</span> ZED9 average for ' + workout.activity.name.toLowerCase() + '</p></div >';
 
 			$(this).qtip({
 				content: tip,
 				show: 'mouseover',
 				hide: { when: 'mouseout', fixed: true },
-				position: { target: $(this).children(':last'), corner: { tooltip: 'topLeft', target: 'topLeft' }, adjust: { x: 0, y: -5 } },
+				position: { target: $(this).children('.number'), corner: { tooltip: 'topLeft', target: 'topLeft' }, adjust: { x: 0, y: -5 } },
 				style: tooltip_style
 			});
 		});
@@ -442,7 +419,7 @@ function workout_page_graphs(data) {
 			sortList: [[2, 1]],
 			headers: { 
 				0: { sorter: false },
-				9: { sorter: false },
+				11: { sorter: false },
 			}
 		}); 
 
@@ -533,7 +510,7 @@ function workout_page_graphs(data) {
 			});
 		});
 
-		$('div[title]').qtip({
+		$('.tip[title]').qtip({
 			style: {
 				background: '#f0f0f0',
 				color: '#545454',
@@ -544,12 +521,16 @@ function workout_page_graphs(data) {
 					radius: 8,
 					color: '#f0f0f0' 
 				},
-				tip: 'topRight', 
+				tip: 'bottomLeft', 
 			},
 			position: { 
 				corner: { 
-					tooltip: 'topRight', 
-					target: 'bottomLeft' 
+					tooltip: 'bottomLeft', 
+					target: 'topRight' 
+				},
+				adjust: { 
+					screen: true,
+					resize: true 
 				} 
 			},
 		  show: 'mouseover',
