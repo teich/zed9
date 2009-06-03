@@ -660,7 +660,8 @@ ol {
 
 .form th {
 	font-size: inherit;
-	padding: 12px 4px 12px 0px;
+/*	padding: 12px 4px 12px 0px;*/
+	padding: 8px 4px 12px 0px;
 	text-align:right;
 	width: 140px;
 	vertical-align: middle;
@@ -669,7 +670,8 @@ ol {
 .form td {
 	width: 300px;
 	font-size: inherit;
-	padding: 12px 4px;
+/*	padding: 12px 4px; */
+	padding: 8px 4px; 
 	vertical-align: top;
 	text-align: left;
 }
@@ -1135,6 +1137,7 @@ input.submit {
 .leaderboard ol {
 	padding: 6px 0px 0px 24px;
 	line-height: 1.2;
+	margin-left: 0px;
 }
 
 .leaderboard li {
@@ -1210,11 +1213,11 @@ input.submit {
 	padding-bottom: 24px;
 }
 
-#dashboard_stats h2, #recent_workouts h2 {
+#dashboard_stats h2, #recent_workouts h2, #dashboard #summary h2 {
 	padding-bottom: 0px;
 }
 
-#recent_workouts {
+#recent_workouts, #dashboard #summary {
 	height: auto;
 	padding: 0px 0px 36px 0px;
 }
@@ -1303,7 +1306,8 @@ td .points {
 }
 
 #bio {
-	padding-bottom: 24px;
+	font-size: 14px;
+	font-style: oblique;
 }
 
 #bio .form th {
@@ -1360,6 +1364,12 @@ td .points {
 	color: #9f9f9f;
 	text-align: left;
 }
+
+#workouts_list .unit {
+	font-size: 12px;
+	color: #9f9f9f;
+}
+
 
 /*---- Add Workout ----*/
 
@@ -1481,7 +1491,8 @@ td .points {
 }
 
 .action {
-	font-size: 14px;
+	font-size: 12px;
+	font-weight: 100;
 }
 
 #display_rpe {

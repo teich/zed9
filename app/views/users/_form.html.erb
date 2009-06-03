@@ -10,13 +10,21 @@
     <td><%= f.text_field :login %></td>
   </tr>
   <tr>
-    <th><%= f.label :displayname, "Display name" %></th>
-    <td><%= f.text_field :displayname %></td>
+    <th class="annotated"><%= f.label :displayname, "Display name" %></th>
+    <td class="annotated"><%= f.text_field :displayname %></td>
   </tr>
   <tr>
-		<th>&nbsp;</th>
-		<td class="field_note">How you want to be identified - for example Joe, or Joe Smith</td>
- 	</tr>
+	<th>&nbsp;</th>
+	<td class="field_note">How you want to be identified - for example Joe, or Joe Smith</td>
+ </tr>
+  <tr>
+    <th class="annotated"><%= f.label :bio, "Bio" %></th>
+    <td class="annotated"><%= f.text_area :bio, :size => "28x4" %></td>
+  </tr>
+  <tr>
+	<th>&nbsp;</th>
+	<td class="field_note">Tell the community something about yourself!</td>
+ </tr>
   <tr>
     <th><%= f.label :email %></th>
     <td><%= f.text_field :email %></td>
@@ -44,17 +52,17 @@
     <td><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %></td>
   </tr>
 	<tr>
-		<th><%= f.label :shared, "New workouts are public" %></th>
+		<th><%= f.label :shared, "New workouts are public", :class => "no_wrap" %></th>
 		<td><%= f.check_box :shared %></td>
 	</tr>
   <tr>
     <th class="annotated"><%= f.label :password, f.object.new_record? ? nil : "Change password" %></th>
     <td class="annotated"><%= f.password_field :password %></td>
   </tr>
-	<tr>
-		<th>&nbsp;</th>
-		<td class="field_note">Passwords must be at least 4 characters</td>
-	</tr>
+  <tr>
+	<th>&nbsp;</th>
+	<td class="field_note">Passwords must be at least 4 characters</td>
+  </tr>
   <tr>
     <th><%= f.label :password_confirmation, "Confirm password" %></th>
     <td><%= f.password_field :password_confirmation %></td>

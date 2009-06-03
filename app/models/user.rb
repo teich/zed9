@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
 	before_create :set_invitation_limit
 
-	attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :birthdate, :sex, :height, :time_zone, :shared, :displayname
+	attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :birthdate, :sex, :height, :time_zone, :shared, :displayname, :bio
 
 	def invitation_token
 		invitation.token if invitation

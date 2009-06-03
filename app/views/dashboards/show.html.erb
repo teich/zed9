@@ -16,15 +16,7 @@
 				<% else %>You are currently <span class="comp_number"><%= h (@total_time/@atd*100).to_i %></span><span class="unit">%</span> below average.<% end %></p>
 			<% end -%>
 		</div>
-		
-		<div id="summary">
-			<% (0..4).each do |weeks_ago| %>
-			You worked out <%= current_user.workouts_per_week(weeks_ago) %> times <%= weeks_ago %> weeks ago for <%= number_to_short_time(current_user.hours_per_week(weeks_ago)) %><BR>
-			<% end %>
-		
-		
-		</div>
-		
+				
 		<div id="recent_workouts">
 			<h2><%= link_to "Your recent workouts", user_workouts_path(current_user) %></h2>
 			<% if @workouts.size > 0 %>
@@ -33,6 +25,12 @@
 			<br>
 			<div class="usage_tip"><%= link_to "Upload your first workout", user_workouts_path(current_user) %> to earn points and move up to Novice.</div>
 			<% end -%>
+		</div>
+
+		<div id="summary">
+			<% (0..4).each do |weeks_ago| %>
+			You worked out <%= current_user.workouts_per_week(weeks_ago) %> times <%= weeks_ago %> weeks ago for <%= number_to_short_time(current_user.hours_per_week(weeks_ago)) %><BR>
+			<% end %>
 		</div>
 
 		<% if @accomplishments.size > 0 %>
@@ -57,7 +55,7 @@
 						<div class="bests">
 							<ol>
 								<% for workout in @farthest %> 
-									<li><span class="number"><%=h workout.distance_in_miles %></span><span class="unit">miles</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+									<li><span class="number"><%=h workout.distance_in_miles %></span><span class="unit">miles</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
 								<% end %>
 							</ol>
 						</div>
@@ -76,7 +74,7 @@
 						<div class="bests">
 							<ol>
 								<% for workout in @fastest %> 
-									<li><span class="number"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+									<li><span class="number"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
 								<% end %>
 							</ol>
 						</div>
@@ -95,7 +93,7 @@
 						<div class="bests">
 							<ol>
 								<% for workout in @longest %> 
-									<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+									<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
 								<% end %>
 							</ol>
 						</div>
@@ -114,7 +112,7 @@
 						<div class="bests">
 							<ol>
 								<% for workout in @climbers %> 
-									<li><span class="number"><%=h workout.elevation_in_feet %></span><span class="unit">ft</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+									<li><span class="number"><%=h workout.elevation_in_feet %></span><span class="unit">ft</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
 								<% end %>
 							</ol>
 						</div>
@@ -133,7 +131,7 @@
 						<div class="bests">
 							<ol>
 								<% for workout in @heart_pumping %> 
-									<li><span class="number"><%=h workout.hr %></span><span class="unit">bpm</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%=h time_as_date(workout.start_time) %></li>
+									<li><span class="number"><%=h workout.hr %></span><span class="unit">bpm</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
 								<% end %>
 							</ol>
 						</div>
