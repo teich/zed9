@@ -91,8 +91,8 @@ class WorkoutsController < ApplicationController
 
 	def destroy
 		# Destroying here so that the merge can call .destroy on a workout
-		@workout.trackpoints.each { |tp| tp.destroy }
-		@workout.devices.each { |d| d.destroy }
+		@workout.trackpoints.delete_all
+		@workout.devices.destroy_all
 		@workout.destroy
 		redirect_to(user_workouts_url(current_user))
 	end
