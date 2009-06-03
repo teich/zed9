@@ -387,6 +387,18 @@ class Workout < ActiveRecord::Base
 	def calc_average_hr
 		get_hr.compact.aaverage
 	end
+	
+	def week
+	  start_time.strftime('%Y%W')
+  end
+  
+  def month
+    start_time.strftime('%Y%m')
+  end
+  
+  def max(field)
+    trackpoints.maximum(field)
+  end
 
 
 	def calc_average_speed
