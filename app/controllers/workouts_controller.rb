@@ -39,6 +39,8 @@ class WorkoutsController < ApplicationController
 		# need for creating new tags.  
 		@tagging = Tagging.new
 
+		@rpe = RPE.new
+
 		respond_to do |format|
 			format.html
 			format.xml {render :xml => @workout.to_xml }
@@ -47,6 +49,7 @@ class WorkoutsController < ApplicationController
 	end
 
 	def new
+		@rpe = RPE.new
 		@workout = current_user.workouts.build
 		@workout.activity = Activity.find_by_name("Uncategorized")
 
@@ -57,9 +60,11 @@ class WorkoutsController < ApplicationController
 	end
 
 	def edit
+		@rpe = RPE.new
 	end
 
   def create
+		@rpe = RPE.new
     @workout = current_user.workouts.create(params[:workout])
     @workout.importing = true
     if @workout.devices.first.nil?

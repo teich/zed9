@@ -14,7 +14,6 @@ class Workout < ActiveRecord::Base
 	validates_presence_of :user_id
 
 	acts_as_taggable_on   :tags
-
 	
   def perform
     

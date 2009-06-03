@@ -111,6 +111,29 @@ var tooltip_style = {
 	}
 };
 
+var base_tooltip_style = {
+	padding: 4,
+	background: '#f0f0f0',
+	color: '#545454',
+	textAlign: 'left',
+	border: {
+		width: 1,
+		radius: 8,
+		color: '#f0f0f0' 
+	},
+	style: {
+		name: 'dark',
+		tip: true, 
+	},
+	position: { 
+		corner: { 
+			tooltip: 'bottomLeft', 
+			target: 'topRight' 
+		} 
+	},
+  show: 'mouseover',
+	hide: { when: 'mouseout', fixed: true },
+};
 
 // Pass in a JSON object, and draw based on that data.
 function draw_dashboard_graph(data) {
@@ -508,6 +531,29 @@ function workout_page_graphs(data) {
 				stay: true,
 				type: $(this).attr("type")
 			});
+		});
+
+		$('div[title]').qtip({
+			style: {
+				background: '#f0f0f0',
+				color: '#545454',
+				padding: 4,
+				textAlign: 'center',
+				border: {
+					width: 1,
+					radius: 8,
+					color: '#f0f0f0' 
+				},
+				tip: 'topRight', 
+			},
+			position: { 
+				corner: { 
+					tooltip: 'topRight', 
+					target: 'bottomLeft' 
+				} 
+			},
+		  show: 'mouseover',
+			hide: { when: 'mouseout', fixed: true }
 		});
 
 	});

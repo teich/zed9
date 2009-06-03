@@ -22,6 +22,14 @@
 			<td class="field_note">Optional: tags give you another way to find and compare workouts in your own history and across ZED9. Separate tags with a comma.</td>
 		</tr>
 		<tr>
+			<th class="annotated"><%= f.label :rpe, "RPE" %></th>
+			<td class="annotated"><select id="rpe" name="workout[rpe]"><%= options_for_select(@rpe.long_descriptions, @workout.rpe) %></select></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td class="field_note">Optional: The Borg Rating of Perceived Exertion, or RPE, is your quantification of the intensity of a workout, or how you feel you worked overall (don't worry about a specific pain). <a href="http://www.cdc.gov/physicalactivity/everyone/measuring/exertion.html">Learn more.</a> Recording your RPE will help in analyzing your progress.</td>
+		</tr>
+		<tr>
 			<th><%= f.label :activity, "Activity type" %></th>
 			<td><select id="workout_activity_id" name="workout[activity_id]">
 			<%= option_groups_from_collection_for_select(Activity.find_all_by_parent_id(nil), :children, :name, :id, :name, @workout.activity.id) %>

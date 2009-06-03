@@ -8,30 +8,39 @@
 
 	<div id="workout_header">
 		
+		<% if !@workout.rpe.nil? %>
+		<div id="display_rpe" title="The Borg Rating of Perceived Exertion, or RPE, is a quantification of the intensity of a workout.">
+			<p class="rpe_label">RPE</p>
+			<p class="rpe_val"><%=h @workout.rpe %></p>
+			<p class="rpe_desc"><%=h @rpe.description(@workout.rpe) %></p>
+		</div>
+		<% end -%>
+
 		<% if !current_user %>
 			<div id="join_prompt">
 				<a href="../">Join ZED9 to track your workouts and see how you measure up</a>
 			</div>
-		<% end %>
+		<% end -%>
 		
-		<% if my_page? && @workout.overlaps? %>
-		<div id="overlaps">
-			This overlaps with another workout.<br>
-			<%= link_to 'Check out your merging options.', workout_overlaps_path(@workout) %>
-		</div>
-		<% end %>
-
 		<h1><!-- <img class="activity_icon" src="/images/running.jpg" width="37" height="40"> -->
 			<%= link_to image_tag(@workout.activity.root.icon_path, :class => "activity_icon"), activity_path(@workout.activity) %><%=h @workout.name %>  
 			<% if my_page? %>
 				<span class="action"><%= link_to 'edit', edit_workout_path(@workout) %></span>
 			<% else %>
 				<span class="by">by</span> <%= link_to @workout.user.display_name, user_path(@workout.user) %> <span class="points">(<%=h @workout.user.points %> points)</span> 
-			<% end %></h1>
+			<% end -%></h1>
 			
 			<p id="workout_description"><%= link_to @workout.activity.name, activity_path(@workout.activity) %> on <%=h activity_timestamp_shorter(@workout.start_time) %>. Posted <%= h activity_timestamp_shorter(@workout.created_at) %>. <span class="comment_count"><a href="#disqus_thread">comment</a></span></p>
 
-			<p id="workout_notes"><%= h @workout.notes %></p>
+			<% if !@workout.notes == "" %>
+				<p id="workout_notes"><%= h @workout.notes %></p>
+			<% end -%>
+
+			<% if my_page? && @workout.overlaps? %>
+				<div id="overlaps">
+					<img src="/images/info_icon.png">This overlaps with another workout. <%= link_to 'Check out your merging options.', workout_overlaps_path(@workout) %>
+				</div>
+			<% end -%>
 
 			<!-- Condition to only display Tags field when there are tags, or prompt owner to tag -->
 			<% if @workout.tags.size > 0 %>
