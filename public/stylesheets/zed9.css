@@ -746,6 +746,15 @@ ol {
 	line-height: 1.6;	
 }
 
+.tooltip_extra_info ul {
+	margin-left: 1em;
+}
+
+.tip_unit {
+	font-size: 12px; 
+	font-weight: 100;	
+}
+
 .tooltip_unit {
 	font-size: 14px; 
 	font-weight: 100;
@@ -1213,7 +1222,7 @@ input.submit {
 	padding-bottom: 24px;
 }
 
-#dashboard_stats h2, #recent_workouts h2, #dashboard #summary h2 {
+#dashboard_stats h2 {
 	padding-bottom: 0px;
 }
 
@@ -1232,14 +1241,60 @@ input.submit {
 
 #recent_workouts_chart {
 	position: relative;
-	left: -4px;
+	top: -6px;
 	overflow: hidden;
 	width: 468px;
 	height: 196px;
 }
 
+#summary_stats_graph {
+	position: relative;
+	top: 12px;
+	overflow: hidden;
+	width: 468px;
+	height: 196px;
+	font-size: 12px;
+}
+
+.legendColorBox {
+	vertical-align: middle;
+}
+
+#dashboard .legend, #dashboard .legendLabel {
+	font-size: 12px;
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,arial,sans-serif;
+	color: #545454;
+	font-weight: 100;
+	letter-spacing: .5px;
+	padding:8px 8px 8px 0px;
+}
+
+#dashboard #axis_labels {
+	clear: both;
+	display: inline;
+	width: 100%;
+	padding-bottom: 0px;
+}
+
+#axis_labels .y1_label {
+	float: left;
+	font-size: 14px;
+	font-weight: 300;
+	padding-bottom: 0px;
+}
+
+#axis_labels .y2_label {
+	float: right;
+	font-size: 14px;
+	font-weight: 300;
+	padding-bottom: 0px;
+}
+
+#dashboard .tickLabel {
+	font-size: 11px;
+}
+
 #bar_tooltip {
-	width: 220px;
 }
 
 .powered_by {

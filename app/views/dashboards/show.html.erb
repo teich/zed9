@@ -20,6 +20,9 @@
 		<div id="recent_workouts">
 			<h2><%= link_to "Your recent workouts", user_workouts_path(current_user) %></h2>
 			<% if @workouts.size > 0 %>
+			<div id="axis_labels">	
+				<span class="y1_label">Duration (h)</span>
+			</div>
 			<div id="recent_workouts_chart"></div>
 			<% else %>
 			<br>
@@ -28,9 +31,18 @@
 		</div>
 
 		<div id="summary">
-			<% (0..4).each do |weeks_ago| %>
+			<h2>Your workouts over time</h2>
+			<div id="axis_labels">	
+				<span class="y1_label">Week's workouts</span>
+				<span class="y2_label">Duration (h)</span>
+			</div>
+			<div id="summary_stats_graph"></div>
+			<div id="summary_stats_legend"></div>
+			
+			<!-- <% (0..4).each do |weeks_ago| %>
 			You worked out <%= current_user.workouts_per_week(weeks_ago) %> times <%= weeks_ago %> weeks ago for <%= number_to_short_time(current_user.hours_per_week(weeks_ago)) %><BR>
-			<% end %>
+			<% end %> -->
+		
 		</div>
 
 		<% if @accomplishments.size > 0 %>

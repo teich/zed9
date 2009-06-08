@@ -111,6 +111,39 @@ var tooltip_style = {
 	}
 };
 
+var summary_stats_graph_options = {
+	grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 12 },
+	xaxis: { ticks: [[.45, "5/11"],[1.45, "5/18"],[2.45, "5/25"], [3.45, "6/1"]], labelWidth: 24 },
+	yaxis: { autoscaleMargin: 0.2 },
+	y2axis: { autoscaleMargin: 0.2 },
+	colors: ["#ff7e00", "#ffa200", "#ffd200", "#feff81", "#25a1d6"],
+	shadowSize: 1,
+	legend: {
+    show: true,
+    // labelFormatter: null or (fn: string, series object -> string)
+    labelBoxBorderColor: null,
+    noColumns: 4,
+    position: "nw",
+    margin: [-20, -18],
+    backgroundColor: null,
+    backgroundOpacity: 0,
+    container: null
+  }
+};
+
+var summary_stats_bar_options = {
+	show: true, 
+	barWidth: 0.9,
+	lineWidth: 1, 
+	fillColor: { colors: [{ opacity: 1 }, { opacity: 0.6 }] }
+};
+
+var summary_stats_line_options = {
+	show: true, 
+	fill: false, 
+	fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] }
+};
+
 
 // Pass in a JSON object, and draw based on that data.
 function draw_dashboard_graph(data) {
@@ -134,9 +167,9 @@ function draw_dashboard_graph(data) {
 				tip_text += name + "<br><span class='tooltip_extra_info'>" + display_date + "<br>" + hms(y) + "h</span>";
 
 				$('<div id="bar_tooltip" class="tooltip">' + tip_text + '</div>').css({
-					top: item.pageY + 8,
-					left: item.pageX + 8
-					}).appendTo("body").fadeIn(200);
+					top: pos.pageY+4,
+					left: pos.pageX+4
+					}).appendTo("body").fadeIn(100);
 				}
 			}
 			else {
@@ -154,14 +187,20 @@ function draw_dashboard_graph(data) {
 		for (i = data.length -1; i > last; --i) {
 			var d = new Date(data[i].workout.json_date * 1000);
 			var display_date = d.getMonth() + 1 + "/" + d.getDate();
+			var horizontal_offset = i + 0.45;
 			duration.push([i, data[i].workout.duration]);
-			date.push([i, display_date]);
+			date.push([horizontal_offset, display_date]);
 		}
 
+		function testFormater(val, axis) {
+	    var d = new Date(val*1000);
+	    return d.getUTCHours() + ":" + d.getUTCMinutes();
+		}
+		
 		var dashboard_options = {
 			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", clickable: true, mouseActiveRadius: 48, markings: xAxis },
-			xaxis: { ticks: date, labelWidth: 12 },
-			yaxis: { ticks: [], autoscaleMargin: 0.2 },
+			xaxis: { ticks: date, labelWidth: 24},
+			yaxis: { autoscaleMargin: 0.2, tickFormatter: testFormater },
 			colors: ["#25a1d6"],
 			shadowSize: 1
 		};
@@ -176,6 +215,58 @@ function draw_dashboard_graph(data) {
 	}
 
 
+	// Pass in a JSON object, and draw based on that data for summary stats on dashboard
+	function draw_dashboard_summary_graph(data) {
+		// var weekly_workouts_count = [[0,3],[1,4],[2,5],[3,6]];
+		var weekly_workout_hours = [[.45,10],[1.45,11],[2.45,9],[3.45,8]];
+		var activity1_count = [[0,1],[1,1],[2,1],[3,3]];
+		var activity2_count = [[0,1],[1,1],[2,3],[3,2]];
+		var activity3_count = [[0,2],[1,0],[2,2],[3,0]];
+		var activity4_count = [[0,2],[1,3],[2,0],[3,0]];
+		var a1 = "Street Running";
+		var a2 = "Trail Running";
+		var a3 = "Road biking";
+		var a4 = "Other";
+		
+		var barsDisplayed = 4;
+
+		function summary_stats_tooltip(event, pos, item) {
+			if (item) {
+				if (previousPoint != item.datapoint) {
+					previousPoint = item.datapoint;
+		
+					$("#summary_stats_tooltip").remove();
+					var x = pos.pageX
+					var y = pos.pageY
+					var count = item.datapoint[1];
+					var tip_text = "<span class='tooltip_extra_info'>Workouts the week of 5/11:<br><ul><li>Street Running: 2</li><li>Trail Running: 2</li><li>Road biking: 1</li><li>Other: 1</li></ul>Total workout time: 7:33</span><span class='tip_unit'>h</span>";
+	
+					$('<div id="summary_stats_tooltip" class="tooltip">' + tip_text + '</div>').css({
+						top: pos.pageY+4,
+						left: pos.pageX+4
+						}).appendTo("body").fadeIn(100);
+					}
+				}
+				else {
+					$("#summary_stats_tooltip").remove();
+					previousPoint = null;
+				}    
+			}
+
+		$.plot($('#summary_stats_graph'), [
+				// { data: weekly_workouts_count, bars: summary_stats_bar_options },
+				{ data: activity1_count, stack: 1, label: a1, bars: summary_stats_bar_options },
+				{ data: activity2_count, stack: 1, label: a2, bars: summary_stats_bar_options },
+				{ data: activity3_count, stack: 1, label: a3, bars: summary_stats_bar_options },
+				{ data: activity4_count, stack: 1, label: a4, bars: summary_stats_bar_options },
+				{ data: weekly_workout_hours, yaxis: 2, lines: summary_stats_line_options }
+			], summary_stats_graph_options 
+		);
+
+			 $("#summary_stats_graph").bind("plothover", summary_stats_tooltip);
+	}
+
+
 function workout_page_graphs(data) {
 	function full_tooltip(event, pos, item) {
 		// TODO: units are now dependent on data
@@ -186,7 +277,6 @@ function workout_page_graphs(data) {
 				$("#fullsize_tooltip").remove();
 				var x = item.datapoint[0].toFixed(2);
 				var y = item.datapoint[1].toFixed(0);
-
 				// This hack tells me it's a time. I know...
 				if (y > 100000) {
 					y = speed_to_pace(MIN_TO_MILLISEC / y);
@@ -407,6 +497,10 @@ function workout_page_graphs(data) {
 		// Dashboard page graphs
 		$('#recent_workouts_chart').each(function() {
 			$.getJSON(jsURL, draw_dashboard_graph);
+		});
+
+		$('#summary_stats_graph').each(function() {
+			$.getJSON(jsURL, draw_dashboard_summary_graph);
 		});
 
 		// Workout page graphs
