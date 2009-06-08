@@ -1241,7 +1241,7 @@ input.submit {
 
 #recent_workouts_chart {
 	position: relative;
-	top: -6px;
+	top: -12px;
 	overflow: hidden;
 	width: 468px;
 	height: 196px;
@@ -1249,11 +1249,12 @@ input.submit {
 
 #summary_stats_graph {
 	position: relative;
-	top: 12px;
+	top: -12px;
 	overflow: hidden;
 	width: 468px;
 	height: 196px;
 	font-size: 12px;
+	padding-bottom: 48px;
 }
 
 .legendColorBox {
@@ -1266,7 +1267,13 @@ input.submit {
 	color: #545454;
 	font-weight: 100;
 	letter-spacing: .5px;
-	padding:8px 8px 8px 0px;
+	padding:0px 8px 0px 2px;
+	vertical-align: top;
+}
+
+#dashboard .legendColorBox {
+	padding: 2px 0px 0px 0px;
+	vertical-align: top;
 }
 
 #dashboard #axis_labels {
@@ -1276,18 +1283,18 @@ input.submit {
 	padding-bottom: 0px;
 }
 
-#axis_labels .y1_label {
-	float: left;
+#axis_labels .y1_label, #axis_labels .y2_label {
 	font-size: 14px;
 	font-weight: 300;
 	padding-bottom: 0px;
 }
 
+#axis_labels .y1_label {
+	float: left;
+}
+
 #axis_labels .y2_label {
 	float: right;
-	font-size: 14px;
-	font-weight: 300;
-	padding-bottom: 0px;
 }
 
 #dashboard .tickLabel {

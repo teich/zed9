@@ -123,8 +123,10 @@ var summary_stats_graph_options = {
     // labelFormatter: null or (fn: string, series object -> string)
     labelBoxBorderColor: null,
     noColumns: 4,
-    position: "nw",
-    margin: [-20, -18],
+    // position: "nw",
+    // margin: [-14, -14],
+    position: "sw",
+    margin: [-15, -24],
     backgroundColor: null,
     backgroundOpacity: 0,
     container: null
@@ -259,7 +261,7 @@ function draw_dashboard_graph(data) {
 				{ data: activity2_count, stack: 1, label: a2, bars: summary_stats_bar_options },
 				{ data: activity3_count, stack: 1, label: a3, bars: summary_stats_bar_options },
 				{ data: activity4_count, stack: 1, label: a4, bars: summary_stats_bar_options },
-				{ data: weekly_workout_hours, yaxis: 2, lines: summary_stats_line_options }
+				{ data: weekly_workout_hours, yaxis: 2, label: "Workout time", lines: summary_stats_line_options }
 			], summary_stats_graph_options 
 		);
 
