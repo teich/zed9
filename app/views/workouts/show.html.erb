@@ -22,7 +22,7 @@
 			</div>
 		<% end -%>
 		
-		<h1><!-- <img class="activity_icon" src="/images/running.jpg" width="37" height="40"> -->
+		<h1>
 			<%= link_to image_tag(@workout.activity.root.icon_path, :class => "activity_icon"), activity_path(@workout.activity) %><%=h @workout.name %>  
 			<% if my_page? %>
 				<span class="action"><%= link_to 'edit', edit_workout_path(@workout) %></span>

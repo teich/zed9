@@ -59,7 +59,7 @@
 						<td class="rpe no_wrap"><% if !workout.rpe.nil? %><span class="sort_value"><%=h workout.rpe %></span><% end %><br></td>
 						<td class="duration no_wrap"><% if !workout.duration.nil? %><span class="sort_value"><%=h number_to_time(workout.duration) %></span><span class="unit">h</span><% end %><br></td>
 						<td class="distance no_wrap"><% if !workout.distance_in_miles.nil? %><span class="sort_value"><%=h workout.distance_in_miles %></span><span class="unit">miles</span><% end %><br></td>
-						<td class="speed no_wrap"><% if !workout.avg_speed_in_mph.nil? %><span class="sort_value"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span><% end %><br></td>				
+						<td class="speed no_wrap"><% if !workout.avg_speed_in_mph.nil? %><span class="sort_value" style="display:none"><%=h workout.avg_speed_in_mph %></span><span><%=h speed_to_pace(workout) %></span><span class="unit"><%=h units(workout,:speed) %></span><% end %><br></td>				
 						<td class="speed no_wrap"><% if !workout.avg_speed_in_mph.nil? %><span class="sort_value"><%=h mps_to_mph(workout.max(:speed)) %></span><span class="unit">mph</span><% end %><br></td>				
 						<td class="elevation no_wrap"><% if !workout.elevation.nil? %><span class="sort_value"><%=h workout.elevation_in_feet.round(0).to_i %></span><span class="unit">ft</span><% end %><br></td>
 						<td class="hr no_wrap"><% if !workout.hr.nil? %><span class="sort_value"><%=h workout.hr %></span><span class="unit">bpm</span><% end %><br></td>
