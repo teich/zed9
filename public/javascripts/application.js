@@ -515,7 +515,7 @@ function workout_page_graphs(data) {
 			sortList: [[2, 1]],
 			headers: { 
 				0: { sorter: false },
-				12: { sorter: false },
+				13: { sorter: false },
 			}
 		}); 
 

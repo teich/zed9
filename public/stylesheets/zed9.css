@@ -889,6 +889,10 @@ table.newsfeed {
 	border-bottom-left-radius: none !important;
 }
 
+.comment_count_inline {
+	top: 0px;	
+}
+
 /*Recent comments widget on dashboard and home*/
 	#dsq-recentcomments {
 		padding-top: 24px;

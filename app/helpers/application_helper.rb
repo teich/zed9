@@ -105,6 +105,15 @@ module ApplicationHelper
 		end
 	end
   
+	def units_short(workout, field)
+		case field
+		when :speed 
+			workout.activity.pace ? "min/mi" : "mph"
+		when :distance 
+			workout.user.metric ? "km" : "mi"
+		end
+	end
+
   def no_leaders?
     @farthest.size == 0 && @fastest.size == 0 && @longest.size == 0 && @climbers.size == 0 && @heart_pumping.size == 0
   end
