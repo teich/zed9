@@ -98,9 +98,6 @@ class User < ActiveRecord::Base
     (0..2).each do |i|
        tops << sorted[i][0]
     end
-    else
-      tops = sorted
-    end
     tops
   end
   
