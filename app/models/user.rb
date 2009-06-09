@@ -60,12 +60,66 @@ class User < ActiveRecord::Base
     (accomplishments.size * 10) + self.workouts.size
   end
   
-  def workouts_per_week(weeks_ago)
-    workouts.count(:conditions => ['start_time < ? AND start_time > ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago])
+  def json_workouts_per_week
+    bar = []
+    activities = top_activities.map {|a| a[1] }
+    for a in activities
+      foo = []
+      11.downto(0) {|i| foo << [11- i, workouts_per_week(i, a)] }
+      bar << foo
+      
+    end
+    
+    snarf = []
+    11.downto(0) {|i| snarf << [11 - i, workouts_per_week(i, nil, activities)]}
+    bar << snarf
+    return bar
+  end
+  
+  def top_activities
+    something = {}
+    tops = []
+    activities = workouts.map { |w| [w.activity.name, w.activity.id]}
+    activities.each do |a| 
+      if something[a].nil?
+        something[a] = 1
+      else
+        something[a] += 1
+      end
+    end
+
+    sorted = something.sort {|a,b| a[1]<=>b[1]}
+    sorted.reverse!
+    (0..2).each do |i|
+       tops << sorted[i][0]
+    end
+    tops
+  end
+  
+  def json_hours_per_week
+    foo = []
+    11.downto(0) {|i| foo << [(11 - i) + 0.45, hours_per_week(i)] }
+    return foo
+  end
+  
+  def json_weeks_labels
+    foo = []
+    11.downto(0) { |i| foo << [(11 - i) + 0.45, (i+1).weeks.ago.strftime("%m/%d")] }
+    foo
+  end
+  
+  def workouts_per_week(weeks_ago, activity = nil, exclude = nil)
+    if !exclude.nil?
+      workouts.count(:conditions => ['start_time < ? AND start_time > ? AND activity_id NOT IN (?)', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago, exclude])
+    elsif activity.nil?
+      workouts.count(:conditions => ['start_time < ? AND start_time > ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago])
+    else
+      workouts.count(:conditions => ['start_time < ? AND start_time > ? AND activity_id = ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago, activity])
+    end
   end
   
   def hours_per_week(weeks_ago)
-    workouts.sum('duration', :conditions =>  ['start_time < ? AND start_time > ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago])
+    workouts.sum('duration', :conditions =>  ['start_time < ? AND start_time > ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago]) / 3600
   end
 	private
 
