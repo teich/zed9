@@ -64,7 +64,7 @@
 				</span>
 			</div>	
 			<% elsif my_page? && @workout.tags.size == 0 %>
-			<span class="action"><%= link_to 'Tag this workout', edit_workout_path(@workout) %></span>
+			<span class="tag"><%= link_to 'Tag this workout', edit_workout_path(@workout) %></span>
 			<% end %>
 			
 	</div>	
