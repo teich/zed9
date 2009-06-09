@@ -149,8 +149,11 @@ var summary_stats_line_options = {
 
 // Pass in a JSON object, and draw based on that data.
 function draw_dashboard_graph(data) {
+	var workouts = data.user.workouts;
+	
 	function dashboard_tooltip(event, pos, item) {
 		var unit = "seconds";
+		
 		if (item) {
 			if (previousPoint != item.datapoint) {
 				previousPoint = item.datapoint;
@@ -158,13 +161,13 @@ function draw_dashboard_graph(data) {
 				$("#bar_tooltip").remove();
 				var x = item.datapoint[0].toFixed(0);
 				var y = item.datapoint[1].toFixed(0);
-				var d = new Date(data[x].workout.json_date * 1000);
+				var d = new Date(workouts[x].json_date * 1000);
 				var m_names = ["", "January", "February", "March",
 				"April", "May", "June", "July", "August", "September",
 				"October", "November", "December"];
 				var display_date = m_names[d.getMonth() + 1] + " " + d.getDate() + ", " + d.getFullYear();
-				var name = data[x].workout.name;
-				var activity_name = data[x].workout.activity_name;
+				var name = workouts[x].name;
+				var activity_name = workouts[x].activity_name;
 				var tip_text = "<span class='tooltip_extra_info'>" + activity_name + ":</span><br>"; 
 				tip_text += name + "<br><span class='tooltip_extra_info'>" + display_date + "<br>" + hms(y) + "h</span>";
 
@@ -183,14 +186,14 @@ function draw_dashboard_graph(data) {
 		var duration = [];
 		var date = [];
 
-		var barsDisplayed = data.length > 12 ? 12 : data.length;
-		var last = data.length - barsDisplayed - 1;
+		var barsDisplayed = workouts.length > 12 ? 12 : workouts.length;
+		var last = workouts.length - barsDisplayed - 1;
 
-		for (i = data.length -1; i > last; --i) {
-			var d = new Date(data[i].workout.json_date * 1000);
+		for (i = workouts.length -1; i > last; --i) {
+			var d = new Date(workouts[i].json_date * 1000);
 			var display_date = d.getMonth() + 1 + "/" + d.getDate();
 			var horizontal_offset = i + 0.45;
-			duration.push([i, data[i].workout.duration]);
+			duration.push([i, workouts[i].duration]);
 			date.push([horizontal_offset, display_date]);
 		}
 

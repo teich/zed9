@@ -39,7 +39,11 @@ class DashboardsController < ApplicationController
 
 		respond_to do |format|
 			format.html
-			format.js {render :js => @workouts.to_json(:methods => [:json_date, :activity_name], :except => :trackpoints) }
+			format.js {render :json => current_user.to_json(:include => { :workouts => 
+			                                                              { :methods => [:json_date, :activity_name], 
+			                                                                :except => :trackpoints } }, 
+			                                                  :except => [:single_access_token, :perishable_token, 
+			                                                              :password_salt, :persistence_token, :crypted_password])} 
 		end
 	end
 end

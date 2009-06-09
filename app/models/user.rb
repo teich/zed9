@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 	has_many :achievements, :through => :accomplishments, :uniq => true, :dependent => :destroy
 	has_many :hr_zones, :dependent => :destroy
 	has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
-	has_many :workouts, :dependent => :destroy
+	has_many :workouts, :dependent => :destroy, :order => 'start_time ASC'
 
 	before_create :set_invitation_limit
 
