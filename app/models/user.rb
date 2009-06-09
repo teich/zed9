@@ -90,8 +90,12 @@ class User < ActiveRecord::Base
 
     sorted = something.sort {|a,b| a[1]<=>b[1]}
     sorted.reverse!
-    (0..2).each do |i|
-       tops << sorted[i][0]
+    if sorted.length > 3
+      (0..2).each do |i|
+         tops << sorted[i][0]
+      end
+    else
+      tops = sorted
     end
     tops
   end
