@@ -111,28 +111,6 @@ var tooltip_style = {
 	}
 };
 
-var summary_stats_graph_options = {
-	grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 12 },
-	xaxis: { ticks: [[.45, "5/11"],[1.45, "5/18"],[2.45, "5/25"], [3.45, "6/1"]], labelWidth: 24 },
-	yaxis: { autoscaleMargin: 0.2 },
-	y2axis: { autoscaleMargin: 0.2 },
-	colors: ["#ff7e00", "#ffa200", "#ffd200", "#feff81", "#25a1d6"],
-	shadowSize: 1,
-	legend: {
-    show: true,
-    // labelFormatter: null or (fn: string, series object -> string)
-    labelBoxBorderColor: null,
-    noColumns: 4,
-    // position: "nw",
-    // margin: [-14, -14],
-    position: "sw",
-    margin: [-15, -24],
-    backgroundColor: null,
-    backgroundOpacity: 0,
-    container: null
-  }
-};
-
 var summary_stats_bar_options = {
 	show: true, 
 	barWidth: 0.9,
@@ -149,8 +127,11 @@ var summary_stats_line_options = {
 
 // Pass in a JSON object, and draw based on that data.
 function draw_dashboard_graph(data) {
+	var workouts = data.user.workouts;
+	
 	function dashboard_tooltip(event, pos, item) {
 		var unit = "seconds";
+		
 		if (item) {
 			if (previousPoint != item.datapoint) {
 				previousPoint = item.datapoint;
@@ -158,13 +139,13 @@ function draw_dashboard_graph(data) {
 				$("#bar_tooltip").remove();
 				var x = item.datapoint[0].toFixed(0);
 				var y = item.datapoint[1].toFixed(0);
-				var d = new Date(data[x].workout.json_date * 1000);
+				var d = new Date(workouts[x].json_date * 1000);
 				var m_names = ["", "January", "February", "March",
 				"April", "May", "June", "July", "August", "September",
 				"October", "November", "December"];
 				var display_date = m_names[d.getMonth() + 1] + " " + d.getDate() + ", " + d.getFullYear();
-				var name = data[x].workout.name;
-				var activity_name = data[x].workout.activity_name;
+				var name = workouts[x].name;
+				var activity_name = workouts[x].activity_name;
 				var tip_text = "<span class='tooltip_extra_info'>" + activity_name + ":</span><br>"; 
 				tip_text += name + "<br><span class='tooltip_extra_info'>" + display_date + "<br>" + hms(y) + "h</span>";
 
@@ -183,14 +164,14 @@ function draw_dashboard_graph(data) {
 		var duration = [];
 		var date = [];
 
-		var barsDisplayed = data.length > 12 ? 12 : data.length;
-		var last = data.length - barsDisplayed - 1;
+		var barsDisplayed = workouts.length > 12 ? 12 : workouts.length;
+		var last = workouts.length - barsDisplayed - 1;
 
-		for (i = data.length -1; i > last; --i) {
-			var d = new Date(data[i].workout.json_date * 1000);
+		for (i = workouts.length -1; i > last; --i) {
+			var d = new Date(workouts[i].json_date * 1000);
 			var display_date = d.getMonth() + 1 + "/" + d.getDate();
 			var horizontal_offset = i + 0.45;
-			duration.push([i, data[i].workout.duration]);
+			duration.push([i, workouts[i].duration]);
 			date.push([horizontal_offset, display_date]);
 		}
 
@@ -220,17 +201,30 @@ function draw_dashboard_graph(data) {
 	// Pass in a JSON object, and draw based on that data for summary stats on dashboard
 	function draw_dashboard_summary_graph(data) {
 		// var weekly_workouts_count = [[0,3],[1,4],[2,5],[3,6]];
-		var weekly_workout_hours = [[.45,10],[1.45,11],[2.45,9],[3.45,8]];
-		var activity1_count = [[0,1],[1,1],[2,1],[3,3]];
-		var activity2_count = [[0,1],[1,1],[2,3],[3,2]];
-		var activity3_count = [[0,2],[1,0],[2,2],[3,0]];
-		var activity4_count = [[0,2],[1,3],[2,0],[3,0]];
-		var a1 = "Street Running";
-		var a2 = "Trail Running";
-		var a3 = "Road biking";
-		var a4 = "Other";
-		
-		var barsDisplayed = 4;
+		var weekly_workout_hours = data.user.json_hours_per_week;
+		var top_activities = data.user.top_activities;
+
+		var summary_stats_graph_options = {
+			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 12 },
+			xaxis: { ticks: data.user.json_weeks_labels, labelWidth: 24 },
+			yaxis: { autoscaleMargin: 0.2 },
+			y2axis: { autoscaleMargin: 0.2 },
+			colors: ["#ff7e00", "#ffa200", "#ffd200", "#feff81", "#25a1d6"],
+			shadowSize: 1,
+			legend: {
+		    show: true,
+		    // labelFormatter: null or (fn: string, series object -> string)
+		    labelBoxBorderColor: null,
+		    noColumns: 4,
+		    // position: "nw",
+		    // margin: [-14, -14],
+		    position: "sw",
+		    margin: [-15, -24],
+		    backgroundColor: null,
+		    backgroundOpacity: 0,
+		    container: null
+		  }
+		};
 
 		function summary_stats_tooltip(event, pos, item) {
 			if (item) {
@@ -241,7 +235,14 @@ function draw_dashboard_graph(data) {
 					var x = pos.pageX
 					var y = pos.pageY
 					var count = item.datapoint[1];
-					var tip_text = "<span class='tooltip_extra_info'>Workouts the week of 5/11:<br><ul><li>Street Running: 2</li><li>Trail Running: 2</li><li>Road biking: 1</li><li>Other: 1</li></ul>Total workout time: 7:33</span><span class='tip_unit'>h</span>";
+					var tip_text = "<span class='tooltip_extra_info'>Workouts for the 7 days starting "+ data.user.json_weeks_labels[item.dataIndex][1]+":<br><ul>";
+					for (var i = 0; i < 3; i++) {
+						tip_text += "<li>" + top_activities[i][0] + ": " + data.user.json_workouts_per_week[i][item.dataIndex][1] + "</li>";
+					}
+					
+					tip_text += "<li>Other: " + data.user.json_workouts_per_week[3][item.dataIndex][1] + "</li>";
+					tip_text += "</ul>";
+					tip_text += "Total workout time: " + hms(weekly_workout_hours[item.dataIndex][1]*3600) + "</span><span class='tip_unit'>h</span>";
 	
 					$('<div id="summary_stats_tooltip" class="tooltip">' + tip_text + '</div>').css({
 						top: pos.pageY+4,
@@ -257,10 +258,10 @@ function draw_dashboard_graph(data) {
 
 		$.plot($('#summary_stats_graph'), [
 				// { data: weekly_workouts_count, bars: summary_stats_bar_options },
-				{ data: activity1_count, stack: 1, label: a1, bars: summary_stats_bar_options },
-				{ data: activity2_count, stack: 1, label: a2, bars: summary_stats_bar_options },
-				{ data: activity3_count, stack: 1, label: a3, bars: summary_stats_bar_options },
-				{ data: activity4_count, stack: 1, label: a4, bars: summary_stats_bar_options },
+				{ data: data.user.json_workouts_per_week[0], stack: 1, label: top_activities[0][0], bars: summary_stats_bar_options },
+				{ data: data.user.json_workouts_per_week[1], stack: 1, label: top_activities[1][0], bars: summary_stats_bar_options },
+				{ data: data.user.json_workouts_per_week[2], stack: 1, label: top_activities[2][0], bars: summary_stats_bar_options },
+				{ data: data.user.json_workouts_per_week[3], stack: 1, label: "Other", bars: summary_stats_bar_options },
 				{ data: weekly_workout_hours, yaxis: 2, label: "Workout time", lines: summary_stats_line_options }
 			], summary_stats_graph_options 
 		);
