@@ -205,7 +205,7 @@ function draw_dashboard_graph(data) {
 		var top_activities = data.user.top_activities;
 
 		var summary_stats_graph_options = {
-			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 12 },
+			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 12, markings: xAxis },
 			xaxis: { ticks: data.user.json_weeks_labels, labelWidth: 24 },
 			yaxis: { autoscaleMargin: 0.2 },
 			y2axis: { autoscaleMargin: 0.2 },
@@ -213,11 +213,8 @@ function draw_dashboard_graph(data) {
 			shadowSize: 1,
 			legend: {
 		    show: true,
-		    // labelFormatter: null or (fn: string, series object -> string)
 		    labelBoxBorderColor: null,
 		    noColumns: 4,
-		    // position: "nw",
-		    // margin: [-14, -14],
 		    position: "sw",
 		    margin: [-15, -24],
 		    backgroundColor: null,
