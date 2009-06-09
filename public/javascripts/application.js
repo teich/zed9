@@ -216,7 +216,7 @@ function draw_dashboard_graph(data) {
 		    labelBoxBorderColor: null,
 		    noColumns: 4,
 		    position: "sw",
-		    margin: [-15, -24],
+		    margin: [-15, -20],
 		    backgroundColor: null,
 		    backgroundOpacity: 0,
 		    container: null

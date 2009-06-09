@@ -38,13 +38,8 @@
 			</div>
 			<div id="summary_stats_graph"></div>
 			<div id="summary_stats_legend"></div>
-			
-			<!-- <% (0..4).each do |weeks_ago| %>
-			You worked out <%= current_user.workouts_per_week(weeks_ago) %> times <%= weeks_ago %> weeks ago for <%= number_to_short_time(current_user.hours_per_week(weeks_ago)) %><BR>
-			<% end %> -->
-		
 		</div>
-
+		
 		<% if @accomplishments.size > 0 %>
 		<div id="recent_achievements" class="achievements">
 			<h2>You've earned <%=h @accomplishments.size %> achievements this week</h2>

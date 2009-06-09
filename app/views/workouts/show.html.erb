@@ -32,9 +32,7 @@
 			
 			<p id="workout_description"><%= link_to @workout.activity.name, activity_path(@workout.activity) %> on <%=h activity_timestamp_shorter(@workout.start_time) %>. Posted <%= h activity_timestamp_shorter(@workout.created_at) %>. <span class="comment_count"><a href="#disqus_thread" class="tip" title="Comments on this workout">comment</a></span></p>
 
-			<% if !@workout.notes == "" %>
-				<p id="workout_notes"><%= h @workout.notes %></p>
-			<% end -%>
+			<p id="workout_notes"><%= h @workout.notes %></p>
 
 			<% if my_page? && @workout.overlaps? %>
 				<div id="overlaps">

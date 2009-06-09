@@ -876,7 +876,7 @@ table.newsfeed {
   border: 1px solid #d9d9d9;
   padding: 0px 4px;
 	position: relative;
-	top: -2px;
+	top: -1px;
 	font-size: 10px;
 	font-weight: 500;
 	text-align: center;
@@ -884,9 +884,9 @@ table.newsfeed {
 	-moz-border-radius: 4px !important;
 	-moz-border-radius-bottomLeft: 0px !important;
 	-webkit-border-radius: 4px !important;
-	-webkit-border-bottom-left-radius: none !important;
+	-webkit-border-bottom-left-radius: 0px !important;
 	border-radius: 4px !important;
-	border-bottom-left-radius: none !important;
+	border-bottom-left-radius: 0px !important;
 }
 
 .comment_count_inline {
@@ -1243,20 +1243,16 @@ input.submit {
 	color:#25a1d6;
 }
 
-#recent_workouts_chart {
+#recent_workouts_chart, #summary_stats_graph {
+	clear: both;
 	position: relative;
-	top: -12px;
+	top: -8px;
 	overflow: hidden;
 	width: 468px;
 	height: 196px;
 }
 
 #summary_stats_graph {
-	position: relative;
-	top: -12px;
-	overflow: hidden;
-	width: 468px;
-	height: 196px;
 	font-size: 12px;
 	padding-bottom: 48px;
 }
@@ -1603,7 +1599,7 @@ td .points {
 	display: block;
 	font-size: 14px;
 	padding: 2px 0px;
-	font-weight: 100;
+	font-weight: 300;
 }
 
 #workout_notes {
