@@ -200,7 +200,6 @@ function draw_dashboard_graph(data) {
 
 	// Pass in a JSON object, and draw based on that data for summary stats on dashboard
 	function draw_dashboard_summary_graph(data) {
-		// var weekly_workouts_count = [[0,3],[1,4],[2,5],[3,6]];
 		var weekly_workout_hours = data.user.json_hours_per_week;
 		var top_activities = data.user.top_activities;
 
@@ -236,7 +235,6 @@ function draw_dashboard_graph(data) {
 					for (var i = 0; i < 3; i++) {
 						tip_text += "<li>" + top_activities[i][0] + ": " + data.user.json_workouts_per_week[i][item.dataIndex][1] + "</li>";
 					}
-					
 					tip_text += "<li>Other: " + data.user.json_workouts_per_week[3][item.dataIndex][1] + "</li>";
 					tip_text += "</ul>";
 					tip_text += "Total workout time: " + hms(weekly_workout_hours[item.dataIndex][1]*3600) + "</span><span class='tip_unit'>h</span>";

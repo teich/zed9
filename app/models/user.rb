@@ -109,7 +109,7 @@ class User < ActiveRecord::Base
   
   def json_weeks_labels
     foo = []
-    11.downto(0) { |i| foo << [(11 - i) + 0.45, (i+1).weeks.ago.strftime("%m/%d")] }
+    11.downto(0) { |i| foo << [(11 - i) + 0.45, (i+1).weeks.ago.strftime("%m/%d").gsub(/0?(\d)\/0?(\d{1,2})/,'\1/\2')] }
     foo
   end
   
