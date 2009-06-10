@@ -207,7 +207,7 @@ function draw_dashboard_graph(data) {
 			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 12, markings: xAxis },
 			xaxis: { ticks: data.user.json_weeks_labels, labelWidth: 24 },
 			yaxis: { autoscaleMargin: 0.2 },
-			y2axis: { autoscaleMargin: 0.2, minTickSize: 1 },
+			y2axis: { autoscaleMargin: 0.2, minTickSize: 1, tickDecimals: null },
 			colors: ["#ffa200", "#25a1d6"],
 			shadowSize: 1,
 			legend: {
