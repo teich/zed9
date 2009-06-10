@@ -193,7 +193,7 @@ function draw_dashboard_graph(data) {
 		var dashboard_options = {
 			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", clickable: true, mouseActiveRadius: 48, markings: xAxis },
 			xaxis: { ticks: date, labelWidth: 24},
-			yaxis: { autoscaleMargin: 0.2, tickFormatter: timeFormater },
+			yaxis: { minTickSize: 0, tickFormatter: timeFormater },
 			colors: ["#25a1d6"],
 			shadowSize: 1
 		};
@@ -216,8 +216,8 @@ function draw_dashboard_graph(data) {
 		var summary_stats_graph_options = {
 			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 12, markings: xAxis },
 			xaxis: { ticks: data.user.json_weeks_labels, labelWidth: 24 },
-			yaxis: { autoscaleMargin: 0.2 },
-			y2axis: { autoscaleMargin: 0.2, minTickSize: 1, tickDecimals: 0 },
+			yaxis: { min: 0 },
+			y2axis: { min: 0, minTickSize: 1, tickDecimals: 0 },
 			colors: ["#ffa200", "#25a1d6"],
 			shadowSize: 1,
 			legend: {
