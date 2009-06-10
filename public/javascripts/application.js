@@ -232,10 +232,7 @@ function draw_dashboard_graph(data) {
 					var y = pos.pageY
 					var count = item.datapoint[1];
 					var tip_text = "<span class='tooltip_extra_info'>Workouts for the 7 days starting "+ data.user.json_weeks_labels[item.dataIndex][1]+":<br><ul>";
-					for (var i = 0; i < 3; i++) {
-						tip_text += "<li>" + top_activities[i][0] + ": " + data.user.json_workouts_per_week[i][item.dataIndex][1] + "</li>";
-					}
-					tip_text += "<li>Other: " + data.user.json_workouts_per_week[3][item.dataIndex][1] + "</li>";
+					tip_text += "<li> Frequency: " + data.user.json_workouts_per_week[item.dataIndex][1] + "</li>";
 					tip_text += "</ul>";
 					tip_text += "Total workout time: " + hms(weekly_workout_hours[item.dataIndex][1]*3600) + "</span><span class='tip_unit'>h</span>";
 	
@@ -251,17 +248,11 @@ function draw_dashboard_graph(data) {
 				}    
 			}
 
-		$.plot($('#summary_stats_graph'), [
-				// { data: weekly_workouts_count, bars: summary_stats_bar_options },
-				{ data: data.user.json_workouts_per_week[0], stack: 1, label: top_activities[0][0], bars: summary_stats_bar_options },
-				{ data: data.user.json_workouts_per_week[1], stack: 1, label: top_activities[1][0], bars: summary_stats_bar_options },
-				{ data: data.user.json_workouts_per_week[2], stack: 1, label: top_activities[2][0], bars: summary_stats_bar_options },
-				{ data: data.user.json_workouts_per_week[3], stack: 1, label: "Other", bars: summary_stats_bar_options },
-				{ data: weekly_workout_hours, yaxis: 2, label: "Workout time", lines: summary_stats_line_options }
-			], summary_stats_graph_options 
-		);
-
-			 $("#summary_stats_graph").bind("plothover", summary_stats_tooltip);
+		var summary_data = [];
+		summary_data.push( { data: data.user.json_workouts_per_week, stack: 1, bars: summary_stats_bar_options });
+		summary_data.push({ data: weekly_workout_hours, yaxis: 2, lines: summary_stats_line_options });
+		$.plot($('#summary_stats_graph'), summary_data, summary_stats_graph_options);
+		$("#summary_stats_graph").bind("plothover", summary_stats_tooltip);
 	}
 
 

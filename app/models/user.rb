@@ -61,19 +61,23 @@ class User < ActiveRecord::Base
   end
   
   def json_workouts_per_week
-    bar = []
-    activities = top_activities.map {|a| a[1] }
-    for a in activities
-      foo = []
-      11.downto(0) {|i| foo << [11- i, workouts_per_week(i, a)] }
-      bar << foo
-      
-    end
-    
-    snarf = []
-    11.downto(0) {|i| snarf << [11 - i, workouts_per_week(i, nil, activities)]}
-    bar << snarf
-    return bar
+    # bar = []
+    # activities = top_activities.map {|a| a[1] }
+    # for a in activities
+    foo = []
+    11.downto(0) {|i| foo << [11- i, workouts_per_week(i)] }
+    foo
+    #   bar << foo
+    #   
+    # end
+    # 
+    # stuff = 3 - bar.length
+    # (0..stuff).each {|i| bar << [[0,0]]}
+    # 
+    # snarf = []
+    # 11.downto(0) {|i| snarf << [11 - i, workouts_per_week(i, nil, activities)]}
+    # bar[3] = snarf
+    # return bar
   end
   
   def top_activities
@@ -90,13 +94,13 @@ class User < ActiveRecord::Base
 
     sorted = something.sort {|a,b| a[1]<=>b[1]}
     sorted.reverse!
+    
     if sorted.length < 3
+      tops = sorted
+    else
       (0..2).each do |i|
-        sorted[i] = [0,0]
+        tops << sorted[i][0]
       end
-    end
-    (0..2).each do |i|
-       tops << sorted[i][0]
     end
     tops
   end

@@ -44,7 +44,7 @@ class DashboardsController < ApplicationController
 			                                                                :except => :trackpoints } }, 
 			                                                  :except => [:single_access_token, :perishable_token, 
 			                                                              :password_salt, :persistence_token, :crypted_password],
-			                                                  :methods => [:json_hours_per_week, :top_activities, :json_workouts_per_week, :json_weeks_labels])} 
+			                                                  :methods => [:json_hours_per_week, :json_workouts_per_week, :json_weeks_labels])} 
 		end
 	end
 end
