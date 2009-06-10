@@ -204,7 +204,7 @@ function draw_dashboard_graph(data) {
 		var top_activities = data.user.top_activities;
 
 		var summary_stats_graph_options = {
-			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 12, markings: xAxis },
+			grid: { borderWidth: 0, tickColor: "white", minTickSize: 1, hoverable: "yes", mouseActiveRadius: 12, markings: xAxis },
 			xaxis: { ticks: data.user.json_weeks_labels, labelWidth: 24 },
 			yaxis: { autoscaleMargin: 0.2 },
 			y2axis: { autoscaleMargin: 0.2 },
