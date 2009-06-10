@@ -175,15 +175,25 @@ function draw_dashboard_graph(data) {
 			date.push([horizontal_offset, display_date]);
 		}
 
-		function testFormater(val, axis) {
+		function timeFormater(val, axis) {
+
+			function checkTime(i)
+			{
+			if (i<10) 
+			  {
+			  i="0" + i;
+			  }
+			return i;
+			}
+
 	    var d = new Date(val*1000);
-	    return d.getUTCHours() + ":" + d.getUTCMinutes();
+	    return d.getUTCHours() + ":" + checkTime(d.getUTCMinutes());
 		}
 		
 		var dashboard_options = {
 			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", clickable: true, mouseActiveRadius: 48, markings: xAxis },
 			xaxis: { ticks: date, labelWidth: 24},
-			yaxis: { autoscaleMargin: 0.2, tickFormatter: testFormater },
+			yaxis: { autoscaleMargin: 0.2, tickFormatter: timeFormater },
 			colors: ["#25a1d6"],
 			shadowSize: 1
 		};

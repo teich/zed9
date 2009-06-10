@@ -1246,7 +1246,6 @@ input.submit {
 #recent_workouts_chart, #summary_stats_graph {
 	clear: both;
 	position: relative;
-	top: -8px;
 	overflow: hidden;
 	width: 468px;
 	height: 196px;
