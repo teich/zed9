@@ -42,7 +42,7 @@
 		
 		<% if @accomplishments.size > 0 %>
 		<div id="recent_achievements" class="achievements">
-			<h2>You've earned <%=h @accomplishments.size %> achievements this week</h2>
+			<h2>You've earned <%=h @accomplishments.size %> achievement<% if @accomplishments.size != 1 %>s<% end %> this week</h2>
 			<ul>
 				<%= render :partial => @accomplishments, :locals => { :date => false } %>
 			</ul>
