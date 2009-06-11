@@ -133,6 +133,7 @@ function draw_dashboard_graph(data) {
 		var unit = "seconds";
 		
 		if (item) {
+			var previousPoint = [];
 			if (previousPoint != item.datapoint) {
 				previousPoint = item.datapoint;
 
@@ -211,7 +212,7 @@ function draw_dashboard_graph(data) {
 	// Pass in a JSON object, and draw based on that data for summary stats on dashboard
 	function draw_dashboard_summary_graph(data) {
 		var weekly_workout_hours = data.user.json_hours_per_week;
-		var top_activities = data.user.top_activities;
+		// var top_activities = data.user.top_activities;
 
 		var summary_stats_graph_options = {
 			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 12, markings: xAxis },
@@ -221,18 +222,19 @@ function draw_dashboard_graph(data) {
 			colors: ["#ffa200", "#25a1d6"],
 			shadowSize: 1,
 			legend: {
-		    show: true,
-		    labelBoxBorderColor: null,
-		    noColumns: 4,
-		    position: "sw",
-		    margin: [-15, -20],
-		    backgroundColor: null,
-		    backgroundOpacity: 0,
-		    container: null
-		  }
+					    show: true,
+					    labelBoxBorderColor: null,
+					    noColumns: 4,
+					    position: "sw",
+					    margin: [-15, -20],
+					    backgroundColor: null,
+					    backgroundOpacity: 0,
+					    container: null
+					  }
 		};
 
 		function summary_stats_tooltip(event, pos, item) {
+			var previousPoint = [];
 			if (item) {
 				if (previousPoint != item.datapoint) {
 					previousPoint = item.datapoint;
@@ -270,6 +272,7 @@ function workout_page_graphs(data) {
 		// TODO: units are now dependent on data
 		//var unit = '<span class="tooltip_unit">bpm</span>';
 		if (item) {
+			var previousPoint = [];
 			if (previousPoint != item.datapoint) {
 				previousPoint = item.datapoint;
 				$("#fullsize_tooltip").remove();
