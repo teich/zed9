@@ -96,6 +96,27 @@ module ApplicationHelper
 		
 	end
 	
+	def max_speed_to_pace(workout)
+
+		metric = workout.user.metric
+		pace = workout.activity.pace
+		max_speed = workout.trackpoints.maximum(:speed)
+		
+		# workout speed is set to meters per second.
+		if metric
+			max_speed *= 3.6
+		else
+			max_speed *= 2.23693629
+		end
+		
+		if pace
+			return float_min_to_formated_time(60 / max_speed) 
+		else
+			return max_speed.round(1)
+		end
+		
+	end
+
 	def units(workout, field)
 		case field
 		when :speed 

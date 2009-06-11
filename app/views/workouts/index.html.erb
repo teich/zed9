@@ -61,7 +61,7 @@
 						<td class="duration no_wrap"><% if !workout.duration.nil? %><span class="sort_value"><%=h number_to_time(workout.duration) %></span><span class="unit">h</span><% end %><br></td>
 						<td class="distance no_wrap"><% if !workout.distance_in_miles.nil? %><span class="sort_value"><%=h workout.distance_in_miles %></span><span class="unit">mi</span><% end %><br></td>
 						<td class="speed no_wrap"><% if !workout.avg_speed_in_mph.nil? %><span class="sort_value" style="display:none"><%=h workout.avg_speed_in_mph %></span><span><%=h speed_to_pace(workout) %></span><span class="unit"><%=h units_short(workout,:speed) %></span><% end %><br></td>				
-						<td class="speed no_wrap"><% if !workout.avg_speed_in_mph.nil? %><span class="sort_value"><%=h mps_to_mph(workout.max(:speed)) %></span><span class="unit">mph</span><% end %><br></td>				
+						<td class="speed no_wrap"><% if !workout.avg_speed_in_mph.nil? %><span class="sort_value" style="display:none"><%=h workout.max(:speed) %></span><span><%=h max_speed_to_pace(workout) %></span><span class="unit"><%=h units_short(workout,:speed) %></span><% end %><br></td>				
 						<td class="elevation no_wrap"><% if !workout.elevation.nil? %><span class="sort_value"><%=h workout.elevation_in_feet.round(0).to_i %></span><span class="unit">ft</span><% end %><br></td>
 						<td class="hr no_wrap"><% if !workout.hr.nil? %><span class="sort_value"><%=h workout.hr %></span><span class="unit">bpm</span><% end %><br></td>
 						<td class="hr no_wrap"><% if !workout.hr.nil? %><span class="sort_value"><%=h workout.max(:heart_rate) %></span><span class="unit">bpm</span><% end %><br></td>
@@ -73,7 +73,7 @@
 						<td><span class="comment_count comment_count_inline tip" title="comments"><%= link_to "0", workout_path(workout, :anchor => "disqus_thread") %></span></td>
 						<!-- Displays actions column if my page -->
 						<% if my_page? %>
-							<td class="last_column no_wrap"><%= link_to image_submit_tag("../../images/pencil.png", :class => "action_icon", :onmouseover => "this.src='../../images/pencil_on.png'", :onmouseout => "this.src='../../images/pencil.png'"), edit_workout_path(workout) %>&nbsp;<%= link_to image_tag("../../images/trash.png", :class => "action_icon",  :onmouseover => "this.src='../../images/trash_on.png'", :onmouseout => "this.src='../../images/trash.png'"), workout, :method => :delete, :confirm => "Are you sure you want to delete this workout?" %><br></td>
+							<td class="last_column no_wrap"><%= link_to image_submit_tag("../../images/pencil.png", :class => "action_icon tip", :title => "edit", :alt => "edit |", :onmouseover => "this.src='../../images/pencil_on.png'", :onmouseout => "this.src='../../images/pencil.png'"), edit_workout_path(workout) %><%= link_to image_tag("../../images/trash.png", :class => "action_icon second tip",  :alt => "delete", :title => "delete", :onmouseover => "this.src='../../images/trash_on.png'", :onmouseout => "this.src='../../images/trash.png'"), workout, :method => :delete, :confirm => "Are you sure you want to delete this workout?" %><br></td>
 						<% end %>
 					<% end %>
 				</tr>

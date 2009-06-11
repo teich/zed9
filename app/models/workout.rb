@@ -399,7 +399,6 @@ class Workout < ActiveRecord::Base
     trackpoints.maximum(field)
   end
 
-
 	def calc_average_speed
 		get_speed.compact.aaverage
 	end

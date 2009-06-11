@@ -25,7 +25,8 @@
 		<h1>
 			<%= link_to image_tag(@workout.activity.root.icon_path, :class => "activity_icon"), activity_path(@workout.activity) %><%=h @workout.name %>  
 			<% if my_page? %>
-				<span class="action"><%= link_to 'edit', edit_workout_path(@workout) %></span>
+				<%= link_to image_submit_tag("../../images/pencil.png", :class => "action_icon tip", :alt => "edit", :title => "edit", :onmouseover => "this.src='../../images/pencil_on.png'", :onmouseout => "this.src='../../images/pencil.png'"), edit_workout_path(@workout) %><%= link_to image_tag("../../images/trash.png", :class => "action_icon second tip", :alt => "delete", :title => "delete", :onmouseover => "this.src='../../images/trash_on.png'", :onmouseout => "this.src='../../images/trash.png'"), @workout, :method => :delete, :confirm => "Are you sure you want to delete this workout?" %>
+				<!-- <span class="action"><%= link_to 'edit', edit_workout_path(@workout) %></span> -->
 			<% else %>
 				<span class="by">by</span> <%= link_to @workout.user.display_name, user_path(@workout.user) %> <span class="points">(<%=h @workout.user.points %> points)</span> 
 			<% end -%></h1>
@@ -104,7 +105,7 @@
 				<th class="spark_line_title">Speed</th>
 				<td id="spark_line"><div id="speed" class="sparkline"></div></td>
 				<td class="number spark_line_title"><span class="value"><%= h speed_to_pace(@workout) %></span><span class="units"><%=h units(@workout,:speed) %></span></td>
-				<td class="max" id="max_speed"><%= h mps_to_mph(@workout.max(:speed)) %><span class="units">max</span></td>
+				<td class="max" id="max_speed"><%= h max_speed_to_pace(@workout) %><span class="units">max</span></td>
 			</tr>
 			<% end -%>
 			

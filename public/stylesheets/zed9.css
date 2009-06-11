@@ -1428,7 +1428,7 @@ td .points {
 }
 
 #workouts_list .unit {
-	font-size: 12px;
+	font-size: 11px;
 	color: #9f9f9f;
 }
 
@@ -1550,6 +1550,10 @@ td .points {
 
 .action_icon {
 	height: 14px;
+}
+
+.action_icon.second {
+	padding-left: 4px;
 }
 
 .action {

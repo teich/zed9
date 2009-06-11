@@ -2,7 +2,7 @@
 	<h1>
 		<%=h @user.display_name %> <span class="points">(<%= @user.points %> points)</span>
 		<% if my_page? %>
-			<span class="action"><%= link_to 'edit profile', edit_user_path(current_user) %></span>
+			<span class="action_icon"><%= link_to image_submit_tag("../../images/pencil.png", :class => "action_icon tip", :title => "edit profile", :alt => "edit profile", :onmouseover => "this.src='../../images/pencil_on.png'", :onmouseout => "this.src='../../images/pencil.png'"), edit_user_path(current_user) %></span>
 		<% end %>
 	</h1>
 	<div id="bio">
