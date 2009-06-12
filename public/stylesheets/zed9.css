@@ -1556,6 +1556,11 @@ td .points {
 	padding-left: 4px;
 }
 
+.add_small {
+	height: 11px;
+	padding-left: 4px;
+}
+
 .action {
 	font-size: 12px;
 	font-weight: 100;
