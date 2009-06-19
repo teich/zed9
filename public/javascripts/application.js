@@ -555,22 +555,25 @@ function workout_page_graphs(data) {
 		
 		// Toggle view of bests on leaderboards
 		$('div.more').hide();  
-		$('div.leaderboard').click(function() { 
+		$('.toggle').click(function() { 
 			$(this).children('.more').slideToggle('fast');
 			$(this).toggleClass('open');
 		});
 
+		// Tabs for add workout
+		
+		$("#tabs").tabs();
 
 		// Accordion on new workout
-    $("#locating").accordion({ autoHeight: false }, { header: 'h4' }, { collapsible: true }, { active: false });
-		
-		$('.accordion_header').click(function() {
-			$('.accordion_header_active').next('.accordion_content_active').removeClass('accordion_content_active');
-		  $('.accordion_header_active').removeClass('accordion_header_active');
-			$(this).next('.accordion_content').addClass('accordion_content_active');
-			$(this).addClass('accordion_header_active');
+    $(".accordion").accordion({
+			autoHeight: false, 
+			collapsible: true, 
+			active: false, 
+			header: 'h4', 
+			clearStyle: true, 
+			icons: { header: 'toggle_closed', headerSelected: 'toggle_open' } 
 		});
-		
+									
 		// Workouts index row highlight on hover
 		$('tr.newsfeed_workout_summary').hover(function() {
 			$(this).children().addClass("highlight");

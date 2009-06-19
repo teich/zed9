@@ -9,12 +9,13 @@ class Workout < ActiveRecord::Base
 	validates_presence_of	:name
 	validates_length_of 	:name,		:maximum => 100
 	validates_length_of		:notes,		:maximum => 600
-	
-
 	validates_presence_of :user_id
+	
+	validates_presence_of :duration, :if => :manual_entry?
 
 	acts_as_taggable_on   :tags
 	
+	  
   def perform
     
     # Make sure there is no existing data
@@ -40,7 +41,7 @@ class Workout < ActiveRecord::Base
       self.check_achievements
       return true
     else
-      puts "something went wrong"
+      puts "Something went wrong"
       return false
     end
     
@@ -74,6 +75,9 @@ class Workout < ActiveRecord::Base
 	  end
 	end
 	
+	def trackpoints?
+	  trackpoints.size > 0
+	end
 	
 	def get_hr
 		trackpoints.map {|a|a.heart_rate}
@@ -90,7 +94,7 @@ class Workout < ActiveRecord::Base
 	# Return the Global Information, AKA lat and lng.
 	def gis
 		gis = []
-		return 0 if trackpoints.size < 5
+		return gis if trackpoints.size < 5
 		start = trackpoints.first.time
 		for tp in trackpoints do
 			if !tp.lat.nil?
@@ -433,5 +437,9 @@ class Workout < ActiveRecord::Base
     end
     return fields
   end
-
+  
+  def manual_entry?
+    devices.first.mfg == "MANUAL"
+  end
+  
 end

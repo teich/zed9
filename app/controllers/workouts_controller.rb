@@ -51,7 +51,14 @@ class WorkoutsController < ApplicationController
 	def new
 		@rpe = RPE.new
 		@workout = current_user.workouts.build
-		@workout.activity = Activity.find_by_name("Uncategorized")
+
+    # Defaults to last selected activity type
+    last_workout = current_user.workouts.find(:first, :order => "created_at DESC")
+    if !last_workout.nil?
+		  @workout.activity = Activity.find_by_name("Uncategorized")
+    else
+      @workout.activity = last_workout.activity.name
+    end
 
 		# Set the workout shared state to the user default
 		@workout.shared = current_user.shared
@@ -66,23 +73,27 @@ class WorkoutsController < ApplicationController
   def create
 		@rpe = RPE.new
     @workout = current_user.workouts.create(params[:workout])
-    @workout.importing = true
-    if @workout.devices.first.nil?
-      @workout.destroy
-      add_flash(:alert, "Please select a file to upload")
-      redirect_to :action => "new", :device_type => params[:device_type]
-    else
+    @workout.importing = true if !@workout.manual_entry?
+
+    # if @workout.devices.first.nil?
+    #    @workout.destroy
+    #    add_flash(:alert, "Please select a file to upload")
+    #    redirect_to :action => "new", :device_type => params[:device_type]
+    #  else
       if @workout.save
-        Delayed::Job.enqueue WorkoutJob.new(@workout.id)
-        add_flash(:notice, 'Now processing your workout data... This may take up to a minute.')
+        if @workout.manual_entry?
+          add_flash(:notice, "Sucessfully created your manual workout")
+        else
+          Delayed::Job.enqueue WorkoutJob.new(@workout.id)
+          add_flash(:notice, 'Now processing your workout data... This may take up to a minute.')
+        end
         redirect_to user_workouts_path(current_user)
       else
-        add_flash(:alert, "Unable to save workout for some lame reason")
+        @workout.destroy
         render :action => "new"
       end
-    end
+    #end
   end
-
 
 	def update
 		if @workout.update_attributes(params[:workout])
@@ -126,14 +137,6 @@ class WorkoutsController < ApplicationController
 		end
 	end
 
-  # def my_workouts?
-  #   if logged_in?
-  #     return @user == current_user
-  #   else
-  #     return false
-  #   end
-  # end
-  
   def upload_if_no_workouts
     redirect_to new_user_workout_path(current_user) if my_page? && current_user.workouts.size == 0 
   end

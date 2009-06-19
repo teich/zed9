@@ -13,11 +13,16 @@ class User < ActiveRecord::Base
 	has_many :achievements, :through => :accomplishments, :uniq => true, :dependent => :destroy
 	has_many :hr_zones, :dependent => :destroy
 	has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
-	has_many :workouts, :dependent => :destroy, :order => 'start_time ASC'
+	has_many :workouts, :dependent => :destroy
+  # has_many :workouts, :dependent => :destroy, :order => 'start_time ASC'
 
 	before_create :set_invitation_limit
 
 	attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :birthdate, :sex, :height, :time_zone, :shared, :displayname, :bio
+
+  def start_time
+    start_time_edited || start_time_file
+  end
 
 	def invitation_token
 		invitation.token if invitation
