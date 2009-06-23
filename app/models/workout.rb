@@ -29,7 +29,7 @@ class Workout < ActiveRecord::Base
 	  end_time.to_s
 	end
 
-  def end_time_string=(start_time_str)
+  def end_time_string=(end_time_str)
     self.end_time = Time.parse(end_time_str)
   end
 	

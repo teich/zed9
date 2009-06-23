@@ -513,6 +513,7 @@ function workout_page_graphs(data) {
 	function get_workout_values(workout) {
 		// Get values
 		var start_time = $("input#workout_start_time_string").val();
+		var end_time = $("input#workout_end_time_string").val();
 		var duration = $("input#workout_duration").val();
 		var distance = $("input#workout_distance").val();
 		var elevation = $("input#workout_elevation").val();
