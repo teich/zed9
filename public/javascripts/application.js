@@ -607,7 +607,7 @@ function workout_page_graphs(data) {
 		var dur = ($("input#workout_duration").val())*1000;
 		var end_in_ms =  start + dur;
 		var end = new Date(end_in_ms);
-		$("input#workout_end_time").val(end);
+		$("input#workout_end_time_string").val(end);
 	}
 
 	function convert_distance() {
