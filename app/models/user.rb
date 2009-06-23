@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 	end
 
 	def to_param
-		"#{login.gsub(/[^a-z0-9]+/i, '-')}"
+		"#{login.gsub(/[^a-z0-9-]+/i, '-')}"
 	end
 
 	def display_name
