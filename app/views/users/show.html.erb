@@ -39,7 +39,7 @@
 			<% if my_page? || !any_private? %>
 				<h2>Personal bests</h2>
 			
-				<% if any_private? %><p>Make your workouts public to let other users see your bests!</p><% end %>
+				<% if any_private? %><p>Share your workouts to let other users see your bests!</p><% end %>
 
 				<% if @farthest.size > 0 %>		
 				<div class="leaderboard toggle">
@@ -237,7 +237,7 @@
 		<% if my_page? && @workouts.size == 0 %>
 			<div class="usage_tip">You haven't recorded any personal bests yet. How sad... <%= link_to "Upload a workout", new_user_workout_path(current_user) %> to fix that!</div>
 		<% elsif @workouts.size == 0 %>
-			<p><%=h @user.display_name %> hasn't publicly recorded any bests yet.</p>
+			<p><%=h @user.display_name %> hasn't shared any bests yet.</p>
 		<% end %>
 		
 		</div>
@@ -254,7 +254,7 @@
 			<% if my_page? && @workouts.size == 0 %>
 				<p>None yet... Better get moving!</p>
 			<% elsif @workouts.size == 0 %>
-				<p>No public workouts yet...</p>
+				<p>No shared workouts yet...</p>
 			<% else %>
 				<p class="more_news"><%= link_to "See all", user_workouts_path(@user) %></p>
 			<% end %>

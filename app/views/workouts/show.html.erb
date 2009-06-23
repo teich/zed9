@@ -118,7 +118,7 @@
 				<th class="spark_line_title">Heart rate</th>
 				<td id="spark_line"><div id="hr" class="<%= sparktype(@workout) %>"></div></td>
 				<td class="number spark_line_title"><span class="value"><%=h @workout.hr %></span><span class="units">bpm</span></td>
-				<td class="max" id="max_hr"><% if !@workout.hr_max.nil? %><%= hr_max(@workout) %><span class="units">max</span><% end %></td>
+				<td class="max" id="max_hr"><% if !@workout.hr_max.nil? %><%= @workout.hr_max %><span class="units">max</span><% end %></td>
 			</tr>
 			<% end %>
 		</table>

@@ -74,12 +74,6 @@ class WorkoutsController < ApplicationController
 		@rpe = RPE.new
     @workout = current_user.workouts.create(params[:workout])
     @workout.importing = true if !@workout.manual_entry?
-
-    # if @workout.devices.first.nil?
-    #    @workout.destroy
-    #    add_flash(:alert, "Please select a file to upload")
-    #    redirect_to :action => "new", :device_type => params[:device_type]
-    #  else
       if @workout.save
         if @workout.manual_entry?
           add_flash(:notice, "Sucessfully created your manual workout")
@@ -92,7 +86,6 @@ class WorkoutsController < ApplicationController
         @workout.destroy
         render :action => "new"
       end
-    #end
   end
 
 	def update

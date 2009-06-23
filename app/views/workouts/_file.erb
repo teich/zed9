@@ -1,0 +1,127 @@
+<% form_for @workout, :url => submit_url, :action => 'upload', :html => { :multipart => true } do |f| %>
+<%= f.error_messages %>
+<!-- TODO Not the Rails Way -->
+<%= hidden_field_tag 'device_type', params[:device_type] %>
+
+<div class="left_column">
+
+	<table id="edit_workout" class="form">
+		<tr>
+			<th><%= f.label :name, "Workout name" %></th>
+			<td><%= f.text_field :name, :size => 36 %></td>
+		</tr>
+		<tr>
+			<th><%= f.label :notes, "Notes" %></th>
+			<td><%= f.text_area :notes, :size => "34x4" %></td>
+		<tr>
+			<th class="annotated"><%= f.label :tag_list, "Tags" %></th>
+			<td class="annotated"><%= f.text_field :tag_list, :size => 36 %></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td class="field_note">Optional: tags give you another way to find and compare workouts in your own history and across ZED9. Separate tags with a comma.</td>
+		</tr>
+		<tr>
+			<th class="annotated"><%= f.label :rpe, "RPE" %></th>
+			<td class="annotated"><select id="rpe" name="workout[rpe]"><%= options_for_select(@rpe.long_descriptions, @workout.rpe) %></select></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td class="field_note">Optional: The Borg Rating of Perceived Exertion, or RPE, is your quantification of the intensity of a workout, or how you feel you worked overall (don't worry about a specific pain). <a href="http://www.cdc.gov/physicalactivity/everyone/measuring/exertion.html">Learn more.</a> Recording your RPE will help in analyzing your progress.</td>
+		</tr>
+		<tr>
+			<th><%= f.label :activity, "Activity type" %></th>
+			<td><select id="workout_activity_id" name="workout[activity_id]">
+			<%= option_groups_from_collection_for_select(Activity.find_all_by_parent_id(nil), :children, :name, :id, :name, @workout.activity.id) %>
+			</select></td>
+		</tr>
+		<tr>
+			<% f.fields_for :devices do |d_f| %>
+			<th class="annotated"><%= d_f.label "File location" %></th>
+			<td class="annotated"><%= d_f.file_field :source, :size => 20 %></td>
+			<%= d_f.hidden_field :mfg, :value => "FILE" %>
+			
+			<% end %>
+		</tr>
+		<tr>
+			<th class="field_note">&nbsp;</th>
+			<td class="field_note">Select a .tcx, .hrm, .sdf, or .gpx file</td>
+		</tr>
+		<tr>
+			<th><%= f.label :shared %></th>
+			<td><%= f.check_box :shared %></td>
+		</tr>
+		<tr>
+			<th><%= link_to 'Cancel', user_workouts_path(current_user), :class => "submit_no_button" %></th>
+			<td><%= f.submit "Save", :class => "submit", :disable_with => "Uploading... please wait" %></td>
+		</tr>
+	</table>
+</div>
+
+<div id="locating_files" class="right_column">
+
+	<h3>Finding Your Workout Files</h3>
+
+	<div id="locating" class="accordion">
+
+		<h4 class="accordion_header">
+			<span class="ui-icon"/><a href="#">Garmin on Windows Vista &amp; Windows 7</a>
+		</h4>
+		<div class="accordion_content">
+			<p><object width="314" id="video"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=4279824&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=4279824&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="314"></embed></object></p>
+			<p>Your workout files are usually stored in one of the following directories:<br> 
+			C:\Users\[YOUR ACCOUNT]\AppData\Roaming\GARMIN\Devices\[UNIQUE ID]\History\<br>
+			C:\Documents and Settings\[YOUR ACCOUNT]\Application Data\GARMIN\Devices\[UNIQUE ID]\History\</p>
+		</div>
+
+		<h4 class="accordion_header">
+			<span class="ui-icon"/><a href="#">Garmin on Windows XP</a></span>
+		</h4>
+		<div class="accordion_content">
+			<p>Your workout files are usually stored in the following director:<br>
+			C:\Documents and Settings\[YOUR ACCOUNT]\Application Data\GARMIN\Devices\[UNIQUE ID]\History</p>
+		</div>
+
+		<h4 class="accordion_header">
+			<span class="ui-icon"/><a href="#">Garmin on Mac</a></span>
+		</h4>
+		<div class="accordion_content">
+			<p>[YOUR ACCOUNT]/Library/Application Support/Garmin/Devices/[UNIQUE ID]/History/</p>
+			<p>You can also export individual workouts from Garmin Training Center v3.2 or later.</p>
+		</div>
+
+		<h4 class="accordion_header">
+			<span class="ui-icon"/><a href="#">Polar on Windows XP</a></span>
+		</h4>
+		<div class="accordion_content">
+			<p>Find your workout in:<br>
+			C:\Program Files\Polar\Polar ProTrainer\[USER NAME]\</p>
+		</div>
+
+		<h4 class="accordion_header">
+			<span class="ui-icon"/><a href="#">Suunto</a></span>
+		</h4>
+		<div class="accordion_content">
+
+			<p><object width="314"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=4579241&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=4579241&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="314"></embed></object></p>
+
+			<p>To import your Suunto workout data:</p>
+			<ol id="suunto_steps">
+				<li>Open Suunto's Training Manager in Windows</li>
+				<li>Right click on the workout</li>
+				<li>Select "export to file" -> "export to Suunto file"</li>
+				<li>Choose where to save your workout file</li>
+				<li>Browse at left to select your workout .sdf file</li>
+			</ol>
+		</div>
+
+		<h4 class="accordion_header">
+			<span class="ui-icon"/><a href="#">GPS</a></span>
+		</h4>
+		<div class="accordion_content">
+			<p>For accurate workout duration calculation, each file should include only one track.</p>
+		</div>
+
+	</div>
+</div>
+<% end %>

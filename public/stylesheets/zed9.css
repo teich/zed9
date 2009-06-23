@@ -660,8 +660,7 @@ ol {
 
 .form th {
 	font-size: inherit;
-/*	padding: 12px 4px 12px 0px;*/
-	padding: 8px 4px 12px 0px;
+	padding: 12px 4px 12px 0px;
 	text-align:right;
 	width: 140px;
 	vertical-align: middle;
@@ -705,6 +704,8 @@ ol {
 	font-family: inherit;
 	color: inherit;
 	padding:4px 8px;
+	color: #545454;
+/*	color: #9f9f9f;*/
 }
 
 /*Submit button styling for forms*/
@@ -1432,6 +1433,139 @@ td .points {
 }
 
 
+/*---- Calendar picker ----/
+
+/* Some resets for compatibility with existing CSS */
+.date_selector, .date_selector * {
+  width: auto;
+  height: auto;
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+	font-size: 14px;
+}
+.date_selector {
+/*  background: #F2F2F2;*/
+/*  border: 1px solid #bbb;*/
+	border: 1px solid #79b7e7; 
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	background:#D0E5F5 url(/images/ui-bg_glass_75_d0e5f5_1x400.png) repeat-x scroll 50% 50%;
+  padding: 5px;
+  margin: 6px 0 0 0;
+  position: absolute;
+  z-index: 100000;
+  display: none;
+}
+.date_selector_ieframe {
+  position: absolute;
+  z-index: 99999;
+  display: none;
+}
+  .date_selector .nav {
+    width: 17.5em; /* 7 * 2.5em */
+  }
+  .date_selector .month_nav, .date_selector .year_nav {
+    margin: 0 0 3px 0;
+    padding: 0;
+    display: block;
+    position: relative;
+    text-align: center;
+  }
+  .date_selector .month_nav {
+    float: left;
+    width: 55%;
+  }
+  .date_selector .year_nav {
+    float: right;
+    width: 35%;
+    margin-right: -8px; /* Compensates for cell borders */
+  }
+  .date_selector .month_name, .date_selector .year_name {
+    font-weight: 500;
+    line-height: 20px;
+  }
+  .date_selector .button {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    line-height: 17px;
+    font-weight: bold;
+		color: #25a1d6;
+/*    color: #003C78;*/
+    text-align: center;
+    font-size: 120%;
+    overflow: hidden;
+		border: none;
+/*		border: 1px solid #d9d9d9; */
+/*    border: 1px solid #F2F2F2;*/
+/*		background: #d0e5f5 url(/images/ui-bg_glass_75_d0e5f5_1x400.png) 50% 50% repeat-x !important; 	*/
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
+		border-radius: 4px;
+  }
+    .date_selector .button:hover, .date_selector .button.hover {
+      background: none;
+			color: #1d5987;
+/*      color: #003C78;*/
+      cursor: pointer;
+/*      border-color: #ccc;*/
+    }
+  .date_selector .prev {
+    left: 0;
+  }
+  .date_selector .next {
+    right: 0;
+  }
+  .date_selector table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    clear: both;
+  }
+    .date_selector th, .date_selector td {
+      width: 2.5em;
+      height: 2em;
+      padding: 0;
+      text-align: center;
+			color: #545454;
+/*      color: black;*/
+    }
+    .date_selector td {
+      border: 1px solid #ccc;
+      line-height: 2em;
+      text-align: center;
+      white-space: nowrap;
+      color: #003C78;
+      background: white;
+    }
+    .date_selector td.today {
+/*      background: #FFFEB3;*/
+			font-weight: 900;
+    }
+    .date_selector td.unselected_month {
+      color: #ccc;
+    }
+    .date_selector td.selectable_day {
+      cursor: pointer;
+    }
+    .date_selector td.selected {
+			background: #d0e5f5 url(/images/ui-bg_glass_75_d0e5f5_1x400.png) 50% 50% repeat-x !important; 	
+			border: #d9d9d9;
+/*      background: #D8DFE5;*/
+      font-weight: 500;
+    }
+    .date_selector td.selectable_day:hover, .date_selector td.selectable_day.hover {
+      background: #003C78;
+      color: white;
+    }
+
+
 /*---- Add Workout ----*/
 
 .tabs {
@@ -1579,7 +1713,6 @@ td .points {
 .accordion .ui-state-default .ui-state-hover {
 	border: 1px solid #79b7e7; 
 	background:#D0E5F5 url(/images/ui-bg_glass_75_d0e5f5_1x400.png) repeat-x scroll 50% 50%;
-	border:1px solid #79B7E7;
 }
 
 .accordion .ui-accordion-header a { 
@@ -2046,7 +2179,7 @@ p.comp_activity {
 
 #map {
 	float: right;
-	position: absolute;
+	position: relative;
 	right: 0px;
 	top: 0px;
 	border: 1px solid #d9d9d9;

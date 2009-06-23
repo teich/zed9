@@ -12,10 +12,19 @@ class Workout < ActiveRecord::Base
 	validates_presence_of :user_id
 	
 	validates_presence_of :duration, :if => :manual_entry?
-
+  validates_presence_of :start_time, :if => :manual_entry?
+  
 	acts_as_taggable_on   :tags
 	
-	  
+	
+	def start_time_string
+	  start_time.to_s
+	end
+
+  def start_time_string=(start_time_str)
+    self.start_time = Time.parse(start_time_str)
+  end
+  
   def perform
     
     # Make sure there is no existing data
