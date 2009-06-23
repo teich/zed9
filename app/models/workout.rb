@@ -25,6 +25,14 @@ class Workout < ActiveRecord::Base
     self.start_time = Time.parse(start_time_str)
   end
   
+  def end_time_string
+	  end_time.to_s
+	end
+
+  def end_time_string=(end_time_str)
+    self.end_time = Time.parse(end_time_str)
+  end
+	
   def perform
     
     # Make sure there is no existing data
