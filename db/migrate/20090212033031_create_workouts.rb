@@ -5,7 +5,7 @@ class CreateWorkouts < ActiveRecord::Migration
       t.float     :distance
       t.integer   :average_hr
       t.integer   :duration
-      t.string    :name, :default => 'Unnamed'
+      t.string    :name
       t.integer   :user_id
       
       t.timestamps

@@ -10,10 +10,27 @@ module WorkoutHelper
   end
   
   def meters_to_feet(meters)
-    return (meters * 2.2).round
+    return (meters * 3.2808399).round
   end
   
   def mps_to_mph(mps)
     return (mps *2.23693629).round(1)
   end
+
+  def sparktype(workout)
+    if workout.trackpoints? 
+      "sparkline"
+    else
+      "sparkbar"
+    end
+  end
+
+  def elevation_max(workout)
+    elevation_max || workout.max(:elevation) 
+  end
+  
+  def hr_max(workout)
+    hr_max || workout.max(:heart_rate)
+  end
+
 end

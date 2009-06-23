@@ -1,0 +1,73 @@
+<% form_for @workout, :url => submit_url do |f| %>
+<%= f.error_messages %>
+<!-- TODO Not the Rails Way -->
+<%= hidden_field_tag 'device_type', params[:device_type] %>
+
+<table id="edit_workout" class="form">
+	<tr>
+		<th><%= f.label :name, "Workout name" %></th>
+		<td><%= f.text_field :name, :size => "70" %></td>
+	</tr>
+	<tr>
+		<th><%= f.label :notes, "Notes" %></th>
+		<td><%= f.text_area :notes, :size => "69x4" %></td>
+	<tr>
+		<th class="annotated"><%= f.label :tag_list, "Tags" %></th>
+		<td class="annotated"><%= f.text_field :tag_list, :size => "70" %></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td class="field_note">Optional: tags give you another way to find and compare workouts in your own history and across ZED9. Separate tags with a comma.</td>
+	</tr>
+	<tr>
+		<th class="annotated"><%= f.label :rpe, "RPE" %></th>
+		<td class="annotated"><select id="rpe" name="workout[rpe]"><%= options_for_select(@rpe.long_descriptions, @workout.rpe) %></select></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td class="field_note">Optional: The Borg Rating of Perceived Exertion, or RPE, is your quantification of the intensity of a workout, or how you feel you worked overall (don't worry about a specific pain). <a href="http://www.cdc.gov/physicalactivity/everyone/measuring/exertion.html">Learn more.</a> Recording your RPE will help in analyzing your progress.</td>
+	</tr>
+	<tr>
+		<th><%= f.label :activity, "Activity type" %></th>
+		<td><select id="workout_activity_id" name="workout[activity_id]">
+		<%= option_groups_from_collection_for_select(Activity.find_all_by_parent_id(nil), :children, :name, :id, :name, @workout.activity.id) %>
+		</select></td>
+	</tr>
+	<tr>
+		<th>Workout date</th>
+		<td><input id="start_date" class="date_input" size="12" onChange="calculate_values()"></td>
+	</tr>
+	<tr>
+		<th>Start time</th>
+		<td><input id="start_clock" class="time_input" size="8" onChange="calculate_values()"><%= f.hidden_field :start_time_string %></td>
+	</tr>
+	<tr>
+		<th>Duration</th>
+		<td><input id="dur" class="duration_input" size="8" onChange="calculate_values()"><%= f.hidden_field :duration %><%= f.hidden_field :end_time %></td>
+	</tr>
+	<tr>
+		<th>Distance</th>
+		<td><input id="miles" size="8" onChange="calculate_values()"> miles<%= f.hidden_field :distance %></td>
+	</tr>
+	<tr>
+		<th>Elevation</th>
+		<td><input id="feet" size="8" onChange="calculate_values()"> feet <%= f.hidden_field :elevation %></td>
+	</tr>
+	<tr>
+		<th><%= f.label :hr, "Heart rate" %></th>
+		<td><%= f.text_field :hr, :size => 4 %> bpm average, <%= f.text_field :hr_max, :size => 4 %> bpm max</td>
+	</tr>
+	<tr>
+		<th><%= f.label :shared %></th>
+		<td><%= f.check_box :shared %></td>
+	</tr>
+		<% f.hidden_field :edited, :value => true %>
+		<% f.fields_for :devices do |d_f| %>
+		<%= d_f.hidden_field :mfg, :value => "MANUAL" %>
+		<% end %>
+	<tr>
+		<th><%= link_to 'Cancel', user_workouts_path(current_user), :class => "submit_no_button" %></th>
+		<td><%= f.submit "Save", :class => "submit"  %></td>
+	</tr>
+</table>
+<% end %>

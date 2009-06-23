@@ -39,10 +39,10 @@
 			<% if my_page? || !any_private? %>
 				<h2>Personal bests</h2>
 			
-				<% if any_private? %><p>Make your workouts public to let other users see your bests!</p><% end %>
+				<% if any_private? %><p>Share your workouts to let other users see your bests!</p><% end %>
 
 				<% if @farthest.size > 0 %>		
-				<div class="leaderboard">
+				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/road.png" class="icon">
 							Farthest: <span class="number_top"><%=h @farthest.first.distance_in_miles %></span><span class="unit">miles</span></h3>
@@ -61,7 +61,7 @@
 				<% end -%>	
 			
 				<% if @fastest.size > 0 %>		
-				<div class="leaderboard">
+				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/flag.png" class="icon">
 							Fastest: <span class="number_top"><%=h @fastest.first.avg_speed_in_mph %></span><span class="unit">mph</span></h3>
@@ -80,7 +80,7 @@
 				<% end -%>	
 			
 				<% if @longest.size > 0 %>		
-				<div class="leaderboard">
+				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/clock.png" class="icon">
 							Longest: <span class="number_top"><%=h number_to_short_time(@longest.first.duration) %></span><span class="unit">h</span></h3>
@@ -99,7 +99,7 @@
 				<% end -%>	
 			
 				<% if @climbers.size > 0 %>		
-				<div class="leaderboard">
+				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/peaks.png" class="icon">
 							Elevation Gain: <span class="number_top"><%=h @climbers.first.elevation_in_feet %></span><span class="unit">ft</span></h3>
@@ -118,7 +118,7 @@
 				<% end -%>	
 			
 				<% if @heart_pumping.size > 0 %>		
-				<div class="leaderboard">
+				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/heart.png" class="icon">
 							Heart-pumping: <span class="number_top"><%=h @heart_pumping.first.hr %></span><span class="unit">bpm</span></h3>
@@ -140,7 +140,7 @@
 				<h2>Shared personal bests</h2>
 
 				<% if @farthest_public.size > 0 %>		
-				<div class="leaderboard">
+				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/road.png" class="icon">
 							Farthest: <span class="number_top"><%=h @farthest_public.first.distance_in_miles %></span><span class="unit">miles</span></h3>
@@ -159,7 +159,7 @@
 				<% end -%>	
 			
 				<% if @fastest_public.size > 0 %>		
-				<div class="leaderboard">
+				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/flag.png" class="icon">
 							Fastest: <span class="number_top"><%=h @fastest_public.first.avg_speed_in_mph %></span><span class="unit">mph</span></h3>
@@ -178,7 +178,7 @@
 				<% end -%>	
 			
 				<% if @longest_public.size > 0 %>		
-				<div class="leaderboard">
+				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/clock.png" class="icon">
 							Longest: <span class="number_top"><%=h number_to_short_time(@longest_public.first.duration) %></span><span class="unit">h</span></h3>
@@ -197,7 +197,7 @@
 				<% end -%>	
 			
 				<% if @climbers_public.size > 0 %>		
-				<div class="leaderboard">
+				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/peaks.png" class="icon">
 							Elevation Gain: <span class="number_top"><%=h @climbers_public.first.elevation_in_feet %></span><span class="unit">ft</span></h3>
@@ -216,7 +216,7 @@
 				<% end -%>	
 			
 				<% if @heart_pumping_public.size > 0 %>		
-				<div class="leaderboard">
+				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/heart.png" class="icon">
 							Heart-pumping: <span class="number_top"><%=h @heart_pumping.first.hr %></span><span class="unit">bpm</span></h3>
@@ -237,7 +237,7 @@
 		<% if my_page? && @workouts.size == 0 %>
 			<div class="usage_tip">You haven't recorded any personal bests yet. How sad... <%= link_to "Upload a workout", new_user_workout_path(current_user) %> to fix that!</div>
 		<% elsif @workouts.size == 0 %>
-			<p><%=h @user.display_name %> hasn't publicly recorded any bests yet.</p>
+			<p><%=h @user.display_name %> hasn't shared any bests yet.</p>
 		<% end %>
 		
 		</div>
@@ -254,7 +254,7 @@
 			<% if my_page? && @workouts.size == 0 %>
 				<p>None yet... Better get moving!</p>
 			<% elsif @workouts.size == 0 %>
-				<p>No public workouts yet...</p>
+				<p>No shared workouts yet...</p>
 			<% else %>
 				<p class="more_news"><%= link_to "See all", user_workouts_path(@user) %></p>
 			<% end %>

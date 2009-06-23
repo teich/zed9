@@ -16,12 +16,6 @@
 		</div>
 		<% end -%>
 
-		<% if !current_user %>
-			<div id="join_prompt">
-				<a href="../">Join ZED9 to track your workouts and see how you measure up</a>
-			</div>
-		<% end -%>
-		
 		<h1>
 			<%= link_to image_tag(@workout.activity.root.icon_path, :class => "activity_icon"), activity_path(@workout.activity) %><%=h @workout.name %>  
 			<% if my_page? %>
@@ -63,7 +57,7 @@
 				</span>
 			</div>	
 			<% elsif my_page? && @workout.tags.size == 0 %>
-			<span class="tag"><%= link_to 'Tag this workout', edit_workout_path(@workout) %></span>
+			<span id="tags_header"><%= link_to 'Tag this workout', edit_workout_path(@workout) %></span>
 			<% end %>
 			
 	</div>	
@@ -101,20 +95,20 @@
 			<% end -%>
 			
 			<% if !@workout.speed.nil? %>
-			<tr class="stat" unit="mph" id="speed">
-				<th class="spark_line_title">Speed</th>
-				<td id="spark_line"><div id="speed" class="sparkline"></div></td>
-				<td class="number spark_line_title"><span class="value"><%= h speed_to_pace(@workout) %></span><span class="units"><%=h units(@workout,:speed) %></span></td>
-				<td class="max" id="max_speed"><%= h max_speed_to_pace(@workout) %><span class="units">max</span></td>
-			</tr>
+				<tr class="stat" unit="mph" id="speed">
+					<th class="spark_line_title">Speed</th>
+					<td id="spark_line"><div id="speed" class="<%= sparktype(@workout) %>"></div></td>
+					<td class="number spark_line_title"><span class="value"><%= h speed_to_pace(@workout) %></span><span class="units"><%=h units(@workout,:speed) %></span></td>
+					<td class="max" id="max_speed"><%= h max_speed_to_pace(@workout) %><span class="units">max</span></td>
+				</tr>
 			<% end -%>
 			
 			<% if !@workout.elevation.nil? %>
 			<tr class="stat" unit="ft" id="elevation">
 				<th class="spark_line_title">Elevation</th>
-				<td id="spark_line"><div id="elevation" class="sparkline"></div></td>
+				<td id="spark_line"><div id="elevation" class="<%= sparktype(@workout) %>"></div></td>
 				<td class="number spark_line_title"><span class="value"><%=h @workout.elevation_in_feet %></span><span class="units">feet</span></td>
-				<td class="max" id="max_elevation"><span class="value"><%= h meters_to_feet(@workout.max(:altitude)) %></span><span class="units">max</span></td>
+				<td class="max" id="max_elevation"><% if @workout.trackpoints? %><span class="value"><%= h meters_to_feet(@workout.max(:altitude)) %></span><span class="units">max</span><% end %></td>
 				
 			</tr>
 			<% end -%>
@@ -122,71 +116,72 @@
 			<% if !@workout.hr.nil? %>
 			<tr class="stat" unit="bpm" id="hr">
 				<th class="spark_line_title">Heart rate</th>
-				<td id="spark_line"><div id="hr" class="sparkline"></div></td>
+				<td id="spark_line"><div id="hr" class="<%= sparktype(@workout) %>"></div></td>
 				<td class="number spark_line_title"><span class="value"><%=h @workout.hr %></span><span class="units">bpm</span></td>
-				<td class="max" id="max_hr"><%= h @workout.max(:heart_rate) %><span class="units">max</span></td>
+				<td class="max" id="max_hr"><% if !@workout.hr_max.nil? %><%= @workout.hr_max %><span class="units">max</span><% end %></td>
 			</tr>
 			<% end %>
 		</table>
 
 	</div>
 
-	<% if @workout.gps_data? %>
-		
-	<div id="workout_right_column" class="right_column">
-		<div id="map">
-			<div id="map_div" style="width:524px;height:296px" ></div>
+	<% if @workout.gps_data? %>		
+		<div id="workout_right_column" class="right_column">
+			<div id="map">
+				<div id="map_div" style="width:516px; height:296px" ></div>
 	        
-	        <% if false %> <%= @z9map.div(:width => 524, :height => 296 ) %> <% end %>
-		</div>
-
-	</div>
-	<% end %>
-	
-	<div id="fullsize_chart_area">
-
-		<div id="axis_labels">
-			<% if @workout.hr %>
-				<h2 id="y1_axis_label">Heart rate</h2>
-				<h2 id="y2_axis_label"></h2>
-			<% else %>
-				<h2 id="y1_axis_label">Speed</h2>
-				<h2 id="y2_axis_label"></h2>
-			<% end %>
-		</div>
-		<div id="graph_options_wrapper">
-			<div id="options_link">graph options</div>
-			<div id="select_axes">
-				<div id="y1_axis_options">
-					<ul>
-						<li class="column_label">y1</li>
-						<% @workout.graph_fields.each_with_index do |value, i| %>
-						<li><input type="radio" display_y1="<%= value[1] %>" name="y1_options" <% if i==0 %>checked="checked" <% end %>value="json_<%=h value[0] %>_big"/><!-- <%= value[1] %> --></li>
-						<% end %>
-						<li>&nbsp;</li>
-					</ul>
-				</div>
-	
-				<div id="y2_axis_options">
-					<ul>
-						<li class="column_label">y2</li>
-						<% for field in @workout.graph_fields do %>
-						<li class="label"><input type="radio" display_y2="<%= field[1] %>" name="y2_options" value="json_<%=h field[0] %>_big"/><%=h field[1] %></li>
-						<% end %>
-						<li class="none"><input type="radio" display_y2="&nbsp;" name="y2_options" value="" checked="checked">None</li>
-					</ul>
-				</div>
-				<div class="close">x</div>
+		        <% if false %> <%= @z9map.div(:width => 524, :height => 296 ) %> <% end %>
 			</div>
+
 		</div>
+	<% end -%>
+	
+	<% if @workout.trackpoints? %>
+		<div id="fullsize_chart_area">
 
-		<% if @workout.hr %>
-			<div id="json_heartrate_big" class="big_visualization"></div>
-		<% else %>
-			<div id="json_speed_big" class="big_visualization"></div>
-		<% end %>
+			<div id="axis_labels">
+				<% if @workout.hr %>
+					<h2 id="y1_axis_label">Heart rate</h2>
+					<h2 id="y2_axis_label"></h2>
+				<% else %>
+					<h2 id="y1_axis_label">Speed</h2>
+					<h2 id="y2_axis_label"></h2>
+				<% end %>
+			</div>
+			<div id="graph_options_wrapper">
+				<div id="options_link">graph options</div>
+				<div id="select_axes">
+					<div id="y1_axis_options">
+						<ul>
+							<li class="column_label">y1</li>
+							<% @workout.graph_fields.each_with_index do |value, i| %>
+							<li><input type="radio" display_y1="<%= value[1] %>" name="y1_options" <% if i==0 %>checked="checked" <% end %>value="json_<%=h value[0] %>_big"/><!-- <%= value[1] %> --></li>
+							<% end %>
+							<li>&nbsp;</li>
+						</ul>
+					</div>
+	
+					<div id="y2_axis_options">
+						<ul>
+							<li class="column_label">y2</li>
+							<% for field in @workout.graph_fields do %>
+							<li class="label"><input type="radio" display_y2="<%= field[1] %>" name="y2_options" value="json_<%=h field[0] %>_big"/><%=h field[1] %></li>
+							<% end %>
+							<li class="none"><input type="radio" display_y2="&nbsp;" name="y2_options" value="" checked="checked">None</li>
+						</ul>
+					</div>
+					<div class="close">x</div>
+				</div>
+			</div>
 
-	</div>
+			<% if @workout.hr %>
+				<div id="json_heartrate_big" class="big_visualization"></div>
+			<% else %>
+				<div id="json_speed_big" class="big_visualization"></div>
+			<% end %>
+
+		</div>
+	<% end -%>
 	
 	<div id="comments">
 	<%= disqus_thread  %>

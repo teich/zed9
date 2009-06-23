@@ -10,4 +10,11 @@ class Device < ActiveRecord::Base
 		:bucket => ENV['S3_BUCKET'],
 		:path => ":class/:id_partition/:basename.:extension",
 		:s3_permissions => "private"
+
+  	validates_attachment_presence :source, :unless => :manual?
+		
+		
+		def manual?
+      mfg == "MANUAL"
+	  end
 end
