@@ -39,11 +39,11 @@
 	</tr>
 	<tr>
 		<th>Start time</th>
-		<td><input id="start_clock" class="time_input" size="8" onChange="calculate_values()"><%= f.text_field :start_time_string %></td>
+		<td><input id="start_clock" class="time_input" size="8" onChange="calculate_values()"><%= f.hidden_field :start_time_string %></td>
 	</tr>
 	<tr>
 		<th>Duration</th>
-		<td><input id="dur" class="duration_input" size="8" onChange="calculate_values()"><%= f.hidden_field :duration %><%= f.text_field :end_time_string %></td>
+		<td><input id="dur" class="duration_input" size="8" onChange="calculate_values()"><%= f.hidden_field :duration %><%= f.hidden_field :end_time_string %></td>
 	</tr>
 	<tr>
 		<th>Distance</th>
