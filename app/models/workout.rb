@@ -333,7 +333,6 @@ class Workout < ActiveRecord::Base
 
 		first_blanks = (number_points * start_percent).to_i
 		end_blanks = (number_points * end_percent).to_i
-
 		points = []
 
 		# flot wants things in milliseconds. 
