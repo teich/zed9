@@ -176,7 +176,8 @@ thead, th, td {
 }
 
 .usage_tip {
-	background: #f7fdff;
+	background:#F5F8F9 url(/images/ui-bg_glass_75_d0e5f5_1x400.png) repeat-x scroll 50% 50%; 
+/*	background: #f7fdff;*/
   border: 1px solid #d9d9d9;
   padding: 18px;
 	font-size: 18px;
@@ -200,31 +201,17 @@ thead, th, td {
 
 /*---- Table Sorter styling ----*/
 
-.sortable th.headerSortUp {
-	background: url(/images/dn.png) no-repeat center right;
-	font-weight: 500;
-	color: #545454;
-	cursor: pointer;
-}
-
-.sortable th.headerSortDown {
-	background: url(/images/up.png) no-repeat center right;
-	font-weight: 500;
-	color: #545454;
-	cursor: pointer;
-}
-
 .sortable2 th.headerSortUp {
 	background: #f7fdff url(/images/dn.png) no-repeat center right;
 	font-weight: 500;
-	color: #545454;
+	color: #1a4465;
 	cursor: pointer;
 }
 
 .sortable2 th.headerSortDown {
 	background: #f7fdff url(/images/up.png) no-repeat center right;
 	font-weight: 500;
-	color: #545454;
+	color: #1a4465;
 	cursor: pointer;
 }
 
@@ -283,10 +270,12 @@ thead, th, td {
 }
 
 #logo a {
-	color: #9f9f9f;
+	color: #1a4465;
+/*	color: #545454;*/
+/*	color: #9f9f9f;*/
 	font-size: 36px;
-	font-weight: 100;
-	letter-spacing: 10px;
+	font-weight: 900;
+/*	letter-spacing: 10px;*/
 }
 
 #logo a:hover {
@@ -296,11 +285,12 @@ thead, th, td {
 #logo .beta {
 	font-size: 12px;
 	font-weight: 100;
-	color: #9f9f9f;
+	color: #545454;
+/*	color: #9f9f9f;*/
 	text-align: left;
 	display: inline;
 	position: relative;
-	left: -4px;
+/*	left: -4px;*/
 }
 
 #nav li {
@@ -344,10 +334,55 @@ thead, th, td {
 
 /*---- Marketing page styles ----*/
 
-.marketing_tagline {
-	padding-top: 29px;
-	padding-bottom: 12px;
+#root #headline {
+	vertical-align: top;
+	line-height: 1;
+	padding-bottom: 36px;
+}
+
+#root #logo_big {
+	vertical-align: top;
+	float: left;
+	padding-right: 18px;
+	color: #1a4465;
+	font-size: 56px;
+	font-weight: 900;
+	letter-spacing: 4px;
+	line-height: 1;
+}
+
+#root #tagline {
+	height: 100%;
+	vertical-align: top;
+	text-align: left;
+}
+
+#root #headline h1 {
+	position: relative;
+	top: 3px;
+	padding: 0px 0px 6px 0px;
+	line-height: 1;
 	font-weight: 500;
+	display: block;
+}
+
+#root #headline h3 {
+	font-size: 24px;
+	padding: 0px;
+	font-style: oblique;
+	line-height: 1;
+	font-weight: 500;
+}
+
+#root #logo_big .beta {
+	font-size: 12px;
+	font-weight: 100;
+	color: #545454;
+	float: right;
+	position: relative;
+	top: -4px;
+	right: 5px;
+	letter-spacing: 1px;
 }
 
 #left_splash {
@@ -355,37 +390,146 @@ thead, th, td {
 	padding-top: 6px;
 }
 
-#left_splash .qualifier {
-	padding: 6px 0px 16px 0px;
-	font-style: oblique;
-	font-weight: 100;
+.benefits {
+	position: relative;
+	padding: 0px 0px 24px 0px;
+	top: -36px;
 }
 
-.marketing_screenshot {
-	text-align: center;
+.benefits h4 {
+	padding: 36px 0px 12px 0px;
+	font-size: 24px;
 }
 
-#example_stats {
-	padding: 12px 0px 18px 0px;
-	width: 380px;
+.benefits img {
+	vertical-align: middle;
+	float: left;
+	padding-right: 12px;
 }
+
+.benefits #devices, .benefits #leader_icons {
+	vertical-align: middle;
+	float: left;
+	padding-right: 12px;
+	padding-top: 4px;
+}
+
+.benefits img.device {
+	height: 36px;
+	padding-right: 4px;
+}
+
+.benefits #garmin {
+	padding-right: 4px;
+}
+
+.benefits #iphone {
+	padding-right: 6px;
+}
+
+.benefits p {
+	padding: 0px;
+}
+
+.benefits #leaderboard_icons {
+	float: right;
+	position: relative;
+	top: -6px;
+}
+
+.benefits .leaderboard_mini {
+	border: 1px solid #d9d9d9;
+	background:#F5F8F9 url(/images/ui-bg_glass_75_d0e5f5_1x400.png) repeat-x scroll 50% 50%; 
+	color: #545454;
+	font-weight: 500;
+	font-size: 10px;
+	text-transform: uppercase;
+	white-space: nowrap;
+	clear: both;
+	padding: 3px 8px 3px 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	margin-bottom: 4px;
+}
+
+.benefits .leaderboard_mini img {
+	height: 12px;
+	padding-right: 4px;
+}
+
+.benefits #leader_icons {
+	float: right;
+}
+
+.benefits #leader_icons img {
+	padding-right: 3px;
+	height: 18px;
+}
+
 
 #right_splash, #right_login {
 	width: 360px;
-	padding-bottom: 24px;
 }
 
 .request_invite {
+	top: 10px;
 	position: relative;
-	top: -1px; /*Position adjustment to align text with left column*/
 	float: right;
-	font-size: 18px;
-	font-weight: 100;
-	padding-bottom: 36px;
+	font-size: 16px;
+	font-weight: 300;
+	padding: 6px 18px;
+	-moz-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	border-radius: 12px;
+	border:1px solid #d9d9d9;
+	background:#F5F8F9 url(/images/blue_gradient.png) repeat-x scroll 50% 50%; 
+	margin-bottom: 36px;
+}
+
+#right_splash .spacer {
+	height: 36px;
+	clear: both;
+}
+
+#join_list .email_address {
+	text-align: left;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	border:1px solid #d9d9d9;
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 1.4;
+	font-family: inherit;
+	color: inherit;
+	padding:4px 8px;
+	color: #545454;	
+	width: 182px;
+	margin-right: 4px;
+}
+
+#join_list .request {
+	cursor: pointer;
+	position: relative;
+	top: 1px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	height: 27px;
+	border: 0px solid #25a1d6;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 1.4;
+	font-family: inherit;
+	padding:4px 8px;
+	color: white;
+	width: 112px;
+	background: url(/images/blue_button_center.png) repeat-x 0 0;
 }
 
 #join_list {
-	padding-top: 6px; /*Position adjustment to align text with left column*/
+	padding-bottom: 8px;
 }
 
 /*---- Device Comparison Guide ----*/
@@ -643,7 +787,7 @@ ol {
 
 #login_form {
 	position: relative;
-	top: -10px;
+	top: -4px;
 }
 
 #new_invitation {
@@ -702,7 +846,6 @@ ol {
 	line-height: inherit;
 	vertical-align: middle;
 	font-family: inherit;
-	color: inherit;
 	padding:4px 8px;
 	color: #545454;
 /*	color: #9f9f9f;*/
@@ -711,6 +854,23 @@ ol {
 /*Submit button styling for forms*/
 .submit {
   background-color: #f0f0f0;
+	cursor: pointer;
+	border: 1px solid #d9d9d9;
+	background:#F5F8F9 url(/images/ui-bg_glass_75_d0e5f5_1x400.png) repeat-x scroll 50% 50%; 
+	color: #1a4465 !important;
+	font-weight: 500;
+	font-size: 14px;
+	white-space: nowrap;
+	clear: both;
+	padding: 4px 8px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	margin-bottom: 4px;
+}
+
+.submit:hover {
+	color: #25a1d6 !important;
 }
 
 .submit_no_button {
@@ -720,6 +880,21 @@ ol {
 #edit_workout .submit, #edit_workout .submit_no_button, #register .submit, #register .submit_no_button {
 	position: relative;
 	top: 18px;
+}
+
+.request_invite .field, .request_invite .submit {
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	border:1px solid #d9d9d9;
+	font-weight: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	vertical-align: middle;
+	font-family: inherit;
+	color: inherit;
+	padding:4px 8px;
+/*	color: #545454;*/
 }
 
 /*---- Tool tip general styling ----*/
@@ -894,12 +1069,9 @@ table.newsfeed {
 }
 
 /*Recent comments widget on dashboard and home*/
-	#dsq-recentcomments {
-		padding-top: 24px;
-	}
 
-	#dsq-recentcomments h2.dsq-widget-title {
-		padding: 0px 0px 12px 0px !important;
+	#recent_comments {
+		padding-top: 18px;
 	}
 
 	#dsq-recentcomments ul.dsq-widget-list {
@@ -1096,7 +1268,8 @@ input.submit {
 .leaderboard {
 	width: auto;
 	padding: 12px;
-	background: #f7fdff url(/images/closed.png) no-repeat 442px 14px; /*	light gray #f0f0f0*/
+	background:#F5F8F9 url(/images/ui-bg_glass_75_d0e5f5_1x400.png) repeat-x scroll 50% 50%; 
+/*	background: #f7fdff url(/images/closed.png) no-repeat 442px 14px; */
 	opacity: .9;
   border: 1px solid #d9d9d9;
 	-moz-border-radius: 8px;
@@ -1107,10 +1280,7 @@ input.submit {
 	font-size: 18px;
 	text-align: left;
 	vertical-align: top;
-}
-
-#leaderboards .spacer {
-	height: 12px;
+	margin-bottom: 4px;
 }
 
 .leaaderboard .activity_headline {
@@ -1121,7 +1291,12 @@ input.submit {
 .leaderboard h3 {
 	color: #545454;
 	padding: 0px;	
+	background: url(/images/rt.png) no-repeat right;
 }
+
+.leaderboard h3 .open {
+	background: url(/images/dn.png) no-repeat right;
+}	
 
 .leaderboard .icon {
 	vertical-align:top; 
@@ -1134,8 +1309,8 @@ input.submit {
 	font-weight: 500;
 }
 
-.leaderboard .open {
-	background: #f7fdff url(/images/open.png) no-repeat 442px 14px;
+.leaderboard .open h3 {
+	background: url(/images/dn.png) no-repeat right !important;
 }
 
 .leaderboards .more {
@@ -1175,7 +1350,7 @@ input.submit {
 
 /*---- Dashboard content layout ----*/
 
-#dashboard, #root {
+#dashboard {
 	padding-top: 30px;
 }
 
@@ -1302,11 +1477,6 @@ input.submit {
 }
 
 #bar_tooltip {
-}
-
-.powered_by {
-	font-size: 11px;
-	color: #9f9f9f;
 }
 
 /*---- Invite ----*/
@@ -1635,7 +1805,7 @@ td .points {
 .tabs #tab_display .ui-state-active .ui-state-hover, .tabs .ui-state-active:hover { 
 	border: 1px solid #79b7e7 !important; 
 	border-bottom: none !important;
-	background:#DFEFFC url(/images/ui-bg_glass_85_dfeffc_1x400.png) repeat-x scroll 50% 50%;
+	background:#DFEFFC url(/images/ui-bg_glass_85_dfeffc_1x400.png) repeat-x scroll 50% 50% !important;
 	color: #1d5987; 
 	outline: none !important; 
 }
@@ -1805,7 +1975,8 @@ td .points {
 .device_details {
 	font-size: 12px;
 	font-style: oblique;
-	color: #9f9f9f;
+	color: #545454;
+/*	color: #9f9f9f;*/
 }
 
 /*---- Workout layout ----*/

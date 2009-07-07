@@ -67,7 +67,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="spacer">&nbsp;</div>
 				<% end -%>	
 			
 				<% if @fastest.size > 0 %>		
@@ -86,7 +85,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="spacer">&nbsp;</div>
 				<% end -%>	
 			
 				<% if @longest.size > 0 %>		
@@ -105,7 +103,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="spacer">&nbsp;</div>
 				<% end -%>	
 			
 				<% if @climbers.size > 0 %>		
@@ -124,7 +121,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="spacer">&nbsp;</div>
 				<% end -%>	
 			
 				<% if @heart_pumping.size > 0 %>		
@@ -156,12 +152,13 @@
 		<div id="workouts_feed">
 			<h2>Recent shared workouts</h2>
 			<table class="newsfeed">
-				<%= render :partial => @public_workouts, :locals => { :icon => true, :name => true, :date => false, :duration => true, :user => true } %>
+				<%= render :partial => @public_workouts, :locals => { :icon => true, :name => true, :date => false, :duration => false, :user => true } %>
 			</table>
 		</div>
 		
 		<div id="recent_comments">
-			 <%= disqus_recent_comments (opts = { { :header => 'Recent comments'}, {:num_items => 5} } ) %>
+			<h2>Recent comments</h2>
+			 <%= disqus_recent_comments (opts = { :header => '', :num_items => 5, :show_powered_by => false } ) %>
 		</div>
 				
 	</div>

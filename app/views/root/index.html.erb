@@ -1,47 +1,54 @@
-<div id="content_header">
-</div>
-
-<div class="content" id="root">
+<div id="root">
+	<div id="headline">
+		<div id="logo_big">ZED9<br>
+			<span class="beta">beta<span>
+		</div>
+		<div id="tagline">
+			<h1>Social fitness analytics</h1>
+			<h3>A new way to measure, motivate, compete, and play</h3>
+		</div>
+	</div>
 
 	<div id="left_splash" class="left_column">
 
-		<h3 class="qualifier">Do you love gadgets and data?</h3>
-	
-		<h3 class="qualifier">Do you want to know how your workouts measures up?</h3>
+		<div class="benefits">
 		
-		<h2 class="marketing_tagline">Join ZED9. The last word in fitness.</h2>
-			
-		<p>ZED9 is a new platform for physical fitness analysis and comparison.</p> 
-			<ul>
-				<li>Track and understand your own activities</li>
-				<li>See how your workouts measure up against yourself, your friends, and your community</li>
-				<li>Learn how to improve your performance</li>
-			</ul>
-			
-		<p>ZED9 aggregates data from your <a href="devices">tracking devices</a> to give you meaningful analytics for each activity, indoors or out:</p> 
+			<h4>Tracking your progress to stay motivated</h4>
+			<img src="/images/screenshots/sparkline.png">
+			<p>Put the observer effect to work for you with interesting stats and graphs of the metrics you record for each activity.</p>
+		
+			<h4>See how you measure up</h4>
+			<img src="/images/screenshots/sparkbar.png">
+			<p><i>Did I go farther than usual? Am I quicker than the average bear?</i> Compare your performance on any metric against your average and against the community.
+		
+			<h4>Compete with anyone, anywhere</h4>
+			<div id="devices">
+				<img src="/images/devices/garmin405.jpg" id="garmin" class="device">
+				<img src="/images/devices/iphone.jpg" id="iphone" class="device">			
+				<img src="/images/devices/wintec.gif" class="device">
+			</div>
+			<p>All the social benefits of Nike+ with better data from <a href="devices">many popular devices</a>. Combine data from multiple sources to get a more complete picture.</p>
 
-		<div class="marketing_screenshot">
-			<img src="/images/screenshots/example_stats.png" id="example_stats">
+			<h4>See your name in lights</h4>
+			<div id="leaderboard_icons">
+				<div class="leaderboard_mini"><img src="/images/flag.png">Fastest</div>
+				<div class="leaderboard_mini"><img src="/images/clock.png">Longest</div>
+				<div class="leaderboard_mini"><img src="/images/peaks.png">Climb</div>
+			</div>
+			<p>Get points and awards for big climbs, long distances, and workout hours logged. Show off your bests and go for gold on the weekly activity leader boards.</p> 
+	
 		</div>
-
-		<p>Join the ZED9 private beta to start shaping the site and your future fitness.</p>
 
 	</div>
 
 	<div id="right_splash" class="right_column">
 		<div class="request_invite">
-			<p>Not a member of ZED9? We're in private beta and scaling as fast as we can. Put your name on the list for an invitation!</p>
+			<p>Request an invitation for the ZED9 private beta to start shaping the site and your future fitness.</p>
 			<% form_for Invitation.new do |f| %>
-				<table id="join_list" class="form">
-					<tr>
-						<th><%= f.label :recipient_email, "Email" %></th>
-						<td><%= f.text_field :recipient_email %></td>
-					</tr>
-					<tr>
-						<th>&nbsp;</th>
-						<td><%= f.submit "Reserve your spot", :class => "submit" %>
-					</tr>
-				</table>
+				<div id="join_list">
+					<%= f.text_field :recipient_email, :value => "Email", :class => "email_address" %>
+					<%= f.submit "Request an invite", :class => "request" %>
+				</div>
 			<% end %>
 		</div>
 
@@ -53,5 +60,4 @@
 		</div>
 
 	</div>
-
-</div>	
+</div>

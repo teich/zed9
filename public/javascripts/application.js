@@ -487,27 +487,29 @@ function workout_page_graphs(data) {
 
 	}
 
-	$.extend(DateInput.DEFAULT_OPTS, {
-			// stringToDate: stringToDate,
-			// dateToString: dateToString,
+	$('#edit_workout').each(function() {
+		
+		$.extend(DateInput.DEFAULT_OPTS, {
+				// stringToDate: stringToDate,
+				// dateToString: dateToString,
 
-	  stringToDate: function(string) {
-	    var matches;
-	    if (matches = string.match(/^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/)) {
-	      return new Date(matches[2] - 1, matches[3], matches[1]);
-	    } else {
-	      return null;
-	    };
-	  },
+		  stringToDate: function(string) {
+		    var matches;
+		    if (matches = string.match(/^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/)) {
+		      return new Date(matches[2] - 1, matches[3], matches[1]);
+		    } else {
+		      return null;
+		    };
+		  },
 	  
-	  dateToString: function(date) {
-	    var month = (date.getMonth() + 1).toString();
-	    var dom = date.getDate().toString();
-	    if (month.length == 1) month = "0" + month;
-	    if (dom.length == 1) dom = "0" + dom;
-	    return month + "/" + dom + "/" + date.getFullYear();
-	  }
-
+		  dateToString: function(date) {
+		    var month = (date.getMonth() + 1).toString();
+		    var dom = date.getDate().toString();
+		    if (month.length == 1) month = "0" + month;
+		    if (dom.length == 1) dom = "0" + dom;
+		    return month + "/" + dom + "/" + date.getFullYear();
+		  }
+		});
 	});
 		
 	function get_workout_values(workout) {
@@ -661,21 +663,29 @@ function workout_page_graphs(data) {
 			$.getJSON(jsURL, workout_page_graphs);
 		});
 
-		// Workouts index table sorting, default to descending on date
-		$("#workouts_index").tablesorter({
-			sortList: [[2, 1]],
-			headers: { 
-				0: { sorter: false },
-				13: { sorter: false },
-			}
-		}); 
+		$('#join_list').each(function() {
+			$('.email_address').clearingInput();
+		});
 
+		// Workouts index table sorting, default to descending on date
+		$('#workouts_index').each(function() {
+			$("#workouts_index").tablesorter({
+				sortList: [[2, 1]],
+				headers: { 
+					0: { sorter: false },
+					13: { sorter: false },
+				}
+			}); 
+		});
+		
 		// Device comparison table sorting 
-		$("#device_grid").tablesorter({
-			sortList: [[12, 1]],
-			headers: { 
-				1: { sorter: false }
-			}
+		$("#device_grid").each(function() {
+			$("#device_grid").tablesorter({
+				sortList: [[12, 1]],
+				headers: { 
+					1: { sorter: false }
+				}
+			}); 
 		}); 
 
 		// Dismiss flash message
@@ -709,34 +719,38 @@ function workout_page_graphs(data) {
 		$('div.more').hide();  
 		$('.toggle').click(function() { 
 			$(this).children('.more').slideToggle('fast');
+			$(this).children('.activity_headline').toggleClass('open');
 			$(this).toggleClass('open');
 		});
 
-		// Tabs for add workout		
-		$("#tabs").tabs();		
-		
-		// Get current workout values or defaults
 		$("#edit_workout").each(function() {
+
+			// Tabs for add workout		
+			$("#tabs").tabs();		
+
+			// Get current workout values or defaults
 			get_workout_values();
+
+			// Date picker widget
+			$($.date_input.initialize);
+
+			// Formatted time inputs for workout
+			$(".time_input").timeEntry({initialField: 0});
+			$(".duration_input").timeEntry({initialField: 0, show24Hours: true, showSeconds: true});
+
+			// Accordion on new workout
+	    $(".accordion").accordion({
+				autoHeight: false, 
+				collapsible: true, 
+				active: false, 
+				header: 'h4', 
+				clearStyle: true, 
+				icons: { header: 'toggle_closed', headerSelected: 'toggle_open' } 
+			});
+
 		});
+				
 		
-		// Date picker widget
-		$($.date_input.initialize);
-		
-		// Formatted time inputs for workout
-		$(".time_input").timeEntry({initialField: 0});
-		$(".duration_input").timeEntry({initialField: 0, show24Hours: true, showSeconds: true});
-	
-		// Accordion on new workout
-    $(".accordion").accordion({
-			autoHeight: false, 
-			collapsible: true, 
-			active: false, 
-			header: 'h4', 
-			clearStyle: true, 
-			icons: { header: 'toggle_closed', headerSelected: 'toggle_open' } 
-		});
-									
 		// Workouts index row highlight on hover
 		$('tr.newsfeed_workout_summary').hover(function() {
 			$(this).children().addClass("highlight");

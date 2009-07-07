@@ -108,7 +108,7 @@
 				<th class="spark_line_title">Elevation</th>
 				<td id="spark_line"><div id="elevation" class="<%= sparktype(@workout) %>"></div></td>
 				<td class="number spark_line_title"><span class="value"><%=h @workout.elevation_in_feet %></span><span class="units">feet</span></td>
-				<td class="max" id="max_elevation"><% if @workout.trackpoints? %><span class="value"><%= h meters_to_feet(@workout.max(:altitude)) %></span><span class="units">max</span><% end %></td>
+				<td class="max" id="max_elevation"><% if @workout.trackpoints? %><%= h meters_to_feet(@workout.max(:altitude)) %><span class="units">max</span><% end %></td>
 				
 			</tr>
 			<% end -%>
@@ -118,7 +118,7 @@
 				<th class="spark_line_title">Heart rate</th>
 				<td id="spark_line"><div id="hr" class="<%= sparktype(@workout) %>"></div></td>
 				<td class="number spark_line_title"><span class="value"><%=h @workout.hr %></span><span class="units">bpm</span></td>
-				<td class="max" id="max_hr"><% if !@workout.hr_max.nil? %><%= @workout.hr_max %><span class="units">max</span><% end %></td>
+				<td class="max" id="max_hr"><% if !@workout.max(:heart_rate).nil? %><%=h @workout.max(:heart_rate) %><span class="units">max</span><% end %></td>
 			</tr>
 			<% end %>
 		</table>

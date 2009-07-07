@@ -32,19 +32,14 @@
 
 	<div id="right_login" class="right_column">
 		<div class="request_invite">
-			<p>Not a member of ZED9? We're currently in private beta and scaling as fast as we can. Put your name on the list for an invitation!</p>
+			<p>Request an invitation for the ZED9 private beta to start shaping the site and your future fitness.</p>
 			<% form_for Invitation.new do |f| %>
-				<table id="join_list" class="form">
-					<tr>
-						<th><%= f.label :recipient_email, "Email" %></th>
-						<td><%= f.text_field :recipient_email %></td>
-					</tr>
-					<tr>
-						<th>&nbsp;</th>
-						<td><%= f.submit "Reserve your spot", :class => "submit" %>
-					</tr>
-				</table>
+				<div id="join_list">
+					<%= f.text_field :recipient_email, :value => "Email", :class => "email_address" %>
+					<%= f.submit "Request an invite", :class => "request" %>
+				</div>
 			<% end %>
 		</div>
+
 	</div>
 </div>
