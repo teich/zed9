@@ -101,7 +101,7 @@ class Workout < ActiveRecord::Base
 	end
 
 	def get_speed
-		trackpoints.map { |tp| tp.speed }
+    trackpoints.map { |tp| tp.speed }
 	end
 
 	def get_elevation
@@ -256,8 +256,8 @@ class Workout < ActiveRecord::Base
 
 	def avg_speed_in_mph
 		return nil if self.speed.nil?
-		#    (self.distance_in_miles / self.duration * 3600).round(1)
-		(self.speed * 2.23693629).round(1)
+       (self.distance_in_miles / (self.duration * 3600)).round(1)
+    # (self.speed * 2.23693629).round(1)
 	end
 
 
