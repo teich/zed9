@@ -54,7 +54,7 @@ class WorkoutsController < ApplicationController
 
     # Defaults to last selected activity type
     last_workout = current_user.workouts.find(:first, :order => "created_at DESC")
-    if !last_workout.nil?
+    if last_workout.nil?
 		  @workout.activity = Activity.find_by_name("Uncategorized")
     else
       @workout.activity = last_workout.activity.name
