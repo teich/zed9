@@ -124,7 +124,7 @@ class WorkoutsController < ApplicationController
 	def find_user_and_require_shared
 		@user = User.find_by_login(params[:user_id])
 
-		if !(!current_user.nil? && !@user.nil? && current_user.id == @user.id) && !@user.shared
+		if @user.nil? || !(!current_user.nil? && current_user.id == @user.id) && !@user.shared
 		  add_flash(:alert, "This page is private")
 			redirect_to root_path
 		end
