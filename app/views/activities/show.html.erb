@@ -14,13 +14,13 @@
 			<div class="leaderboard toggle">
 				<div class="activity_headline">
 					<h3><img src="../images/road.png" class="icon">
-						Farthest: <span class="number_top"><%= link_to @farthest.first.distance_in_miles, workout_path(@farthest.first) %></span><span class="unit">miles by</span> <span class="display_name"><%= link_to @farthest.first.user.display_name, user_workouts_path(@farthest.first.user) %></span><span class="unit">, <%=h time_as_date(@farthest.first.start_time) %></span></h3>
+						Farthest: <span class="number_top"><%= link_to @farthest.first.distance_in_miles, workout_path(@farthest.first) %></span><span class="unit">miles by</span> <span class="display_name"><%= link_to @farthest.first.user.display_name, user_workouts_path(@farthest.first.user) %></span><span class="unit"> on <%=h time_as_date(@farthest.first.start_time) %></span></h3>
 				</div>
 				<div class="more">
 					<div class="bests">
 						<ol>
 							<% for workout in @farthest %> 
-								<li><span class="number"><%=h workout.distance_in_miles %></span><span class="unit">miles</span>: <span class="workout_name"><%= link_to workout.name, workout_path(workout) %></span> by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %>, <%=h time_as_date(workout.start_time) %></li>
+								<li><span class="number"><%=h workout.distance_in_miles %></span><span class="unit">miles</span>: <span class="workout_name"><%= link_to workout.name, workout_path(workout) %></span> by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %> on <%=h time_as_date(workout.start_time) %></li>
 							<% end %>
 						</ol>
 					</div>
@@ -32,13 +32,13 @@
 			<div class="leaderboard toggle">
 				<div class="activity_headline">
 					<h3><img src="../images/flag.png" class="icon">
-						Fastest: <span class="number_top"><%= link_to @fastest.first.avg_speed_in_mph, workout_path(@fastest.first) %></span><span class="unit">mph by</span> <span class="display_name"><%= link_to @fastest.first.user.display_name, user_workouts_path(@fastest.first.user) %></span><span class="unit">, <%=h time_as_date(@fastest.first.start_time) %></span></h3>
+						Fastest: <span class="number_top"><%= link_to speed_to_pace(@fastest.first), workout_path(@fastest.first) %></span><span class="unit"><%=h units(@fastest.first,:speed) %> by</span> <span class="display_name"><%= link_to @fastest.first.user.display_name, user_workouts_path(@fastest.first.user) %></span><span class="unit"> on <%=h time_as_date(@fastest.first.start_time) %></span></h3>
 				</div>
 				<div class="more">
 					<div class="bests">
 						<ol>
 							<% for workout in @fastest %> 
-								<li><span class="number"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %>, <%=h time_as_date(workout.start_time) %></li>
+								<li><span class="number"><%=h speed_to_pace(workout) %></span><span class="unit"><%=h units(workout,:speed) %></span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %> on <%=h time_as_date(workout.start_time) %></li>
 							<% end %>
 						</ol>
 					</div>
@@ -50,13 +50,13 @@
 			<div class="leaderboard toggle">
 				<div class="activity_headline">
 					<h3><img src="../images/clock.png" class="icon">
-						Longest: <span class="number_top"><%=h number_to_short_time(@longest.first.duration) %></span><span class="unit">h by</span> <span class="display_name"><%= link_to @longest.first.user.display_name, user_workouts_path(@longest.first.user) %></span><span class="unit">, <%=h time_as_date(@longest.first.start_time) %></span></h3>
+						Longest: <span class="number_top"><%= link_to number_to_short_time(@longest.first.duration), workout_path(@longest.first) %></span><span class="unit">h by</span> <span class="display_name"><%= link_to @longest.first.user.display_name, user_workouts_path(@longest.first.user) %></span><span class="unit"> on <%=h time_as_date(@longest.first.start_time) %></span></h3>
 				</div>
 				<div class="more">
 					<div class="bests">
 						<ol>
 							<% for workout in @longest %> 
-								<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %>, <%=h time_as_date(workout.start_time) %></li>
+								<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %> on <%=h time_as_date(workout.start_time) %></li>
 							<% end %>
 						</ol>
 					</div>
@@ -68,13 +68,13 @@
 			<div class="leaderboard toggle">
 				<div class="activity_headline">
 					<h3><img src="../images/peaks.png" class="icon">
-						Elevation Gain: <span class="number_top"><%=h @climbers.first.elevation_in_feet %></span><span class="unit">ft by</span> <span class="display_name"><%= link_to @climbers.first.user.display_name, user_workouts_path(@climbers.first.user) %></span><span class="unit">, <%=h time_as_date(@climbers.first.start_time) %></span></h3>
+						Elevation Gain: <span class="number_top"><%= link_to @climbers.first.elevation_in_feet, workout_path(@climbers.first) %></span><span class="unit">ft by</span> <span class="display_name"><%= link_to @climbers.first.user.display_name, user_workouts_path(@climbers.first.user) %></span><span class="unit"> on <%=h time_as_date(@climbers.first.start_time) %></span></h3>
 				</div>
 				<div class="more">
 					<div class="bests">
 						<ol>
 							<% for workout in @climbers %> 
-								<li><span class="number"><%=h workout.elevation_in_feet %></span><span class="unit">ft</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %>, <%=h time_as_date(workout.start_time) %></li>
+								<li><span class="number"><%=h workout.elevation_in_feet %></span><span class="unit">ft</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %> on <%=h time_as_date(workout.start_time) %></li>
 							<% end %>
 						</ol>
 					</div>
@@ -86,13 +86,13 @@
 			<div class="leaderboard toggle">
 				<div class="activity_headline">
 					<h3><img src="../images/heart.png" class="icon">
-						Heart-pumping: <span class="number_top"><%=h @heart_pumping.first.hr %></span><span class="unit">bpm by</span> <span class="display_name"><%= link_to @heart_pumping.first.user.display_name, user_workouts_path(@heart_pumping.first.user) %></span><span class="unit">, <%=h time_as_date(@heart_pumping.first.start_time) %></span></h3>
+						Heart-pumping: <span class="number_top"><%= link_to @heart_pumping.first.hr, workout_path(@heart_pumping.first) %></span><span class="unit">bpm by</span> <span class="display_name"><%= link_to @heart_pumping.first.user.display_name, user_workouts_path(@heart_pumping.first.user) %></span><span class="unit"> on <%=h time_as_date(@heart_pumping.first.start_time) %></span></h3>
 				</div>
 				<div class="more">
 					<div class="bests">
 						<ol>
 							<% for workout in @heart_pumping %> 
-								<li><span class="number"><%=h workout.hr %></span><span class="unit">bpm</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %>, <%=h time_as_date(workout.start_time) %></li>
+								<li><span class="number"><%=h workout.hr %></span><span class="unit">bpm</span>: <span class="workout_name"><%= link_to workout.name, workout %></span> by <%= link_to workout.user.display_name, user_workouts_path(workout.user) %> on <%=h time_as_date(workout.start_time) %></li>
 							<% end %>
 						</ol>
 					</div>

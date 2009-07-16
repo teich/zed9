@@ -55,7 +55,7 @@
 				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/road.png" class="icon">
-							Farthest: <span class="number_top"><%=h @farthest.first.distance_in_miles %></span><span class="unit">miles</span></h3>
+							Farthest: <span class="number_top"><%=h @farthest.first.distance_in_miles %></span><span class="unit">miles on <%=h time_as_date(@farthest.first.start_time) %></span></h3>
 					</div>
 					<div class="more">
 						<div class="bests">
@@ -73,13 +73,13 @@
 				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/flag.png" class="icon">
-							Fastest: <span class="number_top"><%=h @fastest.first.avg_speed_in_mph %></span><span class="unit">mph</span></h3>
+							Fastest: <span class="number_top"><%= h speed_to_pace(@fastest.first) %></span><span class="unit"><%=h units(workout,:speed) %> on <%=h time_as_date(@fastest.first.start_time) %></span></h3>
 					</div>
 					<div class="more">
 						<div class="bests">
 							<ol>
 								<% for workout in @fastest %> 
-									<li><span class="number"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
+									<li><span class="number"><%=h speed_to_pace(workout) %></span><span class="unit"><%=h units(workout,:speed) %></span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
 								<% end %>
 							</ol>
 						</div>
@@ -91,7 +91,7 @@
 				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/clock.png" class="icon">
-							Longest: <span class="number_top"><%=h number_to_short_time(@longest.first.duration) %></span><span class="unit">h</span></h3>
+							Longest: <span class="number_top"><%=h number_to_short_time(@longest.first.duration) %></span><span class="unit">h on <%=h time_as_date(@longest.first.start_time) %></span></span></h3>
 					</div>
 					<div class="more">
 						<div class="bests">
@@ -109,7 +109,7 @@
 				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/peaks.png" class="icon">
-							Elevation Gain: <span class="number_top"><%=h @climbers.first.elevation_in_feet %></span><span class="unit">ft</span></h3>
+							Elevation Gain: <span class="number_top"><%=h @climbers.first.elevation_in_feet %></span><span class="unit">ft on <%=h time_as_date(@climbers.first.start_time) %></span></span></h3>
 					</div>
 					<div class="more">
 						<div class="bests">
@@ -127,7 +127,7 @@
 				<div class="leaderboard toggle">
 					<div class="activity_headline">
 						<h3><img src="../images/heart.png" class="icon">
-							Heart-pumping: <span class="number_top"><%=h @heart_pumping.first.hr %></span><span class="unit">bpm</span></h3>
+							Heart-pumping: <span class="number_top"><%=h @heart_pumping.first.hr %></span><span class="unit">bpm on <%=h time_as_date(@heart_pumping.first.start_time) %></span></span></h3>
 					</div>
 					<div class="more">
 						<div class="bests">

@@ -486,31 +486,7 @@ function workout_page_graphs(data) {
 		google.setOnLoadCallback(z9MapInit(data.workout.gis));
 
 	}
-
-	$('#edit_workout').each(function() {
-		
-		$.extend(DateInput.DEFAULT_OPTS, {
-				// stringToDate: stringToDate,
-				// dateToString: dateToString,
-
-		  stringToDate: function(string) {
-		    var matches;
-		    if (matches = string.match(/^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/)) {
-		      return new Date(matches[2] - 1, matches[3], matches[1]);
-		    } else {
-		      return null;
-		    };
-		  },
-	  
-		  dateToString: function(date) {
-		    var month = (date.getMonth() + 1).toString();
-		    var dom = date.getDate().toString();
-		    if (month.length == 1) month = "0" + month;
-		    if (dom.length == 1) dom = "0" + dom;
-		    return month + "/" + dom + "/" + date.getFullYear();
-		  }
-		});
-	});
+				
 		
 	function get_workout_values(workout) {
 		// Get values
@@ -581,6 +557,26 @@ function workout_page_graphs(data) {
 			$("input#feet").val("");
 		}
 	}
+
+	$.extend(DateInput.DEFAULT_OPTS, {
+
+	  stringToDate: function(string) {
+	    var matches;
+	    if (matches = string.match(/^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/)) {
+	      return new Date(matches[3], matches[1]-1, matches[2]);
+	    } else {
+	      return null;
+	    };
+	  },
+  
+	  dateToString: function(date) {
+	    var month = (date.getMonth() + 1).toString();
+	    var dom = date.getDate().toString();
+	    if (month.length == 1) month = "0" + month;
+	    if (dom.length == 1) dom = "0" + dom;
+	    return month + "/" + dom + "/" + date.getFullYear();
+	  }
+	});
 
 	function calculate_start() {
     var matches;
@@ -723,6 +719,8 @@ function workout_page_graphs(data) {
 			$(this).toggleClass('open');
 		});
 
+		$($.date_input.initialize);
+
 		$("#edit_workout").each(function() {
 
 			// Tabs for add workout		
@@ -732,7 +730,7 @@ function workout_page_graphs(data) {
 			get_workout_values();
 
 			// Date picker widget
-			$($.date_input.initialize);
+		  $(".date_input").date_input();
 
 			// Formatted time inputs for workout
 			$(".time_input").timeEntry({initialField: 0});
