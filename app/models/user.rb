@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 	validates_presence_of :invitation_id, :message => 'is required'
 	validates_uniqueness_of :invitation_id
 	validates_inclusion_of :sex, :in => %w( male female ), :on => :create, :message => "must be male/female"
+	validates_format_of :login, :with => /^\w+$/i, :message => "can only contain letters and numbers."
 
 	belongs_to :invitation  
 	has_many :accomplishments

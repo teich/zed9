@@ -54,10 +54,10 @@ class WorkoutsController < ApplicationController
 
     # Defaults to last selected activity type
     last_workout = current_user.workouts.find(:first, :order => "created_at DESC")
-    if !last_workout.nil?
+    if last_workout.nil?
 		  @workout.activity = Activity.find_by_name("Uncategorized")
     else
-      @workout.activity = last_workout.activity.name
+      @workout.activity = last_workout.activity
     end
 
 		# Set the workout shared state to the user default
@@ -124,7 +124,7 @@ class WorkoutsController < ApplicationController
 	def find_user_and_require_shared
 		@user = User.find_by_login(params[:user_id])
 
-		if !(!current_user.nil? && !@user.nil? && current_user.id == @user.id) && !@user.shared
+		if @user.nil? || !(!current_user.nil? && current_user.id == @user.id) && !@user.shared
 		  add_flash(:alert, "This page is private")
 			redirect_to root_path
 		end
