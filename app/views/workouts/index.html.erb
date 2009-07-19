@@ -46,7 +46,7 @@
 						<td class="icon_col"><%= link_to image_tag(workout.activity.root.icon_path, :class => "activity_icon_small", :alt => workout.activity.name, :title => workout.activity.name), activity_path(workout.activity) %></td>
 						<td class="name importing"><%=h workout.name %> (Processing...)</td>
 						<td><span class="sort_value" style="display:none"><%=h time_as_date(Time.now) %></span></td>
-						<td><br></td>
+						<td class="importing"><% if workout.rpe == 0 || workout.rpe.nil? %><span class="sort_value" style="display: none">0</span><% else %><span class="sort_value" style="display: none"><%=h two_digits(workout.rpe) %></span><span><%=h workout.rpe %></span><% end %><br></td>
 						<td><br></td>
 						<td><br></td>
 						<td><br></td>
@@ -64,7 +64,7 @@
 						<td class="icon_col"><%= link_to image_tag(workout.activity.root.icon_path, :class => "activity_icon_small tip", :alt => workout.activity.name, :title => workout.activity.name), activity_path(workout.activity) %></td>
 						<td class="name"><% if workout.importing %><span class="importing"><%=h workout.name %></span><% elsif workout.notes == "" %><%= link_to workout.name, workout %><% else %><%= link_to workout.name, workout, :class => "tip", :title => workout.notes %><% end %></td>
 						<td class="date no_wrap"><span class="sort_value"><%=h time_as_date(workout.start_time) %></span><br></td>
-						<td class="rpe no_wrap"><% if !workout.rpe.nil? %><span class="sort_value" style="display: none"><%=h two_digits(workout.rpe) %></span><span><%=h workout.rpe %></span><% else %><span class="sort_value" style="display:none">0</span><% end %><br></td>
+						<td class="rpe no_wrap"><% if workout.rpe == 0 || workout.rpe.nil? %><span class="sort_value" style="display: none">0</span><% else %><span class="sort_value" style="display: none"><%=h two_digits(workout.rpe) %></span><span><%=h workout.rpe %></span><% end %><br></td>
 						<td class="duration no_wrap"><% if !workout.duration.nil? %><span class="sort_value"><%=h number_to_time(workout.duration) %></span><span class="unit">h</span><% end %><br></td>
 						<td class="distance no_wrap"><% if !workout.distance_in_miles.nil? %><span class="sort_value"><%=h workout.distance_in_miles %></span><span class="unit">mi</span><% end %><br></td>
 						<td class="speed no_wrap"><% if !workout.avg_speed_in_mph.nil? %><span class="sort_value" style="display:none"><%=h workout.speed %></span><span><%=h speed_to_pace(workout) %></span><span class="unit"><%=h units_short(workout,:speed) %></span><% end %><br></td>				
