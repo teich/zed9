@@ -100,7 +100,7 @@ module ApplicationHelper
 
 		metric = workout.user.metric
 		pace = workout.activity.pace
-		max_speed = workout.trackpoints.maximum(:speed)
+		max_speed = workout.max_speed
 		
 		# workout speed is set to meters per second.
 		if metric

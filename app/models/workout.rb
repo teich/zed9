@@ -108,6 +108,18 @@ class Workout < ActiveRecord::Base
 		trackpoints.map { |tp| tp.altitude }
 	end
 
+  def max_speed
+    found = 0
+    speeds = trackpoints.map { |tp| tp.speed }.compact
+    speeds.compact.each_index do |x|
+      if x < (speeds.length - 20)
+        avg = speeds[x..x+20].aaverage
+        found = avg if avg > found
+      end
+    end
+    return found
+  end
+  
 	# Return the Global Information, AKA lat and lng.
 	def gis
 		gis = []
@@ -329,7 +341,7 @@ class Workout < ActiveRecord::Base
 		end_percent = end_offset / duration
 
 		# we can't have more points than we have data.  Scale down if needed
-		number_points = 200 > hr_trackpoints.size ? hr_trackpoints.size : 200
+		number_points = 100 > hr_trackpoints.size ? hr_trackpoints.size : 100
 
 		first_blanks = (number_points * start_percent).to_i
 		end_blanks = (number_points * end_percent).to_i
@@ -353,11 +365,11 @@ class Workout < ActiveRecord::Base
 	end
 
 	def json_speed_big
-		get_smoothed_speed(200, true, true)
+		get_smoothed_speed(100, true, true)
 	end
 
 	def json_elevation_big
-		get_smoothed_elevation(200,true, true)
+		get_smoothed_elevation(100,true, true)
 	end
 
 	def json_elevation
