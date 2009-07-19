@@ -113,7 +113,7 @@ class Workout < ActiveRecord::Base
     speeds = trackpoints.map { |tp| tp.speed }.compact
     speeds.compact.each_index do |x|
       if x < (speeds.length - 20)
-        avg = speeds[x..x+20].aaverage
+        avg = speeds[x..x+10].aaverage
         found = avg if avg > found
       end
     end
