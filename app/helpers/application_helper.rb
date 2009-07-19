@@ -135,6 +135,12 @@ module ApplicationHelper
 		end
 	end
 
+  def two_digits(value)
+    return "" if value.nil?
+    return value if value >  9 
+		return "0#{value}"
+  end
+  
   def no_leaders?
     @farthest.size == 0 && @fastest.size == 0 && @longest.size == 0 && @climbers.size == 0 && @heart_pumping.size == 0
   end

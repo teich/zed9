@@ -666,11 +666,7 @@ function workout_page_graphs(data) {
 		// Workouts index table sorting, default to descending on date
 		$('#workouts_index').each(function() {
 			$("#workouts_index").tablesorter({
-				sortList: [[2, 1]],
-				headers: { 
-					0: { sorter: false },
-					13: { sorter: false },
-				}
+				sortList: [[2,1]]
 			}); 
 		});
 		

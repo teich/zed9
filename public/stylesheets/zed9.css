@@ -200,21 +200,21 @@ thead, th, td {
 
 /*---- Table Sorter styling ----*/
 
-.sortable2 th.headerSortUp {
+.sortable th.headerSortUp {
 	background: #f7fdff url(/images/dn.png) no-repeat center right;
 	font-weight: 500;
 	color: #1a4465;
 	cursor: pointer;
 }
 
-.sortable2 th.headerSortDown {
+.sortable th.headerSortDown {
 	background: #f7fdff url(/images/up.png) no-repeat center right;
 	font-weight: 500;
 	color: #1a4465;
 	cursor: pointer;
 }
 
-.sortable th:hover, .sortable2 th:hover {
+.sortable th:hover {
 	color: #25a1d6;
 	cursor: pointer;
 }
