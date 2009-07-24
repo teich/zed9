@@ -71,7 +71,10 @@
 						<td class="speed no_wrap"><% if !workout.avg_speed_in_mph.nil? %><span class="sort_value" style="display:none"><%=h workout.max(:speed) %></span><span><%=h max_speed_to_pace(workout) %></span><span class="unit"><%=h units_short(workout,:speed) %></span><% end %><br></td>				
 						<td class="elevation no_wrap"><% if !workout.elevation.nil? %><span class="sort_value"><%=h workout.elevation_in_feet.round(0).to_i %></span><span class="unit">ft</span><% end %><br></td>
 						<td class="hr no_wrap"><% if !workout.hr.nil? %><span class="sort_value"><%=h workout.hr %></span><span class="unit">bpm</span><% end %><br></td>
-						<td class="hr no_wrap"><% if !workout.hr.nil? %><span class="sort_value"><%=h workout.max(:heart_rate) %></span><span class="unit">bpm</span><% end %><br></td>
+						<td class="hr no_wrap"><span class="sort_value">
+							<% if !workout.hr_max.nil? %><%=h workout.hr_max %></span><span class="unit">bpm</span>
+							<% elsif !workout.max(:heart_rate).nil? %><%=h workout.max(:heart_rate) %></span><span class="unit">bpm</span>
+							<% end %><br></td>
 						<td class="tags">
 							<% for tag in workout.tag_list %>
 								<%= link_to tag, user_workouts_path(@user, :tag => tag) %>

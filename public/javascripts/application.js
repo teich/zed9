@@ -495,7 +495,7 @@ function workout_page_graphs(data) {
 		var duration = $("input#workout_duration").val();
 		var distance = $("input#workout_distance").val();
 		var elevation = $("input#workout_elevation").val();
-
+		 
 		// Set Date
 		if (start_time != "") {
 			var z = start_time.split(" ");
