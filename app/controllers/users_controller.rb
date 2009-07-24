@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     
       
       
-    @accomplishments = Accomplishment.find_all_by_user_id(@user)
+    @accomplishments = Accomplishment.find_all_by_user_id(@user, :order => "created_at DESC")
 
 		durations = @workouts.map { |w| w.duration }
 		if durations.nil?
