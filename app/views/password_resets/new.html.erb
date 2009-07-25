@@ -5,6 +5,7 @@
 <div class="content">
 
 	<div id="password_reset_form">
+		<p>Enter the email address on your ZED9 account and we'll send you a link to create a new password and sign in.</p><br>
 
 		<% form_for User.new, :url => password_resets_path, :method => :put do |f| %>
 
@@ -12,8 +13,8 @@
 
 			<table id="email_password" class="form">
 			  	<tr>
-			    	<th><%= f.label :email, "Email address for your account" %></th><br>
-			    	<td><%= f.text_field :email, :value => "Email" %></td>
+			    	<th><%= f.label :email, "Account email address" %></th>
+						<td><%= f.text_field :email %></td>
 			  	</tr>
 			    <tr>
 			      	<th>&nbsp;</th>

@@ -809,6 +809,11 @@ ol {
 	vertical-align: middle;
 }
 
+#email_password.form th {
+	width: auto;
+	white-space: nowrap;
+}
+
 .form td {
 	width: 300px;
 	font-size: inherit;
@@ -876,7 +881,7 @@ ol {
 	background-color: none;
 }
 
-#edit_workout .submit, #edit_workout .submit_no_button, #register .submit, #register .submit_no_button {
+#change_password .submit, #email_password .submit, #edit_workout .submit, #edit_workout .submit_no_button, #register .submit, #register .submit_no_button {
 	position: relative;
 	top: 18px;
 }
