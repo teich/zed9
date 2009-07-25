@@ -15,7 +15,7 @@ function z9MapInit(points) {
 	z9map.defaultLoc    = new GLatLng(0, 0);
 	z9map.gmap = new google.maps.Map2(document.getElementById("map_div"));
 	z9map.gmap.setCenter(z9map.defaultLoc, 1);
-	 
+	z9map.gmap.addMapType(G_PHYSICAL_MAP) ; 
 	z9map.bounds = new google.maps.LatLngBounds();
 	   
 		// Setup the points we're using
