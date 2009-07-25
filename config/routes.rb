@@ -4,7 +4,8 @@ ActionController::Routing::Routes.draw do |map|
 	map.resource  :dashboard, :only => [:show] 
 	map.resources :activities
 	map.resources :invitations
-
+  map.resources :password_resets
+  
 	map.namespace :admin do |admin|
 		admin.resources :users
 		admin.resources :activities
@@ -20,7 +21,7 @@ ActionController::Routing::Routes.draw do |map|
 
 	map.signup '/signup/:invitation_token', :controller => 'users', :action => 'new'
 	map.login '/login', :controller => 'user_sessions', :action => 'new' 
-
+  # map.password_reset '/reset/:perishable_token', :controller => 'password_resets', :action => 'update'
 
 	map.home ':page', :controller => 'home', :action => 'show', :page => /about|contact|devices|guide/
 	map.root :controller => "root", :action => "index"

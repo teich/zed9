@@ -29,9 +29,6 @@ class UsersController < ApplicationController
 		  @workouts = @user.workouts.find_all_by_shared(true, :limit=>20, :order => "updated_at DESC")
 	  end
 
-    
-      
-      
     @accomplishments = Accomplishment.find_all_by_user_id(@user, :order => "created_at DESC")
 
 		durations = @workouts.map { |w| w.duration }

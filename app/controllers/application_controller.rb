@@ -14,10 +14,16 @@ class ApplicationController < ActionController::Base
 
 	before_filter :create_user_session
 	before_filter :set_user_time_zone
+	before_filter :mailer_set_url_options
+
 	
 	rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
 	private
+
+  def mailer_set_url_options
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end
 
 	# Returns true or false if the user is logged in.
 	# Preloads @current_user with the user model if they're logged in.

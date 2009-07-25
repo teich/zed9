@@ -1,0 +1,28 @@
+<div class="content_header">
+	<h1>Forgot Password</h1><br>
+</div>
+
+<div class="content">
+
+	<div id="password_reset_form">
+
+		<% form_for User.new, :url => password_resets_path, :method => :put do |f| %>
+
+  			<%= f.error_messages %>
+
+			<table id="email_password" class="form">
+			  	<tr>
+			    	<th><%= f.label :email, "Email address for your account" %></th><br>
+			    	<td><%= f.text_field :email, :value => "Email" %></td>
+			  	</tr>
+			    <tr>
+			      	<th>&nbsp;</th>
+				    <td><%= f.submit "Reset my password", :class => "submit" %></td> 
+			    </tr>
+			</table>
+
+		<% end %>
+		
+	</div>
+	
+</div>

@@ -136,6 +136,12 @@ class User < ActiveRecord::Base
   def hours_per_week(weeks_ago)
     workouts.sum('duration', :conditions =>  ['start_time < ? AND start_time > ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago]) / 3600
   end
+  
+  def deliver_password_reset_instructions!  
+    reset_perishable_token!  
+    Mailer.deliver_password_reset_instructions(self)  
+  end
+  
 	private
 
 	# How many invitations does a user get?
