@@ -94,7 +94,7 @@ var options = {
 	xaxis: { ticks: [] },
 	yaxis: { ticks: [] },
 	y2axis: { ticks: [], autoscaleMargin: 0.2 },
-	colors: ["#25a1d6", "#3dc10b", "#545454"],
+	colors: ["#25a1d6", "#25a1d6", "#3dc10b", "#545454"],
 	shadowSize: 1
 };
 
@@ -308,6 +308,7 @@ function workout_page_graphs(data) {
 		var sparkbar_options = jQuery.extend(true, {}, options);
 		sparkbar_options.xaxis.min = 0;
 		sparkbar_options.yaxis.min = 0;
+		sparkbar_options.colors = ["#25a1d6", "#3dc10b", "#545454"];
 
 		// TODO: Handle units correctly
 		// This hack converts everything to imperial
