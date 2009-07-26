@@ -30,7 +30,7 @@ Rails::Initializer.run do |config|
 
   config.gem "authlogic"
   config.gem "newrelic_rpm" 
-  config.gem "teich-hrmparser", :lib => "hrmparser", :version => "0.4.9", :source => "http://gems.github.com"
+  config.gem "teich-hrmparser", :lib => "hrmparser", :version => "0.5.0", :source => "http://gems.github.com"
   config.gem "thoughtbot-paperclip", :lib => "paperclip"
   config.gem "disqus"
 
