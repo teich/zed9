@@ -244,7 +244,7 @@ class Workout < ActiveRecord::Base
 	end
 
 
-  def calc_calories()
+  def calories()
     gender = user.sex
     age = ( (Date.today - user.birthdate).to_i / 365.25).floor
     weight = 55
@@ -266,20 +266,8 @@ class Workout < ActiveRecord::Base
     end
 
   end
-  
-  def calories
-    calc_calories
-  end
-  
-
-  # def comps_calories(comps)
-  #     if comps.size > 0
-  #       duration = pick_array_field(comps, :calories)
-  #       return calories.aaverage.round(1)
-  #     end
-  #     return "N/A"    
-  # end  
     
+
 	# Take's an array of objects, and averages one field.
 	def pick_array_field(data, field)
 		data.map { |x| x[field] }
@@ -321,7 +309,7 @@ class Workout < ActiveRecord::Base
 		mycomps["hr"] = (mc.map { |c| c.hr  }).compact.aaverage
 		mycomps["duration"] = (mc.map {|c| c.duration}).compact.aaverage
 		mycomps["distance"]  = distance.round(1) if !distance.nil?
-    mycomps["calories"] = (mc.map {|c| c.calc_calories}).compact.aaverage.round
+    mycomps["calories"] = (mc.map {|c| c.calories}).compact.aaverage.round
 		mycomps["speed"] = speed.round(1) if !speed.nil?
 		mycomps["elevation"] = (mc.map {|c| c.elevation}).compact.aaverage
 
@@ -332,7 +320,7 @@ class Workout < ActiveRecord::Base
 		allcomps["hr"] = (ac.map { |c| c.hr  }).compact.aaverage
 		allcomps["duration"] = (ac.map {|c| c.duration}).compact.aaverage
 		allcomps["distance"]  = distance2.round(1) if !distance2.nil?
-    allcomps["calories"] = (ac.map {|c| c.calc_calories}).compact.aaverage.round
+    allcomps["calories"] = (ac.map {|c| c.calories}).compact.aaverage.round
 		allcomps["speed"] = speed2.round(1) if !speed2.nil?
 		allcomps["elevation"] = (ac.map {|c| c.elevation}).compact.aaverage
 
