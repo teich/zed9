@@ -52,6 +52,7 @@ function id_to_unit(id, pace) {
 		case "elevation": unit = "ft"; break;
 		case "hr": unit = "bpm"; break;
 		case "duration": unit = "h"; break;
+		case "calories": unit = "kCal"; break;
 		default: unit = "ARG!";
 	}
 	return unit;
@@ -304,6 +305,7 @@ function workout_page_graphs(data) {
 		var all_comps = workout.json_comps.all_comps;
 		var my_comps = workout.json_comps.my_comps;
 
+
 		// Just add the differences.  This jquery.Extend copies the object.
 		var sparkbar_options = jQuery.extend(true, {}, options);
 		sparkbar_options.xaxis.min = 0;
@@ -314,12 +316,12 @@ function workout_page_graphs(data) {
 		// This hack converts everything to imperial
 
 		workout.elevation *= 3.28;
-		all_comps.elevation *= 3.28;
 		my_comps.elevation *= 3.28;
+		all_comps.elevation *= 3.28;
 
 		workout.distance *= 0.000621371192;
-		all_comps.distance *= 0.000621371192;
 		my_comps.distance *= 0.000621371192;
+		all_comps.distance *= 0.000621371192;
 
 		$(".sparkline").each(function() {
 			var line_options = { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } };
@@ -345,6 +347,7 @@ function workout_page_graphs(data) {
 			{ data: [[all_comps[this.id], 0.0]], bars: other_bar_options }
 			], sparkbar_options);
 		});
+
 
 	$(".big_visualization").each(function() { 
 		function formatData(id) {
@@ -390,7 +393,7 @@ function workout_page_graphs(data) {
 			}
 			return base_options;
 		}
-		
+				
 		function plotGraphSelected() {
 			var graph_data = [];
 			var graph_data2 = [];
@@ -445,9 +448,11 @@ function workout_page_graphs(data) {
 
 	});
 
+		
 		$(".stat").each(function() {
 			var tip = '<div class="stat">';
 			var unit = 0;
+
 			if (this.id == "duration") {
 				data1 = hms(workout[this.id]);
 				data2 = hms(my_comps[this.id]);
@@ -458,6 +463,11 @@ function workout_page_graphs(data) {
 				data2 = formatted_speed(my_comps[this.id], workout.activity.pace, false);
 				data3 = formatted_speed(all_comps[this.id], workout.activity.pace, false);
 				unit = id_to_unit(this.id, workout.activity.pace);
+			} else if (this.id == 'calories') {
+				data1 = workout.calories;
+				data2 = my_comps.calories;
+				data3 = all_comps.calories;
+				unit = id_to_unit(this.id);
 			} else {
 				data1 = workout[this.id].toFixed(1);
 				data2 = my_comps[this.id].toFixed(1);

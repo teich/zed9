@@ -243,6 +243,43 @@ class Workout < ActiveRecord::Base
 		return "N/A"
 	end
 
+
+  def calc_calories()
+    gender = user.sex
+    age = ( (Date.today - user.birthdate).to_i / 365.25).floor
+    weight = 55
+    duration = (self.duration)/60
+    hr = self.hr
+    
+    if gender && age && weight && duration && hr
+      if gender = "male"  
+        cal = (((-55.0969) + (hr * 0.6309) - (weight * 0.2017) + (age * 0.2017))/(4.184))
+        totalcal = (cal * duration).to_i
+        return totalcal
+      elsif gender = "female"
+        cal = (((-20.4022) + (hr * 0.4472) - (weight * 0.1263) + (age * 0.074))/(4.184))
+        totalcal = (cal * duration).to_i
+        return totalcal
+      end
+    else
+      return nil
+    end
+
+  end
+  
+  def calories
+    calc_calories
+  end
+  
+
+  # def comps_calories(comps)
+  #     if comps.size > 0
+  #       duration = pick_array_field(comps, :calories)
+  #       return calories.aaverage.round(1)
+  #     end
+  #     return "N/A"    
+  # end  
+    
 	# Take's an array of objects, and averages one field.
 	def pick_array_field(data, field)
 		data.map { |x| x[field] }
@@ -284,6 +321,7 @@ class Workout < ActiveRecord::Base
 		mycomps["hr"] = (mc.map { |c| c.hr  }).compact.aaverage
 		mycomps["duration"] = (mc.map {|c| c.duration}).compact.aaverage
 		mycomps["distance"]  = distance.round(1) if !distance.nil?
+    mycomps["calories"] = (mc.map {|c| c.calc_calories}).compact.aaverage.round
 		mycomps["speed"] = speed.round(1) if !speed.nil?
 		mycomps["elevation"] = (mc.map {|c| c.elevation}).compact.aaverage
 
@@ -294,6 +332,7 @@ class Workout < ActiveRecord::Base
 		allcomps["hr"] = (ac.map { |c| c.hr  }).compact.aaverage
 		allcomps["duration"] = (ac.map {|c| c.duration}).compact.aaverage
 		allcomps["distance"]  = distance2.round(1) if !distance2.nil?
+    allcomps["calories"] = (ac.map {|c| c.calc_calories}).compact.aaverage.round
 		allcomps["speed"] = speed2.round(1) if !speed2.nil?
 		allcomps["elevation"] = (ac.map {|c| c.elevation}).compact.aaverage
 
@@ -469,5 +508,5 @@ class Workout < ActiveRecord::Base
   def manual_entry?
     devices.first.mfg == "MANUAL"
   end
-  
+
 end
