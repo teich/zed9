@@ -2,10 +2,10 @@ class DashboardsController < ApplicationController
 	before_filter :require_user
 
 	def show
-		@workouts = current_user.workouts.find(:all, :order => "end_time DESC")
+		@workouts = current_user.workouts.processed.find(:all, :order => "created_at DESC")
 
 		# list of most recent public workouts
-		@public_workouts = Workout.find_all_by_shared(true, :limit=>20, :order => "updated_at DESC")
+		@public_workouts = Workout.processed.find_all_by_shared(true, :limit=>20, :order => "created_at DESC")
 
     # recent achievements
     @accomplishments = Accomplishment.find_all_by_user_id(current_user, :conditions => ['created_at > ?', 7.days.ago])
@@ -39,12 +39,7 @@ class DashboardsController < ApplicationController
 
 		respond_to do |format|
 			format.html
-			format.js {render :json => current_user.to_json(:include => { :workouts => 
-			                                                              { :methods => [:json_date, :activity_name], 
-			                                                                :except => :trackpoints } }, 
-			                                                  :except => [:single_access_token, :perishable_token, 
-			                                                              :password_salt, :persistence_token, :crypted_password],
-			                                                  :methods => [:json_hours_per_week, :json_workouts_per_week, :json_weeks_labels])} 
+			format.js {render :json => current_user.to_json(:include => { :workouts =>  { :methods => [:json_date, :activity_name], :except => :trackpoints } }, :except => [:single_access_token, :perishable_token, :password_salt, :persistence_token, :crypted_password], :methods => [:json_hours_per_week, :json_workouts_per_week, :json_weeks_labels])} 
 		end
 	end
 end

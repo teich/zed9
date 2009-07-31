@@ -16,6 +16,7 @@ class Workout < ActiveRecord::Base
   
 	acts_as_taggable_on   :tags
 	
+	named_scope :processed, :conditions => { :importing => false }
 	
 	def start_time_string
 	  start_time.to_s
@@ -247,17 +248,16 @@ class Workout < ActiveRecord::Base
   def calories()
     gender = user.sex
     age = ( (Date.today - user.birthdate).to_i / 365.25).floor
-    weight = 55
     duration = (self.duration)/60
     hr = self.hr
     
-    if gender && age && weight && duration && hr
+    if gender && age && user.weight && duration && hr
       if gender = "male"  
-        cal = (((-55.0969) + (hr * 0.6309) - (weight * 0.2017) + (age * 0.2017))/(4.184))
+        cal = (((-55.0969) + (hr * 0.6309) - (user.weight * 0.2017) + (age * 0.2017))/(4.184))
         totalcal = (cal * duration).to_i
         return totalcal
       elsif gender = "female"
-        cal = (((-20.4022) + (hr * 0.4472) - (weight * 0.1263) + (age * 0.074))/(4.184))
+        cal = (((-20.4022) + (hr * 0.4472) - (user.weight * 0.1263) + (age * 0.074))/(4.184))
         totalcal = (cal * duration).to_i
         return totalcal
       end

@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
 	has_many :achievements, :through => :accomplishments, :uniq => true, :dependent => :destroy
 	has_many :hr_zones, :dependent => :destroy
 	has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
-	has_many :workouts, :dependent => :destroy
+	has_many :workouts, :dependent => :destroy, :order => "start_time ASC"
+	has_many :journal_entries, :dependent => :destroy, :order => "entry_date ASC"
   # has_many :workouts, :dependent => :destroy, :order => 'start_time ASC'
 
 	before_create :set_invitation_limit
@@ -38,6 +39,10 @@ class User < ActiveRecord::Base
 		(Date.today - birthdate).to_i / 365
 	end
 
+  def weight
+    journal_entries.last.weight
+  end
+  
 	def admin_user?
 		admin
 	end
