@@ -7,8 +7,8 @@ class JournalEntriesController < ApplicationController
 
 		@journal_entries = @user.journal_entries.find(:all, :order => "entry_date DESC")
 		@current_weight = @user.weight(Time.now)
-		@lowest_weight = @user.journal_entries.find(:first, :order => "weight ASC", :conditions => ["weight NOT null"])
-		@highest_weight = @user.journal_entries.find(:first, :order => "weight DESC", :conditions => ["weight NOT null"])
+		@lowest_weight = @user.journal_entries.find(:first, :order => "weight ASC", :conditions => ["weight IS NOT NULL"])
+		@highest_weight = @user.journal_entries.find(:first, :order => "weight DESC", :conditions => ["weight IS NOT NULL"])
 		@current_vo2 = @user.vo2(Time.now)
 				    
 		respond_to do |format|
