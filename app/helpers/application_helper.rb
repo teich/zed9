@@ -69,6 +69,27 @@ module ApplicationHelper
 		start_time.strftime("#{short_month}/#{short_day}/%g")
 	end
 
+  #Output 5/8/09 for date-select inputs (e.g., on Journal Entries)
+  def format_date_select(entry_date)
+		return "" if entry_date.nil?
+    orig_date = entry_date.to_s.split("-")
+    year = orig_date[0]
+    short_year = year[-2..3]
+    month = orig_date[1]
+    day = orig_date[2]
+    if (month =~ /^0(.*$)/)
+      short_month = $1
+    else
+      short_month = month
+    end
+    if (day =~ /^0(.*$)/)
+      short_day = $1
+    else
+      short_day = day
+    end
+    return short_month + "/" + short_day + "/" + short_year
+  end
+
 	def float_min_to_formated_time(time)
 		min = time.to_i
 		sec = (time % 1 * 60).to_i

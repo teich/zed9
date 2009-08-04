@@ -16,7 +16,11 @@
 				<td><%= f.text_field :weight, :size => 4 %> lbs</td>
 			</tr>
 			<tr>
-				<th><%= link_to 'Cancel', user_workouts_path(current_user), :class => "submit_no_button" %></th>
+				<th>VO2 Max</th>
+				<td><%= f.text_field :vo2, :size => 4 %> ml/kg/min</td>
+			</tr>
+			<tr>
+				<th><%= link_to 'Cancel', user_journal_entries_path(current_user), :class => "submit_no_button" %></th>
 				<td><%= f.submit "Save", :class => "submit"  %></td>
 			</tr>
 		</table>

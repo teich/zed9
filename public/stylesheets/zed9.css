@@ -108,6 +108,10 @@ a {
 	color:#25a1d6;
 }
 
+a:hover {
+	color:#1a4465;
+}
+
 h1 {
 	display: inline;
 	font-weight: 500;
@@ -940,7 +944,6 @@ ol {
 }
 
 .tickLabel {
-	font-size: 12px;
 	font-family: inherit;
 	font-weight: 100;
 }
@@ -1358,12 +1361,12 @@ input.submit {
 	padding-top: 30px;
 }
 
-#dashboard .left_column, #profile .left_column {
+#dashboard .left_column, #profile .left_column, #journal_index .left_column {
 	width: 468px;
 }
 
 
-#content_right_column {
+#content_right_column, #journal_index .right_column {
 	width: 396px;
 }
 
@@ -1409,7 +1412,7 @@ input.submit {
 	padding-bottom: 0px;
 }
 
-#recent_workouts, #dashboard #summary {
+#recent_workouts, #dashboard #summary{
 	height: auto;
 	padding: 0px 0px 36px 0px;
 }
@@ -1453,7 +1456,7 @@ input.submit {
 	vertical-align: top;
 }
 
-#dashboard #axis_labels {
+#axis_labels {
 	clear: both;
 	display: inline;
 	width: 100%;
@@ -1476,7 +1479,7 @@ input.submit {
 	color: #ffa200;
 }
 
-#dashboard .tickLabel {
+.tickLabel {
 	font-size: 11px;
 }
 
@@ -2400,6 +2403,72 @@ p.comp_activity {
 #overlap .name {
 	font-style: oblique;
 }
+
+
+/*---- Journal Entries Index ----*/
+
+#weight_summary {
+	padding-bottom: 18px;
+}
+
+#journal_stats td {
+	padding: 12px 0px 0px 0px;
+}
+
+#journal_stats td.details {
+	font-size: 14px;
+	width: 222px;
+	padding: 4px 0px 12px 0px;
+}
+
+#weight_over_time {
+	height: auto;
+	padding: 0px;
+}
+
+#journal_index h2 .unit {
+	font-size: 18px;
+}
+
+.subscript {
+	font-size: 60%;
+	text-align: bottom;
+	bottom: -50%;
+}
+
+#weight_graph {
+	clear: both;
+	position: relative;
+	overflow: hidden;
+	width: 468px;
+/*	height: 256px;*/
+	padding: 0px;
+	top: -12px;
+	height: 196px;
+	padding-bottom: 24px;
+}
+
+#weight_over_time .tickLabels {
+}
+
+#journal_index #entries_stream table {
+	width: 100%;
+	padding-bottom: 24px;
+}
+
+#journal_index #entries_stream td {
+	font-size: 14px;
+	padding: 12px 0px 0px 0px;
+	border-top:1px dotted #d9d9d9;
+}
+
+#journal_index #entries_stream td.entry_metadata {
+	font-size: 12px;
+	color: #9f9f9f;
+	padding: 4px 0px 12px 0px;
+	border-top: none;
+}
+
 
 /*---- Admin pages ----*/
 

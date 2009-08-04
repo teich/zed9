@@ -268,6 +268,51 @@ function draw_dashboard_graph(data) {
 	}
 
 
+
+	// Pass in a JSON object, and draw based on that data for summary stats on dashboard
+	function draw_weight_graph(data) {
+
+		var weights = data.json_weights;
+		var weight_graph_options = {
+			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 12, markings: xAxis },
+			xaxis: { mode: "time", timeformat: "%m/%d", labelWidth: 24 },
+			yaxis: { min: 0, autoscaleMargin: 0.2 },
+			colors: ["#25a1d6"],
+			shadowSize: 1,
+			legend: {show: false, container: null}
+		};
+
+		function summary_stats_tooltip(event, pos, item) {
+			var previousPoint = [];
+			if (item) {
+				if (previousPoint != item.datapoint) {
+					previousPoint = item.datapoint;
+		
+					$("#summary_stats_tooltip").remove();
+					var x = pos.pageX
+					var y = pos.pageY
+					var count = item.datapoint[1];
+					var tip_text = weights[item.dataIndex][1] + "<span class='tooltip_extra_info'>lbs</span>";
+			
+					$('<div id="summary_stats_tooltip" class="tooltip">' + tip_text + '</div>').css({
+						top: pos.pageY+4,
+						left: pos.pageX+4
+						}).appendTo("body").fadeIn(100);
+					}
+				}
+				else {
+					$("#summary_stats_tooltip").remove();
+					previousPoint = null;
+				}    
+			}
+
+		var weight_data = [];
+		weight_data.push({ data: weights, lines: summary_stats_line_options });
+		$.plot($('#weight_graph'), weight_data, weight_graph_options);
+		$("#weight_graph").bind("plothover", weight_tooltip);
+	}
+
+
 function workout_page_graphs(data) {
 	function full_tooltip(event, pos, item) {
 		// TODO: units are now dependent on data
@@ -663,6 +708,10 @@ function workout_page_graphs(data) {
 
 		$('#summary_stats_graph').each(function() {
 			$.getJSON(jsURL, draw_dashboard_summary_graph);
+		});
+
+		$('#weight_graph').each(function() {
+			$.getJSON(jsURL, draw_weight_graph);
 		});
 
 		// Workout page graphs

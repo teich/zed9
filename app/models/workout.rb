@@ -248,17 +248,28 @@ class Workout < ActiveRecord::Base
   def calories()
     gender = user.sex
     age = ( (Date.today - user.birthdate).to_i / 365.25).floor
-    duration = (self.duration)/60
-    hr = self.hr
     
-    if gender && age && user.weight && duration && hr
-      if gender = "male"  
-        cal = (((-55.0969) + (hr * 0.6309) - (user.weight * 0.2017) + (age * 0.2017))/(4.184))
-        totalcal = (cal * duration).to_i
+    # FORMULA WITHOUT V02 MAX 
+    # if gender && age && user.weight(self.start_time) && duration && hr
+    #   if gender == "male"  
+    #     cal = (-55.0969 + (hr * 0.6309) + (user.weight(self.start_time) * 0.1988) + (age * 0.2017) ) / 4.184
+    #     totalcal = (cal * duration/60).to_i
+    #     return totalcal
+    #   elsif gender == "female"
+    #     cal = ( -20.4022 + (hr * 0.4472) + (user.weight(self.start_time) * 0.1263) + (age * 0.074) ) / 4.184
+    #     totalcal = (cal * duration/60).to_i
+    #     return totalcal
+    #   end
+
+    # FORMULA WITH V02 MAX
+    if gender && age && user.weight(self.start_time) && duration && hr
+      if gender == "male"  
+        cal = ( -59.3954 - 36.3781 + (hr * 0.634) + (user.weight(self.start_time) * 0.394) + (age * 0.271) + (user.vo2(start_time) * 0.404) ) / 4.184
+        totalcal = (cal * duration/60).to_i
         return totalcal
-      elsif gender = "female"
-        cal = (((-20.4022) + (hr * 0.4472) - (user.weight * 0.1263) + (age * 0.074))/(4.184))
-        totalcal = (cal * duration).to_i
+      elsif gender == "female"
+        cal = ( -59.3954 + (hr * 0.450) + (user.weight(self.start_time) * 0.103) + (age * 0.274) + (user.vo2(start_time) * 0.380) ) / 4.184
+        totalcal = (cal * duration/60).to_i
         return totalcal
       end
     else

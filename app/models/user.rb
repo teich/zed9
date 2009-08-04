@@ -39,8 +39,43 @@ class User < ActiveRecord::Base
 		(Date.today - birthdate).to_i / 365
 	end
 
-  def weight
-    journal_entries.last.weight
+  def age(date)
+    ( (Date.today - birthdate).to_i / 365.25).floor
+  end
+  
+  def weight(date)
+    je = journal_entries.find(:last, :order => "entry_date ASC", :conditions => ["weight NOT null AND entry_date <= ?", date])    
+    return je.weight if je && je.weight
+  end
+  
+  def vo2(date)
+    jevo2 = journal_entries.find(:last, :order => "entry_date ASC", :conditions => ["vo2 NOT null AND entry_date <= ?", date])
+    return jevo2.vo2 if jevo2
+    if sex == "male"  
+      return 41 if age(date) < 30
+      return 40 if age(date) >= 30 && age(date) < 40
+      return 36 if age(date) >= 40 && age(date) < 50
+      return 35 if age(date) >= 50 && age(date) < 60
+      return 33 if age(date) >= 60
+    elsif sex == "female"
+      return 34 if age(date) < 30
+      return 32 if age(date) >= 30 && age(date) < 40
+      return 30 if age(date) >= 40 && age(date) < 50
+      return 28 if age(date) >= 50 && age(date) < 60
+      return 25 if age(date) >= 60
+    end
+  end
+  
+  # Not working!
+  def manual_vo
+    jevo2 = journal_entries.find(:last, :order => "entry_date ASC", :conditions => "vo2 NOT null")
+    return jevo2.vo2 if jevo2
+    # me = journal_entries.find(:all, :conditions => "vo2 NOT null")
+    # if !me.nil?
+    #   return true 
+    # else 
+    #   return false
+    # end
   end
   
 	def admin_user?
@@ -120,6 +155,16 @@ class User < ActiveRecord::Base
     foo = []
     11.downto(0) {|i| foo << [(11 - i) + 0.45, hours_per_week(i)] }
     return foo
+  end
+  
+  def json_weights
+    aw = journal_entries.find(:all, :order => "entry_date ASC", :conditions => ["weight NOT null"])
+    foo = []
+    for je in aw
+      je_date = Time.parse(je.entry_date.to_s)
+      foo << [je_date.to_i * 1000, je.weight]
+    end
+		return {:json_weights => foo}
   end
   
   def json_weeks_labels

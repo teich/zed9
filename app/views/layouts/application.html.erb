@@ -29,10 +29,8 @@
 
 			<div id="nav">
 				<ul>
-					<li class="first"><%= link_to "Add weight", new_user_journal_entry_path(current_user) %></li>
-					<li class="first"><%= link_to "Add workout", new_user_workout_path(current_user) %></li>
-					<li><%= link_to "Workouts", user_workouts_path(current_user) %></li>
-					<li class="last"><%= link_to "Profile", current_user %></li>
+					<li class="first"><%= link_to "Journal", user_journal_entries_path(current_user) %>&nbsp;<%= link_to image_submit_tag("/images/add_small.png", :alt => "+", :onmouseover => "this.src='/images/add_small_on.png'", :onmouseout => "this.src='/images/add_small.png'"), new_user_journal_entry_path(current_user) %></li>
+					<li class="last"><%= link_to "Workouts", user_workouts_path(current_user) %>&nbsp;<%= link_to image_submit_tag("/images/add_small.png", :alt => "+", :onmouseover => "this.src='/images/add_small_on.png'", :onmouseout => "this.src='/images/add_small.png'"), new_user_workout_path(current_user) %></li>
 				</ul>
 			</div>
 			<% end %>
