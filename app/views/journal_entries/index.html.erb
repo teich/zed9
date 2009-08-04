@@ -34,7 +34,7 @@
 	</div>
 
 	<div id="entries_stream" class="right_column">
-		<% if !@journal_entries.size == 0 %>
+		<% if !(@journal_entries.size == 0) %>
 			<table id="journal_entries_list">
 				<% for journal_entry in @journal_entries %>
 				<tr>
