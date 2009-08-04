@@ -2421,6 +2421,10 @@ p.comp_activity {
 	padding: 4px 0px 12px 0px;
 }
 
+#journal_stats .usage_tip {
+	margin-bottom: 24px;
+}
+
 #weight_over_time {
 	height: auto;
 	padding: 0px;
@@ -2441,9 +2445,8 @@ p.comp_activity {
 	position: relative;
 	overflow: hidden;
 	width: 468px;
-/*	height: 256px;*/
 	padding: 0px;
-	top: -12px;
+/*	top: -12px;*/
 	height: 196px;
 	padding-bottom: 24px;
 }
@@ -2459,16 +2462,19 @@ p.comp_activity {
 #journal_index #entries_stream td {
 	font-size: 14px;
 	padding: 12px 0px 0px 0px;
-	border-top:1px dotted #d9d9d9;
+	border-bottom: none;
 }
 
 #journal_index #entries_stream td.entry_metadata {
 	font-size: 12px;
 	color: #9f9f9f;
 	padding: 4px 0px 12px 0px;
-	border-top: none;
+	border-bottom:1px dotted #d9d9d9;
 }
 
+#journal_entries_list {
+	border-top:1px dotted #d9d9d9;	
+}
 
 /*---- Admin pages ----*/
 

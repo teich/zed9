@@ -282,7 +282,7 @@ function draw_dashboard_graph(data) {
 		var weight_graph_options = {
 			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 12, markings: xAxis },
 			xaxis: { mode: "time", timeformat: "%m/%d", labelWidth: 24 },
-			yaxis: { autoscaleMargin: 0.2 },
+			yaxis: { minTickSize: 1, tickDecimals: 0, autoscaleMargin: 0.2 },
 			colors: ["#25a1d6"],
 			shadowSize: 1,
 			legend: {show: false, container: null}
@@ -313,7 +313,7 @@ function draw_dashboard_graph(data) {
 			}
 
 		var weight_data = [];
-		weight_data.push({ data: weights, lines: weight_graph_line_options });
+		weight_data.push({ data: weights, lines: weight_graph_line_options, points: {show: true, radius: 3 } });
 		$.plot($('#weight_graph'), weight_data, weight_graph_options);
 		$("#weight_graph").bind("plothover", weight_tooltip);
 	}
