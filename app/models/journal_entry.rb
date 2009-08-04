@@ -10,15 +10,5 @@ class JournalEntry < ActiveRecord::Base
     return all_my_weights
   end
 
-  def manual_vo2?
-    jevo2 = journal_entries.find(:last, :order => "entry_date ASC", :conditions => "vo2 NOT null")
-    return jevo2.vo2 if jevo2
-    # me = journal_entries.find(:all, :conditions => "vo2 NOT null")
-    # if !me.nil?
-    #   return true 
-    # else 
-    #   return false
-    # end
-  end
 
 end

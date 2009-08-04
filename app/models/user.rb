@@ -43,6 +43,13 @@ class User < ActiveRecord::Base
     ( (Date.today - birthdate).to_i / 365.25).floor
   end
   
+  def age_bracket(date)
+    user_age = age(date).to_s.split(%r{\s*})
+    low = user_age[0] + "0"
+    high = (user_age[0].to_i + 1) * 10 - 1
+    return low + "-" + high.to_s
+  end
+  
   def weight(date)
     je = journal_entries.find(:last, :order => "entry_date ASC", :conditions => ["weight NOT null AND entry_date <= ?", date])    
     return je.weight if je && je.weight
@@ -67,15 +74,8 @@ class User < ActiveRecord::Base
   end
   
   # Not working!
-  def manual_vo
-    jevo2 = journal_entries.find(:last, :order => "entry_date ASC", :conditions => "vo2 NOT null")
-    return jevo2.vo2 if jevo2
-    # me = journal_entries.find(:all, :conditions => "vo2 NOT null")
-    # if !me.nil?
-    #   return true 
-    # else 
-    #   return false
-    # end
+  def manual_vo2?
+    journal_entries.find(:last, :order => "entry_date ASC", :conditions => "vo2 NOT null")
   end
   
 	def admin_user?
@@ -103,7 +103,7 @@ class User < ActiveRecord::Base
   end
 	
 	def points
-    (accomplishments.size * 10) + self.workouts.size
+    (accomplishments.size * 10) + self.workouts.size + self.journal_entries.size
   end
   
   def json_workouts_per_week

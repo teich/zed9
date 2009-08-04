@@ -125,6 +125,12 @@ var summary_stats_line_options = {
 	fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] }
 };
 
+var weight_graph_line_options = {
+	show: true, 
+	fill: true, 
+	fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] }
+};
+
 
 // Pass in a JSON object, and draw based on that data.
 function draw_dashboard_graph(data) {
@@ -276,13 +282,13 @@ function draw_dashboard_graph(data) {
 		var weight_graph_options = {
 			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 12, markings: xAxis },
 			xaxis: { mode: "time", timeformat: "%m/%d", labelWidth: 24 },
-			yaxis: { min: 0, autoscaleMargin: 0.2 },
+			yaxis: { autoscaleMargin: 0.2 },
 			colors: ["#25a1d6"],
 			shadowSize: 1,
 			legend: {show: false, container: null}
 		};
 
-		function summary_stats_tooltip(event, pos, item) {
+		function weight_tooltip(event, pos, item) {
 			var previousPoint = [];
 			if (item) {
 				if (previousPoint != item.datapoint) {
@@ -307,7 +313,7 @@ function draw_dashboard_graph(data) {
 			}
 
 		var weight_data = [];
-		weight_data.push({ data: weights, lines: summary_stats_line_options });
+		weight_data.push({ data: weights, lines: weight_graph_line_options });
 		$.plot($('#weight_graph'), weight_data, weight_graph_options);
 		$("#weight_graph").bind("plothover", weight_tooltip);
 	}
@@ -543,7 +549,6 @@ function workout_page_graphs(data) {
 
 	}
 				
-		
 	function get_workout_values(workout) {
 		// Get values
 		var start_time = $("input#workout_start_time_string").val();
@@ -693,6 +698,30 @@ function workout_page_graphs(data) {
 		convert_elevation();
 	}
 	
+	function set_journal_entry_values() {
+		var date = $("input#journal_entry_entry_date").val();
+		
+		if (date == "") {
+			var now = new Date();
+	    var month = (now.getMonth() + 1).toString();
+	    var dom = now.getDate().toString();
+	    if (month.length == 1) month = "0" + month;
+	    if (dom.length == 1) dom = "0" + dom;
+			var today = month + "/" + dom + "/" + now.getFullYear();
+			$("input#journal_entry_entry_date").val(today);			
+		}
+		else {
+			console.log(date);
+			var split = date.split("-")
+			var month = split[1];
+			var day = split[2];
+			var year = split[0];
+			var formatted = month + "/" + day + "/" + year;
+			console.log("month is " + month);
+			$("input#journal_entry_entry_date").val(formatted);
+		}
+	}	
+	
 	
 	
 	// THIS IS THE MAIN AREA.  CALLED ON PAGE LOAD
@@ -803,8 +832,16 @@ function workout_page_graphs(data) {
 			});
 
 		});
-				
 		
+		$('.form').each(function() {
+			// Date picker widget
+		  $(".date_input").date_input();
+		})
+		
+		$('#new_journal_entry').each(function() {
+			set_journal_entry_values();
+		})
+
 		// Workouts index row highlight on hover
 		$('tr.newsfeed_workout_summary').hover(function() {
 			$(this).children().addClass("highlight");
