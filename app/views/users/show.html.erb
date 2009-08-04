@@ -36,7 +36,7 @@
 
 		<div id="leaderboards">
 
-			<% if my_page? || !any_private? %>
+			<% if (my_page? || !any_private?) && !@workouts.size == 0 %>
 				<h2>Personal bests</h2>
 			
 				<% if @farthest.size > 0 %>		
@@ -129,106 +129,104 @@
 				</div>
 				<% end %>
 			
-			<% else %>
+			<% elsif !@workouts.size == 0 %>
 			
 				<h2>Shared personal bests</h2>
+					<% if @farthest_public.size > 0 %>		
+					<div class="leaderboard toggle">
+						<div class="activity_headline">
+							<h3><img src="../images/road.png" class="icon">
+								Farthest: <span class="number_top"><%=h @farthest_public.first.distance_in_miles %></span><span class="unit">miles on <%=h time_as_date(@farthest_public.first.start_time) %></span></h3>
+						</div>
+						<div class="more">
+							<div class="bests">
+								<ol>
+									<% for workout in @farthest_public %> 
+										<li><span class="number"><%=h workout.distance_in_miles %></span><span class="unit">miles</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
+									<% end %>
+								</ol>
+							</div>
+						</div>
+					</div>
+					<% end -%>	
+			
+					<% if @fastest_public.size > 0 %>		
+					<div class="leaderboard toggle">
+						<div class="activity_headline">
+							<h3><img src="../images/flag.png" class="icon">
+								Fastest: <span class="number_top"><%=h @fastest_public.first.avg_speed_in_mph %></span><span class="unit">mph on <%=h time_as_date(@fastest_public.first.start_time) %></span></h3>
+						</div>
+						<div class="more">
+							<div class="bests">
+								<ol>
+									<% for workout in @fastest_public %> 
+										<li><span class="number"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
+									<% end %>
+								</ol>
+							</div>
+						</div>
+					</div>
+					<% end -%>	
+			
+					<% if @longest_public.size > 0 %>		
+					<div class="leaderboard toggle">
+						<div class="activity_headline">
+							<h3><img src="../images/clock.png" class="icon">
+								Longest: <span class="number_top"><%=h number_to_short_time(@longest_public.first.duration) %></span><span class="unit">h on <%=h time_as_date(@longest_public.first.start_time) %></span></h3>
+						</div>
+						<div class="more">
+							<div class="bests">
+								<ol>
+									<% for workout in @longest_public %> 
+										<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
+									<% end %>
+								</ol>
+							</div>
+						</div>
+					</div>
+					<% end -%>	
+			
+					<% if @climbers_public.size > 0 %>		
+					<div class="leaderboard toggle">
+						<div class="activity_headline">
+							<h3><img src="../images/peaks.png" class="icon">
+								Elevation Gain: <span class="number_top"><%=h @climbers_public.first.elevation_in_feet %></span><span class="unit">ft on <%=h time_as_date(@climbers_public.first.start_time) %></span></h3>
+						</div>
+						<div class="more">
+							<div class="bests">
+								<ol>
+									<% for workout in @climbers_public %> 
+										<li><span class="number"><%=h workout.elevation_in_feet %></span><span class="unit">ft</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
+									<% end %>
+								</ol>
+							</div>
+						</div>
+					</div>
+					<% end -%>	
+			
+					<% if @heart_pumping_public.size > 0 %>		
+					<div class="leaderboard toggle">
+						<div class="activity_headline">
+							<h3><img src="../images/heart.png" class="icon">
+								Heart-pumping: <span class="number_top"><%=h @heart_pumping.first.hr %></span><span class="unit">bpm on <%=h time_as_date(@heart_pumping_public.first.start_time) %></span></h3>
+						</div>
+						<div class="more">
+							<div class="bests">
+								<ol>
+									<% for workout in @heart_pumping_public %> 
+										<li><span class="number"><%=h workout.hr %></span><span class="unit">bpm</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
+									<% end %>
+								</ol>
+							</div>
+						</div>
+					</div>
+					<% end %>	
 
-				<% if @farthest_public.size > 0 %>		
-				<div class="leaderboard toggle">
-					<div class="activity_headline">
-						<h3><img src="../images/road.png" class="icon">
-							Farthest: <span class="number_top"><%=h @farthest_public.first.distance_in_miles %></span><span class="unit">miles on <%=h time_as_date(@farthest_public.first.start_time) %></span></h3>
-					</div>
-					<div class="more">
-						<div class="bests">
-							<ol>
-								<% for workout in @farthest_public %> 
-									<li><span class="number"><%=h workout.distance_in_miles %></span><span class="unit">miles</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
-								<% end %>
-							</ol>
-						</div>
-					</div>
-				</div>
-				<% end -%>	
-			
-				<% if @fastest_public.size > 0 %>		
-				<div class="leaderboard toggle">
-					<div class="activity_headline">
-						<h3><img src="../images/flag.png" class="icon">
-							Fastest: <span class="number_top"><%=h @fastest_public.first.avg_speed_in_mph %></span><span class="unit">mph on <%=h time_as_date(@fastest_public.first.start_time) %></span></h3>
-					</div>
-					<div class="more">
-						<div class="bests">
-							<ol>
-								<% for workout in @fastest_public %> 
-									<li><span class="number"><%=h workout.avg_speed_in_mph %></span><span class="unit">mph</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
-								<% end %>
-							</ol>
-						</div>
-					</div>
-				</div>
-				<% end -%>	
-			
-				<% if @longest_public.size > 0 %>		
-				<div class="leaderboard toggle">
-					<div class="activity_headline">
-						<h3><img src="../images/clock.png" class="icon">
-							Longest: <span class="number_top"><%=h number_to_short_time(@longest_public.first.duration) %></span><span class="unit">h on <%=h time_as_date(@longest_public.first.start_time) %></span></h3>
-					</div>
-					<div class="more">
-						<div class="bests">
-							<ol>
-								<% for workout in @longest_public %> 
-									<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
-								<% end %>
-							</ol>
-						</div>
-					</div>
-				</div>
-				<% end -%>	
-			
-				<% if @climbers_public.size > 0 %>		
-				<div class="leaderboard toggle">
-					<div class="activity_headline">
-						<h3><img src="../images/peaks.png" class="icon">
-							Elevation Gain: <span class="number_top"><%=h @climbers_public.first.elevation_in_feet %></span><span class="unit">ft on <%=h time_as_date(@climbers_public.first.start_time) %></span></h3>
-					</div>
-					<div class="more">
-						<div class="bests">
-							<ol>
-								<% for workout in @climbers_public %> 
-									<li><span class="number"><%=h workout.elevation_in_feet %></span><span class="unit">ft</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
-								<% end %>
-							</ol>
-						</div>
-					</div>
-				</div>
-				<% end -%>	
-			
-				<% if @heart_pumping_public.size > 0 %>		
-				<div class="leaderboard toggle">
-					<div class="activity_headline">
-						<h3><img src="../images/heart.png" class="icon">
-							Heart-pumping: <span class="number_top"><%=h @heart_pumping.first.hr %></span><span class="unit">bpm on <%=h time_as_date(@heart_pumping_public.first.start_time) %></span></h3>
-					</div>
-					<div class="more">
-						<div class="bests">
-							<ol>
-								<% for workout in @heart_pumping_public %> 
-									<li><span class="number"><%=h workout.hr %></span><span class="unit">bpm</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
-								<% end %>
-							</ol>
-						</div>
-					</div>
-				</div>
-				<% end %>	
-			<% end %>	
-				
-		<% if my_page? && @workouts.size == 0 %>
-			<div class="usage_tip">You haven't recorded any personal bests yet. How sad... <%= link_to "Upload a workout", new_user_workout_path(current_user) %> to fix that!</div>
-		<% elsif @workouts.size == 0 %>
-			<p><%=h @user.display_name %> hasn't shared any bests yet.</p>
-		<% end %>
+				<% elsif my_page? && @workouts.size == 0 %>				
+					<div class="usage_tip">You haven't recorded any personal bests yet. How sad... <%= link_to "Upload a workout", new_user_workout_path(current_user) %> to fix that!</div>
+				<% elsif !my_page? && @workouts.size == 0 %>
+					<p><%=h @user.display_name %> hasn't shared any bests yet.</p>
+				<% end %>
 		
 		</div>
 
