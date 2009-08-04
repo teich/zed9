@@ -51,12 +51,12 @@ class User < ActiveRecord::Base
   end
   
   def weight(date)
-    je = journal_entries.find(:last, :order => "entry_date ASC", :conditions => ["weight NOT null AND entry_date <= ?", date])    
+    je = journal_entries.find(:last, :order => "entry_date ASC", :conditions => ["weight IS NOT NULL AND entry_date <= ?", date])    
     return je.weight if je && je.weight
   end
   
   def vo2(date)
-    jevo2 = journal_entries.find(:last, :order => "entry_date ASC", :conditions => ["vo2 NOT null AND entry_date <= ?", date])
+    jevo2 = journal_entries.find(:last, :order => "entry_date ASC", :conditions => ["vo2 IS NOT NULL AND entry_date <= ?", date])
     return jevo2.vo2 if jevo2
     if sex == "male"  
       return 41 if age(date) < 30
@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
   
   # Not working!
   def manual_vo2?
-    journal_entries.find(:last, :order => "entry_date ASC", :conditions => "vo2 NOT null")
+    journal_entries.find(:last, :order => "entry_date ASC", :conditions => "vo2 IS NOT NULL")
   end
   
 	def admin_user?
@@ -158,7 +158,7 @@ class User < ActiveRecord::Base
   end
   
   def json_weights
-    aw = journal_entries.find(:all, :order => "entry_date ASC", :conditions => ["weight NOT null"])
+    aw = journal_entries.find(:all, :order => "entry_date ASC", :conditions => ["weight IS NOT NULL"])
     foo = []
     for je in aw
       je_date = Time.parse(je.entry_date.to_s)

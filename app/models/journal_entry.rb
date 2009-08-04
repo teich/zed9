@@ -5,7 +5,7 @@ class JournalEntry < ActiveRecord::Base
 
   def json_weights
 		all_my_weights = {}
-		aw = self.user.journal_entries.find(:all, :order => "entry_date DESC", :conditions => ["weight NOT null"])
+		aw = self.user.journal_entries.find(:all, :order => "entry_date DESC", :conditions => ["weight IS NOT NULL"])
 		all_my_weights = (aw.map {|je| [(je.entry_date), je.weight]}).compact
     return all_my_weights
   end
