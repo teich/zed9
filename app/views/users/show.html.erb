@@ -36,7 +36,7 @@
 
 		<div id="leaderboards">
 
-			<% if (my_page? || !any_private?) && !@workouts.size == 0 %>
+			<% if (my_page? || !any_private?) && @workouts.size > 0 %>
 				<h2>Personal bests</h2>
 			
 				<% if @farthest.size > 0 %>		
@@ -129,7 +129,7 @@
 				</div>
 				<% end %>
 			
-			<% elsif !@workouts.size == 0 %>
+			<% elsif @workouts.size > 0 %>
 			
 				<h2>Shared personal bests</h2>
 					<% if @farthest_public.size > 0 %>		
@@ -222,12 +222,14 @@
 					</div>
 					<% end %>	
 
-				<% elsif my_page? && @workouts.size == 0 %>				
-					<div class="usage_tip">You haven't recorded any personal bests yet. How sad... <%= link_to "Upload a workout", new_user_workout_path(current_user) %> to fix that!</div>
-				<% elsif !my_page? && @workouts.size == 0 %>
-					<p><%=h @user.display_name %> hasn't shared any bests yet.</p>
-				<% end %>
-		
+			<% elsif my_page? && @workouts.size == 0 %>				
+				<div class="usage_tip">You haven't recorded any personal bests yet. How sad... <%= link_to "Upload a workout", new_user_workout_path(current_user) %> to fix that!</div>
+
+			<% elsif !my_page? && @workouts.size == 0 %>
+				<p><%=h @user.display_name %> hasn't shared any bests yet.</p>
+
+			<% end %>
+	
 		</div>
 
 	</div>
