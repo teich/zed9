@@ -31,10 +31,32 @@
 			<% end %>
 		</div>
 		
+		<div id="gear">
+			<h2>Gear&nbsp;<%= link_to image_submit_tag("/images/add.png", :class => "action_icon tip", :title => "add equipment", :alt => "+", :onmouseover => "this.src='/images/add_on.png'", :onmouseout => "this.src='/images/add.png'"), new_user_gear_path(current_user) %></h2>
+			<table>
+				<% for gear in @gears %>
+				<tr>
+					<td>
+						<h4><%= h gear.name %> <a href="" class="tag"><%= h gear.tag %></a> <img src='../../images/pencil.png' class="action_icon tip"><img src='../../images/trash.png' class="action_icon tip"></h3>
+						<p><%= h gear.make %> <%= h gear.model %></p>
+						<p>Purchased: <%= h activity_timestamp_shorter(gear.purchase_date) %> for $<%= h gear.price %> at <%= h gear.store %></p>
+						<p><%= h gear.distance_used %>miles out of <%= h gear.distance_max %>miles expected</p>
+						<p><%= h gear.hours_used %> hours out of <%= h gear.hours_max %>hours expected</p>
+					</td>
+					<td>
+						<span class="percent_remaining">32%</span><br>
+						<span class="remaining">remaining</span><br>
+					</td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+		
 	</div>
 
 	<div id="entries_stream" class="right_column">
 		<% if !(@journal_entries.size == 0) %>
+			<h2>Recent journal entries</h2>
 			<table id="journal_entries_list">
 				<% for journal_entry in @journal_entries %>
 				<tr>

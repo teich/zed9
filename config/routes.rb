@@ -14,6 +14,7 @@ ActionController::Routing::Routes.draw do |map|
 
 	map.resources :users, :shallow => true do |user|
     user.resources :journal_entries
+    user.resources :gear
 		user.resources :workouts do |workout|
 			workout.resources :overlaps, :shallow => false, :only => [:index, :destroy]
 			workout.resources :taggings, :shallow => false, :only => [:destroy, :create]

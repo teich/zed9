@@ -2421,7 +2421,7 @@ p.comp_activity {
 	padding: 4px 0px 12px 0px;
 }
 
-#journal_stats .usage_tip {
+#journal_stats .usage_tip, #vo2 {
 	margin-bottom: 24px;
 }
 
@@ -2440,6 +2440,18 @@ p.comp_activity {
 	bottom: -50%;
 }
 
+.bottom {
+	vertical-align: bottom;
+}
+
+.right {
+	text-align: right;
+}
+
+.center {
+	text-align: center;
+}
+
 #weight_graph {
 	clear: both;
 	position: relative;
@@ -2451,10 +2463,44 @@ p.comp_activity {
 	padding-bottom: 24px;
 }
 
-#weight_over_time .tickLabels {
+#gear h2, #entries_stream h2 {
+	padding-bottom: 12px;
 }
 
-#journal_index #entries_stream table {
+#gear h4 {
+	padding: 0px 0px 4px 0px;
+}
+
+#gear p {
+	padding: 2px 0px;
+}
+
+#gear .tag {
+	font-size: 12px;
+}
+
+#gear table {
+	border-top:1px dotted #d9d9d9;
+}
+
+#gear td {
+	font-size: 14px;
+	padding: 12px 0px;
+	border-bottom:1px dotted #d9d9d9;
+}
+
+#gear .percent_remaining {
+	font-size: 24px;
+	font-weight: 500;
+	text-align: center;
+}
+
+#gear .remaining {
+	font-size: 12px;
+	text-align: center;
+}
+
+#journal_index #entries_stream table, #gear table {
 	width: 100%;
 	padding-bottom: 24px;
 }
@@ -2475,6 +2521,7 @@ p.comp_activity {
 #journal_entries_list {
 	border-top:1px dotted #d9d9d9;	
 }
+
 
 /*---- Admin pages ----*/
 

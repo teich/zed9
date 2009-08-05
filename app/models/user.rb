@@ -15,7 +15,8 @@ class User < ActiveRecord::Base
 	has_many :hr_zones, :dependent => :destroy
 	has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
 	has_many :workouts, :dependent => :destroy, :order => "start_time ASC"
-	has_many :journal_entries, :dependent => :destroy, :order => "entry_date ASC"
+	has_many :journal_entries, :dependent => :destroy, :order => "entry_date DESC"
+	has_many :gears, :dependent => :destroy, :order => "purchase_date DESC"
   # has_many :workouts, :dependent => :destroy, :order => 'start_time ASC'
 
 	before_create :set_invitation_limit
@@ -73,7 +74,6 @@ class User < ActiveRecord::Base
     end
   end
   
-  # Not working!
   def manual_vo2?
     journal_entries.find(:last, :order => "entry_date ASC", :conditions => "vo2 IS NOT NULL")
   end

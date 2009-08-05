@@ -1,0 +1,55 @@
+<% form_for @gear, :url => submit_url do |f| %>
+
+	<table id="gear_form" class="form">
+		<tr>
+			<th><%= f.label :name, "Gear name" %></th>
+			<td><%= f.text_field :name, :size => "70" %></td>
+		</tr>
+		<tr>
+			<th class="annotated"><%= f.label :tag, "Label" %></th>
+			<td class="annotated"><%= f.text_field :tag, :size => "40" %></td>
+		</tr>
+		<tr>
+			<th class="field_note">&nbsp;</th>
+			<td class="field_note">Pick a short descriptive tag to easily filter your workouts by gear used</td>
+		</tr>
+		<tr>
+			<th class="annotated"><%= f.label :make, "Make" %></th>
+			<td class="annotated"><%= f.text_field :make, :size => "40" %></td>
+		</tr>
+		<tr>
+			<th class="field_note">&nbsp;</th>
+			<td class="field_note">e.g., Nike or New Balance</td>
+		</tr>
+		<tr>
+			<th><%= f.label :model, "Model" %></th>
+			<td><%= f.text_field :model, :size => "40" %></td>
+		</tr>
+		<tr>
+			<th><%= f.label :purchase_date, "Purchase date" %></th>
+			<td><%= f.text_field :entry_date, :size => 12, :class => "date_input" %></td>
+		</tr>
+		<tr>
+			<th><%= f.label :store, "Purchased at" %></th>
+			<td><%= f.text_field :store, :size => "40" %></td>
+		</tr>
+		<tr>
+			<th><%= f.label :purchase_price, "Purchase price" %></th>
+			<td>$<%= f.text_field :purchase_price, :size => "6" %></td>
+		</tr>
+		<tr>
+			<th>Lifespan</th>
+			<td><%= f.text_field :distance_max, :size => "4" %>miles or <%= f.text_field :hours_max, :size => "4" %>hours</td>
+		</tr>
+		<tr>
+			<th class="field_note">&nbsp;</th>
+			<td class="field_note">Record how long you want to use this gear and we'll remind you when it needs to be replaced</td>
+		</tr>
+		<tr>
+			<th><%= link_to 'Cancel', user_journal_entries_path(current_user), :class => "submit_no_button" %></th>
+			<td><%= f.submit "Save", :class => "submit"  %></td>
+		</tr>
+	</table>
+
+<% end %>
+
