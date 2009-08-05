@@ -711,13 +711,11 @@ function workout_page_graphs(data) {
 			$("input#journal_entry_entry_date").val(today);			
 		}
 		else {
-			console.log(date);
 			var split = date.split("-")
 			var month = split[1];
 			var day = split[2];
 			var year = split[0];
 			var formatted = month + "/" + day + "/" + year;
-			console.log("month is " + month);
 			$("input#journal_entry_entry_date").val(formatted);
 		}
 	}	
@@ -838,7 +836,7 @@ function workout_page_graphs(data) {
 		  $(".date_input").date_input();
 		})
 		
-		$('#new_journal_entry').each(function() {
+		$('#journal_entry').each(function() {
 			set_journal_entry_values();
 		})
 

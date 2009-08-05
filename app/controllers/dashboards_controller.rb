@@ -5,7 +5,8 @@ class DashboardsController < ApplicationController
 		@workouts = current_user.workouts.processed.find(:all, :order => "created_at DESC")
 
 		# list of most recent public workouts
-		@public_workouts = Workout.processed.find_all_by_shared(true, :limit=>20, :order => "created_at DESC")
+		@public_workouts = Workout.processed.find_all_by_shared(true, :limit=>10, :order => "created_at DESC")
+		@public_workouts2 = Workout.processed.find_all_by_shared(true, :limit=>10, :offset => 10, :order => "created_at DESC")
 
     # recent achievements
     @accomplishments = Accomplishment.find_all_by_user_id(current_user, :conditions => ['created_at > ?', 7.days.ago])

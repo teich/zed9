@@ -1,7 +1,8 @@
 class JournalEntriesController < ApplicationController
 	before_filter :require_user
 	before_filter :find_journal_entry, :only => [:edit, :update, :destroy]
-	before_filter :find_user_and_require_public
+  before_filter :find_user, :only => [:index, :create, :new]
+#  before_filter :require_mine, :only => [:index, :create]
 	
 	def index
 
@@ -14,24 +15,13 @@ class JournalEntriesController < ApplicationController
 		respond_to do |format|
 			format.html
 			format.xml {render :xml => @journal_entries.to_xml }
-      format.js {render :js => current_user.json_weights.to_json}
+      format.js {render :js => @user.json_weights.to_json}
 		end
-
-      
-	end
-
-	def show
-  	
-		respond_to do |format|
-			format.html
-			format.xml {render :xml => @journal_entry.to_xml }
-			format.js {render :js => @journal_entry.to_json(:methods => :weight, :include => :user)}
-		end
+		
 	end
 
 	def new
     @journal_entry = JournalEntry.new
-    # @journal_entry = current_user.journal_entry.build
 	end
 
 	def edit
@@ -47,7 +37,7 @@ class JournalEntriesController < ApplicationController
   end
   
   def create
-    @journal = current_user.journal_entries.create(params[:journal_entry])
+    @journal = @user.journal_entries.create(params[:journal_entry])
     if @journal.save
       add_flash(:notice, "Journal entry saved")
       redirect_to user_journal_entries_path
@@ -60,20 +50,34 @@ class JournalEntriesController < ApplicationController
 
   def destroy
     @journal_entry.destroy
-    redirect_to(user_journal_entries_path(current_user))
+    add_flash(:notice, "Journal entry deleted")
+    redirect_to user_journal_entries_path(current_user)
   end
 
 	def find_journal_entry
-		@journal_entry = current_user.journal_entries.find(params[:id])
+#    @journal_entry = current_user.journal_entries.find(params[:id])
+    @journal_entry = JournalEntry.find(params[:id])
+    if @journal_entry.user != current_user
+      add_flash(:alert, "This page is private")
+      redirect_to root_path
+    end
 	end    
   
-  def find_user_and_require_public
+  def find_user
 		@user = User.find_by_login(params[:user_id])
-    if @user.nil? || !(!current_user.nil? && current_user.id == @user.id)
+		if @user.nil? || @user != current_user
+    # if @user.nil? || !(!current_user.nil? && current_user.id == @user.id)
       add_flash(:alert, "This page is private")
       redirect_to root_path
     end
 	end
+	
+  # def require_mine
+  #   if @journal_entry.user != current_user
+  #     add_flash(:alert, "This page is private")
+  #       redirect_to root_path
+  #     end
+  #   end
 	
   
 end

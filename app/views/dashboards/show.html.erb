@@ -153,6 +153,7 @@
 			<h2>Recent shared workouts</h2>
 			<table class="newsfeed">
 				<%= render :partial => @public_workouts, :locals => { :icon => true, :name => true, :date => false, :duration => false, :user => true } %>
+				<%= render :partial => @public_workouts2, :locals => { :icon => true, :name => true, :date => false, :duration => false, :user => true } %>
 			</table>
 		</div>
 		
