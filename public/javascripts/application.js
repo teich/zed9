@@ -671,7 +671,7 @@ function workout_page_graphs(data) {
 	}
 
 	function convert_distance() {
-		var distance = ($("input#miles").val());
+		var distance = $("input#miles").val();
 		if (distance == "") { 
 			$("input#workout_distance").val("");
 		} else {
@@ -698,6 +698,14 @@ function workout_page_graphs(data) {
 		convert_elevation();
 	}
 	
+	function miles_to_meters(miles) {
+		return (miles * 1609.344).toFixed(1);
+	}
+	
+	function meters_to_miles(meters) {
+		return (meters / 1609.344).toFixed(1);
+	}
+	
 	function set_journal_entry_values() {
 		var date = $("input#journal_entry_entry_date").val();
 		
@@ -720,6 +728,55 @@ function workout_page_graphs(data) {
 		}
 	}	
 	
+	function set_gear_values() {
+		var date = $("input#gear_purchase_date").val();
+		
+		if (date == "") {
+			var now = new Date();
+	    var month = (now.getMonth() + 1).toString();
+	    var dom = now.getDate().toString();
+	    if (month.length == 1) month = "0" + month;
+	    if (dom.length == 1) dom = "0" + dom;
+			var today = month + "/" + dom + "/" + now.getFullYear();
+			$("input#gear_purchase_date").val(today);			
+		}
+		else {
+			var split = date.split("-")
+			var month = split[1];
+			var day = split[2];
+			var year = split[0];
+			var formatted = month + "/" + day + "/" + year;
+			$("input#gear_purchase_date").val(formatted);
+		}
+
+		function get_miles_max() {
+			var distance_max = $("input#gear_distance_max").val();
+			if (distance_max != "") {
+				var distance_in_miles = meters_to_miles(distance_max);
+				$("input#miles").val(distance_in_miles);
+			}		
+		}
+	}	
+	
+	function convert_distance_max() {
+		var distance = $("input#miles").val();
+		if (distance == "") { 
+			$("input#gear_distance_max").val("");
+		} else {
+			var meters = miles_to_meters(distance);
+			$("input#gear_distance_max").val(meters);
+		}
+	} 
+	
+	function convert_hours_max() {
+		var hours = $("input#hours").val();
+		if (hours == "") { 
+			$("input#gear_hours_max").val("");
+		} else {
+			var seconds = hours * 3600;
+			$("input#gear_hours_max").val(seconds);
+		}
+	} 
 	
 	
 	// THIS IS THE MAIN AREA.  CALLED ON PAGE LOAD
@@ -838,6 +895,10 @@ function workout_page_graphs(data) {
 		
 		$('#journal_entry').each(function() {
 			set_journal_entry_values();
+		})
+
+		$('#gear_form').each(function() {
+			set_gear_values();
 		})
 
 		// Workouts index row highlight on hover

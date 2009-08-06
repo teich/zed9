@@ -321,7 +321,7 @@ class Workout < ActiveRecord::Base
 		mycomps["hr"] = (mc.map { |c| c.hr  }).compact.aaverage
 		mycomps["duration"] = (mc.map {|c| c.duration}).compact.aaverage
 		mycomps["distance"]  = distance.round(1) if !distance.nil?
-    mycomps["calories"] = (mc.map {|c| c.calories}).compact.aaverage.round
+    mycomps["calories"] = (mc.map {|c| c.calories}).compact.aaverage.round if !calories.nil?
 		mycomps["speed"] = speed.round(1) if !speed.nil?
 		mycomps["elevation"] = (mc.map {|c| c.elevation}).compact.aaverage
 
@@ -332,7 +332,7 @@ class Workout < ActiveRecord::Base
 		allcomps["hr"] = (ac.map { |c| c.hr  }).compact.aaverage
 		allcomps["duration"] = (ac.map {|c| c.duration}).compact.aaverage
 		allcomps["distance"]  = distance2.round(1) if !distance2.nil?
-    allcomps["calories"] = (ac.map {|c| c.calories}).compact.aaverage.round
+    allcomps["calories"] = (ac.map {|c| c.calories}).compact.aaverage.round if !calories.nil?
 		allcomps["speed"] = speed2.round(1) if !speed2.nil?
 		allcomps["elevation"] = (ac.map {|c| c.elevation}).compact.aaverage
 

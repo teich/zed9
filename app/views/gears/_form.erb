@@ -1,9 +1,10 @@
-<% form_for @gear, :url => submit_url do |f| %>
+<% remote_form_for @gear, :url => submit_url do |f| %>
+<%= f.error_messages %>
 
 	<table id="gear_form" class="form">
 		<tr>
 			<th><%= f.label :name, "Gear name" %></th>
-			<td><%= f.text_field :name, :size => "70" %></td>
+			<td><%= f.text_field :name, :size => "40" %></td>
 		</tr>
 		<tr>
 			<th class="annotated"><%= f.label :tag, "Label" %></th>
@@ -35,15 +36,11 @@
 		</tr>
 		<tr>
 			<th><%= f.label :price, "Purchase price" %></th>
-			<td>$<%= f.text_field :price, :size => "6" %></td>
+			<td>$ <%= f.text_field :price, :size => "6" %></td>
 		</tr>
 		<tr>
-			<th>Lifespan</th>
-			<td><%= f.text_field :distance_max, :size => "4" %>miles or <%= f.text_field :hours_max, :size => "4" %>hours</td>
-		</tr>
-		<tr>
-			<th class="field_note">&nbsp;</th>
-			<td class="field_note">Record how long you want to use this gear and we'll remind you when it needs to be replaced</td>
+			<th class="annotated">Lifespan</th>
+			<td><input id="miles" size="6" onChange="convert_distance_max()"> miles and/or <input id="hours" size="6" onChange="convert_hours_max()"> hours<%= f.hidden_field :distance_max %><%= f.hidden_field :hours_max %></td>
 		</tr>
 		<tr>
 			<th><%= link_to 'Cancel', user_journal_entries_path(current_user), :class => "submit_no_button" %></th>

@@ -14,15 +14,6 @@ class GearsController < ApplicationController
 	def edit
 	end
 
-  def update
-		if @gear.update_attributes(params[:gear])
-			add_flash(:notice, 'Gear info updated')
-			redirect_to user_journal_entries_path(current_user)
-		else
-			render :action => "edit"
-		end
-  end
-  
   def create
     @gear = @user.gears.create(params[:gear])
     if @gear.save
@@ -32,9 +23,18 @@ class GearsController < ApplicationController
       @gear.destroy
       render :action => "new"
     end
-        
+    @tagging = Tagging.new    
   end
 
+  def update
+		if @gear.update_attributes(params[:gear])
+      add_flash(:notice, 'Gear info updated')
+      redirect_to user_journal_entries_path(current_user)
+    else
+			render :action => "edit"
+		end
+  end
+  
   def destroy
     @gear.destroy
     add_flash(:notice, "Gear deleted")

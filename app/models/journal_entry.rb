@@ -3,12 +3,4 @@ class JournalEntry < ActiveRecord::Base
 	validates_presence_of :user_id
 	validates_presence_of	:created_at
 
-  def json_weights
-		all_my_weights = {}
-		aw = self.user.journal_entries.find(:all, :order => "entry_date DESC", :conditions => ["weight IS NOT NULL"])
-		all_my_weights = (aw.map {|je| [(je.entry_date), je.weight]}).compact
-    return all_my_weights
-  end
-
-
 end

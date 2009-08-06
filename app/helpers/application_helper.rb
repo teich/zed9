@@ -1,5 +1,30 @@
 module ApplicationHelper
   
+  
+  def seconds_to_hours(seconds)
+    return (seconds/3600)
+  end
+  
+  def currency_formatted(price)
+    m = price.to_s.split(".")
+    if (m[1].size == 2)
+      return price
+    else
+      d = m[0]
+      if (m[1].nil? || m[1].size == 0)
+        c = 00
+      elsif (m[1].size == 1)
+        c = m[1] + "0"
+      end
+    return "#{d}.#{c}"
+    end
+  end
+
+  def meters_to_miles(distance)
+		return nil if distance.nil?
+		(distance * 0.000621371192).round(1)
+	end
+
 	def number_to_time(seconds)
 		return nil if seconds.nil?
 		Time.at(seconds).utc.strftime("%H:%M:%S")

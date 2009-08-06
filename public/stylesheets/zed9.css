@@ -885,7 +885,7 @@ ol {
 	background-color: none;
 }
 
-#change_password .submit, #email_password .submit, #edit_workout .submit, #edit_workout .submit_no_button, #register .submit, #register .submit_no_button, #new_journal_entry .submit, #new_journal_entry .submit_no_button {
+#change_password .submit, #email_password .submit, #edit_workout .submit, #edit_workout .submit_no_button, #register .submit, #register .submit_no_button, #new_journal_entry .submit, #new_journal_entry .submit_no_button, #gear_form .submit, #gear_form .submit_no_button {
 	position: relative;
 	top: 18px;
 }
@@ -2462,9 +2462,8 @@ p.comp_activity {
 	overflow: hidden;
 	width: 468px;
 	padding: 0px;
-/*	top: -12px;*/
 	height: 196px;
-	padding-bottom: 24px;
+	padding-bottom: 36px;
 }
 
 #gear h2, #entries_stream h2 {
@@ -2489,20 +2488,15 @@ p.comp_activity {
 	border-top:1px dotted #d9d9d9;
 }
 
-#gear td.gear_meta {
-	padding: 12px 0px 6px 0px;
-}
-
-#gear td.gear_usage {
-	padding: 0px 0px 12px 0px;
+#gear td {
+	padding: 12px 0px;
 	border-bottom:1px dotted #d9d9d9;
 }
 
 #gear #gear_right_col {
-	text-align: right;
+	text-align: center;
 	padding-right: 0px;
 	padding-left: 0px;
-	width: auto;
 }
 
 #gear .percent_remaining {

@@ -18,7 +18,7 @@ class JournalEntriesController < ApplicationController
 		respond_to do |format|
 			format.html
 			format.xml {render :xml => @journal_entries.to_xml }
-      format.js {render :js => @user.json_weights.to_json}
+      format.js {render :js => {@user.json_weights.to_json, @user.json_gear_hours.to_json}}
 		end
 		
 	end

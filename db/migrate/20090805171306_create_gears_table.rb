@@ -6,13 +6,13 @@ class CreateGearsTable < ActiveRecord::Migration
       t.string  :tag
       t.string  :make
       t.string  :model
-      t.float   :price
+      t.decimal   :price, :precision => 8, :scale => 2
       t.string  :store
       t.date    :purchase_date
       t.float   :distance_used, :default => "0"
       t.integer :distance_max
       t.float    :hours_used, :default => "0"
-      t.time    :hours_max
+      t.integer    :hours_max
       t.timestamps
     end
   end

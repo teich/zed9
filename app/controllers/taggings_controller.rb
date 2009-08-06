@@ -4,7 +4,7 @@ class TaggingsController < ApplicationController
 	def destroy
 		tag = @workout.taggings.find(:first, :conditions => "tag_id = #{params[:id]}")
 		tag.destroy
-		add_flash(:notice, 'Destroyed keyword. Mwahahaha.')
+		add_flash(:notice, 'Tag destroyed. Mwahahaha.')
 		redirect_to @workout
 	end
 

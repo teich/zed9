@@ -64,6 +64,10 @@
 			bpm max</td>
 	</tr>
 	<tr>
+		<th><%= f.label :gear_id, "Gear used" %></th>
+		<td><%= select("workout", "gear_id", @gears.collect {|g| [ g.name, g.id ] }, {:include_blank => 'None'}) %></td>
+	</tr>
+	<tr>
 		<th><%= f.label :shared %></th>
 		<td><%= f.check_box :shared %></td>
 	</tr>

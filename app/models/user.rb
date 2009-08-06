@@ -178,6 +178,17 @@ class User < ActiveRecord::Base
 		return {:json_weights => foo}
   end
   
+
+  # def json_gear_hours(gear)
+  #   d = gear.find(:all, :order => "entry_date ASC", :conditions => ["distance_used IS NOT NULL AND distance_max IS NOT NULL"])
+  #   foo = []
+  #   for g in d
+  #     foo << [g_distance_used, g_distance_max]
+  #   end
+  #     return {:json_weights => foo}
+  # end
+
+
   def json_weeks_labels
     foo = []
     11.downto(0) { |i| foo << [(11 - i) + 0.45, (i+1).weeks.ago.strftime("%m/%d").gsub(/0?(\d)\/0?(\d{1,2})/,'\1/\2')] }

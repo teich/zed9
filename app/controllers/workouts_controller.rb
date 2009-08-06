@@ -60,6 +60,7 @@ class WorkoutsController < ApplicationController
 		  @workout.activity = Activity.find_by_name("Uncategorized")
     else
       @workout.activity = last_workout.activity
+      @workout.gear = last_workout.gear
     end
 
 		# Set the workout shared state to the user default
@@ -70,10 +71,14 @@ class WorkoutsController < ApplicationController
 
 	def edit
 		@rpe = RPE.new
+		@gears = current_user.gears.find(:all)
 	end
 
   def create
 		@rpe = RPE.new
+		if @workout.update_attributes(params[:gear]) 
+      @workout.gear.update_attribute("distance_used", @workout.gear.distance_used + @workout.distance)
+    end
     @workout = current_user.workouts.create(params[:workout])
     @workout.importing = true if !@workout.manual_entry?
       if @workout.save
@@ -88,6 +93,9 @@ class WorkoutsController < ApplicationController
         @workout.destroy
         render :action => "new"
       end
+    #     if !@workout.gear.nil?
+    #   @workout.tag_list << @workout.gear.tag
+    # end
   end
 
 	def update
@@ -97,6 +105,18 @@ class WorkoutsController < ApplicationController
 		else
 			render :action => "edit"
 		end
+    # @gearlabel = @workout.gear.tag
+    # @workout.tags << params[@gearlabel]
+    # @workout.save
+    # if !@workout.gear.nil?
+      # @workout.tags.push(@workout.gear.tag)
+    # end
+
+		if (@workout.gear.nil? && @workout.update_attributes(params[:gear]) && ( !@workout.gear_id.nil? ) )
+      @workout.gear.update_attribute("distance_used", @workout.gear.distance_used + @workout.distance)
+      @workout.gear.update_attribute("hours_used", @workout.gear.hours_used + (@workout.duration))
+    end
+    
 	end
 
 
