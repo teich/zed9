@@ -15,7 +15,8 @@ class WorkoutsController < ApplicationController
 			if params[:tag]
 				@workouts = @user.workouts.find_tagged_with(params[:tag])
 			else
-				@workouts = @user.workouts.find(:all, :order => "start_time DESC")
+        @workouts = @user.workouts.find(:all, :order => "start_time DESC")
+        # @workouts = @user.workouts.paginate( :page => params[:page], :order => 'start_time DESC', :per_page => 10)
 			end
 			  	  
 		else
@@ -51,6 +52,7 @@ class WorkoutsController < ApplicationController
 	def new
 		@rpe = RPE.new
 		@workout = current_user.workouts.build
+		@gears = current_user.gears.find(:all)
 
     # Defaults to last selected activity type
     last_workout = current_user.workouts.find(:first, :order => "created_at DESC")

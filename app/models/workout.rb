@@ -1,6 +1,7 @@
 class Workout < ActiveRecord::Base
 	belongs_to  :user
 	belongs_to  :activity
+	belongs_to  :gear
 	has_many    :trackpoints, :order => 'time ASC'
 	has_many    :devices
 	

@@ -36,6 +36,10 @@
 			</select></td>
 		</tr>
 		<tr>
+			<th><%= f.label :gear_id, "Gear used" %></th>
+			<td><%= select("workout", "gear_id", @gears.collect {|g| [ g.name, g.id ] }, {:include_blank => 'None'}) %></td>
+		</tr>
+		<tr>
 			<% f.fields_for :devices do |d_f| %>
 			<th class="annotated"><%= d_f.label "File location" %></th>
 			<td class="annotated"><%= d_f.file_field :source, :size => 20 %></td>

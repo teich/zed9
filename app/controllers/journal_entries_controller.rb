@@ -12,7 +12,8 @@ class JournalEntriesController < ApplicationController
 		@highest_weight = @user.journal_entries.find(:first, :order => "weight DESC", :conditions => ["weight IS NOT NULL"])
 		@current_vo2 = @user.vo2(Time.now)
 				    
-    @gears = current_user.gears.find(:all, :order => "purchase_date DESC")
+    @gears = @user.gears.find(:all, :order => "purchase_date DESC")
+    # @gear = current_user.gears.find(:all, :order => "purchase_date DESC")
 
 		respond_to do |format|
 			format.html

@@ -7,6 +7,7 @@ class GearsController < ApplicationController
 	end
 	
 	def new
+    # @gear = current_user.Gear.build
     @gear = Gear.new
 	end
 
@@ -23,7 +24,7 @@ class GearsController < ApplicationController
   end
   
   def create
-    @gear = @user.gear.create(params[:gear])
+    @gear = @user.gears.create(params[:gear])
     if @gear.save
       add_flash(:notice, "Gear info added")
       redirect_to user_journal_entries_path
@@ -41,7 +42,7 @@ class GearsController < ApplicationController
   end
 
 	def find_gear
-    @gear = current_user.find(params[:id])
+    @gear = Gear.find(params[:id])
     if @gear.user != current_user
       add_flash(:alert, "This page is private")
       redirect_to root_path

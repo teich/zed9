@@ -19,6 +19,17 @@ class User < ActiveRecord::Base
 	has_many :gears, :dependent => :destroy, :order => "purchase_date DESC"
   # has_many :workouts, :dependent => :destroy, :order => 'start_time ASC'
 
+	has_attached_file :photo,
+		:storage => ENV['S3_BUCKET'] ? :s3 : :filesystem,
+		:s3_credentials => {
+			:access_key_id => ENV['S3_KEY'],
+			:secret_access_key => ENV['S3_SECRET']
+		},
+		:bucket => ENV['S3_BUCKET'],
+		:path => ":class/:id_partition/:basename.:extension",
+		:s3_permissions => "private",
+    :styles => { :thumb=> "32x32#", :small  => "100x100>" }
+      		
 	before_create :set_invitation_limit
 
 	attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :birthdate, :sex, :height, :time_zone, :shared, :displayname, :bio
@@ -199,7 +210,4 @@ class User < ActiveRecord::Base
 		self.invitation_limit = 10
 	end
 	
-
-
-
 end
