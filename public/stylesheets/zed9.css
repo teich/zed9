@@ -2502,10 +2502,20 @@ p.comp_activity {
 	padding-left: 0px;
 	font-size: 12px;
 	text-align: center;
+	display: inline;
 }
 
 #gear .percent_used {
 	float: right;
+}
+
+#gear .used {
+	font-size: 12px;
+	display: inline;
+}
+
+#gear .red {
+	color: red;
 }
 
 #gear .percent_remaining {

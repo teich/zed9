@@ -10,6 +10,14 @@ class Gear < ActiveRecord::Base
   # This is removed so that form can update all fields. May need to correct for tagging workouts with gear.
   # attr_accessible :name, :tag
 	
+	def distance_used 
+    workouts.sum(:distance)
+	end
+	
+	def time_used
+	  workouts.sum(:duration)
+	end
+	
 	def percent_used_distance
     if distance_used && distance_max
 	    ((distance_used / distance_max ) * 100 ).round
@@ -17,20 +25,26 @@ class Gear < ActiveRecord::Base
 	end
 
 	def percent_used_hours
-	  if hours_used && hours_max
-	    ((hours_used / hours_max ) * 100 ).round
+	  if time_used && hours_max
+	    ((time_used / hours_max ) * 100 ).round
 	  end
 	end
 	
 	def percent_remaining
     if distance_used && distance_max
       distance_remaining = 100 - ((distance_used / distance_max) * 100 ).round
+      if distance_remaining <= 0
+        distance_remaining = 0
+      end
     end
 
-    if hours_used && hours_max
-      hours_remaining = 100 - ((hours_used / hours_max) * 100 ).round
+    if time_used && hours_max
+      hours_remaining = 100 - ((time_used / hours_max) * 100 ).round
+      if hours_remaining <= 0
+        hours_remaining = 0
+      end
     end
-
+    
     if distance_remaining && hours_remaining
       if distance_remaining < hours_remaining 
         return distance_remaining 
@@ -42,6 +56,12 @@ class Gear < ActiveRecord::Base
     elsif hours_remaining
       return hours_remaining
     else return
+    end
+  end
+  
+  def percent_remaining_style
+    if percent_remaining <= 20
+      return "red"
     end
   end
   
