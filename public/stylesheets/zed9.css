@@ -1499,6 +1499,10 @@ input.submit {
 
 /*---- Profile Page ----*/
 
+#profile_header td {
+	padding: 0px;
+}
+
 #profile_stats, .achievements {
 	padding-bottom: 36px;
 }

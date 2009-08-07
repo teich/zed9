@@ -507,5 +507,13 @@ class Workout < ActiveRecord::Base
   def manual_entry?
     devices.first.mfg == "MANUAL"
   end
+  
+  def clear_gear_tags
+    gear_labels = user.gears.map { |t| t.tag }
+    for gear_label in gear_labels
+      tag_list.remove(gear_label)
+    end
+    self.save
+  end
 
 end

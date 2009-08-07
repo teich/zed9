@@ -76,48 +76,39 @@ class WorkoutsController < ApplicationController
 
   def create
 		@rpe = RPE.new
-		if (@workout.update_attributes(params[:gear]) && ( !@workout.gear_id.nil? ))
-      @workout.gear.update_attribute("distance_used", @workout.gear.distance_used + @workout.distance)
-      @workout.gear.update_attribute("hours_used", @workout.gear.hours_used + @workout.duration)
-    end
     @workout = current_user.workouts.create(params[:workout])
     @workout.importing = true if !@workout.manual_entry?
-      if @workout.save
-        if @workout.manual_entry?
-          add_flash(:notice, "Sucessfully created your manual workout")
-        else
-          Delayed::Job.enqueue WorkoutJob.new(@workout.id)
-          add_flash(:notice, 'Now processing your workout data... This may take up to a minute.')
-        end
-        redirect_to user_workouts_path(current_user)
+    if !@workout.gear.nil?
+      @workout.tag_list << @workout.gear.tag
+    end
+    if @workout.save
+      if @workout.manual_entry?
+        add_flash(:notice, "Sucessfully created your manual workout")
       else
-        @workout.destroy
-        render :action => "new"
+        Delayed::Job.enqueue WorkoutJob.new(@workout.id)
+        add_flash(:notice, 'Now processing your workout data... This may take up to a minute.')
       end
-    #     if !@workout.gear.nil?
-    #   @workout.tag_list << @workout.gear.tag
-    # end
+      redirect_to user_workouts_path(current_user)
+    else
+      @workout.destroy
+      render :action => "new"
+    end
   end
 
 	def update
+
 		if @workout.update_attributes(params[:workout])
+      @workout.clear_gear_tags
+      if !@workout.gear.nil?
+        @workout.tag_list << @workout.gear.tag
+        @workout.save
+      end
 			add_flash(:notice, 'Workout updated')
 			redirect_to @workout
 		else
 			render :action => "edit"
 		end
-    # @gearlabel = @workout.gear.tag
-    # @workout.tags << params[@gearlabel]
-    # @workout.save
-    # if !@workout.gear.nil?
-      # @workout.tags.push(@workout.gear.tag)
-    # end
 
-		if (@workout.gear.nil? && @workout.update_attributes(params[:gear]) && ( !@workout.gear_id.nil? ) )
-      @workout.gear.update_attribute("distance_used", @workout.gear.distance_used + @workout.distance)
-      @workout.gear.update_attribute("hours_used", @workout.gear.hours_used + (@workout.duration))
-    end
-    
 	end
 
 

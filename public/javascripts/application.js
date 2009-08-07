@@ -765,13 +765,15 @@ function workout_page_graphs(data) {
 			$("input#gear_purchase_date").val(formatted);
 		}
 
-		function get_miles_max() {
-			var distance_max = $("input#gear_distance_max").val();
-			if (distance_max != "") {
-				var distance_in_miles = meters_to_miles(distance_max);
-				$("input#miles").val(distance_in_miles);
+		var distance_max = $("input#gear_distance_max").val();
+		if (distance_max != "") {
+			var distance_in_miles = Math.round(meters_to_miles(distance_max));
+			$("input#miles").val(distance_in_miles);
 			}		
-		}
+
+		var time = Math.round( ($("input#gear_hours_max").val()) / 3600 );
+		$("input#hours").val(time);
+
 	}	
 	
 	function convert_distance_max() {
