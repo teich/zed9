@@ -131,6 +131,22 @@ var weight_graph_line_options = {
 	fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] }
 };
 
+var usage_bar_options = { 
+	horizontal: true, 
+	show: true, 
+	lineWidth: 1, 
+	barWidth: 1,
+	fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }
+};
+
+var usage_options = {
+	grid: { borderWidth: 0, tickColor: "white" },
+	colors: ["#3dc10b", "#25a1d6"],
+	shadowSize: 1,
+	xaxis: { ticks: [], labels: [], min: 0, max: 100 },
+	yaxis: { ticks: [], labels: [], min: 0, max: 1, autoscaleMargin: 0 },
+	stack: true
+};
 
 // Pass in a JSON object, and draw based on that data.
 function draw_dashboard_graph(data) {
@@ -778,6 +794,19 @@ function workout_page_graphs(data) {
 		}
 	} 
 	
+	function draw_gear_usage() {
+
+		$(".usage_bar").each(function() {
+			var data = $(this).attr("data");
+			// var dist_max = $(this).attr("dist_max");
+
+			$.plot($(this), [
+			{ data: [[100, 0]], bars: usage_bar_options },
+			{ data: [[data, 0]], bars: usage_bar_options },
+			], usage_options);
+		});
+		
+	}
 	
 	// THIS IS THE MAIN AREA.  CALLED ON PAGE LOAD
 	$(document).ready(function() {
@@ -797,6 +826,15 @@ function workout_page_graphs(data) {
 		$('#weight_graph').each(function() {
 			$.getJSON(jsURL, draw_weight_graph);
 		});
+
+
+
+		$('.usage_bar').each(function() {
+			// $.getJSON(jsURL, draw_gear_usage);			
+			draw_gear_usage();			
+		});
+
+
 
 		// Workout page graphs
 		$('#workout_stats').each(function() {

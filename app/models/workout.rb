@@ -336,7 +336,6 @@ class Workout < ActiveRecord::Base
 		allcomps["speed"] = speed2.round(1) if !speed2.nil?
 		allcomps["elevation"] = (ac.map {|c| c.elevation}).compact.aaverage
 
-
 		return { :my_comps => mycomps, :all_comps => allcomps }
 	end
 

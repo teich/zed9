@@ -11,23 +11,23 @@ class Gear < ActiveRecord::Base
 	
 	def percent_used_distance
     if distance_used && distance_max
-	    (distance_used / distance_max ).round
+	    ((distance_used / distance_max ) * 100 ).round
 	  end
 	end
 
 	def percent_used_hours
 	  if hours_used && hours_max
-	    (hours_used / hours_max ).round
+	    ((hours_used / hours_max ) * 100 ).round
 	  end
 	end
 	
 	def percent_remaining
     if distance_used && distance_max
-      distance_remaining = 100 - (distance_used / distance_max ).round
+      distance_remaining = 100 - ((distance_used / distance_max) * 100 ).round
     end
 
     if hours_used && hours_max
-      hours_remaining = 100 - (hours_used / hours_max ).round
+      hours_remaining = 100 - ((hours_used / hours_max) * 100 ).round
     end
 
     if distance_remaining && hours_remaining

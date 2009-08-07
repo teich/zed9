@@ -2471,13 +2471,8 @@ p.comp_activity {
 }
 
 #gear td h4 {
-	padding: 0px 0px 8px 0px;
+	padding: 0px 0px 4px 0px;
 	font-weight: 500;
-}
-
-#gear p {
-	padding: 2px 0px;
-	font-size: 14px;
 }
 
 #gear .tag {
@@ -2491,12 +2486,21 @@ p.comp_activity {
 #gear td {
 	padding: 12px 0px;
 	border-bottom:1px dotted #d9d9d9;
+	font-size: 14px;
+	line-height: 1.4;
 }
 
-#gear #gear_right_col {
+#gear .remaining {
+	float: right;
 	text-align: center;
 	padding-right: 0px;
 	padding-left: 0px;
+	font-size: 12px;
+	text-align: center;
+}
+
+#gear .percent_used {
+	float: right;
 }
 
 #gear .percent_remaining {
@@ -2508,9 +2512,12 @@ p.comp_activity {
 	line-height: 1;
 }
 
-#gear .remaining {
-	font-size: 12px;
-	text-align: center;
+.usage_bar {
+	width: 168px;
+	height: 24px;
+	margin-top: -1px;
+	vertical-align: top;
+	position: absolute;
 }
 
 #journal_index #entries_stream table, #gear table {
