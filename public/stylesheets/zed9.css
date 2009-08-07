@@ -2490,6 +2490,11 @@ p.comp_activity {
 	line-height: 1.4;
 }
 
+#gear .usage_container {
+	display: block;
+	clear: both;
+}
+
 #gear .remaining {
 	float: right;
 	text-align: center;
@@ -2513,12 +2518,14 @@ p.comp_activity {
 }
 
 .usage_bar {
+	float: right;
 	width: 168px;
 	height: 24px;
 	margin-top: -1px;
 	vertical-align: top;
 	position: absolute;
 	text-align: right;
+	right: 66px;
 }
 
 #journal_index #entries_stream table, #gear table {

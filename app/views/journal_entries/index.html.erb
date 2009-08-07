@@ -49,19 +49,20 @@
 						<% if gear.purchase_date || gear.price || gear.store %>Purchased <%= h time_as_date(gear.purchase_date) %> <% if gear.price %>for $<%= h currency_formatted(gear.price) %><% end -%> <% if gear.store && gear.store != "" %>at <%= h gear.store %><% end -%><br><% end -%>
 						<% if !gear.distance_used.nil? %>
 							<div class="usage_container">
-								<% if !gear.percent_used_distance.nil? %><span class="percent_used"><%= h gear.percent_used_distance %>% used</span><% end -%>
-								Distance: <%= h meters_to_miles(gear.distance_used).round %> miles <% if !gear.distance_max.nil? %>out of <%= h meters_to_miles(gear.distance_max).round %> miles<% end -%> 
 								<% if !gear.percent_used_distance.nil? %>
-								<span id="<%= h gear.id %>" name="distance" class="usage_bar" data="<%= h gear.percent_used_distance %>"></span><% end -%><br>
+									<span class="percent_used"><%= h gear.percent_used_distance %>% used</span>
+									<span id="<%= h gear.id %>" name="distance" class="usage_bar" data="<%= h gear.percent_used_distance %>"></span>
+								<% end -%>
+								Distance: <%= h meters_to_miles(gear.distance_used).round %> miles <% if !gear.distance_max.nil? %>out of <%= h meters_to_miles(gear.distance_max).round %> miles<% end -%>
 							</div>
 						<% end -%>
 						<% if !gear.hours_used.nil? %>
 							<div class="usage_container">
-								<% if !gear.percent_used_hours.nil? %><span class="percent_used"><%= h gear.percent_used_hours %>% used</span><% end -%>
-								Time: <%= h seconds_to_hours(gear.hours_used).round %> hours <% if !gear.hours_max.nil? %>out of <%= h seconds_to_hours(gear.hours_max).round %> hours<% end -%>
 								<% if !gear.percent_used_hours.nil? %>
+									<span class="percent_used"><%= h gear.percent_used_hours %>% used</span>
 									<span id="<%= h gear.id %>" name="hours" class="usage_bar" data="<%= h gear.percent_used_hours %>"></span>
-								<% end -%><br>
+								<% end -%>
+								Time: <%= h seconds_to_hours(gear.hours_used).round %> hours <% if !gear.hours_max.nil? %>out of <%= h seconds_to_hours(gear.hours_max).round %> hours<% end -%>
 							</div>
 						<% end -%>
 					</td>
