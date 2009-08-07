@@ -76,8 +76,9 @@ class WorkoutsController < ApplicationController
 
   def create
 		@rpe = RPE.new
-		if @workout.update_attributes(params[:gear]) 
+		if (@workout.update_attributes(params[:gear]) && ( !@workout.gear_id.nil? ))
       @workout.gear.update_attribute("distance_used", @workout.gear.distance_used + @workout.distance)
+      @workout.gear.update_attribute("hours_used", @workout.gear.hours_used + @workout.duration)
     end
     @workout = current_user.workouts.create(params[:workout])
     @workout.importing = true if !@workout.manual_entry?

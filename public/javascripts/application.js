@@ -827,14 +827,9 @@ function workout_page_graphs(data) {
 			$.getJSON(jsURL, draw_weight_graph);
 		});
 
-
-
 		$('.usage_bar').each(function() {
-			// $.getJSON(jsURL, draw_gear_usage);			
 			draw_gear_usage();			
 		});
-
-
 
 		// Workout page graphs
 		$('#workout_stats').each(function() {
