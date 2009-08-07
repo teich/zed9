@@ -2518,6 +2518,7 @@ p.comp_activity {
 	margin-top: -1px;
 	vertical-align: top;
 	position: absolute;
+	text-align: right;
 }
 
 #journal_index #entries_stream table, #gear table {
