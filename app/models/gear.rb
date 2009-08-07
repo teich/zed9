@@ -6,7 +6,8 @@ class Gear < ActiveRecord::Base
   has_many :workouts
 	
   acts_as_taggable_on   :tags
-	
+
+  # This is removed so that form can update all fields. May need to correct for tagging workouts with gear.
   # attr_accessible :name, :tag
 	
 	def percent_used_distance
