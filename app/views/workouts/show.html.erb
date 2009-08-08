@@ -42,7 +42,7 @@
 				<span id="tags_list">
 					<% @workout.tags.each do |tag| %>
 					<span class="tag">
-						<a class="globe" href="#"><span class="displace">Global</span><img src="/images/spacer.png" width="18px" height="18px"></a> 
+						<!-- <a class="globe" href="#"><span class="displace">Global</span><img src="/images/spacer.png" width="18px" height="18px"></a>  -->
 						<%= link_to tag.name, user_workouts_path(@workout.user, :tag => tag.name) %>
 					</span>
 					<% end %>
