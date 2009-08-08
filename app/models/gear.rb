@@ -55,7 +55,7 @@ class Gear < ActiveRecord::Base
       return distance_remaining
     elsif hours_remaining
       return hours_remaining
-    else return
+    else return 0
     end
   end
   
