@@ -219,9 +219,10 @@ thead, th, td {
 }
 
 .sortable th:hover {
-	color: #25a1d6;
+	color: #1a4465;
 	cursor: pointer;
 }
+
 
 /*---- General use to display columns ----*/
 
@@ -980,10 +981,10 @@ table.newsfeed {
 .newsfeed th {
 	font-size: 12px;
 	font-weight: 100;
-	color: #9f9f9f;
+	color: #25a1d6;
 	border: none;
 	padding: 6px 8px;	
-	vertical-align: middle;
+	vertical-align: top;
 }
 
 .newsfeed .first_column {

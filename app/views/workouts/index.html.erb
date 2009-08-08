@@ -29,10 +29,9 @@
 					<th>Distance<br><span class="unit">(miles)</span></th>
 					<th>Calories<br><span class="unit">(kCal)</span></th>
 					<th>Speed</th>
-					<th class="no_wrap">Max speed</th>
+					<th>Max speed</th>
 					<th>Elevation<br><span class="unit">(feet)</span></th>
 					<th class="no_wrap">HR<br><span class="unit">(bpm)</span></th>
-					<th class="no_wrap">Max HR<br><span class="unit">(bpm)</span></th>
 					<th>Tags</th>
 					<th><span class="tip" title="Comments"><img src="/images/text_balloon.png"></span></th>
 					<th class="{ sorter: false }"><br></th>
@@ -48,7 +47,6 @@
 						<td class="name importing"><%=h workout.name %> (Processing...)</td>
 						<td><span class="sort_value" style="display:none"><%=h time_as_date(Time.now) %></span></td>
 						<td class="importing"><% if workout.rpe == 0 || workout.rpe.nil? %><span class="sort_value" style="display: none">0</span><% else %><span class="sort_value" style="display: none"><%=h two_digits(workout.rpe) %></span><span><%=h workout.rpe %></span><% end %><br></td>
-						<td><br></td>
 						<td><br></td>
 						<td><br></td>
 						<td><br></td>
@@ -74,10 +72,6 @@
 						<td class="speed no_wrap"><% if !workout.avg_speed_in_mph.nil? %><span class="sort_value" style="display:none"><%=h workout.max(:speed) %></span><span><%=h max_speed_to_pace(workout) %></span><% end %><br></td>				
 						<td class="elevation no_wrap"><% if !workout.elevation.nil? %><span class="sort_value"><%=h workout.elevation_in_feet.round(0).to_i %></span><% end %><br></td>
 						<td class="hr no_wrap"><% if !workout.hr.nil? %><span class="sort_value"><%=h workout.hr %></span><% end %><br></td>
-						<td class="hr no_wrap"><span class="sort_value">
-							<% if !workout.hr_max.nil? %><%=h workout.hr_max %></span>
-							<% elsif !workout.max(:heart_rate).nil? %><%=h workout.max(:heart_rate) %></span>
-							<% end %><br></td>
 						<td class="tags">
 							<% for tag in workout.tag_list %>
 								<%= link_to tag, user_workouts_path(@user, :tag => tag) %><br>
