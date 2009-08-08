@@ -34,6 +34,16 @@ class User < ActiveRecord::Base
 
 	attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :birthdate, :sex, :height, :time_zone, :shared, :displayname, :bio
 
+
+  def gear_expiring?
+    return false if self.gears.nil? 
+    for gear in self.gears
+      if (gear.percent_remaining <= 20)
+        return true
+      end
+    end
+  end
+
   def start_time
     start_time_edited || start_time_file
   end
