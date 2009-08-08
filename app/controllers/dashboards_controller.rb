@@ -2,6 +2,11 @@ class DashboardsController < ApplicationController
 	before_filter :require_user
 
 	def show
+
+    if current_user.gear_expiring?
+			add_flash(:warning, "Time to replace your gear!")
+    end
+
 		@workouts = current_user.workouts.processed.find(:all, :order => "created_at DESC")
 
 		# list of most recent public workouts
