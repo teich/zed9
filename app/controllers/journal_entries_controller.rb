@@ -6,7 +6,7 @@ class JournalEntriesController < ApplicationController
 	
 	def index
 
-		@journal_entries = @user.journal_entries.find(:all, :order => "entry_date DESC")
+		@journal_entries = @user.journal_entries.find(:all, :order => "entry_date DESC, created_at DESC")
 		@current_weight = @user.weight(Time.now)
 		@lowest_weight = @user.journal_entries.find(:first, :order => "weight ASC", :conditions => ["weight IS NOT NULL"])
 		@highest_weight = @user.journal_entries.find(:first, :order => "weight DESC", :conditions => ["weight IS NOT NULL"])
