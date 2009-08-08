@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
   def gear_expiring?
     return false if self.gears.nil? 
     for gear in self.gears
+      return false if gear.nil?
       if (gear.percent_remaining <= 20)
         return true
       end
