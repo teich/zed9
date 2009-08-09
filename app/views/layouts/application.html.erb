@@ -47,7 +47,7 @@
 				<%= h f %>
 			</div>
 			<% end %>
-		<% end %>
+		<% end -%>
 		
 		<% if flash[:alert] %>
 			<% for f in flash[:alert] do %>
@@ -55,7 +55,7 @@
 					<%=h f %>
 				</div>
 			<% end %>
-		<% end %>
+		<% end -%>
 
 		<% if flash[:warning] %>
 			<% for f in flash[:warning] do %>
@@ -63,7 +63,7 @@
 					<%= h f %>
 				</div>
 			<% end %>
-		<% end %>
+		<% end -%>
 
 		<% if flash[:achievement] %>
 			<% for f in flash[:achievement] do %>
@@ -71,7 +71,7 @@
 				<%= h f %>
 			</div>
 			<% end %>
-		<% end %>
+		<% end -%>
 
 		<% if flash[:info] %>
 			<% for f in flash[:info] do %>
@@ -79,12 +79,23 @@
 				<%= h f %>
 			</div>
 			<% end %>
-		<% end %>
+		<% end -%>
 
 		<!-- End flash notices -->
 		
 		<div id="main">
+			
+			<noscript>
+				<div id="no_flash_warning">
+					<div class="warning_text">To see all that ZED9 has to offer, please enable JavaScript in your browser.</div>
+						</div>
+					</div>
+				</div>
+			</noscript>
+
+			
 			<%= yield  %>
+
 		</div>
 
 		<div class="clearfooter"></div>
