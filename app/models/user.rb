@@ -39,11 +39,12 @@ class User < ActiveRecord::Base
     return false if self.gears.nil? 
     if self.gears.size > 0
       for gear in self.gears
-        return false if gear.nil?
-        if (gear.percent_remaining <= 20)
+        if (gear.percent_remaining < 20)
           return true
+        else return false
         end
       end
+    else return false
     end
   end
 
