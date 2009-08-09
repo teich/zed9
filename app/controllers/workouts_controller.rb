@@ -54,17 +54,7 @@ class WorkoutsController < ApplicationController
 		@workout = current_user.workouts.build
 		@gears = current_user.gears.find(:all)
 
-    # Defaults to last selected activity type
-    last_workout = current_user.workouts.find(:first, :order => "created_at DESC")
-    if last_workout.nil?
-		  @workout.activity = Activity.find_by_name("Uncategorized")
-    else
-      @workout.activity = last_workout.activity
-      @workout.gear = last_workout.gear
-    end
-
-		# Set the workout shared state to the user default
-		@workout.shared = current_user.shared
+    @workout.set_defaults!
 		# setup one device for form.
 		@workout.devices.build
 	end

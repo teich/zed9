@@ -515,5 +515,20 @@ class Workout < ActiveRecord::Base
     end
     self.save
   end
+  
+  def set_defaults!
+    # Defaults to last selected activity type
+     last_workout = user.workouts.first
+     if last_workout.nil?
+       self.activity = Activity.find_by_name("Uncategorized")
+     else
+       self.activity = last_workout.activity
+       self.gear = last_workout.gear
+     end
+
+ 		# Set the workout shared state to the user default
+ 		self.shared = user.shared  
+  end
+  
 
 end
