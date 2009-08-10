@@ -864,6 +864,30 @@ function workout_page_graphs(data) {
 			$(this).slideToggle('medium');
 		});
 
+		// Menu of nearby workouts
+		$('#select_axes').hide();  
+		$('#workouts_nearby_link').bind("click", function() {
+			$('#nearby_workouts_list_container').slideToggle('fast');
+			$(this).toggleClass('show_options');	
+		});
+		
+		// Close graph options if click on x in corner
+		$('#select_axes .close').click(function() {
+			$('#nearby_workouts_list_container').slideToggle('fast');
+			$('#workouts_nearby_link').toggleClass('show_options');
+		});
+
+
+		// Close graph options if click anywhere outside selection window
+		$(window).bind('click', function(ev) {
+		  if (!($(ev.target).is('#workouts_nearby_wrapper') || $(ev.target).parents('#workouts_nearby_wrapper').length )) {
+				$('#nearby_workouts_list_container').slideUp('fast');
+				$('#workouts_nearby_link').removeClass('show_options');	
+			}
+		});
+		
+
+
 		// Graph options
 		$('#select_axes').hide();  
 		$('#options_link').bind("click", function() {

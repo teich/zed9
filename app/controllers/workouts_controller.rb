@@ -42,6 +42,8 @@ class WorkoutsController < ApplicationController
 
 		@rpe = RPE.new
 
+    @workouts_nearby = @workout.workouts_nearby
+    
 		respond_to do |format|
 			format.html
 			format.xml {render :xml => @workout.to_xml }

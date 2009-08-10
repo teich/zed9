@@ -1530,7 +1530,26 @@ input.submit {
 
 /*---- Profile Page ----*/
 
-#profile_header td {
+.profile_pic_big {
+	float: left;
+	left: 0px;
+	bottom: -6px;
+	position: relative;
+	border: 1px solid #d9d9d9;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;	
+	display: inline;
+	vertical-align: bottom;
+	width: 64px;
+}
+
+.profile_pic_big, .profile_pic_height_fix {
+	height: 64px;
+}
+
+.profile_pic_height_fix {
+	width: 1px;
 	padding: 0px;
 }
 
@@ -2128,7 +2147,89 @@ td .points {
 	padding: 0px 4px;
 }
 
-a.globe {
+#workouts_nearby_wrapper {
+	float: right;
+	position: relative;
+	vertical-align: top;
+}
+
+#workouts_nearby_link {
+	display: inline;
+	font-size: 12px;
+	font-weight: 100;
+	color:#25a1d6;
+	padding: 4px 14px 4px 8px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	background: white url(/images/closed.png) no-repeat right;	
+}
+
+#workouts_nearby_wrapper .show_options {
+	padding: 4px 14px 0px 8px;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	-moz-border-radius-bottomleft: 0px;
+	-moz-border-radius-bottomright: 0px;
+	-webkit-border-top-right-radius: 4px;
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-bottom-left-radius: none;
+	-webkit-border-bottom-right-radius: none;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: none;
+	border-bottom-right-radius: none;
+  border: 1px solid #d9d9d9;
+	border-bottom: none;
+	border-top: none;
+	border-left: none;
+	background: #f0f0f0 url(/images/open.png) no-repeat right;	
+  opacity: .95;
+	z-index: 999;
+}
+
+#nearby_workouts_list_container {
+  border: 1px solid #d9d9d9;
+	border-top: none;
+	border-left: none;
+  padding: 8px 12px;
+	font-size: 12px;
+	text-align: left;
+  background: #f0f0f0;
+  opacity: .95;
+	-moz-border-radius: 8px;
+	-moz-border-radius-topright: 0px;
+	-webkit-border-radius: 8px;
+	-webkit-border-top-right-radius: 0px;
+	border-radius: 8px;
+	border-top-right-radius: 0px;
+	z-index: 900;
+	height: auto;
+	width: 320px;
+	display: none;
+	position: absolute;
+	right: 0px;
+}
+
+/* x to close options menu */
+#nearby_workouts_list_container .close {
+	float: right;
+	vertical-align: top;
+	text-align: right;
+  color: #d9d9d9;
+	padding: 4px;
+	top: 2px;
+	right: 2px;
+}
+
+#nearby_workouts_list_container p {
+	margin: 0px;
+	padding: 4px 0px;
+}
+
+
+
+/*a.globe {
 	position: relative;
 	margin-left: -2px;
 	display: inline; 
@@ -2153,6 +2254,7 @@ a.delete-x {
 	position: absolute;
 	left: -5000px;
 }
+*/
 
 /*---- Workout comparison stats view ----*/
 
@@ -2337,7 +2439,7 @@ p.comp_activity {
 	-moz-border-radius: 8px;
 	-moz-border-radius-topleft: 0px;
 	-webkit-border-radius: 8px;
-	-webkit-border-top-left-radius: 8px;
+	-webkit-border-top-left-radius: 0px;
 	border-radius: 8px;
 	border-top-left-radius: 0px;
 	z-index: 900;

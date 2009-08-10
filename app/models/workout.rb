@@ -516,4 +516,19 @@ class Workout < ActiveRecord::Base
     self.save
   end
 
+  def workouts_nearby
+    distance = 0.005
+
+    min_lat = trackpoints.first.lat - distance
+    max_lat = trackpoints.first.lat + distance
+    min_lng = trackpoints.first.lng - distance
+    max_lng = trackpoints.first.lng + distance
+
+    nearby = Trackpoint.find(:all, :conditions => ["lat > ? AND lat < ? AND lng > ? AND lng < ?", min_lat, max_lat, min_lng, max_lng], :group => "workout_id").map {|f| f.workout_id}
+
+    workouts_nearby = Workout.find(:all, :conditions => ["id in (?)", nearby], :limit => 10)
+    return workouts_nearby
+    
+  end
+
 end
