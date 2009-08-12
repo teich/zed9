@@ -2151,18 +2151,19 @@ td .points {
 	float: right;
 	position: relative;
 	vertical-align: top;
+	display: inline;
 }
 
 #workouts_nearby_link {
 	display: inline;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: 100;
 	color:#25a1d6;
-	padding: 4px 14px 4px 8px;
+	padding: 4px 12px 4px 8px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
-	background: white url(/images/closed.png) no-repeat right;	
+	background: white url(/images/rt.png) no-repeat right;	
 }
 
 #workouts_nearby_wrapper .show_options {
@@ -2183,7 +2184,7 @@ td .points {
 	border-bottom: none;
 	border-top: none;
 	border-left: none;
-	background: #f0f0f0 url(/images/open.png) no-repeat right;	
+	background: #f0f0f0 url(/images/dn.png) no-repeat right;	
   opacity: .95;
 	z-index: 999;
 }
@@ -2193,7 +2194,7 @@ td .points {
 	border-top: none;
 	border-left: none;
   padding: 8px 12px;
-	font-size: 12px;
+	font-size: 14px;
 	text-align: left;
   background: #f0f0f0;
   opacity: .95;
@@ -2205,7 +2206,7 @@ td .points {
 	border-top-right-radius: 0px;
 	z-index: 900;
 	height: auto;
-	width: 320px;
+	width: 420px;
 	display: none;
 	position: absolute;
 	right: 0px;
@@ -2401,11 +2402,11 @@ p.comp_activity {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
-	background: white url(/images/closed.png) no-repeat right;	
+	background: white url(/images/rt.png) no-repeat right;	
 }
 
 #graph_options_wrapper .show_options {
-	padding: 4px 14px 0px 8px;
+	padding: 4px 12px 0px 8px;
 	-moz-border-radius-topleft: 4px;
 	-moz-border-radius-topright: 4px;
 	-moz-border-radius-bottomleft: 0px;
@@ -2422,7 +2423,7 @@ p.comp_activity {
 	border-bottom: none;
 	border-top: none;
 	border-left: none;
-	background: #f0f0f0 url(/images/open.png) no-repeat right;	
+	background: #f0f0f0 url(/images/dn.png) no-repeat right;	
   opacity: .8;
 	z-index: 999;
 }
@@ -2515,6 +2516,9 @@ p.comp_activity {
 	font-weight: 500;
 	font-size: 14px;
 	padding-bottom: 2px;
+	float: right;
+	text-align: right;
+	padding-left: 48px;
 }
 
 #overlaps img {

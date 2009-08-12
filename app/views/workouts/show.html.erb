@@ -27,13 +27,13 @@
 			
 			<p id="workout_description"><%= link_to @workout.activity.name, activity_path(@workout.activity) %> on <%=h activity_timestamp_shorter(@workout.start_time) %>. Posted <%= h activity_timestamp_shorter(@workout.created_at) %>. <span class="comment_count"><a href="#disqus_thread" class="tip" title="Comments on this workout">comment</a></span></p>
 
-			<p id="workout_notes"><%= h @workout.notes %></p>
-
 			<% if my_page? && @workout.overlaps? %>
 				<div id="overlaps">
-					<img src="/images/info_icon.png">This overlaps with another workout. <%= link_to 'Check out your merging options.', workout_overlaps_path(@workout) %>
+					<img src="/images/info_icon.png">This overlaps with another workout.<br><%= link_to 'Check out your merging options.', workout_overlaps_path(@workout) %>
 				</div>
 			<% end -%>
+
+			<p id="workout_notes"><%= h @workout.notes %></p>
 
 			<!-- Condition to only display Tags field when there are tags, or prompt owner to tag -->
 			<% if @workout.tags.size > 0 %>
@@ -62,7 +62,7 @@
 			
 			<% if @workouts_nearby.size > 0 %>
 			<div id="workouts_nearby_wrapper" class="options_menu_wrapper">
-				<div id="workouts_nearby_link" class="options_link"><% if @workouts_nearby.size = 0 %>10 nearest workouts<% else %><%= h @workouts_nearby.size %> workouts nearby<% end %></div>
+				<div id="workouts_nearby_link" class="options_link"><% if @workouts_nearby.size > 0 %><%= h @workouts_nearby.size %> nearest workouts<% end %></div>
 				<div id="nearby_workouts_list_container">
 					<% for workout in @workouts_nearby %>
 						<p><%= link_to workout.name, workout %> (<%= h workout.activity.name %>) by <%= link_to workout.user.display_name, user_path(workout.user) %> on <%= h time_as_date(workout.start_time) %></p>
