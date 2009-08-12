@@ -60,7 +60,7 @@
 			<span id="tags_header"><%= link_to 'Tag this workout', edit_workout_path(@workout) %></span>
 			<% end %>
 			
-			<% if @workouts_nearby.size > 0 %>
+			<% if !@workout_nearby.nil? && @workouts_nearby.size > 0 %>
 			<div id="workouts_nearby_wrapper" class="options_menu_wrapper">
 				<div id="workouts_nearby_link" class="options_link"><% if @workouts_nearby.size > 0 %><%= h @workouts_nearby.size %> nearest workouts<% end %></div>
 				<div id="nearby_workouts_list_container">
