@@ -1,6 +1,6 @@
 class AddOtherToJournalEntries < ActiveRecord::Migration
   def self.up
-    add_column :journal_entries, :other, :text, :limit => 255
+    add_column :journal_entries, :other, :text
   end
 
   def self.down

@@ -1,1 +1,1 @@
-Disqus::defaults[:account] = "zed9"
+# Disqus::defaults[:account] = "zed9"

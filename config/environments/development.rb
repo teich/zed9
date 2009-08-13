@@ -18,6 +18,6 @@ config.action_mailer.raise_delivery_errors = false
 
 #config.gem "josevalim-rails-footnotes",  :lib => "rails-footnotes", :source => "http://gems.github.com"
 
-config.after_initialize do
-  Disqus::defaults[:developer] = true
-end
+# config.after_initialize do
+#   Disqus::defaults[:developer] = true
+# end
