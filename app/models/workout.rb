@@ -68,7 +68,7 @@ class Workout < ActiveRecord::Base
       zip_workout.name = zip_workout.devices.first.source_file_name
       zip_workout.save
       Delayed::Job.enqueue WorkoutJob.new(zip_workout.id)
-#      zip_workout.perform
+      #zip_workout.perform
       File.delete file
     end
     
