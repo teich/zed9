@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
   def create
     @commentable = find_commentable
     @comment = @commentable.comments.build(params[:comment])
+    @comment.user = current_user
     if @comment.save
       add_flash(:notice, "Your comment has been posted")
       @comment.notify!(@commentable, current_user)
