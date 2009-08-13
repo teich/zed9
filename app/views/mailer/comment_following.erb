@@ -1,0 +1,6 @@
+Hello <%= @user.display_name %>,
+
+Someone has posted a comment on <%= h @workout.name %>, a workout that you are following
+
+Click to see the comment
+<%= workout_url(@workout) %>

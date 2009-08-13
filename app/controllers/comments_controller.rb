@@ -8,7 +8,8 @@ class CommentsController < ApplicationController
     @commentable = find_commentable
     @comment = @commentable.comments.build(params[:comment])
     if @comment.save
-      flash[:notice] = "Your comment has been posted"
+      add_flash(:notice, "Your comment has been posted")
+      @comment.notify!(@commentable, current_user)
       redirect_to workout_path(@commentable)
     else
       render :action => 'new'
