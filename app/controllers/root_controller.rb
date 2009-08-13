@@ -3,7 +3,7 @@ class RootController < ApplicationController
 	def index
 
 		# list of most recent public workouts
-		@workouts = Workout.find_all_by_shared(true, :limit=>8, :order => "updated_at DESC")
+		@public_workouts = Workout.processed.find_all_by_shared(true, :order => "created_at DESC").paginate :page => params[:page], :per_page => 8
 
 		@user_session = UserSession.new
 

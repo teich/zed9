@@ -196,12 +196,7 @@ thead, th, td {
 
 .pagination {
 	text-align: center;
-	padding-bottom: 24px;
-}
-
-.pagination a {
-}
-.pagination a:hover, .pagination a:active {
+	padding-bottom: 12px 0px 24px 0px;
 }
 
 .prev_page {
@@ -235,14 +230,14 @@ thead, th, td {
 /*---- Table Sorter styling ----*/
 
 .sortable th.headerSortUp {
-	background: #f7fdff url(/images/dn.png) no-repeat center right;
+	background: #ffffff url(/images/dn.png) no-repeat center right;
 	font-weight: 500;
 	color: #1a4465;
 	cursor: pointer;
 }
 
 .sortable th.headerSortDown {
-	background: #f7fdff url(/images/up.png) no-repeat center right;
+	background: #ffffff url(/images/up.png) no-repeat center right;
 	font-weight: 500;
 	color: #1a4465;
 	cursor: pointer;
@@ -1021,6 +1016,10 @@ ol {
 	padding-bottom: 12px;
 }
 
+#workouts_feed .pagination {
+	padding: 12px 0px 0px 0px;
+}
+
 table.newsfeed {
 	width: 100%;	
 	border-bottom: 1px dotted #d9d9d9;
@@ -1674,6 +1673,10 @@ td .points {
 }
 
 /*---- Workouts index ----*/
+
+#workouts .pagination {
+	padding: 12px 0px 0px 0px;
+}
 
 #workouts_list {
 	width: 100%;	
@@ -2733,7 +2736,7 @@ p.comp_activity {
 #journal_index #entries_stream td.entry_metadata {
 	font-size: 12px;
 	color: #9f9f9f;
-	padding: 4px 0px 12px 0px;
+	padding: 0px 0px 12px 0px;
 	border-bottom:1px dotted #d9d9d9;
 }
 

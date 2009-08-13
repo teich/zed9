@@ -252,7 +252,7 @@
 			<% elsif @workouts.size == 0 %>
 				<p>No shared workouts yet...</p>
 			<% else %>
-				<p class="more_news"><%= link_to "See all", user_workouts_path(@user) %></p>
+				<%= will_paginate @workouts, :inner_window => 1, :outer_window => 0, :prev_label => "&laquo; Newer", :next_label => "Older &raquo;" %>
 			<% end %>
 		</div>
 		

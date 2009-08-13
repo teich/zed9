@@ -103,7 +103,7 @@
 				<% end %>
 			</table>
 						
-			<%= will_paginate @journal_feed, :inner_window => 1, :outer_window => 0 %>
+			<%= will_paginate @journal_feed, :inner_window => 1, :outer_window => 0, :prev_label => "&laquo; Newer", :next_label => "Older &raquo;" %>
 			
 		<% end -%>
 	</div>
