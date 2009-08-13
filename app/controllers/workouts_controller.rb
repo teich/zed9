@@ -53,26 +53,13 @@ class WorkoutsController < ApplicationController
 	def new
 		@rpe = RPE.new
 		@workout = current_user.workouts.build
-		@gears = current_user.gears.find(:all)
-
-    # Defaults to last selected activity type
-    last_workout = current_user.workouts.find(:first, :order => "created_at DESC")
-    if last_workout.nil?
-		  @workout.activity = Activity.find_by_name("Uncategorized")
-    else
-      @workout.activity = last_workout.activity
-      @workout.gear = last_workout.gear
-    end
-
-		# Set the workout shared state to the user default
-		@workout.shared = current_user.shared
+    @workout.set_defaults!
 		# setup one device for form.
 		@workout.devices.build
 	end
 
 	def edit
 		@rpe = RPE.new
-		@gears = current_user.gears.find(:all)
 	end
 
   def create
@@ -87,6 +74,7 @@ class WorkoutsController < ApplicationController
         add_flash(:notice, "Sucessfully created your manual workout")
       else
         Delayed::Job.enqueue WorkoutJob.new(@workout.id)
+        # @workout.perform
         add_flash(:notice, 'Now processing your workout data... This may take up to a minute.')
       end
       redirect_to user_workouts_path(current_user)

@@ -1,4 +1,5 @@
 class Workout < ActiveRecord::Base
+  
 	belongs_to  :user
 	belongs_to  :activity
 	belongs_to  :gear
@@ -35,35 +36,83 @@ class Workout < ActiveRecord::Base
     self.end_time = Time.parse(end_time_str)
   end
 	
+	
+	def unzip!
+	  tmp_dir = (0...8).map{65.+(rand(25)).chr}.join
+    dest = RAILS_ROOT + "/tmp/" + tmp_dir
+    workout_file_name = devices.first.source_file_name
+    
+    Dir::mkdir(dest)
+    logger.debug "Made directory #{dest}"
+
+    if ENV['S3_BUCKET']
+      f = File.open("#{dest}/#{workout_file_name}", "w+")
+      f.puts devices.first.source.to_file.data
+      f.close
+    else
+      status = File.copy(devices.first.source.path, dest)
+      logger.debug "Coppied file #{devices.first.soure.path} to #{dest} with status #{status}"
+    end
+
+    status = `unzip #{dest}/#{workout_file_name} -d #{dest}`
+    logger.debug "Unzipped file #{workout_file_name} with status #{status}"
+    
+    File.delete("#{dest}/#{workout_file_name}")
+    logger.debug "Deleted the original zip file"
+    
+    Dir["#{dest}/*.*"].each do |file|
+      logger.debug "Found this: #{file}"
+      zip_workout = self.clone
+      zip_workout.devices.build
+      zip_workout.devices.first.source = File.open file
+      zip_workout.name = zip_workout.devices.first.source_file_name
+      zip_workout.save
+      Delayed::Job.enqueue WorkoutJob.new(zip_workout.id)
+      #zip_workout.perform
+      File.delete file
+    end
+    
+    FileUtils.rm_rf dest
+    
+  end
+  
   def perform
     
     # Make sure there is no existing data
-    self.trackpoints.map { |tp| tp.destroy }
+    trackpoints.map { |tp| tp.destroy }
     
     # Import the data
-    uploaded_data = ensure_string(self.devices.first.source.to_file)
-    type = Importer.file_type(self.devices.first.source_file_name)
-    case type
-    when "GARMIN_XML"
-      importer = Importer::Garmin.new(:data => uploaded_data)
-    when "POLAR_HRM"
-      importer = Importer::Polar.new(:data => uploaded_data, :time_zone => self.user.time_zone)
-    when "SUUNTO"
-      importer = Importer::Suunto.new(:data => uploaded_data, :time_zone => self.user.time_zone)
-    when "GPX"
-      importer = Importer::GPX.new(:data => uploaded_data)
-    end
-    iw = importer.restore
-    self.build_from_imported!(iw)
-    self.importing = false
-    if self.save
-      self.check_achievements
-      return true
+  
+    if (devices.first.zip?)
+      self.unzip!
+      self.destroy
     else
-      puts "Something went wrong"
-      return false
-    end
-    
+      type = Importer.file_type(devices.first.source_file_name)
+
+      uploaded_data = ensure_string(devices.first.source.to_file)
+
+      case type
+      when "GARMIN_XML"
+        importer = Importer::Garmin.new(:data => uploaded_data)
+      when "POLAR_HRM"
+        importer = Importer::Polar.new(:data => uploaded_data, :time_zone => self.user.time_zone)
+      when "SUUNTO"
+        importer = Importer::Suunto.new(:data => uploaded_data, :time_zone => self.user.time_zone)
+      when "GPX"
+        importer = Importer::GPX.new(:data => uploaded_data)
+      end
+
+      iw = importer.restore
+      self.build_from_imported!(iw)
+      self.importing = false
+      if self.save
+        self.check_achievements
+        return true
+      else
+        puts "Something went wrong"
+        return false
+      end
+    end    
   end
   
   def reprocess!
@@ -515,6 +564,21 @@ class Workout < ActiveRecord::Base
     end
     self.save
   end
+  
+  def set_defaults!
+    # Defaults to last selected activity type
+     last_workout = user.workouts.first
+     if last_workout.nil?
+       self.activity = Activity.find_by_name("Uncategorized")
+     else
+       self.activity = last_workout.activity
+       self.gear = last_workout.gear
+     end
+
+ 		# Set the workout shared state to the user default
+ 		self.shared = user.shared  
+  end
+  
 
   def workouts_nearby
     if gps_data?
