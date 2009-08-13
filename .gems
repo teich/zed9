@@ -5,3 +5,4 @@ teich-hrmparser -v 0.5.0 --source gems.github.com
 right_aws
 thoughtbot-paperclip --source gems.github.com
 disqus
+mislav-will_paginate -v 2.3.11 --source http://gems.github.com
