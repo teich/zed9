@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 	include ArrayMath
 
 	filter_parameter_logging :password, :password_confirmation
-	helper_method :current_user_session, :current_user, :my_page?, :any_private?
+	helper_method :current_user_session, :current_user, :my_page?, :any_private?, :logged_in?
 	
 
 	before_filter :create_user_session
