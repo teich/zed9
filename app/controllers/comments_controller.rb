@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.build(params[:comment])
     if @comment.save
       flash[:notice] = "Successfully created comment."
+      @comment.notify!(@commentable, current_user)
       redirect_to workout_path(@commentable)
     else
       render :action => 'new'
