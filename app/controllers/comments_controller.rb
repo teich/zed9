@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   def index
     @commentable = find_commentable
-    logger.debug "COMMENTABLE IS #{@commentable}"
     @comments = @commentable.comments
   end
 
@@ -9,7 +8,7 @@ class CommentsController < ApplicationController
     @commentable = find_commentable
     @comment = @commentable.comments.build(params[:comment])
     if @comment.save
-      flash[:notice] = "Successfully created comment."
+      flash[:notice] = "Your comment has been posted"
       redirect_to workout_path(@commentable)
     else
       render :action => 'new'

@@ -75,7 +75,7 @@
 	<div id="entries_stream" class="right_column">
 		<% if (@journal_feed.size > 0) %>
 			<h2>Entries</h2>
-			<table id="journal_entries_list">
+			<table id="journal_entries_list" class="stream">
 				<% for journal_entry in @journal_feed %>
 				<tr>
 					<td class="journal_entry_date"><%=h time_as_date(journal_entry.sort_timestamp) %></td>
