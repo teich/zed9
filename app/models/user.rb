@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 		},
 		:bucket => ENV['S3_BUCKET'],
 		:path => ":class/:id_partition/:basename.:extension",
-    :s3_permissions => "read"
+    # :s3_permissions => "private"
       		
 	before_create :set_invitation_limit
 
