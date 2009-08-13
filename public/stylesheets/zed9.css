@@ -192,6 +192,36 @@ thead, th, td {
 	border-radius: 8px;	
 }
 
+/*---- Pagination ----*/
+
+.pagination {
+	text-align: center;
+	padding-bottom: 24px;
+}
+
+.pagination a {
+}
+.pagination a:hover, .pagination a:active {
+}
+
+.prev_page {
+	padding-right: 8px;
+}
+
+.next_page {
+	padding-left: 8px;
+}
+
+.pagination span.current {
+	color:#1a4465;
+	font-weight: 500;
+}
+
+.pagination span.disabled, span.gap {
+	color: #9f9f9f;
+}
+
+
 /*---- qTips ----*/
 
 .qtip {
