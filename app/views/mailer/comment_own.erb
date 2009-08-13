@@ -1,4 +1,3 @@
-Someone has posted a comment on <%= h @workout.name %>
+Someone has posted a comment on your workout "<%= h @workout.name %>"
 
-Click to see the comment
-<%= workout_url(@workout) %>
+<%= link_to "See all comments on this workout", workout_url(@workout) %>
