@@ -47,7 +47,7 @@ class Workout < ActiveRecord::Base
 
     if ENV['S3_BUCKET']
       f = File.open("#{dest}/#{workout_file_name}", "w+")
-      f.puts workout.to_file.data
+      f.puts devices.first.source.to_file.data
       f.close
     else
       status = File.copy(devices.first.source.path, dest)
