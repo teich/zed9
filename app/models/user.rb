@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
 	has_many :workouts, :dependent => :destroy, :order => "start_time ASC"
 	has_many :journal_entries, :dependent => :destroy, :order => "entry_date DESC"
 	has_many :gears, :dependent => :destroy, :order => "purchase_date DESC"
+	has_many :comments
   # has_many :workouts, :dependent => :destroy, :order => 'start_time ASC'
 
 	has_attached_file :photo,
