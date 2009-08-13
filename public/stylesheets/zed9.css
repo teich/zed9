@@ -1558,18 +1558,29 @@ input.submit {
 
 /*---- Profile Page ----*/
 
-.profile_pic_big {
-	float: left;
-	left: 0px;
+.frame_container {
 	bottom: -6px;
 	position: relative;
-	border: 1px solid #d9d9d9;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;	
+	float: left;
+	left: 0px;
 	display: inline;
 	vertical-align: bottom;
+	overflow: hidden;	
+	width: 66px;
+	height: 66px;
+}
+
+.frame {
+	position: absolute;
+	z-index: 100;
+	background: transparent;
+}
+
+.profile_pic_big {
 	width: 64px;
+	position: absolute;
+	left: 1px;
+	top: 1px;
 }
 
 .profile_pic_big, .profile_pic_height_fix {
