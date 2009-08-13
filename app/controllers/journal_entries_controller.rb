@@ -6,17 +6,13 @@ class JournalEntriesController < ApplicationController
 	
 	def index
 
-    journal_entries = @user.journal_entries.find(:all, :order => "entry_date DESC")
-    gear_entries = @user.gears.find(:all, :order => "created_at DESC")
-    entries = journal_entries + gear_entries
-    # entries = []
-    # entries << journal_entries
-    # entries << gear_entries
-    @journal_feed = entries.sort { |a,b| b.created_at <=> a.created_at } 
-    # @journal_feed = @journal_feed.sort { |x,y| y.sort_timestamp <=> x.sort_timestamp } 
-
-    @journal_entries = @user.journal_entries.find(:all, :order => "entry_date DESC, created_at DESC")
     @gear = @user.gears.find(:all, :order => "created_at DESC")
+    @journal_entries = @user.journal_entries.find(:all, :order => "entry_date DESC, created_at DESC")
+
+    entries = @journal_entries + @gear
+    @journal_feed = entries.sort { |a,b| b.created_at <=> a.created_at } 
+    logger.debug(@journal_feed)
+
       
 		@current_weight = @user.weight(Time.now)
 		@lowest_weight = @user.journal_entries.find(:first, :order => "weight ASC", :conditions => ["weight IS NOT NULL"])

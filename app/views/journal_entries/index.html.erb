@@ -80,10 +80,18 @@
 				<tr>
 					<td class="journal_entry_date"><%=h time_as_date(journal_entry.sort_timestamp) %></td>
 					<td colspan="2">
-						<% if defined? journal_entry.weight %><span class="entry">Weighed in at <%=h journal_entry.weight %><span class="unit">lbs</span>.</span><% end -%>
-						<% if defined? journal_entry.vo2 %><span class="entry">Recorded a new VO<span class="subscript">2</span> max of <%=h journal_entry.vo2 %><span class="unit">ml/kg/min</span>.</span><% end -%>
-						<% if defined? journal_entry.other %><span class="entry"><%= h journal_entry.other %></span><% end -%>
-						<% if defined? journal_entry.name %><span class="entry">Added new gear: <%= h journal_entry.name %></span><% end -%>
+						<% if (defined? journal_entry.weight) && (journal_entry.weight) %>
+							<span class="entry">Weighed in at <%=h journal_entry.weight %><span class="unit">lbs</span>.</span>
+						<% end -%>
+						<% if (defined? journal_entry.vo2) && journal_entry.vo2 %>
+							<span class="entry">Recorded a new VO<span class="subscript">2</span> max of <%=h journal_entry.vo2 %><span class="unit">ml/kg/min</span>.</span>
+						<% end -%>
+						<% if (defined? journal_entry.other) && journal_entry.other %>
+							<span class="entry"><%= h journal_entry.other %></span>
+						<% end -%>
+						<% if (defined? journal_entry.name) && journal_entry.name %>
+							<span class="entry">Added new gear: <%= h journal_entry.name %></span>
+						<% end -%>
 					</td>
 				</tr>
 				<tr>
