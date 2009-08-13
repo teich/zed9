@@ -175,7 +175,7 @@ thead, th, td {
 }
 
 .unit {
-	font-weight: 100;
+/*	font-weight: 300;*/
 	font-size: 12px;
 }
 
@@ -487,7 +487,7 @@ thead, th, td {
 	-webkit-border-radius: 12px;
 	border-radius: 12px;
 	border:1px solid #d9d9d9;
-	background:#F5F8F9 url(/images/blue_gradient.png) repeat-x scroll 50% 50%; 
+	background:#F5F8F9 url(/images/blue_gradient.png) repeat scroll 50% 50%; 
 	margin-bottom: 36px;
 }
 
@@ -780,6 +780,36 @@ ol {
 
 .notice-item-close:hover {
 	color: white;
+}
+
+
+/*---- No Flash*/
+
+#no_flash_warning {
+	position: fixed;
+	bottom: 12px;
+	right: 12px;
+	width: 280px;
+	z-index: 9999;
+	display: block;
+	background: #333 url(/images/warning_icon.png) no-repeat 6px center;	
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	opacity: .9;
+}
+
+#no_flash_warning .warning_text {
+	height: auto;
+	color: white;
+	padding: 12px 12px 12px 48px;
+	font-size: 14px;
+	text-align: left;
+	font-weight: 300;
+	display: block;
+	position: relative;
+	margin: 0 0 12px 0;
+	cursor: pointer;
 }
 
 /*---- General use form styles ----*/
@@ -1500,7 +1530,26 @@ input.submit {
 
 /*---- Profile Page ----*/
 
-#profile_header td {
+.profile_pic_big {
+	float: left;
+	left: 0px;
+	bottom: -6px;
+	position: relative;
+	border: 1px solid #d9d9d9;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;	
+	display: inline;
+	vertical-align: bottom;
+	width: 64px;
+}
+
+.profile_pic_big, .profile_pic_height_fix {
+	height: 64px;
+}
+
+.profile_pic_height_fix {
+	width: 1px;
 	padding: 0px;
 }
 
@@ -2098,7 +2147,96 @@ td .points {
 	padding: 0px 4px;
 }
 
-a.globe {
+#workouts_nearby_wrapper {
+	float: right;
+	position: absolute;
+	vertical-align: top;
+	right: 0px;
+	top: -24px;
+/*	display: inline;*/
+}
+
+#workouts_nearby_link {
+/*	display: inline;*/
+	font-size: 14px;
+	font-weight: 300;
+	color:#25a1d6;
+	padding: 4px 12px 4px 8px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	background: white url(/images/rt.png) no-repeat right;	
+}
+
+#workouts_nearby_wrapper .show_options {
+	padding: 4px 11px 0px 8px;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	-moz-border-radius-bottomleft: 0px;
+	-moz-border-radius-bottomright: 0px;
+	-webkit-border-top-right-radius: 4px;
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-bottom-left-radius: none;
+	-webkit-border-bottom-right-radius: none;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: none;
+	border-bottom-right-radius: none;
+  border: 1px solid #d9d9d9;
+	border-bottom: none;
+	border-top: none;
+	border-left: none;
+	background: #f0f0f0 url(/images/dn.png) no-repeat right;	
+  opacity: .95;
+	z-index: 999;
+}
+
+#nearby_workouts_list_container {
+  border: 1px solid #d9d9d9;
+	border-top: none;
+	border-left: none;
+  padding: 8px 12px;
+	font-size: 14px;
+	text-align: left;
+  background: #f0f0f0;
+  opacity: .95;
+	-moz-border-radius: 8px;
+	-moz-border-radius-topright: 0px;
+	-webkit-border-radius: 8px;
+	-webkit-border-top-right-radius: 0px;
+	border-radius: 8px;
+	border-top-right-radius: 0px;
+	z-index: 900;
+	height: auto;
+	width: 420px;
+	display: none;
+	position: absolute;
+	right: 0px;
+}
+
+/* x to close options menu */
+#nearby_workouts_list_container .close {
+	float: right;
+	vertical-align: top;
+	text-align: right;
+  color: #d9d9d9;
+	padding: 4px;
+	top: 2px;
+	right: 2px;
+}
+
+#nearby_workouts_list_container ol {
+	margin: 0px 24px;
+	padding: 4px;
+}
+
+#nearby_workouts_list_container li {
+	font-weight: 300;
+	padding: 4px 0px;	
+}
+
+
+/*a.globe {
 	position: relative;
 	margin-left: -2px;
 	display: inline; 
@@ -2123,6 +2261,7 @@ a.delete-x {
 	position: absolute;
 	left: -5000px;
 }
+*/
 
 /*---- Workout comparison stats view ----*/
 
@@ -2257,6 +2396,7 @@ p.comp_activity {
 	float: left;
 	top: 11px;
 	padding-left: 8px;
+	vertical-align: top;
 }
 
 #options_link {
@@ -2268,11 +2408,11 @@ p.comp_activity {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
-	background: white url(/images/closed.png) no-repeat right;	
+	background: white url(/images/rt.png) no-repeat right;	
 }
 
 #graph_options_wrapper .show_options {
-	padding: 4px 14px 0px 8px;
+	padding: 4px 12px 0px 8px;
 	-moz-border-radius-topleft: 4px;
 	-moz-border-radius-topright: 4px;
 	-moz-border-radius-bottomleft: 0px;
@@ -2289,7 +2429,7 @@ p.comp_activity {
 	border-bottom: none;
 	border-top: none;
 	border-left: none;
-	background: #f0f0f0 url(/images/open.png) no-repeat right;	
+	background: #f0f0f0 url(/images/dn.png) no-repeat right;	
   opacity: .8;
 	z-index: 999;
 }
@@ -2306,7 +2446,7 @@ p.comp_activity {
 	-moz-border-radius: 8px;
 	-moz-border-radius-topleft: 0px;
 	-webkit-border-radius: 8px;
-	-webkit-border-top-left-radius: 8px;
+	-webkit-border-top-left-radius: 0px;
 	border-radius: 8px;
 	border-top-left-radius: 0px;
 	z-index: 900;
@@ -2382,6 +2522,9 @@ p.comp_activity {
 	font-weight: 500;
 	font-size: 14px;
 	padding-bottom: 2px;
+	float: right;
+	text-align: right;
+	padding-left: 48px;
 }
 
 #overlaps img {
@@ -2568,6 +2711,14 @@ p.comp_activity {
 	border-top:1px dotted #d9d9d9;	
 }
 
+#journal_index #entries_stream td.journal_entry_date {
+	padding-right: 8px;
+}
+
+#journal_index #entries_stream td span.entry {
+	padding-bottom: 6px;
+	display: block;
+}
 
 /*---- Admin pages ----*/
 

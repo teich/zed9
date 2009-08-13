@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   # has_many :workouts, :dependent => :destroy, :order => 'start_time ASC'
 
 	has_attached_file :photo,
+    :styles => { :thumb => "32x32#", :medium => "64x64#", :large => "128x128>" },
 		:storage => ENV['S3_BUCKET'] ? :s3 : :filesystem,
 		:s3_credentials => {
 			:access_key_id => ENV['S3_KEY'],
@@ -27,23 +28,23 @@ class User < ActiveRecord::Base
 		},
 		:bucket => ENV['S3_BUCKET'],
 		:path => ":class/:id_partition/:basename.:extension",
-		:s3_permissions => "private",
-    :styles => { :thumb=> "32x32#", :small  => "100x100>" }
+		:s3_permissions => "private"
       		
 	before_create :set_invitation_limit
 
-	attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :birthdate, :sex, :height, :time_zone, :shared, :displayname, :bio
-
+	#attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :birthdate, :sex, :height, :time_zone, :shared, :displayname, :bio, :photo
+# :photo_file_name, :photo_content_type, :photo_file_size
 
   def gear_expiring?
     return false if self.gears.nil? 
     if self.gears.size > 0
       for gear in self.gears
-        return false if gear.nil?
-        if (gear.percent_remaining <= 20)
+        if (gear.percent_remaining < 20)
           return true
+        else return false
         end
       end
+    else return false
     end
   end
 

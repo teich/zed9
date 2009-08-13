@@ -54,9 +54,17 @@ class Gear < ActiveRecord::Base
   end
   
   def percent_remaining_style
-    if percent_remaining <= 20
+    if percent_remaining < 20
       return "red"
     end
   end
+  
+  def sort_timestamp
+    self.created_at
+  end 
+
+  # def recent_entries
+  #   Gear.find(:all, :order => "created_at DESC")
+  # end
   
 end

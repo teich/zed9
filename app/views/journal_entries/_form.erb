@@ -14,6 +14,10 @@
 			<td><%= f.text_field :vo2, :size => 6 %> ml/kg/min</td>
 		</tr>
 		<tr>
+			<th>Other</th>
+			<td><%= f.text_area :other, :size => "69x4" %></td>
+		</tr>
+		<tr>
 			<th><%= link_to 'Cancel', user_journal_entries_path(current_user), :class => "submit_no_button" %></th>
 			<td><%= f.submit "Save", :class => "submit"  %></td>
 		</tr>

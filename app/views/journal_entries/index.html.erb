@@ -73,22 +73,39 @@
 	</div>
 
 	<div id="entries_stream" class="right_column">
-		<% if !(@journal_entries.size == 0) %>
-			<h2>Recent journal entries</h2>
+		<% if (@journal_feed.size > 0) %>
+			<h2>Entries</h2>
 			<table id="journal_entries_list">
-				<% for journal_entry in @journal_entries %>
+				<% for journal_entry in @journal_feed %>
 				<tr>
-					<td><%=h format_date_select(journal_entry.entry_date) %></td>
-					<td><% if !journal_entry.weight.nil? %>Weighed in at <%=h journal_entry.weight %><span class="unit">lbs</span>.<br><% end -%><% if !journal_entry.vo2.nil? %>Recorded a new VO<span class="subscript">2</span> max of <%=h journal_entry.vo2 %><span class="unit">ml/kg/min</span>.<br><% end -%></td>
+					<td class="journal_entry_date"><%=h time_as_date(journal_entry.sort_timestamp) %></td>
+					<td colspan="2">
+						<% if (defined? journal_entry.weight) && (journal_entry.weight) %>
+							<span class="entry">Weighed in at <%=h journal_entry.weight %><span class="unit">lbs</span>.</span>
+						<% end -%>
+						<% if (defined? journal_entry.vo2) && journal_entry.vo2 %>
+							<span class="entry">Recorded a new VO<span class="subscript">2</span> max of <%=h journal_entry.vo2 %><span class="unit">ml/kg/min</span>.</span>
+						<% end -%>
+						<% if (defined? journal_entry.other) && journal_entry.other %>
+							<span class="entry"><%= h journal_entry.other %></span>
+						<% end -%>
+						<% if (defined? journal_entry.name) && journal_entry.name %>
+							<span class="entry">Added new gear: <%= h journal_entry.name %></span>
+						<% end -%>
+					</td>
 				</tr>
 				<tr>
 					<td class="entry_metadata">&nbsp;</td>
-					<td class="entry_metadata">Posted <%=h time_ago_in_words(journal_entry.created_at) %> ago<br></td>
-					<td class="entry_metadata right">
+					<td class="entry_metadata">Posted <%=h time_ago_in_words(journal_entry.created_at) %> ago</td>
+					<td class="entry_metadata right no_wrap">
 						<%= link_to image_submit_tag("../../images/pencil.png", :class => "action_icon tip", :title => "edit", :alt => "edit |", :onmouseover => "this.src='../../images/pencil_on.png'", :onmouseout => "this.src='../../images/pencil.png'"), edit_journal_entry_path(journal_entry) %><%= link_to image_tag("../../images/trash.png", :class => "action_icon second tip",  :alt => "delete", :title => "delete", :onmouseover => "this.src='../../images/trash_on.png'", :onmouseout => "this.src='../../images/trash.png'"), journal_entry, :method => :delete, :confirm => "Are you sure you want to delete this journal entry?" %><br></td>
 				</tr>
 				<% end %>
 			</table>
+			
+			<%= link_to "Older Entries", journal_entries_path(:page => next_page) %>
+			
+			
 		<% end -%>
 	</div>
 
