@@ -6,7 +6,18 @@ class JournalEntriesController < ApplicationController
 	
 	def index
 
-		@journal_entries = @user.journal_entries.find(:all, :order => "entry_date DESC, created_at DESC")
+    journal_entries = @user.journal_entries.find(:all, :order => "entry_date DESC")
+    gear_entries = @user.gears.find(:all, :order => "created_at DESC")
+    entries = journal_entries + gear_entries
+    # entries = []
+    # entries << journal_entries
+    # entries << gear_entries
+    @journal_feed = entries.sort { |a,b| b.created_at <=> a.created_at } 
+    # @journal_feed = @journal_feed.sort { |x,y| y.sort_timestamp <=> x.sort_timestamp } 
+
+    @journal_entries = @user.journal_entries.find(:all, :order => "entry_date DESC, created_at DESC")
+    @gear = @user.gears.find(:all, :order => "created_at DESC")
+      
 		@current_weight = @user.weight(Time.now)
 		@lowest_weight = @user.journal_entries.find(:first, :order => "weight ASC", :conditions => ["weight IS NOT NULL"])
 		@highest_weight = @user.journal_entries.find(:first, :order => "weight DESC", :conditions => ["weight IS NOT NULL"])
@@ -74,6 +85,10 @@ class JournalEntriesController < ApplicationController
     end
 	end
 	
+  # def recent_entries
+  #   JournalEntry.find(:all, :order => "entry_date DESC")
+  # end
+  
   # def require_mine
   #   if @journal_entry.user != current_user
   #     add_flash(:alert, "This page is private")

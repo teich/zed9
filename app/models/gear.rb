@@ -59,4 +59,12 @@ class Gear < ActiveRecord::Base
     end
   end
   
+  def sort_timestamp
+    self.created_at
+  end 
+
+  # def recent_entries
+  #   Gear.find(:all, :order => "created_at DESC")
+  # end
+  
 end
