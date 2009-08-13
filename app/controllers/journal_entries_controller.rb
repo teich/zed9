@@ -7,20 +7,18 @@ class JournalEntriesController < ApplicationController
 	def index
 
     @gear = @user.gears.find(:all, :order => "created_at DESC")
+    @gears = @user.gears.find(:all, :order => "purchase_date DESC")
     @journal_entries = @user.journal_entries.find(:all, :order => "entry_date DESC, created_at DESC")
 
     entries = @journal_entries + @gear
-    @journal_feed = entries.sort { |a,b| b.created_at <=> a.created_at } 
+    @journal_feed = entries.sort { |a,b| b.created_at <=> a.created_at } .paginate :page => params[:page], :per_page => 5
     logger.debug(@journal_feed)
-
       
 		@current_weight = @user.weight(Time.now)
 		@lowest_weight = @user.journal_entries.find(:first, :order => "weight ASC", :conditions => ["weight IS NOT NULL"])
 		@highest_weight = @user.journal_entries.find(:first, :order => "weight DESC", :conditions => ["weight IS NOT NULL"])
 		@current_vo2 = @user.vo2(Time.now)
-				    
-    @gears = @user.gears.find(:all, :order => "purchase_date DESC")
-
+				        
 		respond_to do |format|
 			format.html
 			format.xml {render :xml => @journal_entries.to_xml }
