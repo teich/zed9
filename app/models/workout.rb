@@ -528,7 +528,6 @@ class Workout < ActiveRecord::Base
       max_lng = location.lng + distance
 
       nearby = Trackpoint.find(:all, :conditions => ["lat > ? AND lat < ? AND lng > ? AND lng < ?", min_lat, max_lat, min_lng, max_lng], :select => "DISTINCT workout_id").map {|tp| tp.workout_id }
-      logger.debug(nearby)
       
       workouts_nearby = Workout.find(:all, :conditions => ["id in (?)", nearby], :limit => 10)
       return workouts_nearby
