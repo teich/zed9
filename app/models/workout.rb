@@ -1,4 +1,5 @@
 class Workout < ActiveRecord::Base
+  
 	belongs_to  :user
 	belongs_to  :activity
 	belongs_to  :gear
@@ -38,11 +39,19 @@ class Workout < ActiveRecord::Base
   def perform
     
     # Make sure there is no existing data
-    self.trackpoints.map { |tp| tp.destroy }
+    trackpoints.map { |tp| tp.destroy }
     
     # Import the data
-    uploaded_data = ensure_string(self.devices.first.source.to_file)
-    type = Importer.file_type(self.devices.first.source_file_name)
+    
+    if (file is a zip)
+      unzip file, and set filename to
+    type = Importer.file_type(devices.first.source_file_name)
+
+    uploaded_data = ensure_string(devices.first.source.to_file)
+    
+#    content_type = MIME::Types.type_for(devices.first.source_file_name).first.content_type
+    
+    logger.debug("\n\n\n\n\n\n\n\n\n\n\n\n\nFound a thing, it's a #{type}\n\n\n\n\n\n\n\n\n\n\n\n\n")
     case type
     when "GARMIN_XML"
       importer = Importer::Garmin.new(:data => uploaded_data)
@@ -53,6 +62,7 @@ class Workout < ActiveRecord::Base
     when "GPX"
       importer = Importer::GPX.new(:data => uploaded_data)
     end
+    
     iw = importer.restore
     self.build_from_imported!(iw)
     self.importing = false

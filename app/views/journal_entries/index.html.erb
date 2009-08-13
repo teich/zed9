@@ -33,9 +33,9 @@
 		
 		<div id="gear">
 			<h2>Gear&nbsp;<%= link_to image_submit_tag("/images/add.png", :class => "action_icon tip", :title => "add equipment", :alt => "+", :onmouseover => "this.src='/images/add_on.png'", :onmouseout => "this.src='/images/add.png'"), new_user_gear_path(current_user) %></h2>
-			<% if @gears.size > 0 %>
+			<% if current_user.gears.size > 0 %>
 			<table>
-				<% for gear in @gears %>
+				<% for gear in current_user.gears %>
 				<tr>
 					<td class="gear_meta">
 						<div class="remaining">

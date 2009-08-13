@@ -52,8 +52,6 @@ class WorkoutsController < ApplicationController
 	def new
 		@rpe = RPE.new
 		@workout = current_user.workouts.build
-		@gears = current_user.gears.find(:all)
-
     @workout.set_defaults!
 		# setup one device for form.
 		@workout.devices.build
@@ -61,7 +59,6 @@ class WorkoutsController < ApplicationController
 
 	def edit
 		@rpe = RPE.new
-		@gears = current_user.gears.find(:all)
 	end
 
   def create
@@ -75,7 +72,8 @@ class WorkoutsController < ApplicationController
       if @workout.manual_entry?
         add_flash(:notice, "Sucessfully created your manual workout")
       else
-        Delayed::Job.enqueue WorkoutJob.new(@workout.id)
+#        Delayed::Job.enqueue WorkoutJob.new(@workout.id)
+        @workout.perform
         add_flash(:notice, 'Now processing your workout data... This may take up to a minute.')
       end
       redirect_to user_workouts_path(current_user)

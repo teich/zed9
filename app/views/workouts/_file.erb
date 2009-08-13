@@ -37,7 +37,7 @@
 		</tr>
 		<tr>
 			<th><%= f.label :gear_id, "Gear used" %></th>
-			<td><%= select("workout", "gear_id", @gears.collect {|g| [ g.name, g.id ] }, {:include_blank => 'None'}) %></td>
+			<td><%= select("workout", "gear_id", current_user.gears.collect {|g| [ g.name, g.id ] }, {:include_blank => 'None'}) %></td>
 		</tr>
 		<tr>
 			<% f.fields_for :devices do |d_f| %>
