@@ -520,12 +520,14 @@ class Workout < ActiveRecord::Base
     if gps_data?
       distance = 0.005
 
-      min_lat = trackpoints.first.lat - distance
-      max_lat = trackpoints.first.lat + distance
-      min_lng = trackpoints.first.lng - distance
-      max_lng = trackpoints.first.lng + distance
+      location = trackpoints.find(:first, :conditions => ['lat IS NOT NULL AND lng IS NOT NULL'])
+      logger.debug(location)
+      min_lat = location.lat - distance
+      max_lat = location.lat + distance
+      min_lng = location.lng - distance
+      max_lng = location.lng + distance
 
-      nearby = Trackpoint.find(:all, :conditions => ["lat > ? AND lat < ? AND lng > ? AND lng < ?", min_lat, max_lat, min_lng, max_lng], :group => "workout_id").map {|f| f.workout_id}
+      nearby = Trackpoint.find(:all, :conditions => ["lat > ? AND lat < ? AND lng > ? AND lng < ?", min_lat, max_lat, min_lng, max_lng], :select => "DISTINCT workout_id")
 
       workouts_nearby = Workout.find(:all, :conditions => ["id in (?)", nearby], :limit => 10)
       return workouts_nearby
