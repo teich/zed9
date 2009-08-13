@@ -175,7 +175,7 @@ thead, th, td {
 }
 
 .unit {
-	font-weight: 100;
+/*	font-weight: 300;*/
 	font-size: 12px;
 }
 
@@ -2711,6 +2711,14 @@ p.comp_activity {
 	border-top:1px dotted #d9d9d9;	
 }
 
+#journal_index #entries_stream td.journal_entry_date {
+	padding-right: 8px;
+}
+
+#journal_index #entries_stream td span.entry {
+	padding-bottom: 6px;
+	display: block;
+}
 
 /*---- Admin pages ----*/
 
