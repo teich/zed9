@@ -63,9 +63,12 @@ class Workout < ActiveRecord::Base
     Dir["#{dest}/*.*"].each do |file|
       logger.debug "Found this: #{file}"
       zip_workout = self.clone
+      zip_workout.devices.build
       zip_workout.devices.first.source = File.open file
-      zip_workout.name = "UNNAMED - $zip_workout.devices.first.source_file_name"
-      zip_work.save
+      zip_workout.name = zip_workout.devices.first.source_file_name
+      zip_workout.save
+      Delayed::Job.enqueue WorkoutJob.new(zip_workout.id)
+#      zip_workout.perform
       File.delete file
     end
     
