@@ -40,6 +40,8 @@ class Workout < ActiveRecord::Base
 	def unzip!
 	  tmp_dir = (0...8).map{65.+(rand(25)).chr}.join
     dest = RAILS_ROOT + "/tmp/" + tmp_dir
+    workout_file_name = devices.first.source_file_name
+    
     Dir::mkdir(dest)
     logger.debug "Made directory #{dest}"
 
@@ -48,8 +50,8 @@ class Workout < ActiveRecord::Base
       f.puts workout.to_file.data
       f.close
     else
-      status = File.copy(workout.path, dest)
-      logger.debug "Coppied file #{workout.path} to #{dest} with status #{status}"
+      status = File.copy(devices.first.source.path, dest)
+      logger.debug "Coppied file #{devices.first.soure.path} to #{dest} with status #{status}"
     end
 
     status = `unzip #{dest}/#{workout_file_name} -d #{dest}`
