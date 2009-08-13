@@ -24,11 +24,10 @@ class UsersController < ApplicationController
 
 		# list of most recent workouts
 		if my_page?
-      @workouts = @user.workouts.processed.find(:all, :limit =>20, :order => "updated_at DESC")
-      # @workouts = @user.workouts.processed.paginate( :page => params[:page], :order => 'updated_at DESC', :per_page => 6)
+      @workouts = @user.workouts.processed.find(:all, :order => "created_at DESC").paginate :page => params[:page], :per_page => 10
       
 	  else
-		  @workouts = @user.workouts.processed.find_all_by_shared(true, :limit=>20, :order => "updated_at DESC")
+		  @workouts = @user.workouts.processed.find_all_by_shared(true, :order => "created_at DESC").paginate :page => params[:page], :per_page => 10
 	  end
 
     @accomplishments = Accomplishment.find_all_by_user_id(@user, :order => "created_at DESC")

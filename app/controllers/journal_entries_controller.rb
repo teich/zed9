@@ -11,7 +11,7 @@ class JournalEntriesController < ApplicationController
     @journal_entries = @user.journal_entries.find(:all, :order => "entry_date DESC, created_at DESC")
 
     entries = @journal_entries + @gear
-    @journal_feed = entries.sort { |a,b| b.created_at <=> a.created_at } .paginate :page => params[:page], :per_page => 5
+    @journal_feed = entries.sort { |a,b| b.created_at <=> a.created_at } .paginate :page => params[:page], :per_page => 10
     logger.debug(@journal_feed)
       
 		@current_weight = @user.weight(Time.now)

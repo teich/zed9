@@ -102,9 +102,8 @@
 				</tr>
 				<% end %>
 			</table>
-			
-			<%= link_to "Older Entries", journal_entries_path(:page => next_page) %>
-			
+						
+			<%= will_paginate @journal_feed, :inner_window => 1, :outer_window => 0, :prev_label => "&laquo; Newer", :next_label => "Older &raquo;" %>
 			
 		<% end -%>
 	</div>

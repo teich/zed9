@@ -13,17 +13,16 @@ class WorkoutsController < ApplicationController
 		# TODO: DRY
 		if my_page?
 			if params[:tag]
-				@workouts = @user.workouts.find_tagged_with(params[:tag])
+				@workouts = @user.workouts.find_tagged_with(params[:tag]).paginate :page => params[:page], :per_page => 100
 			else
-        @workouts = @user.workouts.find(:all, :order => "start_time DESC")
-        # @workouts = @user.workouts.paginate( :page => params[:page], :order => 'start_time DESC', :per_page => 10)
+        @workouts = @user.workouts.find(:all, :order => "start_time DESC").paginate :page => params[:page], :per_page => 100
 			end
 			  	  
 		else
 			if params[:tag]
-				@workouts = @user.workouts.find_tagged_with(params[:tag])
+				@workouts = @user.workouts.find_tagged_with(params[:tag]).paginate :page => params[:page], :per_page => 100
 			else
-				@workouts = @user.workouts.find_all_by_shared(true, :order => "start_time DESC")
+				@workouts = @user.workouts.find_all_by_shared(true, :order => "start_time DESC").paginate :page => params[:page], :per_page => 100
 			end
 
 		end

@@ -27,8 +27,8 @@ class User < ActiveRecord::Base
 			:secret_access_key => ENV['S3_SECRET']
 		},
 		:bucket => ENV['S3_BUCKET'],
-		:path => ":class/:id_partition/:basename.:extension",
-		:s3_permissions => "private"
+		:path => ":class/:id_partition/:basename.:extension"
+    # :s3_permissions => "private"
       		
 	before_create :set_invitation_limit
 

@@ -192,6 +192,31 @@ thead, th, td {
 	border-radius: 8px;	
 }
 
+/*---- Pagination ----*/
+
+.pagination {
+	text-align: center;
+	padding-bottom: 12px 0px 24px 0px;
+}
+
+.prev_page {
+	padding-right: 8px;
+}
+
+.next_page {
+	padding-left: 8px;
+}
+
+.pagination span.current {
+	color:#1a4465;
+	font-weight: 500;
+}
+
+.pagination span.disabled, span.gap {
+	color: #9f9f9f;
+}
+
+
 /*---- qTips ----*/
 
 .qtip {
@@ -205,14 +230,14 @@ thead, th, td {
 /*---- Table Sorter styling ----*/
 
 .sortable th.headerSortUp {
-	background: #f7fdff url(/images/dn.png) no-repeat center right;
+	background: #ffffff url(/images/dn.png) no-repeat center right;
 	font-weight: 500;
 	color: #1a4465;
 	cursor: pointer;
 }
 
 .sortable th.headerSortDown {
-	background: #f7fdff url(/images/up.png) no-repeat center right;
+	background: #ffffff url(/images/up.png) no-repeat center right;
 	font-weight: 500;
 	color: #1a4465;
 	cursor: pointer;
@@ -991,6 +1016,10 @@ ol {
 	padding-bottom: 12px;
 }
 
+#workouts_feed .pagination {
+	padding: 12px 0px 0px 0px;
+}
+
 table.newsfeed {
 	width: 100%;	
 	border-bottom: 1px dotted #d9d9d9;
@@ -1426,7 +1455,6 @@ input.submit {
 
 #dashboard .title_unit {
 	font-size: 14px;
-	font-weight: 100;
 	color: #25a1d6;	
 }
 
@@ -1531,17 +1559,32 @@ input.submit {
 /*---- Profile Page ----*/
 
 .profile_pic_big {
-	float: left;
-	left: 0px;
-	bottom: -6px;
-	position: relative;
-	border: 1px solid #d9d9d9;
-	-moz-border-radius: 8px;
+	width: 64px;
+	position: absolute;
+	left: 1px;
+	top: 1px;
+}
+
+.frame_container {
+/*	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;	
+	border: 1px solid #d9d9d9;
+*/	bottom: -6px;
+	position: relative;
+	float: left;
+	left: 0px;
 	display: inline;
 	vertical-align: bottom;
-	width: 64px;
+	overflow: hidden;	
+	width: 66px;
+	height: 66px;
+}
+
+.frame {
+	position: absolute;
+	z-index: 100;
+	background: transparent;
 }
 
 .profile_pic_big, .profile_pic_height_fix {
@@ -1644,6 +1687,10 @@ td .points {
 }
 
 /*---- Workouts index ----*/
+
+#workouts .pagination {
+	padding: 12px 0px 0px 0px;
+}
 
 #workouts_list {
 	width: 100%;	
@@ -2703,7 +2750,7 @@ p.comp_activity {
 #journal_index #entries_stream td.entry_metadata {
 	font-size: 12px;
 	color: #9f9f9f;
-	padding: 4px 0px 12px 0px;
+	padding: 0px 0px 12px 0px;
 	border-bottom:1px dotted #d9d9d9;
 }
 

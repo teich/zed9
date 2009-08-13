@@ -1,7 +1,10 @@
 <div class="content_header" id="profile_header">
 
 	<h1>
-		<%= image_tag @user.photo.url(:medium), :class => "profile_pic_big", :alt => "" %>
+		<div class="frame_container">
+			<img src="/images/frame.png" class="frame">
+			<%= image_tag @user.photo.url(:medium), :class => "profile_pic_big", :alt => "" %>
+		</div>
 		<img src="/images/spacer.png" class="profile_pic_height_fix">
 		<%=h @user.display_name %> <span class="points">(<%= @user.points %> points)</span>
 		<% if my_page? %>
@@ -252,7 +255,7 @@
 			<% elsif @workouts.size == 0 %>
 				<p>No shared workouts yet...</p>
 			<% else %>
-				<p class="more_news"><%= link_to "See all", user_workouts_path(@user) %></p>
+				<%= will_paginate @workouts, :inner_window => 1, :outer_window => 0, :prev_label => "&laquo; Newer", :next_label => "Older &raquo;" %>
 			<% end %>
 		</div>
 		
