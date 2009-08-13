@@ -18,7 +18,7 @@ class Workout < ActiveRecord::Base
   
 	acts_as_taggable_on   :tags
 	
-	named_scope :processed, :conditions => ['importing == ? OR importing IS NULL', false]
+	named_scope :processed, :conditions => ['importing = ? OR importing IS NULL', false]
 	
 	def start_time_string
 	  start_time.to_s
