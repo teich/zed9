@@ -36,44 +36,78 @@ class Workout < ActiveRecord::Base
     self.end_time = Time.parse(end_time_str)
   end
 	
+	
+	def unzip!
+	  tmp_dir = (0...8).map{65.+(rand(25)).chr}.join
+    dest = RAILS_ROOT + "/tmp/" + tmp_dir
+    Dir::mkdir(dest)
+    logger.debug "Made directory #{dest}"
+
+    if ENV['S3_BUCKET']
+      f = File.open("#{dest}/#{workout_file_name}", "w+")
+      f.puts workout.to_file.data
+      f.close
+    else
+      status = File.copy(workout.path, dest)
+      logger.debug "Coppied file #{workout.path} to #{dest} with status #{status}"
+    end
+
+    status = `unzip #{dest}/#{workout_file_name} -d #{dest}`
+    logger.debug "Unzipped file #{workout_file_name} with status #{status}"
+    
+    File.delete("#{dest}/#{workout_file_name}")
+    logger.debug "Deleted the original zip file"
+    
+    Dir["#{dest}/*.*"].each do |file|
+      logger.debug "Found this: #{file}"
+      zip_workout = self.clone
+      zip_workout.devices.first.source = File.open file
+      zip_workout.name = "UNNAMED - $zip_workout.devices.first.source_file_name"
+      zip_work.save
+      File.delete file
+    end
+    
+    FileUtils.rm_rf dest
+    
+  end
+  
   def perform
     
     # Make sure there is no existing data
     trackpoints.map { |tp| tp.destroy }
     
     # Import the data
-    
-    if (file is a zip)
-      unzip file, and set filename to
-    type = Importer.file_type(devices.first.source_file_name)
-
-    uploaded_data = ensure_string(devices.first.source.to_file)
-    
-#    content_type = MIME::Types.type_for(devices.first.source_file_name).first.content_type
-    
-    logger.debug("\n\n\n\n\n\n\n\n\n\n\n\n\nFound a thing, it's a #{type}\n\n\n\n\n\n\n\n\n\n\n\n\n")
-    case type
-    when "GARMIN_XML"
-      importer = Importer::Garmin.new(:data => uploaded_data)
-    when "POLAR_HRM"
-      importer = Importer::Polar.new(:data => uploaded_data, :time_zone => self.user.time_zone)
-    when "SUUNTO"
-      importer = Importer::Suunto.new(:data => uploaded_data, :time_zone => self.user.time_zone)
-    when "GPX"
-      importer = Importer::GPX.new(:data => uploaded_data)
-    end
-    
-    iw = importer.restore
-    self.build_from_imported!(iw)
-    self.importing = false
-    if self.save
-      self.check_achievements
-      return true
+  
+    if (devices.first.zip?)
+      self.unzip!
+      self.destroy
     else
-      puts "Something went wrong"
-      return false
-    end
-    
+      type = Importer.file_type(devices.first.source_file_name)
+
+      uploaded_data = ensure_string(devices.first.source.to_file)
+
+      case type
+      when "GARMIN_XML"
+        importer = Importer::Garmin.new(:data => uploaded_data)
+      when "POLAR_HRM"
+        importer = Importer::Polar.new(:data => uploaded_data, :time_zone => self.user.time_zone)
+      when "SUUNTO"
+        importer = Importer::Suunto.new(:data => uploaded_data, :time_zone => self.user.time_zone)
+      when "GPX"
+        importer = Importer::GPX.new(:data => uploaded_data)
+      end
+
+      iw = importer.restore
+      self.build_from_imported!(iw)
+      self.importing = false
+      if self.save
+        self.check_achievements
+        return true
+      else
+        puts "Something went wrong"
+        return false
+      end
+    end    
   end
   
   def reprocess!

@@ -17,4 +17,8 @@ class Device < ActiveRecord::Base
 		def manual?
       mfg == "MANUAL"
 	  end
+	  
+	  def zip?
+	    source_content_type == "application/zip"
+    end
 end
