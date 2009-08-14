@@ -34,7 +34,7 @@
 				</div>
 			<% end -%>
 
-			<% if !(@workout.notes == "") %><p id="workout_notes"><%= simple_format @workout.notes %></p><% end -%>
+			<% if !(@workout.notes == "") %><span id="workout_notes"><%= simple_format @workout.notes %></span><% end -%>
 
 			<!-- Condition to only display Tags field when there are tags, or prompt owner to tag -->
 			<% if @workout.tags.size > 0 %>

@@ -2095,6 +2095,10 @@ td .points {
 	font-style: oblique;
 }
 
+#workout_notes p {
+	padding: 0px 0px 4px 0px;
+}
+
 #tag_set {
 	font-size: 14px;
 	display: inline;
