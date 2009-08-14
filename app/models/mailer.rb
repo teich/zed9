@@ -17,7 +17,7 @@ class Mailer < ActionMailer::Base
   
   def comment_own(workout, comment)
     subject       "Someone commented on one of your workouts"
-    from          "ZED9 <support@zednine.com"
+    from          "ZED9 <support@zednine.com>"
     recipients   workout.user.email
     sent_on       Time.now
     body          :workout => workout, :comment => comment
@@ -25,7 +25,7 @@ class Mailer < ActionMailer::Base
   
   def comment_following(workout, user, comment)
     subject       "A comment has been posted on a workout you are following"
-    from          "ZED9 <support@zednine.com"
+    from          "ZED9 <support@zednine.com>"
     recipients   user.email
     sent_on       Time.now
     body          :workout => workout, :user => user, :comment => comment
