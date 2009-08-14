@@ -583,7 +583,7 @@ class Workout < ActiveRecord::Base
 
   def workouts_nearby
     if gps_data?
-      distance = 0.005
+      distance = 0.01
 
       location = trackpoints.find(:first, :conditions => ['lat IS NOT NULL AND lng IS NOT NULL'])
       # logger.debug(location)
