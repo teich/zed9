@@ -169,7 +169,7 @@
 					<% elsif entry.class.name == "Comment" %>
 						<tr>
 							<td rowspan="2" class="entry_image_container">
-								<img src="/images/frame_sm.png" class="profile_pic_frame">
+								<%= link_to image_tag("/images/frame_sm.png", :class => "profile_pic_frame", :alt => ""), user_path(entry.user) %>
 								<%= image_tag entry.user.photo.url(:small), :class => "profile_pic", :alt => "" %>
 							</td>
 							<td class="entry">

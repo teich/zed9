@@ -1198,6 +1198,10 @@ table.newsfeed {
 	display: block;
 }
 
+.entry p {
+	padding: 0px;
+}
+
 .stream .profile_pic, .stream .activity_icon {
 	width: 36px;
 }

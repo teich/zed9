@@ -18,7 +18,6 @@ class RPE
       return ""
     end
     desc = OPTIONS.rassoc(value)[0] 
-    puts "desc is :#{desc}:"
     if desc == ""
       desc = OPTIONS.rassoc(value - 1)[0]  
     end

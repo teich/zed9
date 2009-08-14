@@ -15,19 +15,19 @@ class Mailer < ActionMailer::Base
     body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token)  
   end
   
-  def comment_own(workout)
+  def comment_own(workout, comment)
     subject       "Someone commented on one of your workouts"
     from          "ZED9 <support@zednine.com"
     recipients   workout.user.email
     sent_on       Time.now
-    body          :workout => workout
+    body          :workout => workout, :comment => comment
   end  
   
-  def comment_following(user, workout)
+  def comment_following(workout, user, comment)
     subject       "A comment has been posted on a workout you are following"
     from          "ZED9 <support@zednine.com"
     recipients   user.email
     sent_on       Time.now
-    body          :workout => workout, :user => user
+    body          :workout => workout, :user => user, :comment => comment
   end
 end
