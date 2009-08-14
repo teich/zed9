@@ -213,7 +213,7 @@
 				<table id="comments_list" class="stream">
 				<% for comment in @workout.comments %>
 					<tr>
-						<td rowspan="2" class="pic_cell">
+						<td rowspan="2" class="entry_image_container">
 							<div class="comment_pic_container">
 								<img src="/images/frame.png" class="comment_pic_frame">
 								<%= image_tag comment.user.photo.url(:medium), :class => "profile_pic_big", :alt => "" %>

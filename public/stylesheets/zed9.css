@@ -1187,6 +1187,11 @@ table.newsfeed {
 	height: 36px;	
 }
 
+#show_comments td.entry_image_container {
+	width: 78px;
+	height: 66px;	
+}
+
 .entry_headline {
 	font-size: 12px;
 	padding-bottom: 4px;
