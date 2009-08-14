@@ -183,12 +183,12 @@
 								<%= h entry.text %></td>
 						</tr>
 						<tr>
-							<td class="metadata">Posted <%=h time_ago_in_words(entry.created_at) %> ago</td>
+							<td class="metadata"><%=h time_ago_in_words(entry.created_at) %> ago</td>
 						</tr>
 					<% end %>
 				<% end %>
 			</table>
-			<%= will_paginate @activity_feed, :inner_window => 1, :outer_window => 0, :prev_label => "&laquo; Newer", :next_label => "Older &raquo;" %>
+			<%= will_paginate @activity_feed, :page_links => false, :prev_label => "&laquo; Newer", :next_label => "Older &raquo;" %>
 		</div>
 				
 	</div>

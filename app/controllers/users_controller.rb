@@ -22,6 +22,11 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find_by_login(params[:id])
 
+		@workouts = current_user.workouts.processed.find_all_by_shared(true, :order => "created_at DESC")
+    @comments = current_user.comments
+    entries = @workouts + @comments
+    @activity_feed = entries.sort { |a,b| b.created_at <=> a.created_at } .paginate :page => params[:page], :per_page => 10
+
 		# list of most recent workouts
 		if my_page?
       @workouts = @user.workouts.processed.find(:all, :order => "created_at DESC").paginate :page => params[:page], :per_page => 10
