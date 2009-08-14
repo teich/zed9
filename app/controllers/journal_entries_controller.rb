@@ -12,7 +12,6 @@ class JournalEntriesController < ApplicationController
 
     entries = @journal_entries + @gear
     @journal_feed = entries.sort { |a,b| b.created_at <=> a.created_at } .paginate :page => params[:page], :per_page => 10
-    logger.debug(@journal_feed)
       
 		@current_weight = @user.weight(Time.now)
 		@lowest_weight = @user.journal_entries.find(:first, :order => "weight ASC", :conditions => ["weight IS NOT NULL"])

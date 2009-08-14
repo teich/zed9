@@ -149,48 +149,46 @@
 
 	<div id="content_right_column" class="right_column">
 
-		<div id="workouts_feed">
-			<h2>Recent shared workouts</h2>
-			<table class="newsfeed">
-				<%= render :partial => @public_workouts, :locals => { :icon => true, :name => true, :date => false, :duration => false, :user => true } %>
-			</table>
-			<%= will_paginate @public_workouts, :inner_window => 1, :outer_window => 0, :prev_label => "&laquo; Newer", :next_label => "Older &raquo;" %>
-		</div>
-		
-
-		<div id="recent_comments">
-
-			<% if @comments.size > 0 %>
-				<div id="show_comments">
-					<h2>Recent comments</h2>
-					<table id="comments_list" class="stream">
-					<% for comment in @comments %>
+		<div id="all_activity">
+			<h2>Recent activity</h2>
+			<table class="stream">
+				<% for entry in @activity_feed %>
+					<% if entry.class.name == "Workout" %>
 						<tr>
-							<td rowspan="2" class="pic_cell">
-								<div class="comment_pic_container">
-									<img src="/images/frame.png" class="comment_pic_frame">
-									<%= image_tag comment.user.photo.url(:medium), :class => "profile_pic_big", :alt => "" %>
-								</div>
+							<td class="entry_image_container" rowspan="2"><%= link_to image_tag(entry.activity.root.icon_path, :class => "activity_icon tip", :alt => entry.activity.name, :title => entry.activity.name ), activity_path(entry.activity) %></td>
+							<td class="entry">
+								<span class="entry_headline"><%= link_to entry.user.display_name, user_path(entry.user) %> posted a new <% if entry.duration %><%= h number_to_short_time(entry.duration) %><span class="unit">h</span><% end -%><% if entry.distance %>, <%= h entry.distance_in_miles %><span class="unit">mile</span><% end -%> workout in <%= link_to entry.activity.name, activity_path(entry.activity) %>:</span>
+								<% if entry.notes == "" %><%= link_to entry.name, workout_path(entry) %><% else %><%= link_to entry.name, workout_path(entry), :class => "tip", :title => entry.notes %><% end %>
+							</td>
+						</tr>
+						<tr>
+							<td class="metadata">
+								Posted <%=h time_ago_in_words(entry.created_at) %> ago<% if entry.comments.size > 0 %><span class="comment_count_extended"><%= link_to "#{entry.comments.size} comments", workout_path(entry, :anchor => "comments") %></span><% end -%>
+							</td>
+						</tr>
+					<% elsif entry.class.name == "Comment" %>
+						<tr>
+							<td rowspan="2" class="entry_image_container">
+								<img src="/images/frame_sm.png" class="profile_pic_frame">
+								<%= image_tag entry.user.photo.url(:small), :class => "profile_pic", :alt => "" %>
 							</td>
 							<td class="entry">
 								<span class="entry_headline">
-								<% if (comment.user == find_commentable(comment.commentable_type, comment.commentable_id).user) %>
-									<%= link_to comment.user.display_name, user_path(comment.user) %> commented on <% if comment.user.sex == "female" %>her<% else %>his<% end %> own workout <%= link_to find_commentable(comment.commentable_type, comment.commentable_id).name, find_commentable(comment.commentable_type, comment.commentable_id) %>:
+								<% if (entry.user == find_commentable(entry.commentable_type, entry.commentable_id).user) %>
+									<%= link_to entry.user.display_name, user_path(entry.user) %> commented on <% if entry.user.sex == "female" %>her<% else %>his<% end %> own workout <%= link_to find_commentable(entry.commentable_type, entry.commentable_id).name, find_commentable(entry.commentable_type, entry.commentable_id) %>:
 								<% else %>
-								<%= link_to comment.user.display_name, user_path(comment.user) %> commented on <%= link_to find_commentable(comment.commentable_type, comment.commentable_id).name, find_commentable(comment.commentable_type, comment.commentable_id) %> by <%= link_to find_commentable(comment.commentable_type, comment.commentable_id).user.display_name, user_path(find_commentable(comment.commentable_type, comment.commentable_id).user) %>:
+								<%= link_to entry.user.display_name, user_path(entry.user) %> commented on <%= link_to find_commentable(entry.commentable_type, entry.commentable_id).name, find_commentable(entry.commentable_type, entry.commentable_id) %> by <%= link_to find_commentable(entry.commentable_type, entry.commentable_id).user.display_name, user_path(find_commentable(entry.commentable_type, entry.commentable_id).user) %>:
 								<% end %>
 								</span>
-								<%= h comment.text %></td>
+								<%= h entry.text %></td>
 						</tr>
 						<tr>
-							<td class="metadata">Posted <%=h time_ago_in_words(comment.created_at) %></td>
+							<td class="metadata">Posted <%=h time_ago_in_words(entry.created_at) %> ago</td>
 						</tr>
 					<% end %>
-					</table>
-					<%= will_paginate @comments, :inner_window => 1, :outer_window => 0, :prev_label => "&laquo; Newer", :next_label => "Older &raquo;" %>
-				</div>
-			<% end -%>
-
+				<% end %>
+			</table>
+			<%= will_paginate @activity_feed, :inner_window => 1, :outer_window => 0, :prev_label => "&laquo; Newer", :next_label => "Older &raquo;" %>
 		</div>
 				
 	</div>

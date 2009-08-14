@@ -1175,10 +1175,15 @@ table.newsfeed {
 	background: transparent;
 }
 
-.stream td.pic_cell {
-	padding: 10px 12px 10px 0px;
+.stream td.entry_image_container {
 	border-bottom:1px dotted #d9d9d9;
-	width: 66px;
+	padding: 10px 4px 10px 0px;
+	position: relative;
+	left: 0px;
+	vertical-align: top;
+	overflow: hidden;	
+	width: 36px;
+	height: 36px;	
 }
 
 .entry_headline {
@@ -1187,51 +1192,33 @@ table.newsfeed {
 	display: block;
 }
 
-.small_pic_container {
-	position: relative;
-	left: 0px;
-	display: block;
-	vertical-align: bottom;
-	overflow: hidden;	
+.stream .profile_pic, .stream .activity_icon {
 	width: 36px;
-	height: 36px;
 }
 
-.small_pic_frame {
+.stream .profile_pic_frame {
+/*	border: 1px solid #d9d9d9;*/
+	width: 36px;
+	height: 36px;
 	position: absolute;
 	z-index: 100;
 	background: transparent;
 }
 
-td.small_pic_cell {
-	padding: 8px 12px 10px 0px;
-	border-bottom:1px dotted #d9d9d9;
-	width: 48px;
+.stream .comment_count_extended {
+	padding-left: 12px;
+	margin-left: 12px;
+	border-left:1px dotted #d9d9d9;
 }
 
-.profile_pic_small {
-	width: 36px;
-/*	position: absolute;*/
-/*	left: 1px;*/
-/*	top: 1px;*/
-	border: 1px solid #d9d9d9;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
+#all_activity .stream {
+	padding-bottom: 12px;
 }
 
-/*#comments #show_comments {
-	padding-top: 24px;
-	width: 100%;
-	border-bottom: 1px dotted #d9d9d9;
+#all_activity {
+	padding-bottom: 24px;
 }
 
-#comments .comment_text {
-	padding: 12px 0px;
-	font-size: 14px;
-	border-top: 1px dotted #d9d9d9;
-}
-*/
 /*---- Leaderboards ----*/
 
 #leaderboards {
