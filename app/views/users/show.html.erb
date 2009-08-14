@@ -276,7 +276,7 @@
 								<%= link_to entry.user.display_name, user_path(entry.user) %> commented on <%= link_to find_commentable(entry.commentable_type, entry.commentable_id).name, find_commentable(entry.commentable_type, entry.commentable_id) %> by <%= link_to find_commentable(entry.commentable_type, entry.commentable_id).user.display_name, user_path(find_commentable(entry.commentable_type, entry.commentable_id).user) %>:
 								<% end %>
 								</span>
-								<%= h entry.text %></td>
+								<%= simple_format truncate_words(entry.text) %></td>
 						</tr>
 						<tr>
 							<td class="metadata"><%=h time_ago_in_words(entry.created_at) %> ago</td>

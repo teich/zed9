@@ -34,7 +34,7 @@
 				</div>
 			<% end -%>
 
-			<p id="workout_notes"><%= h @workout.notes %></p>
+			<p id="workout_notes"><%= simple_format @workout.notes %></p>
 
 			<!-- Condition to only display Tags field when there are tags, or prompt owner to tag -->
 			<% if @workout.tags.size > 0 %>
@@ -219,7 +219,7 @@
 								<%= image_tag comment.user.photo.url(:medium), :class => "profile_pic_big", :alt => "" %>
 							</div>
 						</td>
-						<td class="entry" colspan="2"><%= h comment.text %></td>
+						<td class="entry" colspan="2"><%= simple_format comment.text %></td>
 					</tr>
 					<tr>
 						<td class="metadata">Posted <%=h activity_timestamp_shorter(comment.created_at) %> by <%= h comment.user.display_name %></td>
