@@ -75,7 +75,7 @@ class WorkoutsController < ApplicationController
       else
         Delayed::Job.enqueue WorkoutJob.new(@workout.id)
         # @workout.perform
-        add_flash(:notice, 'Now processing your workout data... This may take up to a minute.')
+        add_flash(:notice, 'Now processing your workout data... This may take a minute.')
       end
       redirect_to user_workouts_path(current_user)
     else
