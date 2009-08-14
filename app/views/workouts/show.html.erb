@@ -195,10 +195,10 @@
 				</div>
 			</div>
 
-			<% if @workout.hr %>
-				<div id="json_heartrate_big" class="big_visualization"></div>
-			<% else %>
+			<% if @workout.speed %>
 				<div id="json_speed_big" class="big_visualization"></div>
+			<% else %>
+				<div id="json_heartrate_big" class="big_visualization"></div>
 			<% end %>
 
 		</div>

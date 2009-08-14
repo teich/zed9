@@ -44,7 +44,6 @@ class Workout < ActiveRecord::Base
     workout_file_name = devices.first.source_file_name
     
     Dir::mkdir(dest)
-    logger.debug "Made directory #{dest}"
 
     if ENV['S3_BUCKET']
       f = File.open("#{dest}/#{workout_file_name}", "w+")
@@ -52,14 +51,11 @@ class Workout < ActiveRecord::Base
       f.close
     else
       status = File.copy(devices.first.source.path, dest)
-      logger.debug "Coppied file #{devices.first.soure.path} to #{dest} with status #{status}"
     end
 
     status = `unzip #{dest}/#{workout_file_name} -d #{dest}`
-    logger.debug "Unzipped file #{workout_file_name} with status #{status}"
     
     File.delete("#{dest}/#{workout_file_name}")
-    logger.debug "Deleted the original zip file"
     
     Dir["#{dest}/*.*"].each do |file|
       logger.debug "Found this: #{file}"
