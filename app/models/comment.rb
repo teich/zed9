@@ -3,7 +3,7 @@ class Comment < ActiveRecord::Base
   belongs_to :user
 
   def my_comment?
-    @user == self.user
+    @current_user == self.user
   end
 
   def notify!(commentable, current_user)

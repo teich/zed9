@@ -17,6 +17,13 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    add_flash(:notice, "Comment deleted")
+    redirect_to workout_path(@comment.commentable_id)
+  end
+
   private
 
   def find_commentable
@@ -28,4 +35,5 @@ class CommentsController < ApplicationController
     nil
   end
   
+
 end

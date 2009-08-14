@@ -190,5 +190,9 @@ module ApplicationHelper
   def no_leaders?
     @farthest.size == 0 && @fastest.size == 0 && @longest.size == 0 && @climbers.size == 0 && @heart_pumping.size == 0
   end
+
+  def find_commentable(type, id)
+    return type.classify.constantize.find(id)
+  end
   
 end

@@ -157,8 +157,40 @@
 			<%= will_paginate @public_workouts, :inner_window => 1, :outer_window => 0, :prev_label => "&laquo; Newer", :next_label => "Older &raquo;" %>
 		</div>
 		
+
 		<div id="recent_comments">
-			<h2>Recent comments</h2>
+
+			<% if @comments.size > 0 %>
+				<div id="show_comments">
+					<h2>Recent comments</h2>
+					<table id="comments_list" class="stream">
+					<% for comment in @comments %>
+						<tr>
+							<td rowspan="2" class="pic_cell">
+								<div class="comment_pic_container">
+									<img src="/images/frame.png" class="comment_pic_frame">
+									<%= image_tag comment.user.photo.url(:medium), :class => "profile_pic_big", :alt => "" %>
+								</div>
+							</td>
+							<td class="entry">
+								<span class="entry_headline">
+								<% if (comment.user == find_commentable(comment.commentable_type, comment.commentable_id).user) %>
+									<%= link_to comment.user.display_name, user_path(comment.user) %> commented on <% if comment.user.sex == "female" %>her<% else %>his<% end %> own workout <%= link_to find_commentable(comment.commentable_type, comment.commentable_id).name, find_commentable(comment.commentable_type, comment.commentable_id) %>:
+								<% else %>
+								<%= link_to comment.user.display_name, user_path(comment.user) %> commented on <%= link_to find_commentable(comment.commentable_type, comment.commentable_id).name, find_commentable(comment.commentable_type, comment.commentable_id) %> by <%= link_to find_commentable(comment.commentable_type, comment.commentable_id).user.display_name, user_path(find_commentable(comment.commentable_type, comment.commentable_id).user) %>:
+								<% end %>
+								</span>
+								<%= h comment.text %></td>
+						</tr>
+						<tr>
+							<td class="metadata">Posted <%=h time_ago_in_words(comment.created_at) %></td>
+						</tr>
+					<% end %>
+					</table>
+					<%= will_paginate @comments, :inner_window => 1, :outer_window => 0, :prev_label => "&laquo; Newer", :next_label => "Older &raquo;" %>
+				</div>
+			<% end -%>
+
 		</div>
 				
 	</div>

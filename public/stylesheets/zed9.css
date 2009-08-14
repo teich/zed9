@@ -1136,7 +1136,7 @@ table.newsfeed {
 	padding-bottom: 12px;
 }
 
-#comments td, #comments tr, #comments table {
+#add_comment td, #add_comment tr, #add_comment table {
 	border-collapse:collapse;
 	width: 100%;
 }
@@ -1157,6 +1157,67 @@ table.newsfeed {
 
 #comments #show_comments {
 	padding-bottom: 24px;
+}
+
+.comment_pic_container {
+	position: relative;
+	left: 0px;
+	display: block;
+	vertical-align: bottom;
+	overflow: hidden;	
+	width: 66px;
+	height: 66px;
+}
+
+.comment_pic_frame {
+	position: absolute;
+	z-index: 100;
+	background: transparent;
+}
+
+.stream td.pic_cell {
+	padding: 10px 12px 10px 0px;
+	border-bottom:1px dotted #d9d9d9;
+	width: 66px;
+}
+
+.entry_headline {
+	font-size: 12px;
+	padding-bottom: 8px;
+	display: block;
+}
+
+.small_pic_container {
+	position: relative;
+	left: 0px;
+	display: block;
+	vertical-align: bottom;
+	overflow: hidden;	
+	width: 36px;
+	height: 36px;
+}
+
+.small_pic_frame {
+	position: absolute;
+	z-index: 100;
+	background: transparent;
+}
+
+td.small_pic_cell {
+	padding: 8px 12px 10px 0px;
+	border-bottom:1px dotted #d9d9d9;
+	width: 48px;
+}
+
+.profile_pic_small {
+	width: 36px;
+/*	position: absolute;*/
+/*	left: 1px;*/
+/*	top: 1px;*/
+	border: 1px solid #d9d9d9;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
 }
 
 /*#comments #show_comments {
@@ -2257,7 +2318,7 @@ p.comp_activity {
 	text-align: left;
 	position: relative;
 	top: 24px;
-	padding-bottom: 24px;
+	padding-bottom: 36px;
 	clear: both;
 }
 
@@ -2600,6 +2661,7 @@ p.comp_activity {
 	color: #9f9f9f;
 	padding: 0px 0px 12px 0px;
 	border-bottom:1px dotted #d9d9d9;
+	vertical-align: bottom;
 }
 
 #journal_entries_list, .stream {
