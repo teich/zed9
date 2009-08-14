@@ -130,7 +130,7 @@ class User < ActiveRecord::Base
   end
 	
 	def points
-    (accomplishments.size * 10) + self.workouts.size + self.journal_entries.size
+    (accomplishments.size * 10) + self.workouts.size + self.journal_entries.size + self.comments.size
   end
   
   def json_workouts_per_week
