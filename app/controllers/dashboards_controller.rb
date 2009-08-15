@@ -21,11 +21,12 @@ class DashboardsController < ApplicationController
 		@climbers = current_user.workouts.find(:all, :conditions => ['elevation > ?', 0], :order => "elevation DESC", :limit => 5)
 		@heart_pumping = current_user.workouts.find(:all, :conditions => ['hr > ?', 0], :order => "hr DESC", :limit => 5)
 
-		durations = @workouts.map { |w| w.duration }
+    @my_workouts = current_user.workouts.processed
+    durations = @my_workouts.map { |w| w.duration }
 		if durations.nil?
-			@total_time = 0
+			@my_total_time = 0
 		else
-			@total_time = durations.compact.asum
+			@my_total_time = durations.compact.asum
 		end
 
 		# TODO: pull out of controller!
@@ -42,7 +43,7 @@ class DashboardsController < ApplicationController
 		end 
 		@atd = aud.aaverage
 
-    @comments = Comment.find(:all, :order => "created_at DESC").paginate :page => params[:page], :per_page => 10
+    # @comments = Comment.find(:all, :order => "created_at DESC").paginate :page => params[:page], :per_page => 10
 
 		respond_to do |format|
 			format.html

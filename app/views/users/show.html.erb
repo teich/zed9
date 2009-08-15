@@ -25,7 +25,7 @@
 	<div class="left_column">
 	
 		<div id="profile_stats">
-			<p><% if my_page? %>You've<% else %><%=h @user.display_name %> has<% end %> logged <span class="your_number"><%= link_to number_to_short_time(@total_time), user_workouts_path(@user) %></span><span class="title_unit">h</span> across <span class="your_number"><%= link_to @workouts.size, user_workouts_path(@user) %></span> workout<% if !(@workouts.size == 1) %>s<% end %>.</p>
+			<p><% if my_page? %>You've<% else %><%=h @user.display_name %> has<% end %> logged <span class="your_number"><%= link_to number_to_short_time(@my_total_time), user_workouts_path(@user) %></span><span class="title_unit">h</span> across <span class="your_number"><%= link_to @my_workouts.size, user_workouts_path(@user) %></span> workout<% if !(@my_workouts.size == 1) %>s<% end %>.</p>
 		</div>
 
 		<div id="achievements" class="achievements">

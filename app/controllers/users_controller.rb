@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
 		# list of most recent workouts
 		if my_page?
-      @workouts = @user.workouts.processed.find(:all, :order => "created_at DESC").paginate :page => params[:page], :per_page => 10
+      @workouts = @user.workouts.processed.paginate :page => params[:page], :per_page => 10
       
 	  else
 		  @workouts = @user.workouts.processed.find_all_by_shared(true, :order => "created_at DESC").paginate :page => params[:page], :per_page => 10
@@ -37,11 +37,12 @@ class UsersController < ApplicationController
 
     @accomplishments = Accomplishment.find_all_by_user_id(@user, :order => "created_at DESC")
 
-		durations = @workouts.map { |w| w.duration }
+    @my_workouts = @user.workouts.processed
+		durations = @my_workouts.map { |w| w.duration }
 		if durations.nil?
-			@total_time = 0
+			@my_total_time = 0
 		else
-			@total_time = durations.compact.asum
+			@my_total_time = durations.compact.asum
 		end
 
 		@farthest = @user.workouts.find(:all, :conditions => ['distance > ?', 0], :order => "distance DESC", :limit => 5)
