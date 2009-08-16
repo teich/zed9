@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   # has_many :workouts, :dependent => :destroy, :order => 'start_time ASC'
 
 	has_attached_file :photo,
-    :styles => { :thumb => "32x32#", :medium => "64x64#", :large => "128x128>" },
+    :styles => { :small => "36x36#", :medium => "64x64#", :large => "128x128>" },
 		:storage => ENV['S3_BUCKET'] ? :s3 : :filesystem,
 		:s3_credentials => {
 			:access_key_id => ENV['S3_KEY'],
