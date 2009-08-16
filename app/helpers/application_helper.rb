@@ -195,7 +195,7 @@ module ApplicationHelper
     return type.classify.constantize.find(id)
   end
   
-  def truncate_words(text, length = 32, end_string = ' …')
+  def truncate_words(text, length = 30, end_string = ' …')
     return if text == nil
     words = text.split()
     words[0..(length-1)].join(' ') + (words.length > length ? end_string : '')
