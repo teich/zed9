@@ -28,9 +28,7 @@ class User < ActiveRecord::Base
 			:secret_access_key => ENV['S3_SECRET']
 		},
 		:bucket => ENV['S3_BUCKET'],
-    :path => ":class/:id/:style.:extension",
-    # :path => ":attachment/:id/:style.:extension",
-    # :path => ":class/:id_partition/:style.:extension",
+    :path => ":attachment/:id/:style.:extension",
 		:default_url => "/images/anonymous.png"
     # :s3_permissions => "private"
       		
