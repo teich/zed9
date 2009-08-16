@@ -168,9 +168,9 @@
 						</tr>
 					<% elsif entry.class.name == "Comment" %>
 						<tr>
-							<td rowspan="2" class="entry_image_container">
-								<%= link_to image_tag("/images/frame_sm.png", :class => "profile_pic_frame", :alt => ""), user_path(entry.user) %>
-								<%= image_tag entry.user.photo.url(:small), :class => "profile_pic", :alt => "" %>
+							<td rowspan="2" class="entry_image_container no_overflow">
+								<div class="no_overflow"><%= link_to image_tag("/images/frame_sm.png", :class => "profile_pic_frame", :alt => ""), user_path(entry.user) %>
+								<%= image_tag entry.user.photo.url(:small), :class => "profile_pic no_overflow", :alt => "" %></div>
 							</td>
 							<td class="entry">
 								<span class="entry_headline">

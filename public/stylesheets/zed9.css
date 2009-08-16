@@ -1178,7 +1178,7 @@ table.newsfeed {
 
 .stream td.entry_image_container {
 	border-bottom:1px dotted #d9d9d9;
-	padding: 8px 0px 8px 0px;
+	padding: 8px 8px 8px 0px;
 	position: relative;
 	left: 0px;
 	vertical-align: top;
@@ -1187,9 +1187,17 @@ table.newsfeed {
 	height: 36px;	
 }
 
+#profile td.entry_image_container {
+	padding: 8px 0px 8px 0px !important;
+}
+
 #show_comments td.entry_image_container {
 	width: 78px;
 	height: 66px;	
+}
+
+.no_overflow {
+	overflow: hidden;
 }
 
 .entry_headline {
@@ -1204,6 +1212,7 @@ table.newsfeed {
 
 .stream .profile_pic, .stream .activity_icon {
 	width: 36px;
+	height: 36px;
 }
 
 .stream .profile_pic_frame {
