@@ -1178,7 +1178,7 @@ table.newsfeed {
 
 .stream td.entry_image_container {
 	border-bottom:1px dotted #d9d9d9;
-	padding: 8px 8px 8px 0px;
+	padding: 8px 0px 8px 0px;
 	position: relative;
 	left: 0px;
 	vertical-align: top;
