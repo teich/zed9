@@ -202,16 +202,16 @@ class User < ActiveRecord::Base
   
   def workouts_per_week(weeks_ago, activity = nil, exclude = nil)
     if !exclude.nil?
-      workouts.count(:conditions => ['start_time < ? AND start_time > ? AND activity_id NOT IN (?)', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago, exclude])
+      workouts.processed.count(:conditions => ['start_time < ? AND start_time >= ? AND activity_id NOT IN (?)', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago, exclude])
     elsif activity.nil?
-      workouts.count(:conditions => ['start_time < ? AND start_time > ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago])
+      workouts.processed.count(:conditions => ['start_time < ? AND start_time >= ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago])
     else
-      workouts.count(:conditions => ['start_time < ? AND start_time > ? AND activity_id = ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago, activity])
+      workouts.processed.count(:conditions => ['start_time < ? AND start_time >= ? AND activity_id = ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago, activity])
     end
   end
   
   def hours_per_week(weeks_ago)
-    workouts.sum('duration', :conditions =>  ['start_time < ? AND start_time > ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago]) / 3600
+    workouts.processed.sum('duration', :conditions =>  ['start_time < ? AND start_time >= ?', weeks_ago.weeks.ago, (weeks_ago + 1).weeks.ago]) / 3600
   end
   
   def deliver_password_reset_instructions!  
