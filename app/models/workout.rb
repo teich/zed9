@@ -536,12 +536,12 @@ class Workout < ActiveRecord::Base
 	
 	def graph_fields
 	  fields = []
-	  if !self.hr.nil? && self.hr > 0
-	    fields << ["heartrate", "Heart Rate"]
-    end
-    
     if !self.speed.nil? && self.speed > 0
       fields << ["speed", "Speed"]
+    end
+    
+	  if !self.hr.nil? && self.hr > 0
+	    fields << ["heartrate", "Heart Rate"]
     end
     
     if !self.elevation.nil? && self.elevation > 0
