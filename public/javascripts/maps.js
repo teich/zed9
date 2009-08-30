@@ -1,4 +1,4 @@
-google.load("maps", "2");
+google.load("maps", "2.s");
 var z9map = {};
 
 // show the current location icon
