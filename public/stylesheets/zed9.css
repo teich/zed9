@@ -121,7 +121,7 @@ h1 {
 
 h1 .by {
 	font-size: 24px;
-	font-weight: 100;
+	font-weight: 300;
 }
 
 h2 {
@@ -184,7 +184,7 @@ thead, th, td {
   border: 1px solid #d9d9d9;
   padding: 18px;
 	font-size: 18px;
-	font-weight: 100;
+	font-weight: 300;
 	text-align: left;
   opacity: .9;
 	-moz-border-radius: 8px;
@@ -327,6 +327,7 @@ thead, th, td {
 	display:inline;
 	padding:0px 12px 0px 12px;
 	border-right:1px dotted #d9d9d9;
+	font-weight: 300;
 }
 
 #nav .first {
@@ -338,6 +339,7 @@ thead, th, td {
 }
 
 /*Loginpane is the top-right div containing the welcome, user...*/
+
 #loginpane {
 	font-size: 10pt;
 	float: right;
@@ -354,6 +356,7 @@ thead, th, td {
 	float: left;
 	border-right:1px dotted #d9d9d9;
 	position: relative;
+	font-weight: 300;
 }
 
 #loginpane .last {
@@ -719,7 +722,7 @@ ol {
 }
 
 .errorExplanation p, ul, li {
-	font-weight: 100;
+	font-weight: 300;
 	font-size: 14px;
 }
 
@@ -1257,7 +1260,7 @@ table.newsfeed {
 }
 	
 #leaderboards	.display_name {
-	font-weight: 100;
+	font-weight: 300;
 }
 
 .leaderboard {
@@ -1271,7 +1274,7 @@ table.newsfeed {
 	-webkit-border-radius: 8px;
 	border-radius: 8px;
 	color: #545454;
-	font-weight: 100;
+	font-weight: 300;
 	font-size: 18px;
 	text-align: left;
 	vertical-align: top;
@@ -2305,7 +2308,7 @@ span.value {
 
 #workout_stats .max {
 	font-size: 18px;
-	font-weight: 100;
+	font-weight: 300;
 }
 
 /*Formatting for content in comparison tooltip*/
@@ -2376,7 +2379,7 @@ p.comp_activity {
 #options_link {
 	display: inline;
 	font-size: 12px;
-	font-weight: 100;
+	font-weight: 300;
 	color:#25a1d6;
 	padding: 4px 14px 4px 8px;
 	-moz-border-radius: 4px;
