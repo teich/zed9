@@ -20,8 +20,8 @@ function z9MapInit(points) {
 	   
 		// Setup the points we're using
 	for (var i = 0; i < points.length; i++) {
-		lat = points[i]["data"][0];
-		lng = points[i]["data"][1];
+		lat = parseFloat(points[i]["data"][0]);
+		lng = parseFloat(points[i]["data"][1]);
 		time = points[i]["time"];
 		z9map.points[i] = new google.maps.LatLng(lat, lng);
 		z9map.bounds.extend(z9map.points[i])
