@@ -5,7 +5,7 @@ class Workout < ActiveRecord::Base
 	belongs_to  :gear
 	has_many    :trackpoints, :order => 'time ASC'
 	has_many    :devices
-	has_many    :comments, :as => :commentable
+	has_many    :comments, :as => :commentable, :dependent => :destroy
 	
 	accepts_nested_attributes_for :devices
 
