@@ -9,18 +9,26 @@
 
 		<table>
 			<tr>
-				<th class="first_column">User name</th>
+				<th class="first_column">Login</th>
+				<th class="centered">Name</th>
 				<th class="centered">Last login</th>
-				<th class="centered">Login count</th>
+				<th class="centered">Logins</th>
 				<th class="centered">Workouts</th>
+				<th class="centered">Comments</th>
+				<th class="centered">Points</th>
+				<th class="centered">Invites remaining</th>
 				<th class="last_column">Email</th>
 			</tr>
 			<% for user in @users %>
 			<tr>
-				<td class="first_column name"><%= h user.login %></td>
-				<td class="centered"><%= h user.last_login_at %></td>
+				<td class="first_column"><%= h user.login %></td>
+				<td class="centered"><%= h user.display_name %></td>
+				<td class="centered"><%= h time_as_date(user.last_login_at) %></td>
 				<td class="centered"><%= h user.login_count %></td>
 				<td class="centered"><%= h user.workouts.size %></td>
+				<td class="centered"><%= h user.comments.size %></td>
+				<td class="centered"><%= h user.points %></td>
+				<td class="centered"><%= h user.invitation_limit %></td>
 				<td class="last_column"><%= h user.email %></td>
 			</tr>
 			<% end %>
@@ -29,18 +37,34 @@
 	</div>
 
 	<div id="invites_sent">
-		<h2><%=h @invited.size %> invites sent</h2>
+		<h2><%=h @invited.size %> invites sent 
+				<!-- <span class="conversion_data"><%= h @invited_by_admin.size %> invites by admins (<%= h @admin_conversion %>% conversion)</p> -->
+		</h2>
 		<table>
 			<tr>
-				<th class="first_column">Recipient's email</th>
-				<th class="centered">Sender's login</th>
-				<th class="last_column">Invitation date</th>
+				<th class="first_column">Sender's login</th>
+				<th class="centered">Sender's name</th>
+				<th class="centered">Invitation date</th>
+				<th class="centered">Signup date</th>
+				<th class="centered">Recipient's login</th>
+				<th class="centered">Recipient's name</th>
+				<th class="last_column">Recipient's email</th>
 			</tr>
 		<% for invite in @invited %>
 			<tr>
-				<td class="first_column name"><%=h invite.recipient_email %></td>
-				<td class="centered"><%=h invite.sender.login if !invite.sender.nil? %></td>
-				<td class="last_column"><%=h time_as_date(invite.sent_at) %></td>
+				<td class="first_column"><%=h invite.sender.login if !invite.sender.nil? %></td>
+				<td class="centered"><%=h invite.sender.display_name if !invite.sender.nil? %></td>
+				<td class="centered"><%=h time_as_date(invite.sent_at) %></td>
+				<% if !User.find_by_email(invite.recipient_email).nil? %>
+				<td class="centered"><%= h time_as_date(User.find_by_email(invite.recipient_email).created_at) %></td>
+				<td class="centered"><%= h User.find_by_email(invite.recipient_email).login %></td>
+				<td class="centered"><%= h User.find_by_email(invite.recipient_email).display_name %></td>
+				<% else %>
+				<td class="centered"><br></td>
+				<td class="centered"><br></td>
+				<td class="centered"><br></td>
+				<% end %>
+				<td class="last_column"><%=h invite.recipient_email %></td>
 			</tr>
 		<% end %>
 		</table>
@@ -48,11 +72,21 @@
 	
 	<div id="invite_requests">
 		<h2><%=h @waiting.size %> people have put their name on the wait list</h2>
-		<ol>
+		<table>
+			<tr>
+				<td class="first_column">Email</td>
+				<td class="centered">Wait list date</td>
+				<td class="centered">Invite date</td>
+				<td class="centered">Sign-up date</td>
 		<% for wait in @waiting %>
-				<li><span class="name"><%= h wait.recipient_email %></span> on <%=h time_as_date(wait.created_at) %></li>
+			<tr>
+				<td class="first_column"><%= h wait.recipient_email %></td>
+				<td class="centered"><%= h time_as_date(wait.created_at) %></td>
+				<td class="centered"><% if !wait.sent_at.nil? %><%= h time_as_date(wait.sent_at) %><% else %><% link_to "invite", new_invitation_path %> <% end %></td>
+				<td class="centered"><% if !User.find_by_email(wait.recipient_email).nil? %><%= h time_as_date(User.find_by_email(wait.recipient_email).created_at) %><% else %><br><% end %></td>
+			</tr>
 		<% end %>
-		</ol>
+		</table>
 	</div>
 
 </div>
