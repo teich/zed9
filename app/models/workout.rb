@@ -84,9 +84,9 @@ class Workout < ActiveRecord::Base
       self.unzip!
       self.destroy
     else
-      type = Importer.file_type(devices.first.source_file_name)
 
       uploaded_data = ensure_string(devices.first.source.to_file)
+      type = file_type(devices.first.source_file_name,uploaded_data)
 
       case type
       when "GARMIN_XML"
@@ -97,6 +97,9 @@ class Workout < ActiveRecord::Base
         importer = Importer::Suunto.new(:data => uploaded_data, :time_zone => self.user.time_zone)
       when "GPX"
         importer = Importer::GPX.new(:data => uploaded_data)
+      when "TIMEX"
+        importer = Importer::Timex.new(:data => uploaded_data, :time_zone => self.user.time_zone)
+      else return false
       end
 
       iw = importer.restore
@@ -594,6 +597,26 @@ class Workout < ActiveRecord::Base
       return workouts_nearby
     else return nil
     end
+  end
+  
+  def file_type(name, data = nil)
+		case name
+		when /\.tcx$/i
+			return "GARMIN_XML" 
+		when /\.hrm$/i
+			return "POLAR_HRM"
+		when /\.sdf$/i
+			return "SUUNTO"
+		when /\.gpx$/i
+			return "GPX"
+		when /\.csv$/i
+		  first_line = data.split(/\n/)[0]
+		  if first_line.chomp == "[Timex Trainer Data File]"
+		    return "TIMEX"
+	    else
+	      return "UNKNOWN CSV"
+      end
+		end
   end
 
 end
