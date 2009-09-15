@@ -2709,7 +2709,7 @@ p.comp_activity {
 	text-align: left;
 	vertical-align: top;
 	border-bottom:1px dotted #d9d9d9;
-	padding: 12px;	
+	padding: 6px;	
 }
 
 #users th {
@@ -2742,6 +2742,12 @@ p.comp_activity {
 
 #users li {
 	padding-bottom: 12px;
+}
+
+#users .conversion_data {
+	display: inline;
+	font-size: 14px;
+	font-weight: 300;
 }
 
 /*---- Footer styling ----*/
