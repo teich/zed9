@@ -1,3 +1,4 @@
+## Commented out because I'm using the GMAIL SMTP addon
 # # Load mail configuration if not in test environment
 # if RAILS_ENV != 'test'
 #   email_settings = YAML::load(File.open("#{RAILS_ROOT}/config/email.yml"))
