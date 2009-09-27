@@ -29,20 +29,6 @@ class DashboardsController < ApplicationController
 			@my_total_time = durations.compact.asum
 		end
 
-		# TODO: pull out of controller!
-		# figure out how much time users spend on average working out.  ick.
-		users = User.find(:all)
-		aud = users.map do |u|
-			uw = u.workouts.find(:all)
-			uwd = uw.map { |uwm| uwm.duration }
-			if uwd.nil?
-				utt = 0
-			else
-				utt = uwd.compact.asum
-			end
-		end 
-		@atd = aud.aaverage
-
     # @comments = Comment.find(:all, :order => "created_at DESC").paginate :page => params[:page], :per_page => 10
 
 		respond_to do |format|

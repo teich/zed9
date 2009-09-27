@@ -10,10 +10,10 @@
 
 		<div id="dashboard_stats">
 			<h2>You've logged <span class="your_number"><%= link_to number_to_short_time(@my_total_time), user_workouts_path(current_user) %></span><span class="title_unit">h</span> across <span class="your_number"><%= link_to @my_workouts.size, user_workouts_path(current_user) %></span> workout<% if !(@my_workouts.size == 1) %>s<% end %></h2>
-			<% if !@atd.nil? && @atd > 0 %>
-			<p class="headline_details">The average user logged <span class="comp_number"><%= h number_to_short_time(@atd) %></span><span class="unit">h</span>. 
-				<% if (@my_total_time/@atd*100).to_i > 100 %>You are <span class="comp_number"><%= h ((@my_total_time/@atd*100)-100).to_i %></span><span class="unit">%</span> above average!
-				<% else %>You are currently <span class="comp_number"><%= h (100-((@my_total_time/@atd)*100)).to_i %></span><span class="unit">%</span> below average.<% end %></p>
+			<% if !Average.last.nil? %>
+			<p class="headline_details">The average user logged <span class="comp_number"><%= h number_to_short_time(Average.last.duration) %></span><span class="unit">h</span>. 
+				<% if (@my_total_time/Average.last.duration*100).to_i > 100 %>You are <span class="comp_number"><%= h ((@my_total_time/Average.last.duration*100)-100).to_i %></span><span class="unit">%</span> above average!
+				<% else %>You are currently <span class="comp_number"><%= h (100-((@my_total_time/Average.last.duration)*100)).to_i %></span><span class="unit">%</span> below average.<% end %></p>
 			<% end -%>
 		</div>
 				
