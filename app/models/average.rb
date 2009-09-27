@@ -17,6 +17,5 @@ class Average
       end
     end
     duration_per_day = collector.sum.to_f / collector.size
-    puts duration_per_day
   end
 end
