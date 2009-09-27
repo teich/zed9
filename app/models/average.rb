@@ -2,9 +2,7 @@ class Average
   def self.calc_averages!
     calc_duration_per_day!
   end
-  
-  private
-  
+    
   def self.calc_duration_per_day!
     collector = []
     users = User.find(:all)
