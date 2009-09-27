@@ -3,8 +3,14 @@ class Average < ActiveRecord::Base
     duration_per_day = calc_duration_per_day
     workouts = calc_workouts
     duration = calc_duration
-    a = Average.create(:duration_per_day => duration_per_day, :workouts => workouts, :duration => duration)
-    a.save
+    user_duration = calc_user_duration
+    a = Average.create(:duration_per_day => duration_per_day, :workouts => workouts, 
+                       :duration => duration, :user_duration => user_duration)
+    if a.save
+      return true
+    else
+      return false
+    end
   end
     
     
@@ -14,6 +20,10 @@ class Average < ActiveRecord::Base
 
   def self.calc_duration
     Workout.processed.map(&:duration).aaverage
+  end
+  
+  def self.calc_user_duration
+    User.find(:all).map {|u| u.workouts.processed.sum(:duration)}.aaverage
   end
   
   def self.calc_duration_per_day
