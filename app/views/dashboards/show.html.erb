@@ -9,12 +9,26 @@
 	<div class="left_column">
 
 		<div id="dashboard_stats">
-			<h2>You've logged <span class="your_number"><%= link_to number_to_short_time(@my_total_time), user_workouts_path(current_user) %></span><span class="title_unit">h</span> across <span class="your_number"><%= link_to @my_workouts.size, user_workouts_path(current_user) %></span> workout<% if !(@my_workouts.size == 1) %>s<% end %></h2>
-			<% if !@atd.nil? && @atd > 0 %>
-			<p class="headline_details">The average user has logged <span class="comp_number"><%= h number_to_short_time(@atd) %></span><span class="unit">h</span> across <%= h @avg_workout_count %> workouts. 
-				<% if (@my_total_time/@atd*100).to_i > 100 %>You are <span class="comp_number"><%= h ((@my_total_time/@atd*100)-100).to_i %></span><span class="unit">%</span> above average!
-				<% else %>You are currently <span class="comp_number"><%= h (100-((@my_total_time/@atd)*100)).to_i %></span><span class="unit">%</span> below average.<% end %></p>
+			<h2>You've logged an average of 
+				<%= h number_to_mins(@my_duration_per_day) %><span class="title_unit">min/day</span> and 
+				<%= h number_to_short_time(@my_total_time) %><span class="title_unit">h</span> total across 
+				<%= h @my_workouts.size %> workout<% if !(@my_workouts.size == 1) %>s<% end %></h2>
+				
+			<% if !Average.last.nil? %>
+			<p class="headline_details">The average user has logged <span class="comp_number"><%= h number_to_mins(Average.last.duration_per_day) %></span><span class="unit">min/day</span> and <span class="comp_number"><%= h number_to_short_time(Average.last.user_duration) %></span><span class="unit">h</span> across  <span class="comp_number"><%= h Average.last.workouts %></span> workouts.<br> 			
+				<% if (@my_total_time/Average.last.user_duration*100).to_i > 100 %>You are <span class="comp_number"><%= h ((@my_total_time/Average.last.user_duration*100)-100).to_i %></span><span class="unit">%</span> above average!
+				<% else %>You are currently <span class="comp_number"><%= h (100-((@my_total_time/Average.last.user_duration)*100)).to_i %></span><span class="unit">%</span> below average.<% end %></p>
 			<% end -%>
+			
+		<!-- <table id="workout_stats">	
+			<tr class="stat" unit="h" id="duration">
+				<th class="spark_bar_title">Exercise logged per day</th>
+				<td id="spark_bar"><div id="dur_comps" class="sparkbar"></div></td>
+				<td class="number"><span class="value"><%= h number_to_short_time(@my_duration_per_day) %></span><span class="units">hours</span></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>	 -->
+
 		</div>
 				
 		<% if @accomplishments.size > 0 %>
@@ -58,7 +72,7 @@
 					<div id="weight_graph"></div>
 				</div>
 			<% else %>
-				<h2><%= link_to "Current weight", user_journal_entries_path(current_user) %>: ?<span class="unit">lbs</span>&nbsp;<%= link_to image_submit_tag("/images/add.png", :class => "action_icon tip", :title => "add a journal entry", :alt => "+", :onmouseover => "this.src='/images/add_on.png'", :onmouseout => "this.src='/images/add.png'"), new_user_journal_entry_path(current_user) %></h2><br>
+				<h2><%= link_to "Current weight", user_journal_entries_path(current_user) %>: ?<span class="unit">lbs</span>&nbsp;<%= link_to image_submit_tag("/images/add.png", :class => "action_icon tip", :title => "add a journal entry", :alt => "+", :onmouseover => "this.src='/images/add_on.png'", :onmouseout => "this.src='/images/add.png'"), new_user_journal_entry_path(current_user) %></h2>
 				<div class="usage_tip"><%= link_to "Record your weight", new_user_journal_entry_path(current_user) %> to graph your progress, see how many calories you burn in each workout, and earn points.</div>
 			<% end -%>
 		</div>
@@ -82,6 +96,8 @@
 				</tr>
 				<% end %>
 			</table>
+			<% else %>
+			<div class="usage_tip"><%= link_to "Record your gear", new_user_gear_path(current_user) %> to automatically track hours and mileage. Enter the equipment's lifespan and get alerted when it's time for a replacement.</div>
 			<% end -%>
 		</div>
 
