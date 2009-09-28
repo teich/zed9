@@ -191,7 +191,8 @@ class User < ActiveRecord::Base
       je_date = Time.parse(je.entry_date.to_s)
       foo << [je_date.to_i * 1000, je.weight]
     end
-		return {:json_weights => foo}
+    return foo
+    # return {:json_weights => foo}
   end
   
   def json_weeks_labels

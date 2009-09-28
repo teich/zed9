@@ -11,12 +11,21 @@
 		<div id="dashboard_stats">
 			<h2>You've logged <span class="your_number"><%= link_to number_to_short_time(@my_total_time), user_workouts_path(current_user) %></span><span class="title_unit">h</span> across <span class="your_number"><%= link_to @my_workouts.size, user_workouts_path(current_user) %></span> workout<% if !(@my_workouts.size == 1) %>s<% end %></h2>
 			<% if !@atd.nil? && @atd > 0 %>
-			<p class="headline_details">The average user logged <span class="comp_number"><%= h number_to_short_time(@atd) %></span><span class="unit">h</span>. 
+			<p class="headline_details">The average user has logged <span class="comp_number"><%= h number_to_short_time(@atd) %></span><span class="unit">h</span> across <%= h @avg_workout_count %> workouts. 
 				<% if (@my_total_time/@atd*100).to_i > 100 %>You are <span class="comp_number"><%= h ((@my_total_time/@atd*100)-100).to_i %></span><span class="unit">%</span> above average!
 				<% else %>You are currently <span class="comp_number"><%= h (100-((@my_total_time/@atd)*100)).to_i %></span><span class="unit">%</span> below average.<% end %></p>
 			<% end -%>
 		</div>
 				
+		<% if @accomplishments.size > 0 %>
+		<div id="recent_achievements" class="achievements">
+			<h2>You've earned <%=h @accomplishments.size %> achievement<% if @accomplishments.size != 1 %>s<% end %> this week</h2>
+			<ul>
+				<%= render :partial => @accomplishments, :locals => { :date => false } %>
+			</ul>
+		</div>
+		<% end -%>
+		
 		<div id="recent_workouts">
 			<h2><%= link_to "Your recent workouts", user_workouts_path(current_user) %></h2>
 			<% if @workouts.size > 0 %>
@@ -31,7 +40,7 @@
 		</div>
 
 		<div id="summary">
-			<h2>Your workouts in the last 3 months</h2>
+			<h2><%= link_to "Your workouts in the last 3 months", user_workouts_path(current_user) %></h2>
 			<div id="axis_labels">	
 				<span class="y1_label">Weekly workout time (hours)</span>
 				<span class="y2_label">Number of workouts</span>
@@ -39,109 +48,40 @@
 			<div id="summary_stats_graph"></div>
 		</div>
 		
-		<% if @accomplishments.size > 0 %>
-		<div id="recent_achievements" class="achievements">
-			<h2>You've earned <%=h @accomplishments.size %> achievement<% if @accomplishments.size != 1 %>s<% end %> this week</h2>
-			<ul>
-				<%= render :partial => @accomplishments, :locals => { :date => false } %>
-			</ul>
-		</div>
-		<% end -%>
-		
-		<div id="leaderboards toggle">
-			<h2>Personal bests</h2>
-			<% if @workouts.size > 0 %>
-				<% if @farthest.size > 0 %>		
-				<div class="leaderboard toggle">
-					<div class="activity_headline">
-						<h3><img src="../images/road.png" class="icon">
-							Farthest: <span class="number_top"><%=h @farthest.first.distance_in_miles %></span><span class="unit">miles on <%=h time_as_date(@farthest.first.start_time) %></span></h3>
+		<div id="weight_over_time">
+			<% if !@current_weight.nil? %>
+				<h2><%= link_to "Current weight", user_journal_entries_path(current_user) %>: <%=h @current_weight %><span class="unit">lbs</span>&nbsp;<%= link_to image_submit_tag("/images/add.png", :class => "action_icon tip", :title => "add a journal entry", :alt => "+", :onmouseover => "this.src='/images/add_on.png'", :onmouseout => "this.src='/images/add.png'"), new_user_journal_entry_path(current_user) %></h2>
+				<div id="weight_over_time">
+					<div id="axis_labels">	
+						<span class="y1_label">Weight (pounds)</span>
 					</div>
-					<div class="more">
-						<div class="bests">
-							<ol>
-								<% for workout in @farthest %> 
-									<li><span class="number"><%=h workout.distance_in_miles %></span><span class="unit">miles</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
-								<% end %>
-							</ol>
-						</div>
-					</div>
+					<div id="weight_graph"></div>
 				</div>
-				<% end -%>	
-			
-				<% if @fastest.size > 0 %>		
-				<div class="leaderboard toggle">
-					<div class="activity_headline">
-						<h3><img src="../images/flag.png" class="icon">
-							Fastest: <span class="number_top"><%= h speed_to_pace(@fastest.first) %></span><span class="unit"><%=h units(workout,:speed) %> on <%=h time_as_date(@fastest.first.start_time) %></span></h3>
-					</div>
-					<div class="more">
-						<div class="bests">
-							<ol>
-								<% for workout in @fastest %> 
-									<li><span class="number"><%=h speed_to_pace(workout) %></span><span class="unit"><%=h units(workout,:speed) %></span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
-								<% end %>
-							</ol>
-						</div>
-					</div>
-				</div>
-				<% end -%>	
-			
-				<% if @longest.size > 0 %>		
-				<div class="leaderboard toggle">
-					<div class="activity_headline">
-						<h3><img src="../images/clock.png" class="icon">
-							Longest: <span class="number_top"><%=h number_to_short_time(@longest.first.duration) %></span><span class="unit">h on <%=h time_as_date(@longest.first.start_time) %></span></span></h3>
-					</div>
-					<div class="more">
-						<div class="bests">
-							<ol>
-								<% for workout in @longest %> 
-									<li><span class="number"><%=h number_to_short_time(workout.duration) %></span><span class="unit">h</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
-								<% end %>
-							</ol>
-						</div>
-					</div>
-				</div>
-				<% end -%>	
-			
-				<% if @climbers.size > 0 %>		
-				<div class="leaderboard toggle">
-					<div class="activity_headline">
-						<h3><img src="../images/peaks.png" class="icon">
-							Elevation Gain: <span class="number_top"><%=h @climbers.first.elevation_in_feet %></span><span class="unit">ft on <%=h time_as_date(@climbers.first.start_time) %></span></span></h3>
-					</div>
-					<div class="more">
-						<div class="bests">
-							<ol>
-								<% for workout in @climbers %> 
-									<li><span class="number"><%=h workout.elevation_in_feet %></span><span class="unit">ft</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
-								<% end %>
-							</ol>
-						</div>
-					</div>
-				</div>
-				<% end -%>	
-			
-				<% if @heart_pumping.size > 0 %>		
-				<div class="leaderboard toggle">
-					<div class="activity_headline">
-						<h3><img src="../images/heart.png" class="icon">
-							Heart-pumping: <span class="number_top"><%=h @heart_pumping.first.hr %></span><span class="unit">bpm on <%=h time_as_date(@heart_pumping.first.start_time) %></span></span></h3>
-					</div>
-					<div class="more">
-						<div class="bests">
-							<ol>
-								<% for workout in @heart_pumping %> 
-									<li><span class="number"><%=h workout.hr %></span><span class="unit">bpm</span>: <span class="workout_name"><%= link_to workout.name, workout %></span>, <%= link_to workout.activity.name, activity_path(workout.activity) %> on <%=h time_as_date(workout.start_time) %></li>
-								<% end %>
-							</ol>
-						</div>
-					</div>
-				</div>
-				<% end %>	
 			<% else %>
-			<div class="usage_tip">We'll keep your top performances by category (distance, duration, climbs, etc.) up to date here as you <%= link_to "upload workouts", new_user_workout_path(current_user) %>.</div>
+				<h2><%= link_to "Current weight", user_journal_entries_path(current_user) %>: ?<span class="unit">lbs</span>&nbsp;<%= link_to image_submit_tag("/images/add.png", :class => "action_icon tip", :title => "add a journal entry", :alt => "+", :onmouseover => "this.src='/images/add_on.png'", :onmouseout => "this.src='/images/add.png'"), new_user_journal_entry_path(current_user) %></h2><br>
+				<div class="usage_tip"><%= link_to "Record your weight", new_user_journal_entry_path(current_user) %> to graph your progress, see how many calories you burn in each workout, and earn points.</div>
+			<% end -%>
+		</div>
+
+		<div id="gear">
+			<h2><%= link_to "Gear", user_journal_entries_path(current_user) %>&nbsp;<%= link_to image_submit_tag("/images/add.png", :class => "action_icon tip", :title => "add equipment", :alt => "+", :onmouseover => "this.src='/images/add_on.png'", :onmouseout => "this.src='/images/add.png'"), new_user_gear_path(current_user) %></h2>
+			<% if current_user.gears.size > 0 %>
+			<table>
+				<% for gear in current_user.gears %>
+				<tr>
+					<td class="gear_meta">
+						<div class="remaining">
+							<% if !gear.percent_remaining.nil? %>
+							<span class="percent_remaining <%= h gear.percent_remaining_style %>"><%= h gear.percent_remaining %>%</span><br>
+							<span class="remaining <%= h gear.percent_remaining_style %>">remaining</span><br>
+							<% end %>
+
+						</div>
+						<p><%= h gear.name %> <%= link_to gear.tag + " (#{gear.workouts.size})", user_workouts_path(current_user, :tag => gear.tag), :class => "tag" %></p>
+					</td>
+				</tr>
+				<% end %>
+			</table>
 			<% end -%>
 		</div>
 

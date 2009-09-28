@@ -162,7 +162,7 @@ module ApplicationHelper
 		end
 		
 	end
-
+	
 	def units(workout, field)
 		case field
 		when :speed 

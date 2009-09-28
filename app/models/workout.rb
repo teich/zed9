@@ -295,35 +295,40 @@ class Workout < ActiveRecord::Base
 	end
 
 
-  def calories()
-    gender = user.sex
-    age = ( (Date.today - user.birthdate).to_i / 365.25).floor
-    
-    # FORMULA WITHOUT V02 MAX 
-    # if gender && age && user.weight(self.start_time) && duration && hr
-    #   if gender == "male"  
-    #     cal = (-55.0969 + (hr * 0.6309) + (user.weight(self.start_time) * 0.1988) + (age * 0.2017) ) / 4.184
-    #     totalcal = (cal * duration/60).to_i
-    #     return totalcal
-    #   elsif gender == "female"
-    #     cal = ( -20.4022 + (hr * 0.4472) + (user.weight(self.start_time) * 0.1263) + (age * 0.074) ) / 4.184
-    #     totalcal = (cal * duration/60).to_i
-    #     return totalcal
-    #   end
+  def cals()
 
-    # FORMULA WITH V02 MAX
-    if gender && age && user.weight(self.start_time) && duration && hr
-      if gender == "male"  
-        cal = ( -59.3954 - 36.3781 + (hr * 0.634) + (user.weight(self.start_time) * 0.394) + (age * 0.271) + (user.vo2(start_time) * 0.404) ) / 4.184
-        totalcal = (cal * duration/60).to_i
-        return totalcal
-      elsif gender == "female"
-        cal = ( -59.3954 + (hr * 0.450) + (user.weight(self.start_time) * 0.103) + (age * 0.274) + (user.vo2(start_time) * 0.380) ) / 4.184
-        totalcal = (cal * duration/60).to_i
-        return totalcal
-      end
+    if calories 
+      return calories
     else
-      return nil
+      gender = user.sex
+      age = ( (Date.today - user.birthdate).to_i / 365.25).floor
+
+      # FORMULA WITHOUT V02 MAX 
+      # if gender && age && user.weight(self.start_time) && duration && hr
+      #   if gender == "male"  
+      #     cal = (-55.0969 + (hr * 0.6309) + (user.weight(self.start_time) * 0.1988) + (age * 0.2017) ) / 4.184
+      #     totalcal = (cal * duration/60).to_i
+      #     return totalcal
+      #   elsif gender == "female"
+      #     cal = ( -20.4022 + (hr * 0.4472) + (user.weight(self.start_time) * 0.1263) + (age * 0.074) ) / 4.184
+      #     totalcal = (cal * duration/60).to_i
+      #     return totalcal
+      #   end
+
+      # FORMULA WITH V02 MAX
+      if gender && age && user.weight(self.start_time) && duration && hr
+        if gender == "male"  
+          cal = ( -59.3954 - 36.3781 + (hr * 0.634) + (user.weight(self.start_time) * 0.394) + (age * 0.271) + (user.vo2(start_time) * 0.404) ) / 4.184
+          totalcal = (cal * duration/60).to_i
+          return totalcal
+        elsif gender == "female"
+          cal = ( -59.3954 + (hr * 0.450) + (user.weight(self.start_time) * 0.103) + (age * 0.274) + (user.vo2(start_time) * 0.380) ) / 4.184
+          totalcal = (cal * duration/60).to_i
+          return totalcal
+        end
+      else
+        return nil
+      end
     end
 
   end
@@ -370,7 +375,7 @@ class Workout < ActiveRecord::Base
 		mycomps["hr"] = (mc.map { |c| c.hr  }).compact.aaverage
 		mycomps["duration"] = (mc.map {|c| c.duration}).compact.aaverage
 		mycomps["distance"]  = distance.round(1) if !distance.nil?
-    mycomps["calories"] = (mc.map {|c| c.calories}).compact.aaverage.round if !calories.nil?
+    mycomps["cals"] = (mc.map {|c| c.cals}).compact.aaverage.round if !cals.nil?
 		mycomps["speed"] = speed.round(1) if !speed.nil?
 		mycomps["elevation"] = (mc.map {|c| c.elevation}).compact.aaverage
 
@@ -381,7 +386,7 @@ class Workout < ActiveRecord::Base
 		allcomps["hr"] = (ac.map { |c| c.hr  }).compact.aaverage
 		allcomps["duration"] = (ac.map {|c| c.duration}).compact.aaverage
 		allcomps["distance"]  = distance2.round(1) if !distance2.nil?
-    allcomps["calories"] = (ac.map {|c| c.calories}).compact.aaverage.round if !calories.nil?
+    allcomps["cals"] = (ac.map {|c| c.cals}).compact.aaverage.round if !cals.nil?
 		allcomps["speed"] = speed2.round(1) if !speed2.nil?
 		allcomps["elevation"] = (ac.map {|c| c.elevation}).compact.aaverage
 

@@ -294,7 +294,7 @@ function draw_dashboard_graph(data) {
 	// Pass in a JSON object, and draw based on that data for summary stats on dashboard
 	function draw_weight_graph(data) {
 
-		var weights = data.json_weights;
+		var weights = data.user.json_weights;
 		var weight_graph_options = {
 			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 12, markings: xAxis },
 			xaxis: { mode: "time", timeformat: "%m/%d", labelWidth: 24 },

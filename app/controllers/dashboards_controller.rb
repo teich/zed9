@@ -7,6 +7,9 @@ class DashboardsController < ApplicationController
       add_flash(:warning, "Your gear has less than 20% life remaining.")
     end
 
+		@current_weight = current_user.weight(Time.now)
+    @gears = current_user.gears.find(:all, :order => "purchase_date DESC")
+
 		@workouts = Workout.processed.find_all_by_shared(true, :order => "created_at DESC")
     @comments = Comment.find(:all, :order => "created_at DESC")
     entries = @workouts + @comments
@@ -43,11 +46,11 @@ class DashboardsController < ApplicationController
 		end 
 		@atd = aud.aaverage
 
-    # @comments = Comment.find(:all, :order => "created_at DESC").paginate :page => params[:page], :per_page => 10
-
 		respond_to do |format|
 			format.html
-			format.js {render :json => current_user.to_json(:include => { :workouts =>  { :methods => [:json_date, :activity_name], :except => :trackpoints } }, :except => [:single_access_token, :perishable_token, :password_salt, :persistence_token, :crypted_password], :methods => [:json_hours_per_week, :json_workouts_per_week, :json_weeks_labels])} 
+      # format.js {render :json => current_user.json_weights.to_json }
+
+      format.js {render :json => current_user.to_json(:include => { :workouts =>  { :methods => [:json_date, :activity_name], :except => :trackpoints } }, :except => [:single_access_token, :perishable_token, :password_salt, :persistence_token, :crypted_password], :methods => [:json_hours_per_week, :json_workouts_per_week, :json_weeks_labels, :json_weights])} 
 		end
 	end
 end

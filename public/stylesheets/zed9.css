@@ -1382,7 +1382,6 @@ table.newsfeed {
 
 #dashboard .title_unit {
 	font-size: 14px;
-	color: #25a1d6;	
 }
 
 #dashboard .comp_number {
@@ -1402,16 +1401,16 @@ table.newsfeed {
 	padding-bottom: 0px;
 }
 
-#recent_workouts, #dashboard #summary{
+#recent_workouts, #dashboard #summary {
 	height: auto;
 	padding: 0px 0px 36px 0px;
 }
 
-#recent_workouts h2 a {
+#dashboard h2 a {
 	color: #545454;
 }
 
-#recent_workouts h2 a:hover {
+#dashboard h2 a:hover {
 	color:#25a1d6;
 }
 
@@ -1425,6 +1424,10 @@ table.newsfeed {
 
 #summary_stats_graph {
 	font-size: 12px;
+}
+
+#dashboard #gear p {
+	padding: 0px;
 }
 
 .legendColorBox {

@@ -50,6 +50,10 @@
 		<td><input id="miles" size="8" onChange="calculate_values()"> miles<%= f.hidden_field :distance %></td>
 	</tr>
 	<tr>
+		<th>Calories</th>
+		<td><%= f.text_field :calories, :size => 8, :value => @workout.cals %> kCal</td>
+	</tr>
+	<tr>
 		<th>Elevation</th>
 		<td><input id="feet" size="8" onChange="calculate_values()"> feet <%= f.hidden_field :elevation %></td>
 	</tr>
