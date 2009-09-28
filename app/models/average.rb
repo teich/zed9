@@ -1,8 +1,16 @@
 class Average < ActiveRecord::Base
   def self.calc_averages!
+
+    # Average time working out per day for average user
     duration_per_day = calc_duration_per_day
+
+    # Number of workouts for the average user
     workouts = calc_workouts
+
+    # Average duration of average workout (single workout)
     duration = calc_duration
+
+    # Average amount of time across workouts per user (all user's workouts)
     user_duration = calc_user_duration
     a = Average.create(:duration_per_day => duration_per_day, :workouts => workouts, 
                        :duration => duration, :user_duration => user_duration)

@@ -148,6 +148,17 @@ var usage_options = {
 	stack: true
 };
 
+var sparkbar_options = jQuery.extend(true, {}, options);
+	sparkbar_options.xaxis.min = 0;
+	sparkbar_options.yaxis.min = 0;
+	sparkbar_options.colors = ["#25a1d6", "#3dc10b", "#545454"];
+
+var line_options = { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } };
+var end_bar_options = { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } };
+var first_bar_options = { horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }};
+var other_bar_options = jQuery.extend(true, {}, first_bar_options);
+other_bar_options.barWidth = 0.2;
+
 // Pass in a JSON object, and draw based on that data.
 function draw_dashboard_graph(data) {
 	var workouts = data.user.workouts;
@@ -372,13 +383,6 @@ function workout_page_graphs(data) {
 		var all_comps = workout.json_comps.all_comps;
 		var my_comps = workout.json_comps.my_comps;
 
-
-		// Just add the differences.  This jquery.Extend copies the object.
-		var sparkbar_options = jQuery.extend(true, {}, options);
-		sparkbar_options.xaxis.min = 0;
-		sparkbar_options.yaxis.min = 0;
-		sparkbar_options.colors = ["#25a1d6", "#3dc10b", "#545454"];
-
 		// TODO: Handle units correctly
 		// This hack converts everything to imperial
 
@@ -391,9 +395,6 @@ function workout_page_graphs(data) {
 		all_comps.distance *= 0.000621371192;
 
 		$(".sparkline").each(function() {
-			var line_options = { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }] } };
-			var end_bar_options = { show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 1 }, { opacity: 0.4 }] } };
-
 			$.plot($(this), [
 			{ data: workout["json_" + this.id], lines: line_options },
 			{ data: [[22, workout[this.id]]], yaxis: 2, bars: end_bar_options },
@@ -403,18 +404,12 @@ function workout_page_graphs(data) {
 		});
 
 		$(".sparkbar").each(function(i) {
-			// Our bars are almost identical, except that the additional bars are thinner.
-			var first_bar_options = { horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }};
-			var other_bar_options = jQuery.extend(true, {}, first_bar_options);
-			other_bar_options.barWidth = 0.2;
-
 			$.plot($(this), [
 			{ data: [[workout[this.id], 0.8]], bars: first_bar_options },
 			{ data: [[my_comps[this.id], 0.4]], bars: other_bar_options },
 			{ data: [[all_comps[this.id], 0.0]], bars: other_bar_options }
 			], sparkbar_options);
 		});
-
 
 	$(".big_visualization").each(function() { 
 		function formatData(id) {
@@ -810,6 +805,44 @@ function workout_page_graphs(data) {
 		
 	}
 	
+	function draw_dashboard_global_stats(data) {
+		
+		var my_ave_dur = data.user.json_global_comps.my_ave_daily_exercise;
+		var global_ave_dur = data.user.json_global_comps.ave_daily_exercise;
+		
+		$(".sparkbar").each(function() {
+			var first_bar_options = { horizontal: true, show: true, lineWidth: 1, fillColor: { colors: [{ opacity: 0.2 }, { opacity: 1 }] }};
+			var other_bar_options = jQuery.extend(true, {}, first_bar_options);
+			other_bar_options.barWidth = 0.2;
+
+			$.plot($(this), [
+			{ data: [[my_ave_dur, 0.8]], bars: first_bar_options },
+			{ data: [[global_ave_dur, 0.4]], bars: other_bar_options },
+			], sparkbar_options);
+		});	
+		
+		$(".stat").each(function() {
+			var tip = '<div class="stat">';
+			var unit = 0;
+
+			tip += '<p class="comp_this_workout"><span class="value">';
+			tip += my_ave_dur;
+			tip += '</span><span class="unit">' + h + '</span> per day</p>';
+			tip += '<p class="comp_my_activity"><span class="value">';
+			tip += global_ave_dur + '</span><span class="unit">';
+			tip += h + '</span> daily average exercise for all users</p>';
+
+			$(this).qtip({
+				content: tip,
+				show: 'mouseover',
+				hide: { when: 'mouseout', fixed: true },
+				position: { target: $(this).children('.number'), corner: { tooltip: 'topLeft', target: 'topLeft' }, adjust: { x: 0, y: -5 } },
+				style: tooltip_style
+			});
+		});
+		
+	}
+	
 	// THIS IS THE MAIN AREA.  CALLED ON PAGE LOAD
 	$(document).ready(function() {
 
@@ -819,6 +852,10 @@ function workout_page_graphs(data) {
 		// Dashboard page graphs
 		$('#recent_workouts_chart').each(function() {
 			$.getJSON(jsURL, draw_dashboard_graph);
+		});
+		
+		$('#dur_comps').each(function() {
+			$.getJSON(jsURL, draw_dashboard_global_stats);
 		});
 
 		$('#summary_stats_graph').each(function() {

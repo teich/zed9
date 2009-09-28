@@ -24,10 +24,10 @@
 		<% end -%>
 		
 		<div id="vo2">
-			<h2>Current VO<span class="subscript">2</span> Max: <%=h @current_vo2 %><span class="unit">ml/kg/min</span>&nbsp;<%= link_to image_submit_tag("/images/add.png", :class => "action_icon tip", :title => "add a journal entry", :alt => "+", :onmouseover => "this.src='/images/add_on.png'", :onmouseout => "this.src='/images/add.png'"), new_user_journal_entry_path(current_user) %></h2>
+			<h2>Current VO<span class="subscript">2</span> Max: <%=h @current_vo2 %><span class="unit">ml/kg/min</span>&nbsp;<%= link_to image_submit_tag("/images/add.png", :class => "action_icon tip", :title => "add a journal entry", :alt => "+", :onmouseover => "this.src='/images/add_on.png'", :onmouseout => "this.src='/images/add.png'"), new_user_journal_entry_path(current_user) %></h2><br>
 			<% if !current_user.manual_vo2? %>
-			<p class="headline_details">VO<span class="subscript">2</span> max (short for maximal oxygen uptake or aerobic capacity) is a measure of physical fitness. VO<span class="subscript">2</span> max adds significant accuracy to calorie calculations. <a href="http://sportsmedicine.about.com/od/anatomyandphysiology/a/VO2_max.htm" target="new">Learn more about VO<span class="subscript">2</span> max.</a></p> 
-			<p>Because you have not yet entered your VO<span class="subscript">2</span> max, we are using the average value for a moderately fit <%= h current_user.age_bracket(Time.now) %> year old <%= h current_user.sex %>. You can better estimate your VO<span class="subscript">2</span> max with the <a href="http://health.drgily.com/walking-test-peak-aerobic-capacity.php">Rockport Walking Test</a> or one of these <a href="http://www.brianmac.co.uk/vo2max.htm#vo2" target="new">alternative evaluation tests</a>.</p>
+			<div class="usage_tip">VO<span class="subscript">2</span> max (short for maximal oxygen uptake or aerobic capacity) is a measure of physical fitness. VO<span class="subscript">2</span> max adds significant accuracy to calorie calculations. <a href="http://sportsmedicine.about.com/od/anatomyandphysiology/a/VO2_max.htm" target="new">Learn more about VO<span class="subscript">2</span> max.</a><br><br> 
+			Because you have not yet entered your VO<span class="subscript">2</span> max, we are using the average value for a moderately fit <%= h current_user.age_bracket(Time.now) %> year old <%= h current_user.sex %>. You can better estimate your VO<span class="subscript">2</span> max with the <a href="http://health.drgily.com/walking-test-peak-aerobic-capacity.php">Rockport Walking Test</a> or one of these <a href="http://www.brianmac.co.uk/vo2max.htm#vo2" target="new">alternative evaluation tests</a>.
 			<% end %>
 		</div>
 		
@@ -67,6 +67,8 @@
 				</tr>
 				<% end %>
 			</table>
+			<% else %>
+				<div class="usage_tip"><%= link_to "Record your gear", new_user_gear_path(current_user) %> to automatically track hours and mileage. Enter the equipment's lifespan and get alerted when it's time for a replacement.</div>
 			<% end -%>
 		</div>
 		
@@ -100,7 +102,7 @@
 					<td class="entry_metadata right no_wrap">
 						<%= link_to image_submit_tag("../../images/pencil.png", :class => "action_icon tip", :title => "edit", :alt => "edit |", :onmouseover => "this.src='../../images/pencil_on.png'", :onmouseout => "this.src='../../images/pencil.png'"), edit_journal_entry_path(journal_entry) %><%= link_to image_tag("../../images/trash.png", :class => "action_icon second tip",  :alt => "delete", :title => "delete", :onmouseover => "this.src='../../images/trash_on.png'", :onmouseout => "this.src='../../images/trash.png'"), journal_entry, :method => :delete, :confirm => "Are you sure you want to delete this journal entry?" %><br></td>
 				</tr>
-				<% end %>
+				<% end -%>
 			</table>
 						
 			<%= will_paginate @journal_feed, :inner_window => 1, :outer_window => 0, :prev_label => "&laquo; Newer", :next_label => "Older &raquo;" %>

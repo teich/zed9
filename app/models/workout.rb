@@ -363,7 +363,6 @@ class Workout < ActiveRecord::Base
     # (self.speed * 2.23693629).round(1)
 	end
 
-
 	def find_comps()
 		mycomps = {}
 		allcomps = {}

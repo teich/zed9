@@ -39,6 +39,11 @@ module ApplicationHelper
 
 		return "#{hours}:#{minutes}"
 	end
+	
+	# Output: 34
+	def number_to_mins(seconds)
+		minutes = (seconds / 60).to_i
+	end
 
 	# Output: Monday, April 06, 2009 at 11:58am
 	def activity_timestamp(start_time)

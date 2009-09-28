@@ -133,6 +133,23 @@ class User < ActiveRecord::Base
     (accomplishments.size * 10) + self.workouts.size + self.journal_entries.size + self.comments.size
   end
   
+  # Days between first and last workout on ZED9 to use in average daily exercise time
+  def days_active
+    days = (workouts.processed.last.start_time.to_date - workouts.processed.first.start_time.to_date).to_i
+    days += 1 if days == 0
+    return days
+  end
+  
+  def global_comps
+  	my_ave_daily_exercise = workouts.sum(:duration) / days_active
+		ave_daily_exercise = Average.last.duration_per_day
+  	return { :my_ave_daily_exercise => my_ave_daily_exercise, :ave_daily_exercise => ave_daily_exercise }  
+  end
+    
+  def json_global_comps
+		global_comps
+	end
+  
   def json_workouts_per_week
     # bar = []
     # activities = top_activities.map {|a| a[1] }

@@ -183,7 +183,7 @@ thead, th, td {
 	background:#F5F8F9 url(/images/ui-bg_glass_75_d0e5f5_1x400.png) repeat-x scroll 50% 50%; 
   border: 1px solid #d9d9d9;
   padding: 18px;
-	font-size: 18px;
+	font-size: 14px;
 	font-weight: 300;
 	text-align: left;
   opacity: .9;
@@ -1401,7 +1401,14 @@ table.newsfeed {
 	padding-bottom: 0px;
 }
 
-#recent_workouts, #dashboard #summary {
+#dashboard #workout_stats {
+	display: block;
+	clear: both;
+	width: 100%;
+	padding-bottom: 12px;
+}
+
+#recent_workouts, #dashboard #summary, #gear {
 	height: auto;
 	padding: 0px 0px 36px 0px;
 }
