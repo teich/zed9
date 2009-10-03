@@ -220,7 +220,7 @@
 					<tr>
 						<td class="metadata">Posted <%=h activity_timestamp_shorter(comment.created_at) %> by <%= h comment.user.display_name %></td>
 						<td class="metadata right no_wrap">
-							<% if comment.my_comment? %>
+							<% if comment.user == @current_user %>
 								<%= link_to image_tag("../../images/trash.png", :class => "action_icon second tip",  :alt => "delete", :title => "delete", :onmouseover => "this.src='../../images/trash_on.png'", :onmouseout => "this.src='../../images/trash.png'"), comment, :method => :delete, :confirm => "Are you sure you want to delete this comment?" %>
 							<% end -%>	
 							<br>

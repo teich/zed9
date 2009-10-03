@@ -1,10 +1,10 @@
 class Comment < ActiveRecord::Base
   belongs_to :commentable, :polymorphic => true
   belongs_to :user
-
-  def my_comment?
-    @current_user == self.user
-  end
+	
+  # def my_comment?
+  #   self.user == @current_user
+  # end
 
   def notify!(commentable, current_user)
     #send the owner of the item the comment
