@@ -22,3 +22,9 @@ config.action_controller.perform_caching             = true
 
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
+
+if ENV['MEMCACHE_SERVERS']
+  memcache_config = ENV['MEMCACHE_SERVERS'].split(',')
+  memcache_config << {:namespace => ENV['MEMCACHE_NAMESPACE']}
+  config.cache_store = :mem_cache_store, memcache_config
+end

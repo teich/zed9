@@ -50,6 +50,15 @@ class User < ActiveRecord::Base
     end
   end
 
+
+  def cached_dashboard_json
+    Rails.cache.fetch([self.cache_key, 'dashboard_json']) { self.to_json(:include => { 
+                    :workouts =>  { 
+                      :methods => [:json_date, :activity_name], 
+                      :except => :trackpoints } }, 
+                  :except => [:single_access_token, :perishable_token, :password_salt, :persistence_token, :crypted_password], 
+                  :methods => [:json_hours_per_week, :json_workouts_per_week, :json_weeks_labels, :json_weights, :json_global_comps])}
+  end
   def start_time
     start_time_edited || start_time_file
   end
