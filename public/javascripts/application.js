@@ -52,7 +52,7 @@ function id_to_unit(id, pace) {
 		case "elevation": unit = "ft"; break;
 		case "hr": unit = "bpm"; break;
 		case "duration": unit = "h"; break;
-		case "calories": unit = "kCal"; break;
+		case "cals": unit = "kCal"; break;
 		default: unit = "ARG!";
 	}
 	return unit;
@@ -525,10 +525,10 @@ function workout_page_graphs(data) {
 				data2 = formatted_speed(my_comps[this.id], workout.activity.pace, false);
 				data3 = formatted_speed(all_comps[this.id], workout.activity.pace, false);
 				unit = id_to_unit(this.id, workout.activity.pace);
-			} else if (this.id == 'calories') {
-				data1 = workout.calories;
-				data2 = my_comps.calories;
-				data3 = all_comps.calories;
+			} else if (this.id == 'cals') {
+				data1 = workout.cals;
+				data2 = my_comps.cals;
+				data3 = all_comps.cals;
 				unit = id_to_unit(this.id);
 			} else {
 				data1 = workout[this.id].toFixed(1);
@@ -844,6 +844,7 @@ function workout_page_graphs(data) {
 	}
 	
 	// THIS IS THE MAIN AREA.  CALLED ON PAGE LOAD
+
 	$(document).ready(function() {
 
 		// I'm using the .each selector really as a page identifier.  
@@ -1057,5 +1058,5 @@ function workout_page_graphs(data) {
 		  show: 'mouseover',
 			hide: { when: 'mouseout', fixed: true }
 		});
-
+		
 	});
