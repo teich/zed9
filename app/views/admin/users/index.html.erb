@@ -25,8 +25,8 @@
 				<td class="centered"><%= h user.display_name %></td>
 				<td class="centered"><%= h time_as_date(user.last_login_at) %></td>
 				<td class="centered"><%= h user.login_count %></td>
-				<td class="centered"><%= h user.workouts.size %></td>
-				<td class="centered"><%= h user.comments.size %></td>
+				<td class="centered"><%= h user.workouts.count %></td>
+				<td class="centered"><%= h user.comments.count %></td>
 				<td class="centered"><%= h user.points %></td>
 				<td class="centered"><%= h user.invitation_limit %></td>
 				<td class="last_column"><%= h user.email %></td>
