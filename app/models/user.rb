@@ -144,9 +144,13 @@ class User < ActiveRecord::Base
   
   # Days between first and last workout on ZED9 to use in average daily exercise time
   def days_active
-    days = (workouts.processed.last.start_time.to_date - workouts.processed.first.start_time.to_date).to_i
-    days += 1 if days == 0
-    return days
+    if (workouts.processed.count > 0)
+      days = (workouts.processed.last.start_time.to_date - workouts.processed.first.start_time.to_date).to_i
+      days += 1 if days == 0
+      return days
+    else
+      return 1
+    end
   end
   
   def global_comps
