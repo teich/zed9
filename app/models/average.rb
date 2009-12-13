@@ -15,8 +15,10 @@ class Average < ActiveRecord::Base
     a = Average.create(:duration_per_day => duration_per_day, :workouts => workouts, 
                        :duration => duration, :user_duration => user_duration)
     if a.save
+      puts "SAVED AVERAGE: #{duration_per_day} #{workouts} #{duration} #{user_duration}"
       return true
     else
+      puts "SAVE FAILED!"
       return false
     end
   end
