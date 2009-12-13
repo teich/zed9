@@ -52,6 +52,6 @@ class Average < ActiveRecord::Base
       end
     end
     duration_per_day = collector.sum.to_f / workouts_counter.sum
-    puts "TOTAL: average is #{duration_per_day}.
+    puts "TOTAL: average is #{duration_per_day}."
   end
 end
