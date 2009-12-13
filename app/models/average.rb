@@ -36,6 +36,7 @@ class Average < ActiveRecord::Base
   
   def self.calc_duration_per_day
     collector = []
+    workouts_counter = []
     users = User.find(:all)
     users.each do |u|
       if u.workouts.processed.size > 0
@@ -45,11 +46,12 @@ class Average < ActiveRecord::Base
         time = u.workouts.sum(:duration)
         average = time / days
         collector << average
+        workouts_counter << u.workouts.processed.count
         # puts "----> and averaged #{average}"
-        puts "#{average}, #{u.workouts.processed.count}"
+        # puts "#{average}, #{u.workouts.processed.count}"
       end
     end
-    duration_per_day = collector.sum.to_f / collector.size
-    # puts "TOTAL: average is #{duration_per_day}.  This came from #{collector.sum} sum in #{collector.size} items"
+    duration_per_day = collector.sum.to_f / workouts_counter.sum
+    puts "TOTAL: average is #{duration_per_day}.
   end
 end
