@@ -53,6 +53,6 @@ class Average < ActiveRecord::Base
         # puts "#{average}, #{u.workouts.processed.count}"
       end
     end
-    duration_per_day = collector.sum.to_f / workouts_counter.sum
+    return (collector.sum.to_f / workouts_counter.sum)
   end
 end
