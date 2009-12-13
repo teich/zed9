@@ -15,7 +15,7 @@ class Average < ActiveRecord::Base
     a = Average.create(:duration_per_day => duration_per_day, :workouts => workouts, 
                        :duration => duration, :user_duration => user_duration)
     if a.save
-      puts "SAVED AVERAGE: #{duration_per_day} #{workouts} #{duration} #{user_duration}"
+      puts "SAVED AVERAGE: #{duration_per_day} - #{workouts} - #{duration} - #{user_duration}"
       return true
     else
       puts "SAVE FAILED!"
@@ -54,6 +54,5 @@ class Average < ActiveRecord::Base
       end
     end
     duration_per_day = collector.sum.to_f / workouts_counter.sum
-    puts "TOTAL: average is #{duration_per_day}."
   end
 end
