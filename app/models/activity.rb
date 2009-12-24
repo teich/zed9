@@ -5,4 +5,8 @@ class Activity < ActiveRecord::Base
 	
 	attr_accessible :pace, :icon_path, :parent, :name, :parent_id
 
+  def comp_average(field)
+    w = self.workouts.map(&field).compact
+    w.sum / w.size
+  end
 end

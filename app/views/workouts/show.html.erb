@@ -85,7 +85,7 @@
 		<table id="workout_stats">
 			<tr class="stat" unit="h" id="duration">
 				<th class="spark_bar_title">Duration</th>
-				<td id="spark_bar"><div id="duration" class="sparkbar"></div></td>
+				<td id="spark_bar"><div id="duration" class="sparkbar" data-src="<%= workout_data_path(@workout, :q => 'duration') %>"></div></td>
 				<td class="number"><span class="value"><%= h number_to_time(@workout.duration) %></span><span class="units">hours</span></td>
 				<td>&nbsp;</td>
 			</tr>
@@ -93,7 +93,7 @@
 			<% if !@workout.distance.nil? %>
 			<tr class="stat" unit="miles" id="distance">
 				<th class="spark_bar_title">Distance</th>
-				<td id="spark_bar" id="distance"><div id="distance" class="sparkbar"></div></td>
+				<td id="spark_bar" id="distance"><div id="distance" class="sparkbar" data-src="<%= workout_data_path(@workout, :q => 'distance') %>"></div></td>
 				<td class="number"><span class="value"><%= h @workout.distance_in_miles %></span><span class="units">miles</span></td>
 				<td>&nbsp;</td>
 			</tr>
@@ -102,7 +102,7 @@
 			<% if !@workout.cals.nil? %>
 			<tr class="stat" unit="kCal" id="cals">
 				<th class="spark_bar_title">Calories</th>
-				<td id="spark_bar"><div id="cals" class="sparkbar"></div></td>
+				<td id="spark_bar"><div id="cals" class="sparkbar" data-src="<%= workout_data_path(@workout, :q => 'calories') %>">></div></td>
 				<td class="number"><span class="value"><%= h @workout.cals %></span><span class="units">kCal</span></td>
 			</tr>
 			<% end -%>
@@ -110,7 +110,7 @@
 			<% if !@workout.speed.nil? %>
 				<tr class="stat" unit="mph" id="speed">
 					<th class="spark_line_title">Speed</th>
-					<td id="spark_line"><div id="speed" class="<%= sparktype(@workout) %>"></div></td>
+					<td id="spark_line"><div id="speed" class="<%= sparktype(@workout) %>" data-src="<%= workout_data_path(@workout, :q => 'speed') %>"></div></td>
 					<td class="number spark_line_title"><span class="value"><%= h speed_to_pace(@workout) %></span><span class="units"><%=h units(@workout,:speed) %></span></td>
 					<td class="max" id="max_speed"><%= h max_speed_to_pace(@workout) %><span class="units">max</span></td>
 				</tr>
@@ -119,9 +119,9 @@
 			<% if !@workout.elevation.nil? %>
 			<tr class="stat" unit="ft" id="elevation">
 				<th class="spark_line_title">Elevation</th>
-				<td id="spark_line"><div id="elevation" class="<%= sparktype(@workout) %>"></div></td>
+				<td id="spark_line"><div id="elevation" class="<%= sparktype(@workout) %>" data-src="<%= workout_data_path(@workout, :q => 'elevation') %>"></div></td>
 				<td class="number spark_line_title"><span class="value"><%=h @workout.elevation_in_feet %></span><span class="units">feet</span></td>
-				<td class="max" id="max_elevation"><% if @workout.trackpoints? %><%= h meters_to_feet(@workout.max(:altitude)) %><span class="units">max</span><% end %></td>
+				<td class="max" id="max_elevation"><% if @workout.trackpoints? %><%= h meters_to_feet(@workout.max(:elevation)) %><span class="units">max</span><% end %></td>
 				
 			</tr>
 			<% end -%>
@@ -129,11 +129,11 @@
 			<% if !@workout.hr.nil? %>
 			<tr class="stat" unit="bpm" id="hr">
 				<th class="spark_line_title">Heart rate</th>
-				<td id="spark_line"><div id="hr" class="<%= sparktype(@workout) %>"></div></td>
+				<td id="spark_line"><div id="hr" class="<%= sparktype(@workout) %>" data-src="<%= workout_data_path(@workout, :q => 'hr') %>"></div></td>
 				<td class="number spark_line_title"><span class="value"><%=h @workout.hr %></span><span class="units">bpm</span></td>
 				<td class="max" id="max_hr">
 					<% if !@workout.hr_max.nil? %><%=h @workout.hr_max %>
-					<% elsif !@workout.max(:heart_rate).nil? %><%=h @workout.max(:heart_rate) %>
+					<% elsif !@workout.max(:hr).nil? %><%=h @workout.max(:hr) %>
 					<% end %>
 					<span class="units">max</span>
 				</td>

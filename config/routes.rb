@@ -20,6 +20,7 @@ ActionController::Routing::Routes.draw do |map|
     # end
 		user.resources :workouts do |workout|
 		  workout.resources :comments
+		  workout.resources :data, :shallow => false, :only => :index
 			workout.resources :overlaps, :shallow => false, :only => [:index, :destroy]
 			workout.resources :taggings, :shallow => false, :only => [:destroy, :create]
     end
@@ -31,6 +32,4 @@ ActionController::Routing::Routes.draw do |map|
 
 	map.home ':page', :controller => 'home', :action => 'show', :page => /about|contact|devices|guide/
 	map.root :controller => "root", :action => "index"
-	map.connect '*path' , :controller => 'four_oh_fours'
-
 end

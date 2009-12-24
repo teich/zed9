@@ -148,7 +148,7 @@ class Workout < ActiveRecord::Base
 	end
 	
 	def get_hr
-		trackpoints.map {|a|a.heart_rate}
+		trackpoints.map {|a|a.hr}
 	end
 
 	def get_speed
@@ -156,7 +156,7 @@ class Workout < ActiveRecord::Base
 	end
 
 	def get_elevation
-		trackpoints.map { |tp| tp.altitude }
+		trackpoints.map { |tp| tp.elevation }
 	end
 
   def max_speed
@@ -363,34 +363,34 @@ class Workout < ActiveRecord::Base
     # (self.speed * 2.23693629).round(1)
 	end
 
-	def find_comps()
-		mycomps = {}
-		allcomps = {}
-
-		mc = self.user.workouts.find_all_by_activity_id(activity.id)
-		distance = (mc.map {|c| c.distance}).compact.aaverage
-		speed = (mc.map {|c| c.speed}).compact.aaverage
-
-		mycomps["hr"] = (mc.map { |c| c.hr  }).compact.aaverage
-		mycomps["duration"] = (mc.map {|c| c.duration}).compact.aaverage
-		mycomps["distance"]  = distance.round(1) if !distance.nil?
-    mycomps["cals"] = (mc.map {|c| c.cals}).compact.aaverage.round if !cals.nil?
-		mycomps["speed"] = speed.round(1) if !speed.nil?
-		mycomps["elevation"] = (mc.map {|c| c.elevation}).compact.aaverage
-
-		ac = Workout.find_all_by_activity_id(activity.id)
-		distance2 = (ac.map {|c| c.distance}).compact.aaverage
-		speed2 = (ac.map {|c| c.speed}).compact.aaverage
-
-		allcomps["hr"] = (ac.map { |c| c.hr  }).compact.aaverage
-		allcomps["duration"] = (ac.map {|c| c.duration}).compact.aaverage
-		allcomps["distance"]  = distance2.round(1) if !distance2.nil?
-    allcomps["cals"] = (ac.map {|c| c.cals}).compact.aaverage.round if !cals.nil?
-		allcomps["speed"] = speed2.round(1) if !speed2.nil?
-		allcomps["elevation"] = (ac.map {|c| c.elevation}).compact.aaverage
-
-		return { :my_comps => mycomps, :all_comps => allcomps }
-	end
+  # def find_comps()
+  #   mycomps = {}
+  #   allcomps = {}
+  # 
+  #   mc = self.user.workouts.find_all_by_activity_id(activity.id)
+  #   distance = (mc.map {|c| c.distance}).compact.aaverage
+  #   speed = (mc.map {|c| c.speed}).compact.aaverage
+  # 
+  #   mycomps["hr"] = (mc.map { |c| c.hr  }).compact.aaverage
+  #   mycomps["duration"] = (mc.map {|c| c.duration}).compact.aaverage
+  #   mycomps["distance"]  = distance.round(1) if !distance.nil?
+  #     mycomps["cals"] = (mc.map {|c| c.cals}).compact.aaverage.round if !cals.nil?
+  #   mycomps["speed"] = speed.round(1) if !speed.nil?
+  #   mycomps["elevation"] = (mc.map {|c| c.elevation}).compact.aaverage
+  # 
+  #   ac = Workout.find_all_by_activity_id(activity.id)
+  #   distance2 = (ac.map {|c| c.distance}).compact.aaverage
+  #   speed2 = (ac.map {|c| c.speed}).compact.aaverage
+  # 
+  #   allcomps["hr"] = (ac.map { |c| c.hr  }).compact.aaverage
+  #   allcomps["duration"] = (ac.map {|c| c.duration}).compact.aaverage
+  #   allcomps["distance"]  = distance2.round(1) if !distance2.nil?
+  #     allcomps["cals"] = (ac.map {|c| c.cals}).compact.aaverage.round if !cals.nil?
+  #   allcomps["speed"] = speed2.round(1) if !speed2.nil?
+  #   allcomps["elevation"] = (ac.map {|c| c.elevation}).compact.aaverage
+  # 
+  #   return { :my_comps => mycomps, :all_comps => allcomps }
+  # end
 
 	def json_comps
 		find_comps
@@ -419,7 +419,7 @@ class Workout < ActiveRecord::Base
 	def json_heartrate_big
 
 		#get trackpoints that have a HR
-		hr_trackpoints = trackpoints.map { |tp| tp if (!tp.heart_rate.nil? && tp.heart_rate > 0) }
+		hr_trackpoints = trackpoints.map { |tp| tp if (!tp.hr.nil? && tp.hr > 0) }
 		hr_trackpoints.compact!
 		return nil if hr_trackpoints.first.nil?
 
@@ -446,7 +446,7 @@ class Workout < ActiveRecord::Base
 		factor = hr_trackpoints.size / graphing_points
 		#factor = 1 if factor == 0
 		graphing_points.times do |i| 
-			points << [step * (i+first_blanks), hr_trackpoints[i * factor].heart_rate]
+			points << [step * (i+first_blanks), hr_trackpoints[i * factor].hr]
 		end
 		points
 	end
@@ -491,13 +491,13 @@ class Workout < ActiveRecord::Base
 		iw.trackpoints.each do |tp|
 			wtp = trackpoints.build()
 
-			wtp.altitude = tp.altitude
+			wtp.elevation = tp.altitude
 			wtp.distance = tp.distance
 			wtp.lat = tp.lat
 			wtp.lng = tp.lng
 			wtp.speed = tp.speed
 			wtp.time = tp.time
-			wtp.heart_rate = tp.hr
+			wtp.hr = tp.hr
 			self.trackpoints << wtp
 		end
 
@@ -623,4 +623,28 @@ class Workout < ActiveRecord::Base
 		end
   end
 
+  ## PASS TWO BELOW.  
+  ## ABANDON ALL HOPE YE WHO LOOK ABOVE HERE
+  
+  def get_smoothed_data(field)
+    unless (field == :duration)
+      points = trackpoints.map(&field).compact
+      if (!points.nil?)
+        data = smooth_data(points, points.size/20)
+        return data.inject([]) {|a,b| a << [a.size, b]}
+
+      end
+    end
+  end
+  
+  def comps(field)
+    bar = {}
+    bar["comps"] = [self.send(field), 
+                    self.user.comp_average(field, self.activity_id), 
+                    self.activity.comp_average(field)]
+    # Speed, elevation, HR,
+    bar["data"] = self.get_smoothed_data(field)
+    
+    bar
+  end
 end

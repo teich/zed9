@@ -249,12 +249,22 @@ class User < ActiveRecord::Base
     reset_perishable_token!  
     Mailer.deliver_password_reset_instructions(self)  
   end
-  
+ 
+  ## POST CLEANUP
+
+   def comp_average(field, activity)  
+     ## find all activities that this user has
+     ## Average the value
+     w = self.workouts.find_all_by_activity_id(activity).map(&field).compact
+     w.sum / w.size
+   end
+     
 	private
 
 	# How many invitations does a user get?
 	def set_invitation_limit
 		self.invitation_limit = 10
 	end
-	
+
+ 
 end

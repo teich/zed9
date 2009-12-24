@@ -403,13 +403,13 @@ function workout_page_graphs(data) {
 			], options);
 		});
 
-		$(".sparkbar").each(function(i) {
-			$.plot($(this), [
-			{ data: [[workout[this.id], 0.8]], bars: first_bar_options },
-			{ data: [[my_comps[this.id], 0.4]], bars: other_bar_options },
-			{ data: [[all_comps[this.id], 0.0]], bars: other_bar_options }
-			], sparkbar_options);
-		});
+		// $(".sparkbar").each(function(i) {
+		// 	$.plot($(this), [
+		// 	{ data: [[workout[this.id], 0.8]], bars: first_bar_options },
+		// 	{ data: [[my_comps[this.id], 0.4]], bars: other_bar_options },
+		// 	{ data: [[all_comps[this.id], 0.0]], bars: other_bar_options }
+		// 	], sparkbar_options);
+		// });
 
 	$(".big_visualization").each(function() { 
 		function formatData(id) {
