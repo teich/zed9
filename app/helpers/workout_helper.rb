@@ -19,9 +19,9 @@ module WorkoutHelper
 
   def sparktype(workout)
     if workout.trackpoints? 
-      "sparkline"
+      "line"
     else
-      "sparkbar"
+      "bar"
     end
   end
 
