@@ -57,6 +57,7 @@ function plot_spark_graph(target, data, type) {
     // Take the data as a 3 element array, plus what unit to use
     // Special case if we're dealing with a time too.
     function spark_tooltip(values, unit) {
+        // If the unit is h, it's a time, so convert it from seconds to a string
         if (unit == "h") {
             var bar = [hms(values[0]), hms(values[1]), hms(values[2])];
             values = bar;

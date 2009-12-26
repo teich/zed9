@@ -880,22 +880,22 @@ function workout_page_graphs(data) {
 			$('.email_address').clearingInput();
 		});
 
-		// Workouts index table sorting, default to descending on date
-		$('#workouts_index').each(function() {
-			$("#workouts_index").tablesorter({
-				sortList: [[2,1]]
-			}); 
-		});
-		
-		// Device comparison table sorting 
-		$("#device_grid").each(function() {
-			$("#device_grid").tablesorter({
-				sortList: [[12, 1]],
-				headers: { 
-					1: { sorter: false }
-				}
-			}); 
-		}); 
+        // // Workouts index table sorting, default to descending on date
+        // $('#workouts_index').each(function() {
+        //  $("#workouts_index").tablesorter({
+        //      sortList: [[2,1]]
+        //  }); 
+        // });
+        // 
+        // // Device comparison table sorting 
+        // $("#device_grid").each(function() {
+        //  $("#device_grid").tablesorter({
+        //      sortList: [[12, 1]],
+        //      headers: { 
+        //          1: { sorter: false }
+        //      }
+        //  }); 
+        // }); 
 
 		// Dismiss flash message
 		$('#flash').click(function() { 
@@ -956,7 +956,7 @@ function workout_page_graphs(data) {
 			$(this).toggleClass('open');
 		});
 
-		$($.date_input.initialize);
+        // $($.date_input.initialize);
 
 		$("#edit_workout").each(function() {
 
@@ -984,11 +984,11 @@ function workout_page_graphs(data) {
 			});
 
 		});
-		
-		$('.form').each(function() {
-			// Date picker widget
-		  $(".date_input").date_input();
-		})
+
+        // // Date picker widget
+        // $('.form').each(function() {
+        //   $(".date_input").date_input();
+        // })
 		
 		$('#journal_entry').each(function() {
 			set_journal_entry_values();
@@ -998,21 +998,21 @@ function workout_page_graphs(data) {
 			set_gear_values();
 		})
 
-		// Workouts index row highlight on hover
-		$('tr.newsfeed_workout_summary').hover(function() {
-			$(this).children().addClass("highlight");
-		},
-		function() {
-			$(this).children().removeClass("highlight");
-		});
-
-		// Guide row highlight on hover
-		$('tr.model_details').hover(function() {
-			$(this).children().addClass("highlight");
-		},
-		function() {
-			$(this).children().removeClass("highlight");
-		});
+        // // Workouts index row highlight on hover
+        // $('tr.newsfeed_workout_summary').hover(function() {
+        //  $(this).children().addClass("highlight");
+        // },
+        // function() {
+        //  $(this).children().removeClass("highlight");
+        // });
+        // 
+        // // Guide row highlight on hover
+        // $('tr.model_details').hover(function() {
+        //  $(this).children().addClass("highlight");
+        // },
+        // function() {
+        //  $(this).children().removeClass("highlight");
+        // });
 
 		// Notices
 		$('.timed').each(function() {
