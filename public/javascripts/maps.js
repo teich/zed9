@@ -48,3 +48,8 @@ function z9MapInit(points) {
 	
 }
 
+$(document).ready(function() {
+    $("#map_div").each(function() {
+        $.getJSON($(this).attr('data-src'), function(data) { google.setOnLoadCallback(z9MapInit(data)) });
+    })
+});

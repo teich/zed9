@@ -1,8 +1,7 @@
 class DataController < ApplicationController
-  def index
-  	
-    # @workout = current_user.workouts.find(params[:workout_id])
+  def sparks
     workout = Workout.find(params[:workout_id])
+
     case params[:q]
     when "distance"
       data = workout.comps(:distance)
@@ -18,5 +17,10 @@ class DataController < ApplicationController
       data = workout.comps(:calories)
     end
     render :js => data.to_json
+  end
+  
+  def gis
+    workout = Workout.find(params[:workout_id])
+    render :js => workout.gis.to_json
   end
 end
