@@ -637,11 +637,29 @@ class Workout < ActiveRecord::Base
     end
   end
   
+  def localize_data(data, field)
+    if data.class == Array
+      return data.map { |d| localize_data(d, field).round(1) }
+    end
+    
+    case field.to_s
+    when "distance"
+      return self.user.metric ? data / 1000 : Convert.meters_to_miles(data)
+    when "speed"
+      return self.user.metric ? Convert.ms_to_kmh(data) : Convert.ms_to_mph(data)
+    when "elevation"
+      return self.user.metric ? data : Convert.meters_to_feet(data)
+    else
+      return data.to_f
+    end
+  end
+  
   def comps(field)
     bar = {}
-    bar["comps"] = [self.send(field), 
+    bar["comps"] = [self.send(field),
                     self.user.comp_average(field, self.activity_id), 
                     self.activity.comp_average(field)]
+    bar["comps"] = localize_data(bar["comps"], field)
     # Speed, elevation, HR,
     bar["data"] = self.get_smoothed_data(field)
     

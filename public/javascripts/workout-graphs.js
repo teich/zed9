@@ -54,8 +54,14 @@ function plot_spark_graph(target, data, type) {
     // ----------------------
     
     // This function just builds up the tool tip string
-    function spark_tooltip(values) {
-        var unit = "UNKNOWN!"
+    // Take the data as a 3 element array, plus what unit to use
+    // Special case if we're dealing with a time too.
+    function spark_tooltip(values, unit) {
+        if (unit == "h") {
+            var bar = [hms(values[0]), hms(values[1]), hms(values[2])];
+            values = bar;
+        }
+        
         var tip = '<div class="stat">';
         tip += '<p class="comp_this_workout"><span class="value">';
         tip += values[0];
@@ -89,7 +95,7 @@ function plot_spark_graph(target, data, type) {
     //  Display the tooltip for the graph
     $(target).parents(".stat").each(function() {
        $(this).qtip({
-               content: spark_tooltip(data["comps"]),
+               content: spark_tooltip(data["comps"], $(this).attr('unit')),
                show: 'mouseover',
                hide: { when: 'mouseout', fixed: true },
                position: { target: $(this).children('.number'), corner: { tooltip: 'topLeft', target: 'topLeft' }, adjust: { x: 0, y: -5 } },

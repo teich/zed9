@@ -128,18 +128,10 @@ module ApplicationHelper
 	end
 	
 	def speed_to_pace(workout)
-		metric = workout.user.metric
-		pace = workout.activity.pace
-		speed = workout.speed
+    # TODO: this is ugly, muts be a more ruby way
+		speed = workout.localize_data(workout.speed, "speed")
 		
-		# workout speed is set to meters per second.
-		if metric
-			speed *= 3.6
-		else
-			speed *= 2.23693629
-		end
-		
-		if pace
+		if workout.activity.pace
 			return float_min_to_formated_time(60 / speed) 
 		else
 			return speed.round(1)
@@ -149,19 +141,10 @@ module ApplicationHelper
 	
 	def max_speed_to_pace(workout)
 
-		metric = workout.user.metric
-		pace = workout.activity.pace
-		max_speed = workout.max_speed
+		max_speed = workout.localize_data(workout.max_speed, "speed")
 		
-		# workout speed is set to meters per second.
-		if metric
-			max_speed *= 3.6
-		else
-			max_speed *= 2.23693629
-		end
-		
-		if pace
-			return float_min_to_formated_time(60 / max_speed) 
+		if workout.activity.pace
+  		return float_min_to_formated_time(60 / max_speed) 
 		else
 			return max_speed.round(1)
 		end
