@@ -632,12 +632,12 @@ class Workout < ActiveRecord::Base
       if (!points.nil?)
         data = smooth_data(points, points.size/20)
         return data.inject([]) {|a,b| a << [a.size, b]}
-
       end
     end
   end
   
   def localize_data(data, field)
+    # Recursion - call ourselves if we're called with an array.  Apply to all elements
     if data.class == Array
       return data.map { |d| localize_data(d, field).round(1) }
     end
@@ -660,7 +660,6 @@ class Workout < ActiveRecord::Base
                     self.user.comp_average(field, self.activity_id), 
                     self.activity.comp_average(field)]
     bar["comps"] = localize_data(bar["comps"], field)
-    # Speed, elevation, HR,
     bar["data"] = self.get_smoothed_data(field)
     
     bar
