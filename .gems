@@ -1,8 +1,8 @@
 authlogic  
 logging
 newrelic_rpm
-teich-hrmparser -v 0.6.0 --source gems.github.com
+hrmparser 
 right_aws
-thoughtbot-paperclip --source gems.github.com
+paperclip 
 disqus
-mislav-will_paginate -v 2.3.11 --source http://gems.github.com
+will_paginate -v 2.3.11
