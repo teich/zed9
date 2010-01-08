@@ -3,6 +3,6 @@ logging
 newrelic_rpm
 hrmparser 
 right_aws
-paperclip 
+paperclip -v 2.3.0
 disqus
 will_paginate -v 2.3.11
