@@ -8,4 +8,9 @@ class DataController < ApplicationController
     workout = Workout.find(params[:workout_id])
     render :json => workout.gis
   end
+  
+  def full
+    workout = Workout.find(params[:workout_id])
+    render :text => workout.full_data(params[:q].intern).to_json
+  end
 end
