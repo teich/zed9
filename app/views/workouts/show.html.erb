@@ -172,7 +172,7 @@
 						<ul>
 							<li class="column_label">y1</li>
 							<% @workout.graph_fields.each_with_index do |value, i| %>
-							<li><input type="radio" display_y1="<%= value[1] %>" name="y1_options" <% if i==0 %>checked="checked" <% end %>value="json_<%=h value[0] %>_big"/><!-- <%= value[1] %> --></li>
+							<li><input type="radio" display_y1="<%= value[1] %>" name="y1_options" <% if i==0 %>checked="checked" <% end %>data-src="<%=h full_workout_data_path(@workout, :q => value[0]) %>"/></li>
 							<% end %>
 							<li>&nbsp;</li>
 						</ul>
@@ -181,22 +181,18 @@
 					<div id="y2_axis_options">
 						<ul>
 							<li class="column_label">y2</li>
-							<% for field in @workout.graph_fields do %>
-							<li class="label"><input type="radio" display_y2="<%= field[1] %>" name="y2_options" value="json_<%=h field[0] %>_big"/><%=h field[1] %></li>
+							<% @workout.graph_fields.each_with_index do |value, i| %>
+							<li class="label"><input type="radio" display_y2="<%= value[1] %>" name="y2_options" <% if i==1 %>checked="checked" <% end %>data-src="<%=h full_workout_data_path(@workout, :q => value[0]) %>"/><%= value[1] %></li>
 							<% end %>
-							<li class="none"><input type="radio" display_y2="&nbsp;" name="y2_options" value="" checked="checked">None</li>
+							<li class="none"><input type="radio" display_y2="&nbsp;" name="y2_options" value="">None</li>
 						</ul>
 					</div>
 					<div class="close">x</div>
 				</div>
 			</div>
 
-			<% if @workout.speed %>
-				<div id="json_speed_big" class="big_visualization"></div>
-			<% else %>
-				<div id="json_heartrate_big" class="big_visualization"></div>
-			<% end %>
-
+      <!-- TODO: RENAME JSON_SPEED_BIG -->
+			<div id="json_speed_big" class="big_visualization"></div>
 		</div>
 	<% end -%>
 	

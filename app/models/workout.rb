@@ -446,6 +446,7 @@ class Workout < ActiveRecord::Base
 
 	end
 	
+  # this is where we specify what to include in the big graph.  It's really a display thing!
 	def graph_fields
 	  fields = []
     if !self.speed.nil? && self.speed > 0
@@ -453,7 +454,7 @@ class Workout < ActiveRecord::Base
     end
     
 	  if !self.hr.nil? && self.hr > 0
-	    fields << ["heartrate", "Heart Rate"]
+	    fields << ["hr", "Heart Rate"]
     end
     
     if !self.elevation.nil? && self.elevation > 0
