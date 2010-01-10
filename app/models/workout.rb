@@ -532,13 +532,11 @@ class Workout < ActiveRecord::Base
   ## ABANDON ALL HOPE YE WHO LOOK ABOVE HERE
   
   def get_smoothed(field, points, value_array = false, milliseconds = false)
-    return if (field == :duration)
+    return nil if (field == :duration)
 		data = trackpoints.map(&field).compact
 		return nil if data.size == 0
 
-		vc = []
-		factor = data.size / points
-		smoothed = smooth_data(data, factor)
+		smoothed = smooth_data(data, data.size / points)
 		multiplier = milliseconds ? self.duration / smoothed.size * 1000 : 1
 		
 		if value_array
