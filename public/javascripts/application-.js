@@ -511,52 +511,52 @@ function workout_page_graphs(data) {
 	});
 
 		
-		$(".stat").each(function() {
-			var tip = '<div class="stat">';
-			var unit = 0;
-
-			if (this.id == "duration") {
-				data1 = hms(workout[this.id]);
-				data2 = hms(my_comps[this.id]);
-				data3 = hms(all_comps[this.id]);
-				unit = id_to_unit(this.id);
-			} else if (this.id == 'speed') {
-				data1 = formatted_speed(workout[this.id], workout.activity.pace, false);
-				data2 = formatted_speed(my_comps[this.id], workout.activity.pace, false);
-				data3 = formatted_speed(all_comps[this.id], workout.activity.pace, false);
-				unit = id_to_unit(this.id, workout.activity.pace);
-			} else if (this.id == 'cals') {
-				data1 = workout.cals;
-				data2 = my_comps.cals;
-				data3 = all_comps.cals;
-				unit = id_to_unit(this.id);
-			} else {
-				data1 = workout[this.id].toFixed(1);
-				data2 = my_comps[this.id].toFixed(1);
-				data3 = all_comps[this.id].toFixed(1);
-				unit = id_to_unit(this.id);
-			}
-
-			tip += '<p class="comp_this_workout"><span class="value">';
-			tip += data1;
-			tip += '</span><span class="unit">' + unit + '</span> for this workout</p>';
-			tip += '<p class="comp_my_activity"><span class="value">';
-			tip += data2 + '</span><span class="unit">';
-			tip += unit + '</span> average for ' + workout.activity.name.toLowerCase() + '</p>';
-			tip += '<p class="comp_activity"><span class="value">';
-			tip += data3 + '</span><span class="unit">';
-			tip += unit + '</span> ZED9 average for ' + workout.activity.name.toLowerCase() + '</p></div >';
-
-			$(this).qtip({
-				content: tip,
-				show: 'mouseover',
-				hide: { when: 'mouseout', fixed: true },
-				position: { target: $(this).children('.number'), corner: { tooltip: 'topLeft', target: 'topLeft' }, adjust: { x: 0, y: -5 } },
-				style: tooltip_style
-			});
-		});
-
-		google.setOnLoadCallback(z9MapInit(data.workout.gis));
+		// $(".stat").each(function() {
+		// 	var tip = '<div class="stat">';
+		// 	var unit = 0;
+		// 
+		// 	if (this.id == "duration") {
+		// 		data1 = hms(workout[this.id]);
+		// 		data2 = hms(my_comps[this.id]);
+		// 		data3 = hms(all_comps[this.id]);
+		// 		unit = id_to_unit(this.id);
+		// 	} else if (this.id == 'speed') {
+		// 		data1 = formatted_speed(workout[this.id], workout.activity.pace, false);
+		// 		data2 = formatted_speed(my_comps[this.id], workout.activity.pace, false);
+		// 		data3 = formatted_speed(all_comps[this.id], workout.activity.pace, false);
+		// 		unit = id_to_unit(this.id, workout.activity.pace);
+		// 	} else if (this.id == 'cals') {
+		// 		data1 = workout.cals;
+		// 		data2 = my_comps.cals;
+		// 		data3 = all_comps.cals;
+		// 		unit = id_to_unit(this.id);
+		// 	} else {
+		// 		data1 = workout[this.id].toFixed(1);
+		// 		data2 = my_comps[this.id].toFixed(1);
+		// 		data3 = all_comps[this.id].toFixed(1);
+		// 		unit = id_to_unit(this.id);
+		// 	}
+		// 
+		// 	tip += '<p class="comp_this_workout"><span class="value">';
+		// 	tip += data1;
+		// 	tip += '</span><span class="unit">' + unit + '</span> for this workout</p>';
+		// 	tip += '<p class="comp_my_activity"><span class="value">';
+		// 	tip += data2 + '</span><span class="unit">';
+		// 	tip += unit + '</span> average for ' + workout.activity.name.toLowerCase() + '</p>';
+		// 	tip += '<p class="comp_activity"><span class="value">';
+		// 	tip += data3 + '</span><span class="unit">';
+		// 	tip += unit + '</span> ZED9 average for ' + workout.activity.name.toLowerCase() + '</p></div >';
+		// 
+		// 	$(this).qtip({
+		// 		content: tip,
+		// 		show: 'mouseover',
+		// 		hide: { when: 'mouseout', fixed: true },
+		// 		position: { target: $(this).children('.number'), corner: { tooltip: 'topLeft', target: 'topLeft' }, adjust: { x: 0, y: -5 } },
+		// 		style: tooltip_style
+		// 	});
+		// });
+		// 
+		// google.setOnLoadCallback(z9MapInit(data.workout.gis));
 
 	}
 				
@@ -926,13 +926,13 @@ function workout_page_graphs(data) {
 		
 
 
-		// Graph options
-		$('#select_axes').hide();  
-		$('#options_link').bind("click", function() {
-			$('#select_axes').slideToggle('fast');
-			$(this).toggleClass('show_options');	
-		});
-		
+		// // Graph options
+		// $('#select_axes').hide();  
+		// $('#options_link').bind("click", function() {
+		// 	$('#select_axes').slideToggle('fast');
+		// 	$(this).toggleClass('show_options');	
+		// });
+		// 
 		// Close graph options if click on x in corner
 		$('#select_axes .close').click(function() {
 			$('#select_axes').slideToggle('fast');

@@ -106,6 +106,9 @@ function plot_spark_graph(target, data, type) {
 }
 
 
+function plot_large_graph() {
+	
+}
 $(document).ready(function() {
 	$(".sparkline").each(function() {
 		var self = $(this);
@@ -114,4 +117,11 @@ $(document).ready(function() {
             function(data) { plot_spark_graph(self,data,type) }
         );
     });
+
+	// Graph options
+	$('#options_link').bind("click", function() {
+		$('#select_axes').slideToggle('fast');
+		$(this).toggleClass('show_options');	
+	});
+
 });
