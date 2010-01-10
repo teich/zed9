@@ -186,30 +186,6 @@ class Workout < ActiveRecord::Base
 	# 	trackpoints.map { |tp| tp.time - start_time }
 	# end
 
-	def get_smoothed_hr(points, value_array = false, milliseconds = false)
-		hr = trackpoints.map(&:hr).compact
-		return nil if hr.size == 0
-
-		vc = []
-		factor = hr.size / points
-		sd = smooth_data(hr, factor)
-		point_interval = self.duration / sd.size
-		if value_array
-			c = -1
-			vc = sd.map do |d|
-				c += 1
-				if milliseconds
-					axis = c * point_interval * 1000
-				else
-					axis = c
-				end
-				[axis.to_i, d] 
-			end
-			return vc
-		else
-			return sd
-		end
-	end
 
 	def get_smoothed_speed(points, value_array = false, milliseconds = false)
 		speed = trackpoints.map(&:speed).compact
@@ -323,28 +299,28 @@ class Workout < ActiveRecord::Base
 	Time.at(seconds).utc.strftime("%H:%M:%S")
 	end
 
-	def distance_in_miles
-		return nil if self.distance.nil?
-		(self.distance * 0.000621371192).round(1)
-	end
+  def distance_in_miles
+    return nil if self.distance.nil?
+    (self.distance * 0.000621371192).round(1)
+  end
 
-	def avg_speed_in_mph
-		return nil if self.speed.nil?
-       (self.distance_in_miles / (self.duration * 3600)).round(1)
-    # (self.speed * 2.23693629).round(1)
-	end
+  # def avg_speed_in_mph
+  #   return nil if self.speed.nil?
+  #        (self.distance_in_miles / (self.duration * 3600)).round(1)
+  #     # (self.speed * 2.23693629).round(1)
+  # end
 
-	def json_comps
-		find_comps
-	end
-
-	def json_date
-		start_time.to_i
-	end  
-
-	def json_hr
-		get_smoothed_hr(20, true)
-	end
+  # def json_comps
+  #   find_comps
+  # end
+  # 
+  # def json_date
+  #   start_time.to_i
+  # end  
+  # 
+  # def json_hr
+  #   get_smoothed_hr(20, true)
+  # end
 
 	def json_heartrate_big
 
@@ -555,15 +531,22 @@ class Workout < ActiveRecord::Base
   ## PASS TWO BELOW.  
   ## ABANDON ALL HOPE YE WHO LOOK ABOVE HERE
   
-  def get_smoothed_data(field)
-    unless (field == :duration)
-      points = trackpoints.map(&field).compact
-      if (!points.nil?)
-        data = smooth_data(points, points.size/20)
-        return data.inject([]) {|a,b| a << [a.size, b]}
-      end
-    end
-  end
+  def get_smoothed(field, points, value_array = false, milliseconds = false)
+    return if (field == :duration)
+		data = trackpoints.map(&field).compact
+		return nil if data.size == 0
+
+		vc = []
+		factor = data.size / points
+		smoothed = smooth_data(data, factor)
+		multiplier = milliseconds ? self.duration / smoothed.size * 1000 : 1
+		
+		if value_array
+			return smoothed.inject([]) { |a, n| a << [(a.size * multiplier).to_i, n] }
+		else
+			return smoothed
+		end
+	end
   
   def localize_data(data, field)
     # Recursion - call ourselves if we're called with an array.  Apply to all elements
@@ -589,8 +572,12 @@ class Workout < ActiveRecord::Base
                     self.user.comp_average(field, self.activity_id), 
                     self.activity.comp_average(field)]
     bar["comps"] = localize_data(bar["comps"], field)
-    bar["data"] = self.get_smoothed_data(field)
+    bar["data"] = self.get_smoothed(field, 20, true)
     
     bar
+  end
+  
+  def full_data(field)
+    self.get_smoothed(field, 200, true, true)
   end
 end
