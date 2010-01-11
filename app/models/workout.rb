@@ -538,10 +538,11 @@ class Workout < ActiveRecord::Base
 		return nil if data.size == 0
 
 		smoothed = smooth_data(data, data.size / points)
+		conversion = self.user.metric ? Conversion::Metric[field] : Conversion::Imperial[field] 
 		multiplier = milliseconds ? self.duration / smoothed.size * 1000 : 1
 		
 		if value_array
-			return smoothed.inject([]) { |a, n| a << [(a.size * multiplier).to_i, n] }
+			return smoothed.inject([]) { |a, n| a << [(a.size * multiplier).to_i, n * conversion] }
 		else
 			return smoothed
 		end
