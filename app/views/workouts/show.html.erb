@@ -25,7 +25,7 @@
 				<span class="by">by</span> <%= link_to @workout.user.display_name, user_path(@workout.user) %> <span class="points">(<%=h @workout.user.points %> points)</span> 
 			<% end -%></h1>
 			
-			<p id="workout_description"><%= link_to @workout.activity.name, activity_path(@workout.activity) %> on <%=h activity_timestamp_shorter(@workout.start_time) %>. Posted <%= h activity_timestamp_shorter(@workout.created_at) %>. 
+			<p id="workout_description"><%= link_to @workout.activity.name, activity_path(@workout.activity) %> on <%=h activity_timestamp_shorter(@workout.start_time) %>. Posted <%= h distance_of_time_in_words(@workout.created_at, Time.now) %> ago. 
 				<% if @workout.comments.size > 0 %><span class="comment_count tip" title="comments"><%= link_to @workout.comments.size, :anchor => "comments" %></span><% end -%></p>
 
 			<% if my_page? && @workout.overlaps? %>

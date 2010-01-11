@@ -60,25 +60,26 @@ module ApplicationHelper
 	# Output: Monday 4/06/09 at 11:58am
 	def activity_timestamp_shorter(start_time)
   		return "" if start_time.nil?
-  		time = start_time.strftime("%I:%M%p")
-  		if (time =~ /^0(.*$)/)
-  			short_time = $1
-  		else
-  			short_time = time
-  		end
-  		month = start_time.strftime("%m")
-  		if (month =~ /^0(.*$)/)
-  			short_month = $1
-  		else
-  			short_month = month
-  		end
-  		day = start_time.strftime("%d")
-  		if (day =~ /^0(.*$)/)
-  			short_day = $1
-  		else
-  			short_day = day
-  		end
-  		start_time.strftime("%A, #{short_month}/#{short_day}/%g at #{short_time.downcase}")
+      start_time.strftime("%A %b %d %Y at %I:%M%p")
+      # time = start_time.strftime("%I:%M%p")
+      # if (time =~ /^0(.*$)/)
+      #   short_time = $1
+      # else
+      #   short_time = time
+      # end
+      # month = start_time.strftime("%m")
+      # if (month =~ /^0(.*$)/)
+      #   short_month = $1
+      # else
+      #   short_month = month
+      # end
+      # day = start_time.strftime("%d")
+      # if (day =~ /^0(.*$)/)
+      #   short_day = $1
+      # else
+      #   short_day = day
+      # end
+      # start_time.strftime("%A, #{short_month}/#{short_day}/%g at #{short_time.downcase}")
   	end
 
 	# Output: 5/8/09
