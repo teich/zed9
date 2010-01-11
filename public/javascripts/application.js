@@ -9,12 +9,37 @@ $(document).ready(function() {
     
     $($.date_input.initialize);
 	
+	// Toggle view of bests on leaderboards
+	$('div.more').hide();  
+	$('.toggle').click(function() { 
+		$(this).children('.more').slideToggle('fast');
+		$(this).children('.activity_headline').toggleClass('open');
+		$(this).toggleClass('open');
+	});
+	
+	$('#join_list').each(function() {
+		$('.email_address').clearingInput();
+	});
+	
+	// Dismiss flash message
+	$('#flash').click(function() { 
+		$(this).slideToggle('medium');
+	});
+	
 	// Workouts index table sorting, default to descending on date
 	$('#workouts_index').each(function() {
 		$("#workouts_index").tablesorter({
 			sortList: [[2,1]]
 		}); 
 	});
+	
+	$('#journal_entry').each(function() {
+		set_journal_entry_values();
+	})
+
+	$('#gear_form').each(function() {
+		set_gear_values();
+	})
 	
 	// Device comparison table sorting 
 	$("#device_grid").each(function() {
