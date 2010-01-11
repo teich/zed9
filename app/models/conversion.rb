@@ -4,7 +4,8 @@ class Conversion
     :elevation => 3.2808399,
     :distance => 0.000621371192,
     :hr => 1,
-    :duration => 1
+    :duration => 1,
+    :calories => 1
   }
   
   Metric = {
@@ -12,6 +13,7 @@ class Conversion
     :elevation => 1,
     :distance => 0.001,
     :hr => 1,
-    :duration => 1
+    :duration => 1,
+    :calories => 1
   }
 end

@@ -30,7 +30,7 @@ module WorkoutHelper
   end
   
   def hr_max(workout)
-    hr_max || workout.max(:heart_rate)
+    hr_max || workout.max(:hr)
   end
 
 end

@@ -63,7 +63,7 @@
 			<% if !@workout.hr_max.nil? %>
 				<%= f.text_field :hr_max, :size => 4, :value => @workout.hr_max %>
 			<% else %>
-				<%= f.text_field :hr_max, :size => 4, :value => @workout.max(:heart_rate) %>
+				<%= f.text_field :hr_max, :size => 4, :value => @workout.max(:hr) %>
 			<% end %>	
 			bpm max</td>
 	</tr>
