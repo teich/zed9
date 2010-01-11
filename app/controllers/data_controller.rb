@@ -11,6 +11,6 @@ class DataController < ApplicationController
   
   def full
     workout = Workout.find(params[:workout_id])
-    render :text => workout.full_data.to_json
+    render :json => workout.full_data
   end
 end
