@@ -538,20 +538,23 @@ class Workout < ActiveRecord::Base
 		return nil if data.size == 0
 
 		smoothed = smooth_data(data, data.size / points)
-		conversion = self.user.metric ? Conversion::Metric[field] : Conversion::Imperial[field] 
 		multiplier = milliseconds ? self.duration / smoothed.size * 1000 : 1
 		
 		if value_array
-			return smoothed.inject([]) { |a, n| a << [(a.size * multiplier).to_i, n * conversion] }
+			return smoothed.inject([]) { |a, n| a << [(a.size * multiplier).to_i, localize_data(n, field)] }
 		else
-			return smoothed
+			return localize_data(smoothed, field)
 		end
 	end
   
   def localize_data(data, field)
+		
     # Recursion - call ourselves if we're called with an array.  Apply to all elements
     if data.class == Array
       return data.map { |d| localize_data(d, field).round(1) }
+    else
+      conversion = self.user.metric ? Conversion::Metric[field] : Conversion::Imperial[field] 
+      data * conversion
     end
     
     case field.to_s

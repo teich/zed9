@@ -129,7 +129,7 @@ module ApplicationHelper
 	
 	def speed_to_pace(workout)
     # TODO: this is ugly, muts be a more ruby way
-		speed = workout.localize_data(workout.speed, "speed")
+		speed = workout.localize_data(workout.speed, :speed)
 		
 		if workout.activity.pace
 			return float_min_to_formated_time(60 / speed) 
@@ -141,7 +141,7 @@ module ApplicationHelper
 	
 	def max_speed_to_pace(workout)
 
-		max_speed = workout.localize_data(workout.max_speed, "speed")
+		max_speed = workout.localize_data(workout.max_speed, :speed)
 		
 		if workout.activity.pace
   		return float_min_to_formated_time(60 / max_speed) 
