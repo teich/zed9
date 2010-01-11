@@ -576,7 +576,11 @@ class Workout < ActiveRecord::Base
     bar
   end
   
-  def full_data(field)
-    self.get_smoothed(field, 200, true, true)
+  def full_data
+    bar = {}
+    bar ["speed"] = self.get_smoothed(:speed, 200, true, true)
+    bar ["hr"] = self.get_smoothed(:hr, 200, true, true)
+    bar ["elevation"] = self.get_smoothed(:elevation, 200, true, true)
+    bar
   end
 end

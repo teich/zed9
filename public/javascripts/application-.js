@@ -347,37 +347,37 @@ function draw_dashboard_graph(data) {
 
 
 function workout_page_graphs(data) {
-	function full_tooltip(event, pos, item) {
-		// TODO: units are now dependent on data
-		//var unit = '<span class="tooltip_unit">bpm</span>';
-		if (item) {
-			var previousPoint = [];
-			if (previousPoint != item.datapoint) {
-				previousPoint = item.datapoint;
-				$("#fullsize_tooltip").remove();
-				var x = item.datapoint[0].toFixed(2);
-				var y = item.datapoint[1].toFixed(0);
-				// This hack tells me it's a time. I know...
-				if (y > 100000) {
-					y = speed_to_pace(MIN_TO_MILLISEC / y);
-				}
-				key = (x / 10000).toFixed(0);
-				point = z9map.pointsByRoundedTime[key];
-				
-				// Only try and update map, if we have a map!
-				if (z9map.gmap) { 
-					setCurrLoc(z9map, point.y, point.x); 
-				}
-				$('<div id="fullsize_tooltip" class="tooltip">' + y + '</div>').css( {
-					top: item.pageY - 41,
-					left: item.pageX + 1
-					}).appendTo("body").fadeIn(200);
-				}
-			} else {
-				$("#fullsize_tooltip").remove();
-				previousPoint = null;            
-			}
-		}
+	// function full_tooltip(event, pos, item) {
+	// 	// TODO: units are now dependent on data
+	// 	//var unit = '<span class="tooltip_unit">bpm</span>';
+	// 	if (item) {
+	// 		var previousPoint = [];
+	// 		if (previousPoint != item.datapoint) {
+	// 			previousPoint = item.datapoint;
+	// 			$("#fullsize_tooltip").remove();
+	// 			var x = item.datapoint[0].toFixed(2);
+	// 			var y = item.datapoint[1].toFixed(0);
+	// 			// This hack tells me it's a time. I know...
+	// 			if (y > 100000) {
+	// 				y = speed_to_pace(MIN_TO_MILLISEC / y);
+	// 			}
+	// 			key = (x / 10000).toFixed(0);
+	// 			point = z9map.pointsByRoundedTime[key];
+	// 			
+	// 			// Only try and update map, if we have a map!
+	// 			if (z9map.gmap) { 
+	// 				setCurrLoc(z9map, point.y, point.x); 
+	// 			}
+	// 			$('<div id="fullsize_tooltip" class="tooltip">' + y + '</div>').css( {
+	// 				top: item.pageY - 41,
+	// 				left: item.pageX + 1
+	// 				}).appendTo("body").fadeIn(200);
+	// 			}
+	// 		} else {
+	// 			$("#fullsize_tooltip").remove();
+	// 			previousPoint = null;            
+	// 		}
+	// 	}
 
 		var workout = data.workout;
 		var all_comps = workout.json_comps.all_comps;
@@ -386,22 +386,22 @@ function workout_page_graphs(data) {
 		// TODO: Handle units correctly
 		// This hack converts everything to imperial
 
-		workout.elevation *= 3.28;
-		my_comps.elevation *= 3.28;
-		all_comps.elevation *= 3.28;
-
-		workout.distance *= 0.000621371192;
-		my_comps.distance *= 0.000621371192;
-		all_comps.distance *= 0.000621371192;
-
-		$(".sparkline").each(function() {
-			$.plot($(this), [
-			{ data: workout["json_" + this.id], lines: line_options },
-			{ data: [[22, workout[this.id]]], yaxis: 2, bars: end_bar_options },
-			{ data: [[24, my_comps[this.id]]], yaxis: 2, bars: end_bar_options },
-			{ data: [[26, all_comps[this.id]]], yaxis: 2, bars: end_bar_options }
-			], options);
-		});
+		// workout.elevation *= 3.28;
+		// my_comps.elevation *= 3.28;
+		// all_comps.elevation *= 3.28;
+		// 
+		// workout.distance *= 0.000621371192;
+		// my_comps.distance *= 0.000621371192;
+		// all_comps.distance *= 0.000621371192;
+		// 
+		// $(".sparkline").each(function() {
+		// 	$.plot($(this), [
+		// 	{ data: workout["json_" + this.id], lines: line_options },
+		// 	{ data: [[22, workout[this.id]]], yaxis: 2, bars: end_bar_options },
+		// 	{ data: [[24, my_comps[this.id]]], yaxis: 2, bars: end_bar_options },
+		// 	{ data: [[26, all_comps[this.id]]], yaxis: 2, bars: end_bar_options }
+		// 	], options);
+		// });
 
 		// $(".sparkbar").each(function(i) {
 		// 	$.plot($(this), [
@@ -411,104 +411,104 @@ function workout_page_graphs(data) {
 		// 	], sparkbar_options);
 		// });
 
-	$(".big_visualization").each(function() { 
-		function formatData(id) {
-			var graph_data = [];
+	// $(".big_visualization").each(function() { 
+	// 	function formatData(id) {
+	// 		var graph_data = [];
+	// 		
+	// 		if (id == "json_speed_big") {
+	// 			var temp = workout[id];
+	// 			for (var i = 0; i < temp.length; i++) {
+	// 				var x = temp[i][0];
+	// 				// TODO: metric/imperical support goes here
+	// 				var y = temp[i][1] * MPS_TO_MPH;
+	// 				if (workout.activity.pace) {
+	// 					// Special case the stopped situation.
+	// 					y = y < 1 ? null : MIN_TO_MILLISEC / y;
+	// 				}
+	// 				graph_data[i] = [x, y];
+	// 			}
+	// 		} else {
+	// 			graph_data = workout[id];
+	// 		}
+	// 		return graph_data;
+	// 	}
+	// 	
+	// 	function getFullSizeOptions(id1, id2) {
+	// 		var base_options = {
+	// 			grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 36, markings: axes },
+	// 			// crosshair: { mode: "x", color: '#d9d9d9' },
+	// 			colors: ["#25a1d6", "#ffa200", "#545454"],
+	// 			shadowSize: 1,
+	// 			xaxis: { mode: "time", timeformat: "%h:%M", minTickSize: [10, "minute"] },
+	// 			selection: { mode: "xy" }
+	// 		};
+	// 		// Manual check right now for the only thing that requires a different axis
+	// 		if (id1 == "json_speed_big" && workout.activity.pace) {
+	// 			base_options.yaxis = { mode: "time", timeformat: "%M:%S" };
+	// 		}
+	// 		if (id2) {
+	// 			base_options.y2axis = {};
+	// 			base_options.grid = { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 36, markings: axes2 };
+	// 		}
+	// 		if (id2 == "json_speed_big" && workout.activity.pace) {
+	// 			base_options.y2axis = { mode: "time", timeformat: "%M:%S" };
+	// 		}
+	// 		return base_options;
+	// 	}
+	// 			
+	// 	function plotGraphSelected() {
+	// 		var graph_data = [];
+	// 		var graph_data2 = [];
+	// 		var full_size_options = {};
+	// 		var leftkey;
+	// 		var rightkey;
+	// 		var dataHash = {};
+	// 		$("#y1_axis_options").find("input:checked").each(function () {
+	// 			leftkey = $(this).attr("value");
+	// 		});
+	// 		$("#y2_axis_options").find("input:checked").each(function () {
+	// 			rightkey = $(this).attr("value");
+	// 		});
+	// 		if (leftkey && workout[leftkey]) {
+	// 			$("#y1_axis_label").html($(this).attr("display_y1"));
+	// 			graph_data = formatData(leftkey);
+	// 		}
+	// 		if (rightkey && workout[rightkey]) {
+	// 			$("#y2_axis_label").html($(this).attr("display_y2"));
+	// 			graph_data2 = formatData(rightkey);
+	// 		}
+	// 
+	// 		$('.none').click(function() {
+	// 			$("#y2_axis_label").hide();
+	// 		});
+	// 			
+	// 		$('.label').click(function() {
+	// 			$("#y2_axis_label").show();
+	// 		});
+	// 
+	// 		full_size_options = getFullSizeOptions(leftkey, rightkey);
+	// 		if (graph_data2.length > 1) {
+	// 			$.plot($('.big_visualization'), [
+	// 			{ data: graph_data, lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } }},
+	// 			{ data: graph_data2, lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } }, yaxis: 2}], 
+	// 			full_size_options);
+	// 		} else {
+	// 			$.plot($('.big_visualization'), [{ 
+	// 				data: graph_data, 
+	// 				lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } } 
+	// 			}],
+	// 			full_size_options);
+	// 		}
+	// 
+	// 	}
 			
-			if (id == "json_speed_big") {
-				var temp = workout[id];
-				for (var i = 0; i < temp.length; i++) {
-					var x = temp[i][0];
-					// TODO: metric/imperical support goes here
-					var y = temp[i][1] * MPS_TO_MPH;
-					if (workout.activity.pace) {
-						// Special case the stopped situation.
-						y = y < 1 ? null : MIN_TO_MILLISEC / y;
-					}
-					graph_data[i] = [x, y];
-				}
-			} else {
-				graph_data = workout[id];
-			}
-			return graph_data;
-		}
-		
-		function getFullSizeOptions(id1, id2) {
-			var base_options = {
-				grid: { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 36, markings: axes },
-				// crosshair: { mode: "x", color: '#d9d9d9' },
-				colors: ["#25a1d6", "#ffa200", "#545454"],
-				shadowSize: 1,
-				xaxis: { mode: "time", timeformat: "%h:%M", minTickSize: [10, "minute"] },
-				selection: { mode: "xy" }
-			};
-			// Manual check right now for the only thing that requires a different axis
-			if (id1 == "json_speed_big" && workout.activity.pace) {
-				base_options.yaxis = { mode: "time", timeformat: "%M:%S" };
-			}
-			if (id2) {
-				base_options.y2axis = {};
-				base_options.grid = { borderWidth: 0, tickColor: "white", hoverable: "yes", mouseActiveRadius: 36, markings: axes2 };
-			}
-			if (id2 == "json_speed_big" && workout.activity.pace) {
-				base_options.y2axis = { mode: "time", timeformat: "%M:%S" };
-			}
-			return base_options;
-		}
-				
-		function plotGraphSelected() {
-			var graph_data = [];
-			var graph_data2 = [];
-			var full_size_options = {};
-			var leftkey;
-			var rightkey;
-			var dataHash = {};
-			$("#y1_axis_options").find("input:checked").each(function () {
-				leftkey = $(this).attr("value");
-			});
-			$("#y2_axis_options").find("input:checked").each(function () {
-				rightkey = $(this).attr("value");
-			});
-			if (leftkey && workout[leftkey]) {
-				$("#y1_axis_label").html($(this).attr("display_y1"));
-				graph_data = formatData(leftkey);
-			}
-			if (rightkey && workout[rightkey]) {
-				$("#y2_axis_label").html($(this).attr("display_y2"));
-				graph_data2 = formatData(rightkey);
-			}
+		// $("#y1_axis_options").find("input").click(plotGraphSelected);
+		// $("#y2_axis_options").find("input").click(plotGraphSelected);
+		// 
+		// plotGraphSelected();
+		// $(".big_visualization").bind("plothover", full_tooltip);
 
-			$('.none').click(function() {
-				$("#y2_axis_label").hide();
-			});
-				
-			$('.label').click(function() {
-				$("#y2_axis_label").show();
-			});
-
-			full_size_options = getFullSizeOptions(leftkey, rightkey);
-			if (graph_data2.length > 1) {
-				$.plot($('.big_visualization'), [
-				{ data: graph_data, lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } }},
-				{ data: graph_data2, lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } }, yaxis: 2}], 
-				full_size_options);
-			} else {
-				$.plot($('.big_visualization'), [{ 
-					data: graph_data, 
-					lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0 }, { opacity: 0.1 }] } } 
-				}],
-				full_size_options);
-			}
-
-		}
-			
-		$("#y1_axis_options").find("input").click(plotGraphSelected);
-		$("#y2_axis_options").find("input").click(plotGraphSelected);
-
-		plotGraphSelected();
-		$(".big_visualization").bind("plothover", full_tooltip);
-
-	});
+	// });
 
 		
 		// $(".stat").each(function() {
@@ -903,27 +903,27 @@ function workout_page_graphs(data) {
 		});
 
 		// Menu of nearby workouts
-		$('#select_axes').hide();  
-		$('#workouts_nearby_link').bind("click", function() {
-			$('#nearby_workouts_list_container').slideToggle('fast');
-			$(this).toggleClass('show_options');	
-		});
+		// $('#select_axes').hide();  
+		// $('#workouts_nearby_link').bind("click", function() {
+		// 	$('#nearby_workouts_list_container').slideToggle('fast');
+		// 	$(this).toggleClass('show_options');	
+		// });
 		
-		// Close graph options if click on x in corner
-		$('#select_axes .close').click(function() {
-			$('#nearby_workouts_list_container').slideToggle('fast');
-			$('#workouts_nearby_link').toggleClass('show_options');
-		});
-
-
-		// Close graph options if click anywhere outside selection window
-		$(window).bind('click', function(ev) {
-		  if (!($(ev.target).is('#workouts_nearby_wrapper') || $(ev.target).parents('#workouts_nearby_wrapper').length )) {
-				$('#nearby_workouts_list_container').slideUp('fast');
-				$('#workouts_nearby_link').removeClass('show_options');	
-			}
-		});
-		
+		// // Close graph options if click on x in corner
+		// $('#select_axes .close').click(function() {
+		// 	$('#nearby_workouts_list_container').slideToggle('fast');
+		// 	$('#workouts_nearby_link').toggleClass('show_options');
+		// });
+		// 
+		// 
+		// // Close graph options if click anywhere outside selection window
+		// $(window).bind('click', function(ev) {
+		//   if (!($(ev.target).is('#workouts_nearby_wrapper') || $(ev.target).parents('#workouts_nearby_wrapper').length )) {
+		// 		$('#nearby_workouts_list_container').slideUp('fast');
+		// 		$('#workouts_nearby_link').removeClass('show_options');	
+		// 	}
+		// });
+		// 
 
 
 		// // Graph options
