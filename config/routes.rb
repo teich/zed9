@@ -20,7 +20,7 @@ ActionController::Routing::Routes.draw do |map|
     # end
 		user.resources :workouts do |workout|
 		  workout.resources :comments
-		  workout.resources :data, :shallow => false, :collection => {:sparks => :get, :gis => :get}
+		  workout.resources :data, :shallow => false, :collection => {:sparks => :get, :gis => :get, :full => :get}
 			workout.resources :overlaps, :shallow => false, :only => [:index, :destroy]
 			workout.resources :taggings, :shallow => false, :only => [:destroy, :create]
     end

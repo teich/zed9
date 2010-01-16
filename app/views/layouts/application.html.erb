@@ -10,7 +10,7 @@
   <%= javascript_include_tag 'jquery', 
                              'jquery.jeditable', 
                              'jquery.flot', 
-                             'jquery.qtip-1.0.0-rc2', 
+                             'jquery.qtip-1.0.0-rc3.min', 
                              'jquery.tablesorter', 
                              'jquery.notice', 
                              'ui.core.js', 
@@ -19,10 +19,8 @@
                              'jquery.date_input.js', 
                              'jquery.timeentry.min.js', 
                              'jquery.clearinginput' %>
-	<%= javascript_include_tag 'maps', 
-	                           'workout-graphs', 
-	                           'application' %>
-	<%= stylesheet_link_tag 'zed9' %>
+  <%= javascript_include_tag  'application', 'zed9-notices' %>
+  <%= stylesheet_link_tag 'zed9' %>
 	
 </head>
 <body>
