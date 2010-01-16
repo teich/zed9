@@ -47,7 +47,7 @@
 	</tr>
 	<tr>
 		<th>Distance</th>
-		<td><input id="miles" size="8" onChange="calculate_values()"> miles<%= f.hidden_field :distance %></td>
+		<td><%= f.text_field :distance, :size => 8, :value => @workout.getLocalized(:distance) %> miles</td>
 	</tr>
 	<tr>
 		<th>Calories</th>
@@ -55,7 +55,7 @@
 	</tr>
 	<tr>
 		<th>Elevation</th>
-		<td><input id="feet" size="8" onChange="calculate_values()"> feet <%= f.hidden_field :elevation %></td>
+		<td><%= f.text_field :elevation, :size => 8, :value => @workout.getLocalized(:elevation) %> ft</td>
 	</tr>
 	<tr>
 		<th><%= f.label :hr, "Heart rate" %></th>

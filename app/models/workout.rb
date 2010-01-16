@@ -568,6 +568,10 @@ class Workout < ActiveRecord::Base
       return data.to_f
     end
   end
+  
+  def getLocalized(field)
+    (user.metric ? self.field : Conversion::ConvertToImperial(:value => self[field], :field => field)).round(1)
+  end
 
   def comps(field)
     bar = {}

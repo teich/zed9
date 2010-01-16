@@ -143,8 +143,8 @@ function calculate_values() {
 	calculate_start();
 	calculate_duration();
 	calculate_end();
-	convert_distance();
-	convert_elevation();
+    // convert_distance();
+    // convert_elevation();
 }
 
 function miles_to_meters(miles) {
@@ -236,7 +236,7 @@ $(document).ready(function() {
 		$("#tabs").tabs();		
 
 		// Get current workout values or defaults
-		get_workout_values();
+        get_workout_values();
 
 		// Date picker widget
 	  	$(".date_input").date_input();

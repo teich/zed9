@@ -64,7 +64,8 @@ class WorkoutsController < ApplicationController
 
   def create
     @rpe = RPE.new
-    @workout = current_user.workouts.create(params[:workout])
+    localized = Conversion::LocalizeParams(params[:workout], current_user.metric)
+    @workout = current_user.workouts.create(localized)
     @workout.importing = true if !@workout.manual_entry?
     if !@workout.gear.nil?
       @workout.tag_list << @workout.gear.tag
@@ -86,8 +87,8 @@ class WorkoutsController < ApplicationController
   end
 
   def update
-
-    if @workout.update_attributes(params[:workout])
+    localized = Conversion::LocalizeParams(params[:workout], current_user.metric)
+    if @workout.update_attributes(localized)
       @workout.clear_gear_tags
       if !@workout.gear.nil?
         @workout.tag_list << @workout.gear.tag
