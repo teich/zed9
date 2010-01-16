@@ -96,18 +96,14 @@ function draw_dashboard_graph(data) {
 		}
 
 		function timeFormater(val, axis) {
-
-			function checkTime(i)
-			{
-			if (i<10) 
-			  {
-			  i="0" + i;
-			  }
-			return i;
+			function checkTime(i) {
+                if (i<10)  {
+                    i="0" + i;
+			    }
+			    return i;
 			}
-
-	    var d = new Date(val*1000);
-	    return d.getUTCHours() + ":" + checkTime(d.getUTCMinutes());
+	        var d = new Date(val*1000);
+	        return d.getUTCHours() + ":" + checkTime(d.getUTCMinutes());
 		}
 		
 		var dashboard_options = {
