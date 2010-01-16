@@ -95,7 +95,8 @@ class WorkoutsController < ApplicationController
       end
       add_flash(:notice, 'Workout updated')
       redirect_to @workout
-    else
+    else  
+      add_flash(:notice, "We ran into a problem, please try again.")
       render :action => "edit"
     end
 
