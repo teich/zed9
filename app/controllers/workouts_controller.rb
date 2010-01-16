@@ -45,8 +45,8 @@ class WorkoutsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.xml {render :xml => @workout.to_xml }
-      format.js {render :js => @workout.to_json(:methods => [:json_hr, :json_heartrate_big, :json_speed, :json_speed_big, :json_elevation, :json_elevation_big, :gis, :cals], :except => :trackpoints, :include => [:activity, :user])}
+      # format.xml {render :xml => @workout.to_xml }
+      # format.js {render :js => @workout.to_json(:methods => [:json_hr, :json_heartrate_big, :json_speed, :json_speed_big, :json_elevation, :json_elevation_big, :gis, :cals], :except => :trackpoints, :include => [:activity, :user])}
     end
   end
 
@@ -66,7 +66,11 @@ class WorkoutsController < ApplicationController
     @rpe = RPE.new
     localized = Conversion::LocalizeParams(params[:workout], current_user.metric)
     @workout = current_user.workouts.create(localized)
-    @workout.importing = true if !@workout.manual_entry?
+    if !@workout.manual_entry?
+      @workout.importing = true
+      @workout.calcCalories!
+    end
+      
     if !@workout.gear.nil?
       @workout.tag_list << @workout.gear.tag
     end
@@ -89,7 +93,10 @@ class WorkoutsController < ApplicationController
   def update
     localized = Conversion::LocalizeParams(params[:workout], current_user.metric)
     if @workout.update_attributes(localized)
-      @workout.clear_gear_tags
+      if !(params[:workout][:calories].to_i > 0)
+        @workout.calcCalories!
+      end
+      @workout.clear_gear_tags!
       if !@workout.gear.nil?
         @workout.tag_list << @workout.gear.tag
         @workout.save

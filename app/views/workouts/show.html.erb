@@ -99,11 +99,11 @@
 			</tr>
 			<% end -%>
 			
-			<% if !@workout.cals.nil? %>
+			<% if !@workout.calories.nil? %>
 			<tr class="stat" unit="kCal" id="cals">
 				<th class="spark_bar_title">Calories</th>
 				<td id="spark_bar"><div id="cals" class="sparkline" spark-type="bar" data-src="<%= sparks_workout_data_path(@workout, :q => 'calories') %>"></div></td>
-				<td class="number"><span class="value"><%= h @workout.cals %></span><span class="units">kCal</span></td>
+				<td class="number"><span class="value"><%= h @workout.calories %></span><span class="units">kCal</span></td>
 			</tr>
 			<% end -%>
 			

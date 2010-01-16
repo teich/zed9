@@ -30,12 +30,9 @@ class Conversion
   }
   
   def self.ConvertToMetric(options)
-    puts "Converting #{options[:field]} from #{options[:value]}"
     if ImperialToMetric[options[:field]]
-      puts "did a conversion"
       return options[:value].to_f * ImperialToMetric[options[:field]]
     else
-      puts "  -> didn't do a conversion"
       return options[:value]
     end
   end
@@ -51,7 +48,7 @@ class Conversion
   def self.LocalizeParams(fields, metric)
     return fields if metric
     localized = {}
-    fields.each do |key, value| 
+    fields.each do |key, value|
       localized[key] = Conversion::ConvertToMetric(:value => value, :field => key.intern)
     end
     return localized

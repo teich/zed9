@@ -65,7 +65,7 @@
 						<td class="rpe no_wrap"><% if workout.rpe == 0 || workout.rpe.nil? %><span class="sort_value" style="display: none">0</span><% else %><span class="sort_value" style="display: none"><%=h two_digits(workout.rpe) %></span><span><%=h workout.rpe %></span><% end %><br></td>
 						<td class="duration no_wrap"><% if !workout.duration.nil? %><span class="sort_value"><%=h number_to_time(workout.duration) %></span><% end %><br></td>
 						<td class="distance no_wrap"><% if !workout.distance_in_miles.nil? %><span class="sort_value"><%=h workout.distance_in_miles %></span><% end %><br></td>
-						<td class="calories no_wrap"><% if !workout.cals.nil? %><span class="sort_value"><%=h workout.cals %></span><% end %><br></td>
+						<td class="calories no_wrap"><% if !workout.calories.nil? %><span class="sort_value"><%=h workout.calories %></span><% end %><br></td>
 						<td class="speed no_wrap"><% if !workout.avg_speed_in_mph.nil? %><span class="sort_value" style="display:none"><%=h workout.speed %></span><span><%=h speed_to_pace(workout) %></span><% end %></td>				
 						<td class="elevation no_wrap"><% if !workout.elevation.nil? %><span class="sort_value"><%=h workout.elevation_in_feet.round(0).to_i %></span><% end %><br></td>
 						<td class="hr no_wrap"><% if !workout.hr.nil? %><span class="sort_value"><%=h workout.hr %></span><% end %><br></td>
