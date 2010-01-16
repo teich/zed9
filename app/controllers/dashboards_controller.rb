@@ -12,10 +12,10 @@ class DashboardsController < ApplicationController
         @current_weight = current_user.weight(Time.now)
         @gears = current_user.gears.find(:all, :order => "purchase_date DESC")
 
-        @workouts = Workout.processed.find_all_by_shared(true, :order => "created_at DESC")
-        @comments = Comment.find(:all, :order => "created_at DESC")
+        @workouts = Workout.processed.find_all_by_shared(true, :order => "created_at DESC", :limit => 50)
+        @comments = Comment.find(:all, :order => "created_at DESC", :limit => 50)
         entries = @workouts + @comments
-        @activity_feed = entries.sort { |a,b| b.created_at <=> a.created_at } .paginate :page => params[:page], :per_page => 12
+        @activity_feed = entries.sort { |a,b| b.created_at <=> a.created_at }.paginate :page => params[:page], :per_page => 10
 
         @my_workouts = current_user.workouts.processed
         durations = @my_workouts.map { |w| w.duration }
