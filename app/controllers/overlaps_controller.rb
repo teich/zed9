@@ -20,7 +20,7 @@ class OverlapsController < ApplicationController
 
 		# Don't copy altitude if we already have one...
 		# TODO - be smarter
-		dup.trackpoints.each { |tp| tp.altitude = nil } if @workout.elevation > 0
+		dup.trackpoints.each { |tp| tp.elevation = nil } if @workout.elevation > 0
 		@workout.trackpoints += dup.trackpoints
 
 		@workout.hr = @workout.calc_average_hr
