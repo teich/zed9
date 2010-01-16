@@ -563,8 +563,9 @@ class Workout < ActiveRecord::Base
       self.update_attributes(:calories => nil)
     end
   end
+  
   def get_smoothed(field, points, value_array = false, milliseconds = false)
-    return nil if (field == :duration)
+    return nil if (field == :duration || field == :calories || field == :distance)
     data = trackpoints.map(&field).compact
     return nil if data.size == 0
 
