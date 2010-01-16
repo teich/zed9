@@ -68,7 +68,6 @@ class WorkoutsController < ApplicationController
     @workout = current_user.workouts.create(localized)
     if !@workout.manual_entry?
       @workout.importing = true
-      @workout.calcCalories!
     end
       
     if !@workout.gear.nil?
@@ -94,7 +93,7 @@ class WorkoutsController < ApplicationController
     localized = Conversion::LocalizeParams(params[:workout], current_user.metric)
     if @workout.update_attributes(localized)
       if !(params[:workout][:calories].to_i > 0)
-        @workout.calcCalories!
+        @workout.calc_calories!
       end
       @workout.clear_gear_tags!
       if !@workout.gear.nil?

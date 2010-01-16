@@ -106,6 +106,7 @@ class Workout < ActiveRecord::Base
       self.build_from_imported!(iw)
       self.importing = false
       if self.save
+        self.calc_calories
         self.check_achievements
         return true
       else
@@ -532,7 +533,7 @@ class Workout < ActiveRecord::Base
   ## PASS TWO BELOW.  
   ## ABANDON ALL HOPE YE WHO LOOK ABOVE HERE
 
-  def calcCalories!
+  def calc_calories!
     gender = user.sex
     age = ( (Date.today - user.birthdate).to_i / 365.25).floor
 
