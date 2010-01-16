@@ -571,20 +571,17 @@ class Workout < ActiveRecord::Base
 
   def comps(field)
     bar = {}
-    bar["comps"] = [self.send(field),
-      self.user.comp_average(field, self.activity_id), 
-      self.activity.comp_average(field)]
-      bar["comps"] = localize_data(bar["comps"], field)
-      bar["data"] = self.get_smoothed(field, 20, true)
-
-      bar
-    end
-
-    def full_data
-      bar = {}
-      bar ["speed"] = self.get_smoothed(:speed, 200, true, true)
-      bar ["hr"] = self.get_smoothed(:hr, 200, true, true)
-      bar ["elevation"] = self.get_smoothed(:elevation, 200, true, true)
-      bar
-    end
+    bar["comps"] = [self.send(field), self.user.comp_average(field, self.activity_id), self.activity.comp_average(field)]
+    bar["comps"] = localize_data(bar["comps"], field)
+    bar["data"] = self.get_smoothed(field, 20, true)
+    bar
   end
+
+  def full_data
+    bar = {}
+    bar ["speed"] = self.get_smoothed(:speed, 200, true, true)
+    bar ["hr"] = self.get_smoothed(:hr, 200, true, true)
+    bar ["elevation"] = self.get_smoothed(:elevation, 200, true, true)
+    bar
+  end
+end
