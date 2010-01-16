@@ -314,10 +314,10 @@ class Workout < ActiveRecord::Base
   #   find_comps
   # end
   # 
-  # def json_date
-  #   start_time.to_i
-  # end  
-  # 
+  def json_date
+    start_time.to_i
+  end  
+  
   # def json_hr
   #   get_smoothed_hr(20, true)
   # end
