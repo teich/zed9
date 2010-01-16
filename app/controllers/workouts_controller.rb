@@ -80,6 +80,7 @@ class WorkoutsController < ApplicationController
       redirect_to user_workouts_path(current_user)
     else
       @workout.destroy
+      add_flash(:notice, "We ran into a problem, please try again.")
       render :action => "new"
     end
   end
