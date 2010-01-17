@@ -7,8 +7,9 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::Initializer.run do |config|
   config.gem "authlogic"
   config.gem "hrmparser"
-  config.gem "right_aws"
+  config.gem "aws-s3", :lib => "aws/s3"
   config.gem "paperclip"
+  config.gem "right_aws"
   config.gem 'will_paginate', :version => '~> 2.3.11'
 
   config.time_zone = 'UTC'

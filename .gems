@@ -1,7 +1,8 @@
 authlogic  
 logging
 hrmparser 
+aws-s3
+paperclip
 right_aws
-paperclip -v 2.3.0
 disqus
 will_paginate -v 2.3.11
