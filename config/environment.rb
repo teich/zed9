@@ -8,7 +8,7 @@ Rails::Initializer.run do |config|
   config.gem "authlogic"
   config.gem "hrmparser"
   config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "paperclip"
+  config.gem "paperclip", :version => "2.3.0"
   config.gem "right_aws"
   config.gem 'will_paginate', :version => '~> 2.3.11'
 
