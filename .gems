@@ -1,6 +1,5 @@
 authlogic  
 logging
-newrelic_rpm
 hrmparser 
 right_aws
 paperclip -v 2.3.0
