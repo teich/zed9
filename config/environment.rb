@@ -6,7 +6,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.gem "authlogic"
-  config.gem "hrmparser"
+  config.gem "hrmparser", :version => "0.7.0"
   config.gem "aws-s3", :lib => "aws/s3"
   config.gem "paperclip", :version => "2.3.0"
   config.gem "right_aws"
