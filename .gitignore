@@ -1,5 +1,4 @@
 tmp
 devices
-vendor/bundler_gems/*
-!vendor/bundler_gems/cache/
-bin/
+vendor/bundler_gems
+bin
