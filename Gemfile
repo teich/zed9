@@ -1,6 +1,6 @@
 bundle_path "vendor/bundler_gems"
 
-gem "rails", "2.3.4"
+gem "rails", "2.3.5"
 gem "rack", "1.0.1"
 
 gem "authlogic", "2.1.3"
