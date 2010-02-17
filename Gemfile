@@ -12,4 +12,4 @@ gem "right_aws", "1.10.0"
 gem "disqus", "1.0.2"
 gem "will_paginate", "2.3.11"
 gem "sqlite3-ruby", :group => :development
-
+gem "pg", :group => :production
