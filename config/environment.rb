@@ -5,12 +5,12 @@ RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem "authlogic"
-  config.gem "hrmparser", :version => "0.7.0"
-  config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "paperclip", :version => "2.3.0"
-  config.gem "right_aws"
-  config.gem 'will_paginate', :version => '~> 2.3.11'
+  # config.gem "authlogic"
+  # config.gem "hrmparser", :version => "0.7.0"
+  # config.gem "aws-s3", :lib => "aws/s3"
+  # config.gem "paperclip", :version => "2.3.0"
+  # config.gem "right_aws"
+  # config.gem 'will_paginate', :version => '~> 2.3.11'
 
   config.time_zone = 'UTC'
 
