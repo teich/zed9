@@ -1,7 +1,6 @@
 source :gemcutter
 
-gem "rails", "~> 2.3.5"
-gem "rack", "1.0.1"
+gem "rails", "~> 2.3.15"
 
 gem "authlogic", "2.1.3"
 gem "logging", "1.3.0"
