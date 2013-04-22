@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem "rails", "~> 2.3.15"
+gem "rails", "~> 2.3.18"
 
 gem "authlogic", "2.1.3"
 gem "logging", "1.3.0"
